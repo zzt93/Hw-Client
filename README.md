@@ -1,8 +1,22 @@
 Hw-g2-repository-system
 =======================
 
-A homework project using Java
+Task for Software Engineering & Computing, Software Insitute, NJU
 
-Requirement:
+Team Project of 4 to develop an Invoicing System.
 
-Tools: Maven + Github + JUnit
+Development Time:A semester(from about 17 Sept to about the end of Dec)
+11 Deadlines, two weeks a deadline in average.
+
+Team Members:
+131250072
+131250082
+131250084
+131250094
+
+Tools Used:
+Java IDE,JUnit,Maven,GitHub
+
+Team Integration Time:to be confirmed
+
+
