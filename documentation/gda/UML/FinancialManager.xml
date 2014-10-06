@@ -5946,7 +5946,7 @@
 												<UML:TaggedValue tag="dst_containment" value="Unspecified"/>
 												<UML:TaggedValue tag="dst_style" value="Owned=0;Navigable=Navigable;"/>
 												<UML:TaggedValue tag="virtualInheritance" value="0"/>
-												<UML:TaggedValue tag="mb" value=" &#xA;«realize»"/>
+												<UML:TaggedValue tag="mb" value=" &#xA;Â«realizeÂ»"/>
 											</UML:ModelElement.taggedValue>
 										</UML:Dependency>
 										<UML:Class name="&#32463;&#33829;&#24773;&#20917;&#34920;" xmi.id="EAID_90230328_6368_4437_870B_207B26478337" visibility="public" namespace="EAPK_CA9F1237_EC03_40a2_874E_09D41F0B9916" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
