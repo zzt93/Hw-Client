@@ -132,6 +132,4 @@ public class Client implements Cloneable {
             throw new ContingencyException("无法克隆(这怎么可能！)", e);
         }
     }
-
-    //TODO NotifyChanged
 }

@@ -70,6 +70,6 @@ public class ClientUtility implements ClientUtilityImpl, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        //TODO update
     }
 }

@@ -1,13 +1,11 @@
 package nifury.receipt;
 
-import nifury.client.Client;
-
 import java.math.BigDecimal;
 
 /**
  * Created by Nifury on 2014/10/15.
  */
-public class Product_receipt {
+public class ProductsReceipt implements ReceiptImpl {
 
     private String id;
     private int number;
@@ -15,7 +13,7 @@ public class Product_receipt {
     private String comment;
     private int stock_After_Op;
 
-    public Product_receipt(String id, int number, BigDecimal price, String comment, int stock_After_Op) {
+    public ProductsReceipt(String id, int number, BigDecimal price, String comment, int stock_After_Op) {
         this.id = id;
         this.number = number;
         this.price = price;

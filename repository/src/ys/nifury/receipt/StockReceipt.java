@@ -6,18 +6,18 @@ import java.util.Vector;
 /**
  * Created by Nifury on 2014/10/15.
  */
-public class Receipt_buy {
+public class StockReceipt implements ReceiptImpl {
 
     private String id;
     private String supplier;
     private String repository;
     private String operator;
-    private Vector<Product_receipt> productList;
+    private Vector<ProductsReceipt> productList;
     private String comment;
     private BigDecimal totalValue;
 
-    public Receipt_buy(String id, String supplier, String repository, String operator,
-                       String comment) {
+    public StockReceipt(String id, String supplier, String repository, String operator,
+                        String comment) {
         this.id = id;
         this.supplier = supplier;
         this.repository = repository;
@@ -47,20 +47,6 @@ public class Receipt_buy {
 
     public BigDecimal getTotalValue() {
         return totalValue;
-    }
-
-    private BigDecimal countPrice(Product_receipt receipt) {
-        return new BigDecimal(receipt.getNumber()).multiply(receipt.getPrice());
-    }
-
-    public void addProduct(Product_receipt receipt) {
-        productList.add(receipt);
-        totalValue = totalValue.add(countPrice(receipt));
-    }
-
-    public void removeProduct(Product_receipt receipt) {
-        productList.remove(receipt);
-        totalValue = totalValue.subtract(countPrice(receipt));
     }
 
 }
