@@ -7,5 +7,4 @@ import VO.Goods;
 
 public interface GL_repo_BLservice {
 	HashMap<String, ArrayList<Goods>> sum();
-	boolean check(Goods goods);
 }

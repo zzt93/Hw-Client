@@ -1,11 +1,11 @@
-package VO;
-/**
- * this class save the information of every check 
- */
+package PO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RepoVO {
+import VO.Goods;
+
+public class RepoPO {
 	long batch;
 	String batchNum;
 	HashMap<String, ArrayList<Goods>> goodsListMap;
