@@ -1,9 +1,9 @@
-package RepoBLservice;
+package RepoExaminBLservice;
 
 import java.util.ArrayList;
 
 import PO.RepoPO;
 
-public interface RepoBLservice {
+public interface RepoExaminBLservice {
 	ArrayList<RepoPO> show();
 }
