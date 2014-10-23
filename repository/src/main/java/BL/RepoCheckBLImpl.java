@@ -1,8 +1,9 @@
-package RepoCheckBL;
+package BL;
 
 import java.util.ArrayList;
 
 import PO.InOutRepoPO;
+import RepoCheckBL.RepoCheckBLservice;
 
 public class RepoCheckBLImpl implements RepoCheckBLservice {
 

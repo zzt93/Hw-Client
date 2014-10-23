@@ -1,6 +1,6 @@
 package PO;
 
-public class RepoReceipt {
+public class RepoReceiptPO {
 	int aNum;
 	int cNum;
 	String type;

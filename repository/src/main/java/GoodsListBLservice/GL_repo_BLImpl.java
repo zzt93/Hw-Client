@@ -1,14 +1,12 @@
 package GoodsListBLservice;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import VO.Goods;
+import PO.GoodsListPO;
 
 public class GL_repo_BLImpl implements GL_repo_BLservice {
 
-	public HashMap<String, ArrayList<Goods>> sum() {
+	public GoodsListPO sum() {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
