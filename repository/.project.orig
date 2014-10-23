@@ -13,7 +13,7 @@
 		</buildCommand>
 		<buildCommand>
 =======
->>>>>>> origin/master
+>>>>>>> dda9d03a6432a2bc10fbfe866d89f00f45e40566
 			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>
@@ -23,7 +23,7 @@
 <<<<<<< HEAD
 		<nature>org.eclipse.jdt.core.javanature</nature>
 =======
->>>>>>> origin/master
+>>>>>>> dda9d03a6432a2bc10fbfe866d89f00f45e40566
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
 </projectDescription>
