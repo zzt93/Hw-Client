@@ -17,7 +17,7 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		GL_repo_BLservice gl_repo_BLservice = new GL_repo_BLImpl();
 		GoodsListPO temp = gl_repo_BLservice.sum();
 		
-		ArrayList<GoodsModelPO> goodsModelList = temp.
+		ArrayList<GoodsModelPO> goodsModelList;
 		return result;
 	}
 
