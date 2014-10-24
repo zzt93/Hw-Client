@@ -1,20 +1,21 @@
-package po;
+package dzh.po;
 
 
 public class StrategyPO {
-	String condition;
-	String treatment;
+	Condition condition;
+	Treatment treatment;
 	TimePeriod timePeriod;
-	public String getCondition() {
+	
+	public Condition getCondition() {
 		return condition;
 	}
-	public void setCondition(String condition) {
+	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
-	public String getTreatment() {
+	public Treatment getTreatment() {
 		return treatment;
 	}
-	public void setTreatment(String treatment) {
+	public void setTreatment(Treatment treatment) {
 		this.treatment = treatment;
 	}
 	public TimePeriod getTimePeriod() {

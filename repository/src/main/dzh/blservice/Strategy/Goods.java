@@ -1,4 +1,4 @@
-package blservice.Strategy;
+package dzh.blservice.Strategy;
 
 public interface Goods {
 

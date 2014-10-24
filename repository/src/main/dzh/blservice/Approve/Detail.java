@@ -1,6 +1,6 @@
-package blservice.Approve;
+package dzh.blservice.Approve;
 
-import blservice.Receipt;
+import dzh.blservice.Receipt;
 
 public interface Detail {
 	Receipt show(int serial);

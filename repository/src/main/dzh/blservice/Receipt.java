@@ -1,4 +1,4 @@
-package blservice;
+package dzh.blservice;
 /**
  * 
  * @author Mebleyev.G.Longinus

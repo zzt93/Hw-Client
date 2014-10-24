@@ -1,8 +1,8 @@
-package po;
+package dzh.po;
 
 import java.util.ArrayList;
 
-import blservice.Strategy.Goods;
+import dzh.blservice.Strategy.Goods;
 
 enum catOfTreatment{GIVE,DISCOUNT,COUPON}
 public class Treatment {
