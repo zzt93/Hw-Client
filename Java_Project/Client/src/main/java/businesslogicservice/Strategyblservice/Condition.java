@@ -1,8 +1,8 @@
-package StrategyBLService;
+package businesslogicservice.Strategyblservice;
 
 import java.util.ArrayList;
 
-import PO.GoodsPO;
+import po.GoodsPO;
 
 public class Condition {
 	public CatOfCondition type;

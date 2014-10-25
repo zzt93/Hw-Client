@@ -1,6 +1,6 @@
-package ApproveBLService;
+package businesslogicservice.Approveblservice;
 
-import PO.ReceiptPO;
+import po.ReceiptPO;
 
 public interface Approve_Detail_BLservice {
 	ReceiptPO show(int serial);
