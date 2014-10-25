@@ -1,0 +1,68 @@
+package businesslogic.Clientbl;
+
+import businesslogicservice.Clientblservice.ClientUtilityImpl;
+import dataservice.Clientdataservice.ClientDataServiceImpl;
+import po.ClientPO;
+import po.ClientFilter;
+import po.ResultMessage;
+import util.RMIUtility;
+
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.Vector;
+
+/**
+ * Created by Nifury on 2014/10/20.
+ */
+public class ClientUtility implements ClientUtilityImpl {
+
+    private static ClientDataServiceImpl impl;
+
+    static {
+        try {
+            impl = (ClientDataServiceImpl) RMIUtility.getImpl("Client");
+        } catch (RemoteException | NotBoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void addClient(ClientPO clientPO) throws Exception {
+        ResultMessage result = impl.addClient(clientPO);
+        result.throwIfFailed();
+    }
+
+    @Override
+    public void deleteClient(String id) throws Exception {
+        ResultMessage result = impl.deleteClient(id);
+        result.throwIfFailed();
+    }
+
+    @Override
+    public void modifyClient(ClientPO newClientPO) throws Exception {
+        ResultMessage result = impl.modifyClient(newClientPO);
+        result.throwIfFailed();
+    }
+
+    /**
+     * @param id 客户编号
+     * @return 找不到此编号时抛出异常，否则返回对应客户
+     */
+    public ClientPO queryClientById(String id) throws Exception {
+        ResultMessage<ClientPO> result = impl.queryClientById(id);
+        result.throwIfFailed();
+        return result.getObj();
+    }
+
+    /**
+     * @param filters 客户信息过滤向量，可为null
+     * @return 当没有满足条件时，返回null，否则返回符合条件的客户Vector
+     */
+    @Override
+    public Vector<ClientPO> queryClient(Vector<ClientFilter> filters) throws Exception {
+        ResultMessage<Vector<ClientPO>> result = impl.queryClient(filters);
+        result.throwIfFailed();
+        return result.getObj();
+    }
+
+}
