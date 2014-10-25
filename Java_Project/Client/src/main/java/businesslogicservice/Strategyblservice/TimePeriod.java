@@ -1,4 +1,4 @@
-package StrategyBLService;
+package businesslogicservice.Strategyblservice;
 
 import java.util.Date;
 

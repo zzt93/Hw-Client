@@ -1,4 +1,5 @@
-package PO;
+package po;
+
 enum UserRole{STOCK,IMPANDEXP,ACCOUNT,MANAGER}
 public class UserPO {
 	int id;

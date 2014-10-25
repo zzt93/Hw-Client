@@ -1,10 +1,10 @@
-package dzh.stub;
+package stub.dzh.stub;
 
 import java.util.ArrayList;
 
-import ApproveBLService.Approve_Detail_BLservice;
-import ApproveBLService.Approve_List_BLservice;
-import PO.ReceiptPO;
+import businesslogicservice.Approveblservice.Approve_Detail_BLservice;
+import businesslogicservice.Approveblservice.Approve_List_BLservice;
+import po.ReceiptPO;
 
 public class ApproveStub implements Approve_Detail_BLservice,Approve_List_BLservice{
 	

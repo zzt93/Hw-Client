@@ -1,8 +1,8 @@
-package ApproveBLService;
+package businesslogicservice.Approveblservice;
 
 import java.util.ArrayList;
 
-import PO.ReceiptPO;
+import po.ReceiptPO;
 
 public interface Approve_List_BLservice {
 	ArrayList<ReceiptPO> showList();

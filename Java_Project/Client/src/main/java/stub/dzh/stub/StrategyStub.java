@@ -1,7 +1,7 @@
-package dzh.stub;
+package stub.dzh.stub;
 
-import PO.StrategyPO;
-import StrategyBLService.*;
+import po.StrategyPO;
+import businesslogicservice.Strategyblservice.*;
 public class StrategyStub{
 	
 	public static void main(String[] args) {

@@ -1,9 +1,9 @@
-package StrategyBLService;
+package businesslogicservice.Strategyblservice;
 
 import java.util.ArrayList;
 
-import PO.GoodsPO;
-import PO.StrategyPO;
+import po.GoodsPO;
+import po.StrategyPO;
 
 public interface Strategy_List_BLservice {
 	public void addStrategy(StrategyPO s);
