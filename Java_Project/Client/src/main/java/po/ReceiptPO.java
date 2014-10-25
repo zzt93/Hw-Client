@@ -1,11 +1,7 @@
 package po;
-/**
- * 
- * @author Mebleyev.G.Longinus
- *
- */
-public interface ReceiptPO {
-	/*
-	 * All the Receipts are supposed to implement this!
-	 */
+
+public class ReceiptPO {
+	ReceiptState statement=ReceiptState.disapprove;
+	String number;
+	
 }
