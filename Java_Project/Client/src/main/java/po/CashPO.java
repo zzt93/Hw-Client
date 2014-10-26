@@ -13,4 +13,5 @@ public class CashPO extends ReceiptPO{
 		itemList=vo.itemList;
 		total=vo.total;
 	}
+	public CashPO(){}
 }
