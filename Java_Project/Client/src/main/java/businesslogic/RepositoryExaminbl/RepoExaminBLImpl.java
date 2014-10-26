@@ -2,27 +2,23 @@ package businesslogic.RepositoryExaminbl;
 
 import java.util.ArrayList;
 
+import po.InOutRepoPO;
+import po.StockReceiptPO;
+import businesslogic.Stockbl.StockUtility;
 import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
-import businesslogic.GoodsListbl.GL_repo_BLImpl;
-import businesslogicservice.GoodsListblservice.GL_repo_BLservice;
-import po.GoodsListPO;
-import po.GoodsModelPO;
-import po.RepoPO;
+import businesslogicservice.Stockblservice.StockUtilityImpl;
 
 public class RepoExaminBLImpl implements RepoExaminBLservice {
 
-	public ArrayList<RepoPO> show() {
+	
+
+	public ArrayList<InOutRepoPO> countInOut() throws Exception {
 		// TODO Auto-generated method stub
-		ArrayList<RepoPO> result = new ArrayList<RepoPO>();
-		GL_repo_BLservice gl_repo_BLservice = new GL_repo_BLImpl();
-		try {
-			GoodsListPO temp = gl_repo_BLservice.sum();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ArrayList<InOutRepoPO> result = new ArrayList<InOutRepoPO>(null);
+		StockUtilityImpl stockReceipt = new StockUtility();
+		stockReceipt.queryReceipt(null);
 		
-		ArrayList<GoodsModelPO> goodsModelList ;
+		
 		return result;
 	}
 

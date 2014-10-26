@@ -1,4 +1,4 @@
-package presentation.GoodsListui;
+package presentation.GoosTypeui;
 
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -12,13 +12,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import vo.GoodsVO;
-import businesslogic.GoodsListbl.GLBLImpl;
-import businesslogicservice.GoodsListblservice.GLBLservice;
+
+import vo.TreeNodeVO;
+
+import businesslogic.GoodsTypebl.GTBLImpl;
+
+import businesslogicservice.GoodsTypeblservice.GTBLservice;
 /**
  * This is the intersection where ui and bl interact
  * 
- * GoodsList
+ * ArrayList<TreeNode>
  * 
  * @author zzt
  *
@@ -58,7 +61,7 @@ public class ButtonPanel extends JPanel{
 	
 	public void addListener(){
 		
-		final GLBLservice glbLservice = new GLBLImpl("account");
+		final GTBLservice gtbLservice = new GTBLImpl("account");
 		
 		addButton.addActionListener(new ActionListener() {
 			
@@ -83,7 +86,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.add(new GoodsVO());
+					gtbLservice.add(new TreeNodeVO());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -113,7 +116,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.delete(new GoodsVO());
+					gtbLservice.delete(new TreeNodeVO());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -146,13 +149,13 @@ public class ButtonPanel extends JPanel{
 				//method of bl
 
 				try {
-					glbLservice.update(new GoodsVO());
+					gtbLservice.update(new TreeNodeVO());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				//update the ui
-				TablePanel.tableModel.setValueAt("sa",1, 1);
+				TreePanel.tableModel.setValueAt("sa",1, 1);
 				
 			}
 		});
@@ -179,7 +182,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.eSearch(id.getText());
+					gtbLservice.eSearch(id.getText());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

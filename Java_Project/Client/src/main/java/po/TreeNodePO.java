@@ -2,6 +2,8 @@ package po;
 
 import java.util.ArrayList;
 
+import vo.TreeNodeVO;
+
 public class TreeNodePO {
 	String type;
 	TreeNodePO fa;
@@ -9,6 +11,10 @@ public class TreeNodePO {
 	
 	ArrayList<GoodsModelPO> goodsList;
 
+	public TreeNodePO(TreeNodeVO treeNodeVO) {
+		// TODO Auto-generated constructor stub
+		
+	}
 	public String getType() {
 		return type;
 	}

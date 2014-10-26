@@ -18,7 +18,7 @@ public class GLBLImpl implements GLBLservice {
 	public GLBLImpl(String account) {
 		// TODO Auto-generated constructor stub
 		try {
-			goodsList = new GoodsListDataImpl("account name").getGoodsList();
+			goodsList = new GoodsListDataImpl("account name").getGoodsList().getObj();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

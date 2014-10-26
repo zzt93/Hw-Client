@@ -2,8 +2,8 @@ package businesslogicservice.RepositoryExaminblservice;
 
 import java.util.ArrayList;
 
-import po.RepoPO;
+import po.InOutRepoPO;
 
 public interface RepoExaminBLservice {
-	ArrayList<RepoPO> show();
+	ArrayList<InOutRepoPO> countInOut() throws Exception;
 }

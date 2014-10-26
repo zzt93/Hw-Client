@@ -2,8 +2,8 @@ package businesslogicservice.RepositoryCheckblservice;
 
 import java.util.ArrayList;
 
-import po.InOutRepoPO;
+import po.RepoPO;
 
 public interface RepoCheckBLservice {
-	ArrayList<InOutRepoPO> check();
+	ArrayList<RepoPO> checkAndSum();
 }

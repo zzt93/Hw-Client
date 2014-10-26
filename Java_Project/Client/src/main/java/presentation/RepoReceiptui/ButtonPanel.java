@@ -1,4 +1,4 @@
-package presentation.GoodsListui;
+package presentation.RepoReceiptui;
 
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -12,13 +12,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import vo.GoodsVO;
-import businesslogic.GoodsListbl.GLBLImpl;
-import businesslogicservice.GoodsListblservice.GLBLservice;
+import businesslogic.RepoReceiptbl.RepoReceiptBLImpl;
+import businesslogicservice.RepoReceiptblservice.RepoReceBLservice;
 /**
  * This is the intersection where ui and bl interact
  * 
- * GoodsList
+ * ArrayList<TreeNode>
  * 
  * @author zzt
  *
@@ -36,6 +35,9 @@ public class ButtonPanel extends JPanel{
 	JButton seaButton = new JButton("Search");
 	
 	static GridLayout gridLayout = new GridLayout(2, 2);
+	
+	
+	
 	
 	public ButtonPanel() {
 		// TODO Auto-generated constructor stub
@@ -58,7 +60,7 @@ public class ButtonPanel extends JPanel{
 	
 	public void addListener(){
 		
-		final GLBLservice glbLservice = new GLBLImpl("account");
+		final RepoReceBLservice receBLservice = new RepoReceiptBLImpl();
 		
 		addButton.addActionListener(new ActionListener() {
 			
@@ -83,7 +85,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.add(new GoodsVO());
+					receBLservice.input(null, ABORT);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -113,7 +115,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.delete(new GoodsVO());
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -146,7 +148,7 @@ public class ButtonPanel extends JPanel{
 				//method of bl
 
 				try {
-					glbLservice.update(new GoodsVO());
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -179,7 +181,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.eSearch(id.getText());
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

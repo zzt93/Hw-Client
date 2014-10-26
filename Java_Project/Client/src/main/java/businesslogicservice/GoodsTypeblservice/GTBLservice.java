@@ -10,10 +10,10 @@ public interface GTBLservice {
 	boolean update(TreeNodeVO tNode) throws Exception;
 	boolean delete(TreeNodeVO tNode) throws Exception;
 	
-	TreeNodeVO eSearch(String id);
+	TreeNodeVO eSearch(String id) throws Exception;
 	
 	ArrayList<TreeNodeVO> show() throws Exception;//return the tree so to build the tree
 	
-	void initialize(String account);
-	String getDatabase(String account); 
+	void initialize(String account) throws Exception;
+	String getDatabase(String account)throws Exception; 
 }

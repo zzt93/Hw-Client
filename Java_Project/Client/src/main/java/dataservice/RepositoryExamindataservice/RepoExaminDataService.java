@@ -5,15 +5,16 @@ import java.util.ArrayList;
 
 import po.RepoFilterPO;
 import po.InOutRepoPO;
+import po.ResultMessage;
 
 public interface RepoExaminDataService {
-	ArrayList<InOutRepoPO> getRepoReceipt() throws RemoteException;
-	boolean initialize(ArrayList<InOutRepoPO> receipts) throws RemoteException;
+	ResultMessage<ArrayList<InOutRepoPO>> getRepoReceipt() throws RemoteException;
+	ResultMessage<Boolean> initialize(ArrayList<InOutRepoPO> receipts) throws RemoteException;
 	
-	boolean insert(InOutRepoPO receipt) throws RemoteException;
-	boolean delete(InOutRepoPO receipt) throws RemoteException;
-	boolean update(InOutRepoPO receipt) throws RemoteException;
+	ResultMessage<Boolean> insert(InOutRepoPO receipt) throws RemoteException;
+	ResultMessage<Boolean> delete(InOutRepoPO receipt) throws RemoteException;
+	ResultMessage<Boolean> update(InOutRepoPO receipt) throws RemoteException;
 	
-	InOutRepoPO efind(String info) throws RemoteException;
-	ArrayList<InOutRepoPO> ifind(RepoFilterPO filterPO) throws RemoteException;
+	ResultMessage<InOutRepoPO> efind(String info) throws RemoteException;
+	ResultMessage<ArrayList<InOutRepoPO>> ifind(RepoFilterPO filterPO) throws RemoteException;
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import po.GoodsListPO;
 import po.GoodsPO;
 import po.RepoFilterPO;
+import po.ResultMessage;
 
 public class GoodsListDataImpl implements GoodsListDataService {
 
@@ -15,37 +16,37 @@ public class GoodsListDataImpl implements GoodsListDataService {
 		// TODO Auto-generated constructor stub
 		account = accountN;
 	}
-	public GoodsListPO getGoodsList() throws RemoteException {
+	public ResultMessage<GoodsListPO> getGoodsList() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean initialize(GoodsListPO goodsListPO) throws RemoteException {
+	public ResultMessage<Boolean> initialize(GoodsListPO goodsListPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return new ResultMessage<Boolean>("", true);
 	}
 
-	public boolean insert(GoodsPO goodsPO) throws RemoteException {
+	public ResultMessage<Boolean> insert(GoodsPO goodsPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return new ResultMessage<Boolean>("", true);
 	}
 
-	public boolean delete(GoodsPO goodsPO) throws RemoteException {
+	public ResultMessage<Boolean> delete(GoodsPO goodsPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return new ResultMessage<Boolean>("", true);
 	}
 
-	public boolean update(GoodsPO goodsPO) throws RemoteException {
+	public ResultMessage<Boolean> update(GoodsPO goodsPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return new ResultMessage<Boolean>("", true);
 	}
 
-	public GoodsPO efind(String id) throws RemoteException {
+	public ResultMessage<GoodsPO> efind(String id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ArrayList<GoodsPO> ifind(RepoFilterPO filter) throws RemoteException {
+	public ResultMessage<ArrayList<GoodsPO>> ifind(RepoFilterPO filter) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
