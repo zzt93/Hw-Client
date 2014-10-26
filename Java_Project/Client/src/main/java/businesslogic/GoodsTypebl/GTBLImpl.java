@@ -4,7 +4,6 @@ package businesslogic.GoodsTypebl;
 import java.util.ArrayList;
 
 import po.TreeNodePO;
-import dataservice.GoodsTypedataservice.GoodsTypeDataImpl;
 import dataservice.GoodsTypedataservice.GoodsTypeDateService;
 import vo.TreeNodeVO;
 import businesslogicservice.GoodsTypeblservice.GTBLservice;

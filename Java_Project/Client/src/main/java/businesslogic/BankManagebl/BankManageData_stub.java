@@ -1,7 +1,8 @@
-package dataservice.BankManagedataservice;
+package businesslogic.BankManagebl;
 
 import java.rmi.RemoteException;
 
+import dataservice.BankManagedataservice.BankManagedataservice;
 import po.BankPO;
 import po.ResultMessage;
 import vo.BankVO;

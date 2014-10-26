@@ -1,4 +1,4 @@
-package presentation.Saleui;
+package businesslogic.Salebl;
 
 import businesslogicservice.Saleblservice.SaleUtilityImpl;
 import po.ReceiptFilter;

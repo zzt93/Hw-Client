@@ -2,7 +2,6 @@ package businesslogic.FinancialReceiptbl;
 
 import java.rmi.RemoteException;
 
-import dataservice.FinancialReceiptdataservice.FinancialReceiptdata_stub;
 import vo.*;
 import po.*;
 

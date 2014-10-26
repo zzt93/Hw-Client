@@ -1,4 +1,4 @@
-package presentation.FinancialReceiptui;
+package businesslogic.FinancialReceiptbl;
 
 import vo.*;
 import businesslogic.FinancialReceiptbl.FinancialReceipt_stub;

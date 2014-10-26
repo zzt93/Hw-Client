@@ -1,4 +1,4 @@
-package presentation.RunningTableui;
+package businesslogic.RunningTablebl;
 
 import vo.*;
 import businesslogic.RunningTablebl.RunningTable_stub;

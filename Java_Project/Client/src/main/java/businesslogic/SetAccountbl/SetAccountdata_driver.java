@@ -3,7 +3,7 @@ package businesslogic.SetAccountbl;
 import java.rmi.RemoteException;
 
 import po.ResultMessage;
-import dataservice.SetAccountdataservice.SetAccountdata_stub;
+
 
 public class SetAccountdata_driver {
 	ResultMessage result;

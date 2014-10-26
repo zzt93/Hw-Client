@@ -1,6 +1,5 @@
 package businesslogic.RepoReceiptbl;
 
-import dataservice.RepoReceiptdataservice.RepoReceiptDataImpl;
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
 import po.ReceiptPO;
 import po.RepoReceiptPO;

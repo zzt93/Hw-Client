@@ -1,7 +1,8 @@
-package dataservice.FinancialReceiptdataservice;
+package businesslogic.FinancialReceiptbl;
 
 import java.rmi.RemoteException;
 
+import dataservice.FinancialReceiptdataservice.FinancialReceiptdataservice;
 import po.CashPO;
 import po.PayPO;
 import po.RecPO;

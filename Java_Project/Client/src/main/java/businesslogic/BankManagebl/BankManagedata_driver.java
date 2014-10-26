@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import po.BankPO;
 import po.ResultMessage;
 import vo.BankVO;
-import dataservice.BankManagedataservice.BankManageData_stub;
 
 public class BankManagedata_driver {
 	ResultMessage result;

@@ -1,4 +1,4 @@
-package presentation.Stockui;
+package businesslogic.Stockbl;
 
 import businesslogicservice.Stockblservice.StockUtilityImpl;
 import po.ReceiptFilter;

@@ -1,4 +1,4 @@
-package presentation.Clientui;
+package businesslogic.Clientbl;
 
 import businesslogicservice.Clientblservice.ClientUtilityImpl;
 import po.ClientFilter;

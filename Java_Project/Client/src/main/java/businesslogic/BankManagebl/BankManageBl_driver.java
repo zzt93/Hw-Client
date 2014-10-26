@@ -1,4 +1,4 @@
-package presentation.BankManageui;
+package businesslogic.BankManagebl;
 
 import businesslogic.BankManagebl.BankManagebl_stub;
 import po.ResultMessage;

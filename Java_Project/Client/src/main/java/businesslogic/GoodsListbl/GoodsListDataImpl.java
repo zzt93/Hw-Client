@@ -1,8 +1,9 @@
-package dataservice.GoodsListdataservice;
+package businesslogic.GoodsListbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import dataservice.GoodsListdataservice.GoodsListDataService;
 import po.GoodsListPO;
 import po.GoodsPO;
 import po.RepoFilterPO;

@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dataservice.GoodsListdataservice.GoodsListDataImpl;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
