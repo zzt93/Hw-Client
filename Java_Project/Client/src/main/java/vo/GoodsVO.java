@@ -5,6 +5,10 @@ package vo;
  *
  */
 public class GoodsVO {
-	boolean everHas;
-	int amount;
+	public int amount;
+	public String name;
+	public String id;
+	public String model;
+	public double inPrice;
+	public double outPrice;
 }

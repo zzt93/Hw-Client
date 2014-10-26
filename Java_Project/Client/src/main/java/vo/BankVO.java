@@ -1,16 +1,16 @@
 package vo;
 
 public class BankVO {
-	public String name;
+	String name;
 	public double account;
-	public String remark;
-	public BankVO(String name,double account){
-		this(name,account,null);
+	String remark;
+	public BankVO(String n,double a){
+		this(n,a,null);
 	}
-	public BankVO(String name,double account,String remark){
-		this.name=name;
-		this.account=account;
-		this.remark=remark;
+	public BankVO(String n,double a,String r){
+		name=n;
+		account=a;
+		remark=r;
 	}
 	
 }

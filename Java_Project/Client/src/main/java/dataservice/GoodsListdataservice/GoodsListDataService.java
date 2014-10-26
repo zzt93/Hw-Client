@@ -1,5 +1,6 @@
 package dataservice.GoodsListdataservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.RepoFilterPO;
@@ -7,11 +8,11 @@ import po.GoodsListPO;
 import po.GoodsPO;
 
 public interface GoodsListDataService {
-	GoodsListPO getGoodsList();
-	boolean initialize(GoodsListPO goodsListPO);
-	boolean insert(GoodsPO goodsPO);
-	boolean delete(GoodsPO goodsPO);
-	boolean update(GoodsPO goodsPO);
-	GoodsPO efind(String id);
-	ArrayList<GoodsPO> ifind(RepoFilterPO filter);
+	GoodsListPO getGoodsList() throws RemoteException;
+	boolean initialize(GoodsListPO goodsListPO) throws RemoteException;
+	boolean insert(GoodsPO goodsPO) throws RemoteException;
+	boolean delete(GoodsPO goodsPO) throws RemoteException;
+	boolean update(GoodsPO goodsPO) throws RemoteException;
+	GoodsPO efind(String id) throws RemoteException;
+	ArrayList<GoodsPO> ifind(RepoFilterPO filter) throws RemoteException;
 }

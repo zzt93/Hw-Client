@@ -13,6 +13,6 @@ public interface BankManagedataservice {
 	public ResultMessage init() throws RemoteException;
 	public ResultMessage finish() throws RemoteException;
 	public ResultMessage finds() throws RemoteException;
-	public ResultMessage setup(String account) throws RemoteException;
-	public ResultMessage getID(String account) throws RemoteException;
+	public ResultMessage setup(String account);
+	public ResultMessage getID(String account);
 }

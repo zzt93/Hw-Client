@@ -1,18 +1,19 @@
 package dataservice.GoodsTypedataservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.RepoFilterPO;
 import po.TreeNodePO;
 
 public interface GoodTypeDateService {
-	ArrayList<TreeNodePO> getGoodsTypde();
-	boolean initialize(ArrayList<TreeNodePO> treeNodePOs);
+	ArrayList<TreeNodePO> getGoodsTypde() throws RemoteException;
+	boolean initialize(ArrayList<TreeNodePO> treeNodePOs) throws RemoteException;
 	
-	boolean insert(TreeNodePO treeNodePO);
-	boolean delete(TreeNodePO treeNodePO);
-	boolean update(TreeNodePO treeNodePO);
+	boolean insert(TreeNodePO treeNodePO) throws RemoteException;
+	boolean delete(TreeNodePO treeNodePO) throws RemoteException;
+	boolean update(TreeNodePO treeNodePO) throws RemoteException;
 	
-	TreeNodePO efind(String idN);
-	ArrayList<TreeNodePO> ifind(RepoFilterPO filterPO);
+	TreeNodePO efind(String idN) throws RemoteException;
+	ArrayList<TreeNodePO> ifind(RepoFilterPO filterPO) throws RemoteException;
 }

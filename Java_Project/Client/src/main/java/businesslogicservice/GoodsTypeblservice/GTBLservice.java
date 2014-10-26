@@ -3,11 +3,17 @@ package businesslogicservice.GoodsTypeblservice;
 
 import java.util.ArrayList;
 
-import vo.TreeNode;
+import vo.TreeNodeVO;
 
 public interface GTBLservice {
-	boolean add(TreeNode tNode);
-	boolean update(TreeNode tNode);
-	boolean delete(TreeNode tNode);
-	ArrayList<TreeNode> show();//return the tree so to build the tree
+	boolean add(TreeNodeVO tNode) throws Exception;
+	boolean update(TreeNodeVO tNode) throws Exception;
+	boolean delete(TreeNodeVO tNode) throws Exception;
+	
+	TreeNodeVO eSearch(String id);
+	
+	ArrayList<TreeNodeVO> show() throws Exception;//return the tree so to build the tree
+	
+	void initialize(String account);
+	String getDatabase(String account); 
 }
