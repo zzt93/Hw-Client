@@ -5,5 +5,6 @@ import java.io.Serializable;
 /**
  * Created by Nifury on 2014/10/20.
  */
-public class ClientType implements Serializable {
+public enum ClientType implements Serializable {
+    STOCKER, SELLER
 }

@@ -33,10 +33,10 @@ public class ClientPO implements Serializable {
         this.address = address;
         this.zip = zip;
         this.email = email;
+        this.upperBound = BigDecimal.ZERO;
+        this.toReceive = BigDecimal.ZERO;
+        this.toPay = BigDecimal.ZERO;
         this.defaultSalesMan = defaultSalesMan;
-
-        //生成随机ID
-        this.id = UUID.randomUUID().toString();
     }
 
     public String getId() {

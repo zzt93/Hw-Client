@@ -22,9 +22,11 @@ public class Client implements Serializable {
     private BigDecimal toPay;
     private String defaultSalesMan;
 
-    public Client(ClientType type, ClientLevel level,
-                  String name, String phone, String address,
-                  String zip, String email, String defaultSalesMan) {
+    public Client(String id, ClientType type, ClientLevel level,
+                  String name, String phone, String address, String zip,
+                  String email, BigDecimal upperBound, BigDecimal toReceive,
+                  BigDecimal toPay, String defaultSalesMan) {
+        this.id = id;
         this.type = type;
         this.level = level;
         this.name = name;
@@ -32,10 +34,10 @@ public class Client implements Serializable {
         this.address = address;
         this.zip = zip;
         this.email = email;
+        this.upperBound = upperBound;
+        this.toReceive = toReceive;
+        this.toPay = toPay;
         this.defaultSalesMan = defaultSalesMan;
-
-        //生成随机ID
-        this.id = UUID.randomUUID().toString();
     }
 
     public String getId() {

@@ -7,36 +7,35 @@ import java.sql.*;
  */
 public class MySQLUtility {
 
-    private final static String url = "jdbc:mysql://localhost:3306/myuser";
-    private final static String user = "root";
-    private final static String pass = "root";
+    private final static String url = "jdbc:mysql://localhost:3306/sampdb?" +
+            "user=root&password=8633515&useUnicode=true&characterEncoding=UTF8";
     private static Connection connection;
     private static Statement statement;
 
-    static {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url, user, pass);
-            statement = connection.createStatement();
-        } catch (Exception e) {
-            throw new ContingencyException(e.getMessage(), e);
-        }
+    public static void init() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        connection = DriverManager.getConnection(url);
+        statement = connection.createStatement();
     }
 
-    public static int update(String sql) {
-        try {
-            return statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            throw new ContingencyException(e.getMessage(), e);
-        }
+    private static int update(String sql) throws SQLException {
+        return statement.executeUpdate(sql);
     }
 
-    public static ResultSet query(String sql) {
-        try {
-            return statement.executeQuery(sql);
-        } catch (SQLException e) {
-            throw new ContingencyException(e.getMessage(), e);
-        }
+    public static ResultSet query(String sql) throws SQLException {
+        return statement.executeQuery(sql);
+    }
+
+    public static int insert(String table, String args) throws SQLException {
+        return update("insert into " + table + " values(" + args + ");");
+    }
+
+    public static int delete(String table, String where) throws SQLException {
+        return update("delete from" + table + " where " + where + ";");
+    }
+
+    public static int update(String table, String set, String where) throws SQLException {
+        return update("update " + table + "set " + set + " where " + where);
     }
 
 }

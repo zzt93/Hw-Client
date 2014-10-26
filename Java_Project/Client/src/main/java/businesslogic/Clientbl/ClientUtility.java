@@ -18,7 +18,7 @@ public class ClientUtility implements ClientUtilityImpl {
 
     private static ClientDataServiceImpl impl;
 
-    static {
+    public ClientUtility() {
         try {
             impl = (ClientDataServiceImpl) RMIUtility.getImpl("Client");
         } catch (RemoteException | NotBoundException e) {
@@ -56,7 +56,7 @@ public class ClientUtility implements ClientUtilityImpl {
 
     /**
      * @param filters 客户信息过滤向量，可为null
-     * @return 当没有满足条件时，返回null，否则返回符合条件的客户Vector
+     * @return 当没有满足条件时，返回空Vector，否则返回符合条件的客户Vector
      */
     @Override
     public Vector<ClientPO> queryClient(Vector<ClientFilter> filters) throws Exception {

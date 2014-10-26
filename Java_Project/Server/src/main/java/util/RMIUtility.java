@@ -11,13 +11,9 @@ import java.rmi.registry.Registry;
  */
 public class RMIUtility {
 
-    public static void init() {
-        try {
-            Registry registry = LocateRegistry.getRegistry();
-            registry.rebind("Client", new ClientUtility());
-        } catch (RemoteException e) {
-            throw new ContingencyException(e.getMessage(), e);
-        }
+    public static void init() throws RemoteException {
+        Registry registry = LocateRegistry.createRegistry(1099);
+        registry.rebind("Client", new ClientUtility());
     }
 
 }

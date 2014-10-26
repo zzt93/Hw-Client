@@ -10,7 +10,7 @@ public class ResultMessage<T> implements Serializable {
     private static final long serialVersionUID = 2247778592327071063L;
     private String errMessage;
     private T obj;
-    public static final ResultMessage noErr = new ResultMessage(null, null);
+    public static final ResultMessage<Object> noErr = new ResultMessage<>(null, null);
 
     public ResultMessage(String errMessage, T obj) {
         this.errMessage = errMessage;
