@@ -14,4 +14,5 @@ public class RecPO extends ReceiptPO {
 		bankList=vo.bankList;
 		total=vo.total;
 	}
+	public RecPO(){}
 }

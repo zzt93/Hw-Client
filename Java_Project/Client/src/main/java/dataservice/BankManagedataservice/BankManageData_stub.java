@@ -4,12 +4,13 @@ import java.rmi.RemoteException;
 
 import po.BankPO;
 import po.ResultMessage;
+import vo.BankVO;
 
 public class BankManageData_stub implements BankManagedataservice {
 
 	public ResultMessage find(String field) throws RemoteException{
 		if(field.equals("right"))
-		return new ResultMessage(null,new BankPO("银行账户1",3000,"备注"));
+		return new ResultMessage(null,new BankPO(new BankVO("银行账户1",3000,"备注")));
 		else 
 		return new ResultMessage("没找到该账户",null);
 	}
@@ -39,12 +40,12 @@ public class BankManageData_stub implements BankManagedataservice {
 		return new ResultMessage(null,new BankPO[5]);
 	}
 
-	public ResultMessage setup(String account) {
+	public ResultMessage setup(String account) throws RemoteException{
 		System.out.println("新建数据库成功");
 		return ResultMessage.noErr;
 	}
 
-	public ResultMessage getID(String account) {
+	public ResultMessage getID(String account) throws RemoteException {
 		// TODO Auto-generated method stub
 		return new ResultMessage(null,"账目1");
 	}
