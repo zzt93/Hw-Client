@@ -7,7 +7,7 @@ import po.StrategyPO;
 import po.GoodsPO;
 
 
-public class StrategyList implements Strategy_List_BLservice{
+public class StrategyList_Stub implements Strategy_List_BLservice{
 	private ArrayList<StrategyPO> list;
 
 	public ArrayList<StrategyPO> getList() {
