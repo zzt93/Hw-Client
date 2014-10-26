@@ -2,31 +2,28 @@ package po;
 
 import java.io.Serializable;
 
-/**
- * Created by Nifury on 2014/10/25.
- */
 public class ResultMessage<T> implements Serializable {
+	  private static final long serialVersionUID = 2247778592327071063L;
+	    private String errMessage;
+	    private T obj;
+	    public static final ResultMessage noErr = new ResultMessage(null, null);
 
-    private static final long serialVersionUID = 2247778592327071063L;
-    private String errMessage;
-    private T obj;
-    public static final ResultMessage noErr = new ResultMessage(null, null);
+	    public ResultMessage(String errMessage, T obj) {
+	        this.errMessage = errMessage;
+	        this.obj = obj;
+	    }
 
-    public ResultMessage(String errMessage, T obj) {
-        this.errMessage = errMessage;
-        this.obj = obj;
-    }
+	    public void throwIfFailed() throws Exception {
+	        if (errMessage != null)
+	            throw new Exception(errMessage);
+	    }
 
-    public void throwIfFailed() throws Exception {
-        if (errMessage != null)
-            throw new Exception(errMessage);
-    }
+	    public String getErrMessage() {
+	        return errMessage;
+	    }
 
-    public String getErrMessage() {
-        return errMessage;
-    }
+	    public T getObj() {
+	        return obj;
+	    }
 
-    public T getObj() {
-        return obj;
-    }
 }
