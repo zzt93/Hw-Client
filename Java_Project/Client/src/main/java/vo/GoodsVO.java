@@ -6,4 +6,9 @@ package vo;
  */
 public class GoodsVO {
 	int amount;
+	String name;
+	String id;
+	String model;
+	double inPrice;
+	double outPrice;
 }
