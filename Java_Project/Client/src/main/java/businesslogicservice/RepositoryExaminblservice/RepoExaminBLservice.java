@@ -1,4 +1,4 @@
-package businesslogicservice.Repositoryblservice;
+package businesslogicservice.RepositoryExaminblservice;
 
 import java.util.ArrayList;
 

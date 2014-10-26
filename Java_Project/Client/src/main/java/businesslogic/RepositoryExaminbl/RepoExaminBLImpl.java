@@ -2,7 +2,7 @@ package businesslogic.Repositorybl;
 
 import java.util.ArrayList;
 
-import businesslogicservice.Repositoryblservice.RepoExaminBLservice;
+import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
 import businesslogic.GoodsListbl.GL_repo_BLImpl;
 import businesslogicservice.GoodsListblservice.GL_repo_BLservice;
 import po.GoodsListPO;

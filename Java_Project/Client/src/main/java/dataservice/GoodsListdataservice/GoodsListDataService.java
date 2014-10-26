@@ -7,11 +7,11 @@ import po.GoodsListPO;
 import po.GoodsPO;
 
 public interface GoodsListDataService {
-	GoodsListPO getGoodsList();
-	boolean initialize(GoodsListPO goodsListPO);
-	boolean insert(GoodsPO goodsPO);
-	boolean delete(GoodsPO goodsPO);
-	boolean update(GoodsPO goodsPO);
-	GoodsPO efind(String id);
-	ArrayList<GoodsPO> ifind(RepoFilterPO filter);
+	GoodsListPO getGoodsList() throws Exception;
+	boolean initialize(GoodsListPO goodsListPO) throws Exception;
+	boolean insert(GoodsPO goodsPO) throws Exception;
+	boolean delete(GoodsPO goodsPO) throws Exception;
+	boolean update(GoodsPO goodsPO) throws Exception;
+	GoodsPO efind(String id) throws Exception;
+	ArrayList<GoodsPO> ifind(RepoFilterPO filter) throws Exception;
 }

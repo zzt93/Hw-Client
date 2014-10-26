@@ -6,13 +6,13 @@ import po.RepoFilterPO;
 import po.TreeNodePO;
 
 public interface GoodTypeDateService {
-	ArrayList<TreeNodePO> getGoodsTypde();
-	boolean initialize(ArrayList<TreeNodePO> treeNodePOs);
+	ArrayList<TreeNodePO> getGoodsTypde() throws Exception;
+	boolean initialize(ArrayList<TreeNodePO> treeNodePOs) throws Exception;
 	
-	boolean insert(TreeNodePO treeNodePO);
-	boolean delete(TreeNodePO treeNodePO);
-	boolean update(TreeNodePO treeNodePO);
+	boolean insert(TreeNodePO treeNodePO) throws Exception;
+	boolean delete(TreeNodePO treeNodePO) throws Exception;
+	boolean update(TreeNodePO treeNodePO) throws Exception;
 	
-	TreeNodePO efind(String idN);
-	ArrayList<TreeNodePO> ifind(RepoFilterPO filterPO);
+	TreeNodePO efind(String idN) throws Exception;
+	ArrayList<TreeNodePO> ifind(RepoFilterPO filterPO) throws Exception;
 }

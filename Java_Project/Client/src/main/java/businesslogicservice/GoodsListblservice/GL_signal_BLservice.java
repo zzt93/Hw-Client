@@ -4,6 +4,6 @@ import vo.Goods;
 
 public interface GL_signal_BLservice {
 	/*check whether some goods is exist and the signal is modifiable*/
-	boolean check(Goods goods);
-	boolean setSignal(Goods goods, int amount);//Hashmap<String(id), int> signalMap
+	boolean check(Goods goods) throws Exception;
+	boolean setSignal(Goods goods, int amount) throws Exception;//Hashmap<String(id), int> signalMap
 }

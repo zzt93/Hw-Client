@@ -3,7 +3,7 @@ package businesslogic.Repositorybl;
 import java.util.ArrayList;
 
 import po.InOutRepoPO;
-import businesslogicservice.Repositoryblservice.RepoCheckBLservice;
+import businesslogicservice.RepositoryCheckblservice.RepoCheckBLservice;
 
 public class RepoCheckBLImpl implements RepoCheckBLservice {
 

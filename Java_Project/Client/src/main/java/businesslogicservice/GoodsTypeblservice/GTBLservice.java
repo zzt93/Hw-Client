@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import vo.TreeNode;
 
 public interface GTBLservice {
-	boolean add(TreeNode tNode);
-	boolean update(TreeNode tNode);
-	boolean delete(TreeNode tNode);
-	ArrayList<TreeNode> show();//return the tree so to build the tree
+	boolean add(TreeNode tNode) throws Exception;
+	boolean update(TreeNode tNode) throws Exception;
+	boolean delete(TreeNode tNode) throws Exception;
+	ArrayList<TreeNode> show() throws Exception;//return the tree so to build the tree
 }
