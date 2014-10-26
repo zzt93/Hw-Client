@@ -4,13 +4,12 @@ public class PayVO extends ReceiptVO{
 	public String client,operator;
 	public BankVO[] bankList;
 	public double total=0;
-	public PayVO(String n,String c,String o,String t,BankVO[] vo){
-		number=n;
-		client=c;
-		operator=c;
-		bankList=vo;
-		for(int i=0;i<bankList.length;i++){
-			total+=bankList[i].account;
-		}
+	public PayVO(String num,String client,String operator,BankVO[] bankList,double total){
+		this.number=num;
+		this.client=client;
+		this.operator=operator;
+		this.bankList=bankList;
+		this.total=total;
 	}
+	public PayVO(){}
 }
