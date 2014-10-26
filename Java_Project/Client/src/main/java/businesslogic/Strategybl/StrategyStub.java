@@ -1,4 +1,4 @@
-package stub.dzh.stub;
+package businesslogic.Strategybl;
 
 import po.StrategyPO;
 import businesslogicservice.Strategyblservice.*;
