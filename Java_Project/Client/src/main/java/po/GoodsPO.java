@@ -1,5 +1,7 @@
 package po;
 
+import vo.GoodsVO;
+
 public class GoodsPO {
 	int amount;
 	String name;
@@ -8,6 +10,9 @@ public class GoodsPO {
 	double inPrice;
 	double outPrice;
 	
+	public GoodsPO(GoodsVO goods){
+		
+	}
 	public int getAmount() {
 		return amount;
 	}

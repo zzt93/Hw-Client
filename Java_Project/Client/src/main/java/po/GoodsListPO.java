@@ -9,7 +9,15 @@ public class GoodsListPO {
 	/* Every GoodsPO in the list is a batch of goods
 	 * a sum of every batch is the stock of the repository
 	 */
-	HashMap<String, ArrayList<GoodsPO>> goodsMap;
+	HashMap<String, ArrayList<GoodsPO>> goods;
+
+	public HashMap<String, ArrayList<GoodsPO>> getGoods() {
+		return goods;
+	}
+
+	public void setGoods(HashMap<String, ArrayList<GoodsPO>> goods) {
+		this.goods = goods;
+	}
 
 	public HashMap<String, GoodsModelPO> getGoodsModels() {
 		return goodsModels;
@@ -19,11 +27,4 @@ public class GoodsListPO {
 		this.goodsModels = goodsModels;
 	}
 
-	public HashMap<String, ArrayList<GoodsPO>> getGoodsMap() {
-		return goodsMap;
-	}
-
-	public void setGoodsMap(HashMap<String, ArrayList<GoodsPO>> goodsMap) {
-		this.goodsMap = goodsMap;
-	}
 }
