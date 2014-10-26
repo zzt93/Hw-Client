@@ -1,4 +1,4 @@
-package businesslogic.Repositorybl;
+package businesslogic.RepositoryExaminbl;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,12 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		// TODO Auto-generated method stub
 		ArrayList<RepoPO> result = new ArrayList<RepoPO>();
 		GL_repo_BLservice gl_repo_BLservice = new GL_repo_BLImpl();
-		GoodsListPO temp = gl_repo_BLservice.sum();
+		try {
+			GoodsListPO temp = gl_repo_BLservice.sum();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		ArrayList<GoodsModelPO> goodsModelList ;
 		return result;

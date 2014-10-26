@@ -4,7 +4,6 @@ package vo;
  * @author zzt
  *
  */
-public class Goods {
-	boolean everHas;
+public class GoodsVO {
 	int amount;
 }

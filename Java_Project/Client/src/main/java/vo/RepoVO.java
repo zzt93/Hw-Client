@@ -8,5 +8,5 @@ import java.util.HashMap;
 public class RepoVO {
 	long batch;
 	String batchNum;
-	HashMap<String, ArrayList<Goods>> goodsListMap;
+	HashMap<String, ArrayList<GoodsVO>> goodsListMap;
 }

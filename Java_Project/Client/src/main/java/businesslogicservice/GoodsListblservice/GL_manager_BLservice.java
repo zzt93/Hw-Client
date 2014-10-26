@@ -1,8 +1,8 @@
 package businesslogicservice.GoodsListblservice;
 
-import vo.Goods;
+import vo.GoodsVO;
 
 public interface GL_manager_BLservice {
-	int amount(Goods goods) throws Exception;
+	int amount(GoodsVO goods) throws Exception;
 	
 }

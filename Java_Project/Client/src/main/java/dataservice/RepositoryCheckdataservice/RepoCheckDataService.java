@@ -1,4 +1,4 @@
-package dataservice.Repositorydataservice;
+package dataservice.RepositoryCheckdataservice;
 
 import java.util.ArrayList;
 
@@ -6,14 +6,14 @@ import po.RepoFilterPO;
 import po.RepoPO;
 
 public interface RepoCheckDataService {
-	ArrayList<RepoPO> getRepo();
-	boolean initialize(ArrayList<RepoPO> repoPOs);
+	ArrayList<RepoPO> getRepo() throws Exception;
+	boolean initialize(ArrayList<RepoPO> repoPOs) throws Exception;
 	
-	boolean insert(RepoPO repoPO);
-	boolean delete(RepoPO repoPO);
-	boolean update(RepoPO repoPO);
+	boolean insert(RepoPO repoPO) throws Exception;
+	boolean delete(RepoPO repoPO) throws Exception;
+	boolean update(RepoPO repoPO) throws Exception;
 	
-	RepoPO efind(String info);
-	ArrayList<RepoPO> ifind(RepoFilterPO filterPO);
+	RepoPO efind(String info) throws Exception;
+	ArrayList<RepoPO> ifind(RepoFilterPO filterPO) throws Exception;
 	
 }
