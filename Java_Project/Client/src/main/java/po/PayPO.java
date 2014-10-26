@@ -14,5 +14,4 @@ public class PayPO extends ReceiptPO{
 		bankList=vo.bankList;
 		total=vo.total;
 	}
-	public PayPO(){}
 }
