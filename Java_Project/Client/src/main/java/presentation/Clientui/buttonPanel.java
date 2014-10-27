@@ -99,7 +99,7 @@ public class buttonPanel extends JPanel{
 				JOptionPane.showMessageDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
 				tablePanel.addStatistic();
                 try {
-                    impl.addClient(new ClientPO(ClientType.SELLER, ClientLevel.LEVEL1, name.getToolTipText(),
+                    impl.addClient(new ClientPO(ClientType.SELLER, ClientLevel.LEVEL1, name.getText(),
                             phone.getText(), addr.getText(), zip.getText(), email.getText(),
                             "defaultSales"));
                 } catch (Exception e1) {
