@@ -1,7 +1,6 @@
 package dataservice.Clientdataservice;
 
 import po.ClientPO;
-import po.ClientFilter;
 import po.ResultMessage;
 
 import java.rmi.Remote;
@@ -16,5 +15,5 @@ public interface ClientDataServiceImpl extends Remote {
     public ResultMessage deleteClient(String id) throws RemoteException;
     public ResultMessage modifyClient(ClientPO newClientPO) throws RemoteException;
     public ResultMessage<ClientPO> queryClientById(String id) throws RemoteException;
-    public ResultMessage<Vector<ClientPO>> queryClient(Vector<ClientFilter> filters) throws RemoteException;
+    public ResultMessage<Vector<ClientPO>> queryClient(Vector<String> filters) throws RemoteException;
 }

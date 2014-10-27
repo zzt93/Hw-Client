@@ -1,7 +1,8 @@
 package data.Clientdata;
 
 import dataservice.Clientdataservice.ClientDataServiceImpl;
-import po.*;
+import po.ClientPO;
+import po.ResultMessage;
 import util.MySQLUtility;
 
 import java.rmi.RemoteException;
@@ -19,40 +20,42 @@ import static util.MySQLUtility.*;
  */
 public class ClientUtility extends UnicastRemoteObject implements ClientDataServiceImpl, Observer {
 
-    private static final String tableName = "Client";
+    private static final String TABLE_NAME = "Client";
+    private static final String NO_SUCH_ID = "No such id";
+    private static final long serialVersionUID = 1L;
 
     public ClientUtility() throws RemoteException {
         super();
     }
 
     @Override
-    public ResultMessage addClient(Client client) throws RemoteException {
+    public ResultMessage addClient(ClientPO clientPO) throws RemoteException {
         //id
-        StringBuffer buffer = new StringBuffer("null");
+        StringBuilder buffer = new StringBuilder("null");
         //ClientType
-        buffer.append(',').append(client.getType().ordinal());
+        buffer.append(',').append(clientPO.getType().ordinal());
         //ClientLevel
-        buffer.append(',').append(client.getLevel().ordinal());
+        buffer.append(',').append(clientPO.getLevel().ordinal());
         //name
-        buffer.append(',').append('\'').append(client.getName()).append('\'');
+        buffer.append(',').append('\'').append(clientPO.getName()).append('\'');
         //phone
-        buffer.append(',').append('\'').append(client.getPhone()).append('\'');
+        buffer.append(',').append('\'').append(clientPO.getPhone()).append('\'');
         //address
-        buffer.append(',').append('\'').append(client.getAddress()).append('\'');
+        buffer.append(',').append('\'').append(clientPO.getAddress()).append('\'');
         //zip
-        buffer.append(',').append('\'').append(client.getZip()).append('\'');
+        buffer.append(',').append('\'').append(clientPO.getZip()).append('\'');
         //email
-        buffer.append(',').append('\'').append(client.getEmail()).append('\'');
+        buffer.append(',').append('\'').append(clientPO.getEmail()).append('\'');
         //upperBound
-        buffer.append(',').append(client.getUpperBound().doubleValue());
+        buffer.append(',').append(clientPO.getUpperBound().doubleValue());
         //toReceive
-        buffer.append(',').append(client.getToReceive().doubleValue());
+        buffer.append(',').append(clientPO.getToReceive().doubleValue());
         //toPay
-        buffer.append(',').append(client.getToPay().doubleValue());
+        buffer.append(',').append(clientPO.getToPay().doubleValue());
         //defaultSalesMan
-        buffer.append(',').append('\'').append(client.getDefaultSalesMan()).append('\'');
+        buffer.append(',').append('\'').append(clientPO.getDefaultSalesMan()).append('\'');
         try {
-            int i = insert(tableName, buffer.toString());
+            int i = insert(TABLE_NAME, buffer.toString());
             if (i != 1)
                 throw new SQLException(String.valueOf(i) + " rows affected");
         } catch (SQLException e) {
@@ -64,10 +67,10 @@ public class ClientUtility extends UnicastRemoteObject implements ClientDataServ
     @Override
     public ResultMessage deleteClient(String id) throws RemoteException {
         try {
-            int i = delete(tableName, "id=" + id);
+            int i = delete(TABLE_NAME, "id=" + id);
             if (i != 1)
                 if (i == 0) {
-                    throw new SQLException("id not found");
+                    throw new SQLException(NO_SUCH_ID);
                 } else {
                     throw new SQLException(String.valueOf(i) + " rows affected");
                 }
@@ -78,24 +81,24 @@ public class ClientUtility extends UnicastRemoteObject implements ClientDataServ
     }
 
     @Override
-    public ResultMessage modifyClient(Client newClient) throws RemoteException {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("type=").append(newClient.getType().ordinal()).append(',');
-        buffer.append("level=").append(newClient.getLevel().ordinal()).append(',');
-        buffer.append("name='").append(newClient.getName()).append("',");
-        buffer.append("phone='").append(newClient.getPhone()).append("',");
-        buffer.append("address='").append(newClient.getAddress()).append("',");
-        buffer.append("zip='").append(newClient.getZip()).append("',");
-        buffer.append("email='").append(newClient.getEmail()).append("',");
-        buffer.append("upperBound=").append(newClient.getUpperBound().doubleValue()).append(',');
-        buffer.append("toReceive=").append(newClient.getToReceive().doubleValue()).append(',');
-        buffer.append("toPay=").append(newClient.getToPay().doubleValue()).append(',');
-        buffer.append("defaultSalesMan='").append(newClient.getDefaultSalesMan());
+    public ResultMessage modifyClient(ClientPO newClientPO) throws RemoteException {
+        StringBuilder buffer = new StringBuilder();
+        buffer.append("type=").append(newClientPO.getType().ordinal()).append(',');
+        buffer.append("level=").append(newClientPO.getLevel().ordinal()).append(',');
+        buffer.append("name='").append(newClientPO.getName()).append("',");
+        buffer.append("phone='").append(newClientPO.getPhone()).append("',");
+        buffer.append("address='").append(newClientPO.getAddress()).append("',");
+        buffer.append("zip='").append(newClientPO.getZip()).append("',");
+        buffer.append("email='").append(newClientPO.getEmail()).append("',");
+        buffer.append("upperBound=").append(newClientPO.getUpperBound().doubleValue()).append(',');
+        buffer.append("toReceive=").append(newClientPO.getToReceive().doubleValue()).append(',');
+        buffer.append("toPay=").append(newClientPO.getToPay().doubleValue()).append(',');
+        buffer.append("defaultSalesMan='").append(newClientPO.getDefaultSalesMan());
         try {
-            int i = MySQLUtility.update(tableName, buffer.toString(), "id=" + newClient.getId());
+            int i = MySQLUtility.update(TABLE_NAME, buffer.toString(), "id=" + newClientPO.getId());
             if (i != 1)
                 if (i == 0) {
-                    throw new SQLException("id not found");
+                    throw new SQLException(NO_SUCH_ID);
                 } else {
                     throw new SQLException(String.valueOf(i) + " rows affected");
                 }
@@ -106,23 +109,40 @@ public class ClientUtility extends UnicastRemoteObject implements ClientDataServ
     }
 
     @Override
-    public ResultMessage<Client> queryClientById(String id) throws RemoteException {
+    public ResultMessage<ClientPO> queryClientById(String id) throws RemoteException {
         try {
-            ResultSet result = query("select * from " + tableName + " where id=" + id);
-            Client client = new Client(result.getString(1), ClientType.values()[result.getInt(2)],
-                    ClientLevel.values()[result.getInt(3)],
-                    result.getString(4), result.getString(5), result.getString(6),
-                    result.getString(7), result.getString(8), result.getBigDecimal(9),
-                    result.getBigDecimal(10), result.getBigDecimal(11), result.getString(12));
-            return new ResultMessage<>(null, client);
+            ResultSet result = query("select * from " + TABLE_NAME + " where id=" + id + ";");
+            if (!result.next())
+                throw new SQLException(NO_SUCH_ID);
+            ClientPO clientPO = new ClientPO(result);
+            return new ResultMessage<>(null, clientPO);
         } catch (SQLException e) {
             return new ResultMessage<>(e.getMessage(), null);
         }
     }
 
     @Override
-    public ResultMessage<Vector<Client>> queryClient(Vector<ClientFilter> filters) throws RemoteException {
-        return null;
+    public ResultMessage<Vector<ClientPO>> queryClient(Vector<String> filters) throws RemoteException {
+        StringBuilder buffer = new StringBuilder("select * from ").append(TABLE_NAME);
+        if (!filters.isEmpty()) {
+            buffer.append(" where ");
+            for (String str : filters) {
+                buffer.append('(').append(str).append(')').append(" and ");
+            }
+            int length = buffer.length();
+            buffer.delete(length - 5, length);
+        }
+        buffer.append(';');
+        try {
+            ResultSet result = query(buffer.toString());
+            Vector<ClientPO> clientPOVector = new Vector<>();
+            while (result.next()) {
+                clientPOVector.add(new ClientPO(result));
+            }
+            return new ResultMessage<>(null, clientPOVector);
+        } catch (SQLException e) {
+            return new ResultMessage<>(e.getMessage(), null);
+        }
     }
 
     @Override

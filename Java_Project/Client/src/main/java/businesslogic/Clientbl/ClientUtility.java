@@ -3,7 +3,6 @@ package businesslogic.Clientbl;
 import businesslogicservice.Clientblservice.ClientUtilityImpl;
 import dataservice.Clientdataservice.ClientDataServiceImpl;
 import po.ClientPO;
-import po.ClientFilter;
 import po.ResultMessage;
 import util.RMIUtility;
 
@@ -18,12 +17,9 @@ public class ClientUtility implements ClientUtilityImpl {
 
     private static ClientDataServiceImpl impl;
 
-    public ClientUtility() {
-        try {
+    public ClientUtility() throws RemoteException, NotBoundException {
+        if (impl == null)
             impl = (ClientDataServiceImpl) RMIUtility.getImpl("Client");
-        } catch (RemoteException | NotBoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -59,7 +55,7 @@ public class ClientUtility implements ClientUtilityImpl {
      * @return 当没有满足条件时，返回空Vector，否则返回符合条件的客户Vector
      */
     @Override
-    public Vector<ClientPO> queryClient(Vector<ClientFilter> filters) throws Exception {
+    public Vector<ClientPO> queryClient(Vector<String> filters) throws Exception {
         ResultMessage<Vector<ClientPO>> result = impl.queryClient(filters);
         result.throwIfFailed();
         return result.getObj();

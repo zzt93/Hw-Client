@@ -7,10 +7,11 @@ import java.io.Serializable;
  */
 public class ResultMessage<T> implements Serializable {
 
-    private static final long serialVersionUID = 2247778592327071063L;
+    private static final long serialVersionUID = 1L;
     private String errMessage;
     private T obj;
-    public static final ResultMessage<Object> noErr = new ResultMessage<>(null, null);
+    @SuppressWarnings("unchecked")
+    public static final ResultMessage noErr = new ResultMessage(null, null);
 
     public ResultMessage(String errMessage, T obj) {
         this.errMessage = errMessage;

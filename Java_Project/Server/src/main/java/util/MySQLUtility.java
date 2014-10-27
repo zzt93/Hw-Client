@@ -9,12 +9,11 @@ public class MySQLUtility {
 
     private final static String url = "jdbc:mysql://localhost:3306/sampdb?" +
             "user=root&password=8633515&useUnicode=true&characterEncoding=UTF8";
-    private static Connection connection;
     private static Statement statement;
 
     public static void init() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection(url);
+        Connection connection = DriverManager.getConnection(url);
         statement = connection.createStatement();
     }
 
@@ -31,11 +30,11 @@ public class MySQLUtility {
     }
 
     public static int delete(String table, String where) throws SQLException {
-        return update("delete from" + table + " where " + where + ";");
+        return update("delete from " + table + " where " + where + ";");
     }
 
     public static int update(String table, String set, String where) throws SQLException {
-        return update("update " + table + "set " + set + " where " + where);
+        return update("update " + table + "set " + set + " where " + where + ";");
     }
 
 }
