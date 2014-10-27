@@ -29,7 +29,7 @@ public class ClientUtility implements ClientUtilityImpl {
     }
 
     @Override
-    public void deleteClient(String id) throws Exception {
+    public void deleteClient(int id) throws Exception {
         ResultMessage result = impl.deleteClient(id);
         result.throwIfFailed();
     }
@@ -44,7 +44,7 @@ public class ClientUtility implements ClientUtilityImpl {
      * @param id 客户编号
      * @return 找不到此编号时抛出异常，否则返回对应客户
      */
-    public ClientPO queryClientById(String id) throws Exception {
+    public ClientPO queryClientById(int id) throws Exception {
         ResultMessage<ClientPO> result = impl.queryClientById(id);
         result.throwIfFailed();
         return result.getObj();

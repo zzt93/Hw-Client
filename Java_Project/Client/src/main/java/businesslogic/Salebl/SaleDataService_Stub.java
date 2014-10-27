@@ -1,7 +1,6 @@
 package businesslogic.Salebl;
 
 import dataservice.Saledataservice.SaleDataServiceImpl;
-import po.ReceiptFilter;
 import po.ResultMessage;
 import po.SaleReceiptPO;
 
@@ -18,7 +17,7 @@ public class SaleDataService_Stub implements SaleDataServiceImpl {
     }
 
     @Override
-    public ResultMessage<Vector<SaleReceiptPO>> queryReceipt(Vector<ReceiptFilter> filters) throws RemoteException {
+    public ResultMessage<Vector<SaleReceiptPO>> queryReceipt(Vector<String> filters) throws RemoteException {
         return ResultMessage.noErr;
     }
 }

@@ -1,6 +1,5 @@
 package dataservice.Saledataservice;
 
-import po.ReceiptFilter;
 import po.ResultMessage;
 import po.SaleReceiptPO;
 
@@ -13,6 +12,6 @@ import java.util.Vector;
  */
 public interface SaleDataServiceImpl extends Remote {
     public ResultMessage makeReceipt(SaleReceiptPO receiptPO) throws RemoteException;
-    public ResultMessage<Vector<SaleReceiptPO>> queryReceipt(Vector<ReceiptFilter> filters)
+    public ResultMessage<Vector<SaleReceiptPO>> queryReceipt(Vector<String> filters)
             throws RemoteException;
 }

@@ -11,12 +11,12 @@ public interface ClientUtilityImpl {
 
     void addClient(ClientPO clientPO) throws Exception;
 
-    void deleteClient(String id) throws Exception;
+    void deleteClient(int id) throws Exception;
 
     void modifyClient(ClientPO newClientPO) throws Exception;
 
     Vector<ClientPO> queryClient(Vector<String> filters) throws Exception;
 
-    ClientPO queryClientById(String id) throws Exception;
+    ClientPO queryClientById(int id) throws Exception;
 
 }

@@ -65,7 +65,7 @@ public class ClientUtility extends UnicastRemoteObject implements ClientDataServ
     }
 
     @Override
-    public ResultMessage deleteClient(String id) throws RemoteException {
+    public ResultMessage deleteClient(int id) throws RemoteException {
         try {
             int i = delete(TABLE_NAME, "id=" + id);
             if (i != 1)
@@ -91,8 +91,6 @@ public class ClientUtility extends UnicastRemoteObject implements ClientDataServ
         buffer.append("zip='").append(newClientPO.getZip()).append("',");
         buffer.append("email='").append(newClientPO.getEmail()).append("',");
         buffer.append("upperBound=").append(newClientPO.getUpperBound().doubleValue()).append(',');
-        buffer.append("toReceive=").append(newClientPO.getToReceive().doubleValue()).append(',');
-        buffer.append("toPay=").append(newClientPO.getToPay().doubleValue()).append(',');
         buffer.append("defaultSalesMan='").append(newClientPO.getDefaultSalesMan());
         try {
             int i = MySQLUtility.update(TABLE_NAME, buffer.toString(), "id=" + newClientPO.getId());
@@ -109,7 +107,7 @@ public class ClientUtility extends UnicastRemoteObject implements ClientDataServ
     }
 
     @Override
-    public ResultMessage<ClientPO> queryClientById(String id) throws RemoteException {
+    public ResultMessage<ClientPO> queryClientById(int id) throws RemoteException {
         try {
             ResultSet result = query("select * from " + TABLE_NAME + " where id=" + id + ";");
             if (!result.next())
@@ -124,7 +122,7 @@ public class ClientUtility extends UnicastRemoteObject implements ClientDataServ
     @Override
     public ResultMessage<Vector<ClientPO>> queryClient(Vector<String> filters) throws RemoteException {
         StringBuilder buffer = new StringBuilder("select * from ").append(TABLE_NAME);
-        if (!filters.isEmpty()) {
+        if (filters != null && !filters.isEmpty()) {
             buffer.append(" where ");
             for (String str : filters) {
                 buffer.append('(').append(str).append(')').append(" and ");

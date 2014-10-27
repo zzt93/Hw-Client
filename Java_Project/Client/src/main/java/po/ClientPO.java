@@ -123,4 +123,22 @@ public class ClientPO implements Serializable {
         this.defaultSalesMan = defaultSalesMan;
     }
 
+    @Override
+    public String toString() {
+        //TODO to be removed
+        return "ClientPO{" +
+                "id=" + id +
+                ", type=" + type +
+                ", level=" + level +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", zip='" + zip + '\'' +
+                ", email='" + email + '\'' +
+                ", upperBound=" + upperBound +
+                ", toReceive=" + toReceive +
+                ", toPay=" + toPay +
+                ", defaultSalesMan='" + defaultSalesMan + '\'' +
+                '}';
+    }
 }

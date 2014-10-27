@@ -14,7 +14,7 @@ public class ClientDataService_Driver {
         ClientPO clientPO=new ClientPO(null,null,null,null,null,null,null,null);
         try {
             impl.addClient(clientPO);
-            impl.deleteClient("0");
+            impl.deleteClient(0);
             impl.modifyClient(clientPO);
         } catch (RemoteException e) {
             e.printStackTrace();

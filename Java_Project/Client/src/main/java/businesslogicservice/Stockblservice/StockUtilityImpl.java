@@ -1,6 +1,5 @@
 package businesslogicservice.Stockblservice;
 
-import po.ReceiptFilter;
 import po.StockReceiptPO;
 
 import java.util.Vector;
@@ -10,5 +9,5 @@ import java.util.Vector;
  */
 public interface StockUtilityImpl {
     public void makeReceipt(StockReceiptPO receiptPO) throws Exception;
-    public Vector<StockReceiptPO> queryReceipt(Vector<ReceiptFilter> filters) throws Exception;
+    public Vector<StockReceiptPO> queryReceipt(Vector<String> filters) throws Exception;
 }

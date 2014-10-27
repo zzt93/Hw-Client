@@ -2,7 +2,6 @@ package businesslogic.Stockbl;
 
 import businesslogicservice.Stockblservice.StockUtilityImpl;
 import dataservice.Stockdataservice.StockDataServiceImpl;
-import po.ReceiptFilter;
 import po.ResultMessage;
 import po.StockReceiptPO;
 import util.RMIUtility;
@@ -33,7 +32,7 @@ public class StockUtility implements StockUtilityImpl {
     }
 
     @Override
-    public Vector<StockReceiptPO> queryReceipt(Vector<ReceiptFilter> filters) throws Exception {
+    public Vector<StockReceiptPO> queryReceipt(Vector<String> filters) throws Exception {
         ResultMessage<Vector<StockReceiptPO>> result = impl.queryReceipt(filters);
         result.throwIfFailed();
         return result.getObj();

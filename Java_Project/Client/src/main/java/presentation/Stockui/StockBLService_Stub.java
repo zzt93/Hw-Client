@@ -1,7 +1,6 @@
 package presentation.Stockui;
 
 import businesslogicservice.Stockblservice.StockUtilityImpl;
-import po.ReceiptFilter;
 import po.StockReceiptPO;
 
 import java.util.Vector;
@@ -19,7 +18,7 @@ public class StockBLService_Stub implements StockUtilityImpl {
     }
 
     @Override
-    public Vector<StockReceiptPO> queryReceipt(Vector<ReceiptFilter> filters) throws Exception {
+    public Vector<StockReceiptPO> queryReceipt(Vector<String> filters) throws Exception {
         return data;
     }
 }

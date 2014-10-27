@@ -1,7 +1,6 @@
 package presentation.Saleui;
 
 import businesslogicservice.Saleblservice.SaleUtilityImpl;
-import po.ReceiptFilter;
 import po.SaleReceiptPO;
 
 import java.util.Vector;
@@ -19,7 +18,7 @@ public class SaleBLService_Stub implements SaleUtilityImpl {
     }
 
     @Override
-    public Vector<SaleReceiptPO> queryReceipt(Vector<ReceiptFilter> filters) throws Exception {
+    public Vector<SaleReceiptPO> queryReceipt(Vector<String> filters) throws Exception {
         return data;
     }
 }

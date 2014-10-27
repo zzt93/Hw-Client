@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Gui {
@@ -64,8 +65,12 @@ public class Gui {
 	
 	
 	public static void changeTo() {
-		buttonPanel buttonPanel = new buttonPanel();
-		tablePanel tabelJPanel = new tablePanel(); 
+        DefaultTableModel tableModel = new DefaultTableModel(null,
+                new String[]{"id", "type", "level", "name", "phone",
+                        "address", "zip", "email", "upperBound",
+                        "toReceive", "toPay", "defaultSalesMan"});
+        tablePanel tabelJPanel = new tablePanel(tableModel);
+        buttonPanel buttonPanel = new buttonPanel(tableModel);
 		
 		JPanel borderJPanel = new JPanel(new BorderLayout());
 		

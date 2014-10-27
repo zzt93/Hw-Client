@@ -1,7 +1,6 @@
 package businesslogic.Clientbl;
 
 import dataservice.Clientdataservice.ClientDataServiceImpl;
-import po.ClientFilter;
 import po.ClientPO;
 import po.ResultMessage;
 
@@ -18,7 +17,7 @@ public class ClientDataService_Stub implements ClientDataServiceImpl {
     }
 
     @Override
-    public ResultMessage deleteClient(String id) throws RemoteException {
+    public ResultMessage deleteClient(int id) throws RemoteException {
         return ResultMessage.noErr;
     }
 
@@ -28,12 +27,12 @@ public class ClientDataService_Stub implements ClientDataServiceImpl {
     }
 
     @Override
-    public ResultMessage<ClientPO> queryClientById(String id) throws RemoteException {
+    public ResultMessage<ClientPO> queryClientById(int id) throws RemoteException {
         return new ResultMessage<>(null, new ClientPO(null, null, null, null, null, null, null, null));
     }
 
     @Override
-    public ResultMessage<Vector<ClientPO>> queryClient(Vector<ClientFilter> filters) throws RemoteException {
+    public ResultMessage<Vector<ClientPO>> queryClient(Vector<String> filters) throws RemoteException {
         return null;
     }
 }

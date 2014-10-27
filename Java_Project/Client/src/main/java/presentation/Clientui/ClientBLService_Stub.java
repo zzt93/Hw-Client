@@ -1,7 +1,6 @@
 package presentation.Clientui;
 
 import businesslogicservice.Clientblservice.ClientUtilityImpl;
-import po.ClientFilter;
 import po.ClientPO;
 
 import java.util.Vector;
@@ -17,7 +16,7 @@ public class ClientBLService_Stub implements ClientUtilityImpl {
     }
 
     @Override
-    public void deleteClient(String id) throws Exception {
+    public void deleteClient(int id) throws Exception {
         data.remove(queryClientById(id));
     }
 
@@ -30,14 +29,14 @@ public class ClientBLService_Stub implements ClientUtilityImpl {
     }
 
     @Override
-    public Vector<ClientPO> queryClient(Vector<ClientFilter> filters) throws Exception {
+    public Vector<ClientPO> queryClient(Vector<String> filters) throws Exception {
         return data;
     }
 
     @Override
-    public ClientPO queryClientById(String id) throws Exception {
+    public ClientPO queryClientById(int id) throws Exception {
         for (ClientPO clientPO : data) {
-            if (id.equals(clientPO.getId()))
+            if (id == clientPO.getId())
                 return clientPO;
         }
         return null;

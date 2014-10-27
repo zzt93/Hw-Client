@@ -1,6 +1,5 @@
 package businesslogicservice.Saleblservice;
 
-import po.ReceiptFilter;
 import po.SaleReceiptPO;
 
 import java.util.Vector;
@@ -10,5 +9,5 @@ import java.util.Vector;
  */
 public interface SaleUtilityImpl {
     public void makeReceipt(SaleReceiptPO receipt) throws Exception;
-    public Vector<SaleReceiptPO> queryReceipt(Vector<ReceiptFilter> filters) throws Exception;
+    public Vector<SaleReceiptPO> queryReceipt(Vector<String> filters) throws Exception;
 }

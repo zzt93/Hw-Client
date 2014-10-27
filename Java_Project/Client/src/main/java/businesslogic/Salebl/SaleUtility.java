@@ -2,7 +2,6 @@ package businesslogic.Salebl;
 
 import businesslogicservice.Saleblservice.SaleUtilityImpl;
 import dataservice.Saledataservice.SaleDataServiceImpl;
-import po.ReceiptFilter;
 import po.ResultMessage;
 import po.SaleReceiptPO;
 import util.RMIUtility;
@@ -33,7 +32,7 @@ public class SaleUtility implements SaleUtilityImpl {
     }
 
     @Override
-    public Vector<SaleReceiptPO> queryReceipt(Vector<ReceiptFilter> filters) throws Exception {
+    public Vector<SaleReceiptPO> queryReceipt(Vector<String> filters) throws Exception {
         ResultMessage<Vector<SaleReceiptPO>> result = impl.queryReceipt(filters);
         result.throwIfFailed();
         return result.getObj();

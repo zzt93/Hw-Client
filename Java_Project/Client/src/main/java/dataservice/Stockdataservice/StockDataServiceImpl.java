@@ -1,6 +1,5 @@
 package dataservice.Stockdataservice;
 
-import po.ReceiptFilter;
 import po.ResultMessage;
 import po.StockReceiptPO;
 
@@ -13,6 +12,6 @@ import java.util.Vector;
  */
 public interface StockDataServiceImpl extends Remote {
     public ResultMessage makeReceipt(StockReceiptPO receiptPO) throws RemoteException;
-    public ResultMessage<Vector<StockReceiptPO>> queryReceipt(Vector<ReceiptFilter> filters)
+    public ResultMessage<Vector<StockReceiptPO>> queryReceipt(Vector<String> filters)
             throws RemoteException;
 }

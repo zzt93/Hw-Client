@@ -1,7 +1,6 @@
 package businesslogic.Stockbl;
 
 import dataservice.Stockdataservice.StockDataServiceImpl;
-import po.ReceiptFilter;
 import po.ResultMessage;
 import po.StockReceiptPO;
 
@@ -18,7 +17,7 @@ public class StockDataService_Stub implements StockDataServiceImpl {
     }
 
     @Override
-    public ResultMessage<Vector<StockReceiptPO>> queryReceipt(Vector<ReceiptFilter> filters) throws RemoteException {
+    public ResultMessage<Vector<StockReceiptPO>> queryReceipt(Vector<String> filters) throws RemoteException {
         return ResultMessage.noErr;
     }
 }
