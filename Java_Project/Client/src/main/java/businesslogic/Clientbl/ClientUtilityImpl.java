@@ -1,7 +1,7 @@
 package businesslogic.Clientbl;
 
-import businesslogicservice.Clientblservice.ClientUtilityImpl;
-import dataservice.Clientdataservice.ClientDataServiceImpl;
+import businesslogicservice.Clientblservice.ClientUtility;
+import dataservice.Clientdataservice.ClientDataService;
 import po.ClientPO;
 import po.ResultMessage;
 import util.RMIUtility;
@@ -13,19 +13,20 @@ import java.util.Vector;
 /**
  * Created by Nifury on 2014/10/20.
  */
-public class ClientUtility implements ClientUtilityImpl {
+public class ClientUtilityImpl implements ClientUtility {
 
-    private static ClientDataServiceImpl impl;
+    private static ClientDataService impl;
 
-    public ClientUtility() throws RemoteException, NotBoundException {
+    public ClientUtilityImpl() throws RemoteException, NotBoundException {
         if (impl == null)
-            impl = (ClientDataServiceImpl) RMIUtility.getImpl("Client");
+            impl = (ClientDataService) RMIUtility.getImpl("Client");
     }
 
     @Override
-    public void addClient(ClientPO clientPO) throws Exception {
-        ResultMessage result = impl.addClient(clientPO);
+    public int addClient(ClientPO clientPO) throws Exception {
+        ResultMessage<Integer> result = impl.addClient(clientPO);
         result.throwIfFailed();
+        return result.getObj();
     }
 
     @Override

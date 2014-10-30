@@ -1,6 +1,6 @@
 package businesslogic.Salebl;
 
-import dataservice.Saledataservice.SaleDataServiceImpl;
+import dataservice.Saledataservice.SaleDataService;
 
 import java.rmi.RemoteException;
 
@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
  */
 public class SaleDataService_Driver {
 
-    private void drive(SaleDataServiceImpl impl) {
+    private void drive(SaleDataService impl) {
         try {
             impl.makeReceipt(null);
             impl.queryReceipt(null);
@@ -19,7 +19,7 @@ public class SaleDataService_Driver {
     }
 
     public static void main(String[] args) {
-        SaleDataServiceImpl impl=new SaleDataService_Stub();
+        SaleDataService impl=new SaleDataService_Stub();
         SaleDataService_Driver driver = new SaleDataService_Driver();
         driver.drive(impl);
     }

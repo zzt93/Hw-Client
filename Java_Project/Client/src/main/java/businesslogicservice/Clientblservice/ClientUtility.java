@@ -7,9 +7,9 @@ import java.util.Vector;
 /**
  * Created by Nifury on 2014/10/20.
  */
-public interface ClientUtilityImpl {
+public interface ClientUtility {
 
-    void addClient(ClientPO clientPO) throws Exception;
+    int addClient(ClientPO clientPO) throws Exception;
 
     void deleteClient(int id) throws Exception;
 

@@ -10,8 +10,6 @@ public class ResultMessage<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     private String errMessage;
     private T obj;
-    @SuppressWarnings("unchecked")
-    public static final ResultMessage noErr = new ResultMessage(null, null);
 
     public ResultMessage(String errMessage, T obj) {
         this.errMessage = errMessage;

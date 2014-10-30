@@ -1,6 +1,6 @@
 package businesslogic.Stockbl;
 
-import dataservice.Stockdataservice.StockDataServiceImpl;
+import dataservice.Stockdataservice.StockDataService;
 
 import java.rmi.RemoteException;
 
@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
  */
 public class StockDataService_Driver {
 
-    public void drive(StockDataServiceImpl impl) {
+    public void drive(StockDataService impl) {
         try {
             impl.makeReceipt(null);
             impl.queryReceipt(null);
@@ -19,7 +19,7 @@ public class StockDataService_Driver {
     }
 
     public static void main(String[] args) {
-        StockDataServiceImpl impl=new StockDataService_Stub();
+        StockDataService impl=new StockDataService_Stub();
         StockDataService_Driver driver = new StockDataService_Driver();
         driver.drive(impl);
     }

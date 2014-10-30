@@ -1,6 +1,6 @@
 package businesslogic.Clientbl;
 
-import dataservice.Clientdataservice.ClientDataServiceImpl;
+import dataservice.Clientdataservice.ClientDataService;
 import po.ClientPO;
 import po.ResultMessage;
 
@@ -10,7 +10,7 @@ import java.util.Vector;
 /**
  * Created by Nifury on 2014/10/25.
  */
-public class ClientDataService_Stub implements ClientDataServiceImpl {
+public class ClientDataService_Stub implements ClientDataService {
     @Override
     public ResultMessage addClient(ClientPO clientPO) throws RemoteException {
         return ResultMessage.noErr;

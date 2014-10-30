@@ -1,6 +1,6 @@
 package businesslogic.Clientbl;
 
-import dataservice.Clientdataservice.ClientDataServiceImpl;
+import dataservice.Clientdataservice.ClientDataService;
 import po.ClientPO;
 
 import java.rmi.RemoteException;
@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
  */
 public class ClientDataService_Driver {
 
-    public void drive(ClientDataServiceImpl impl) {
+    public void drive(ClientDataService impl) {
         ClientPO clientPO=new ClientPO(null,null,null,null,null,null,null,null);
         try {
             impl.addClient(clientPO);
@@ -22,7 +22,7 @@ public class ClientDataService_Driver {
     }
 
     public static void main(String[] args) {
-        ClientDataServiceImpl impl = new ClientDataService_Stub();
+        ClientDataService impl = new ClientDataService_Stub();
         ClientDataService_Driver driver = new ClientDataService_Driver();
         driver.drive(impl);
     }

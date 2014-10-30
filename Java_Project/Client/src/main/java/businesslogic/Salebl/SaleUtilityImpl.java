@@ -1,7 +1,7 @@
 package businesslogic.Salebl;
 
-import businesslogicservice.Saleblservice.SaleUtilityImpl;
-import dataservice.Saledataservice.SaleDataServiceImpl;
+import businesslogicservice.Saleblservice.SaleUtility;
+import dataservice.Saledataservice.SaleDataService;
 import po.ResultMessage;
 import po.SaleReceiptPO;
 import util.RMIUtility;
@@ -13,16 +13,13 @@ import java.util.Vector;
 /**
  * Created by Nifury on 2014/10/25.
  */
-public class SaleUtility implements SaleUtilityImpl {
+public class SaleUtilityImpl implements SaleUtility {
 
-    private static SaleDataServiceImpl impl;
+    private static SaleDataService impl;
 
-    static {
-        try {
-            impl = (SaleDataServiceImpl) RMIUtility.getImpl("Sale");
-        } catch (RemoteException | NotBoundException e) {
-            throw new RuntimeException(e);
-        }
+    public SaleUtilityImpl() throws RemoteException, NotBoundException {
+        if (impl == null)
+            impl = (SaleDataService) RMIUtility.getImpl("Sale");
     }
 
     @Override
