@@ -24,7 +24,7 @@ public class LoggingPanel extends JPanel {
 	JTextField userNameField = new JTextField(10);
 	JPasswordField passwordField = new JPasswordField(10);
 
-	Image image = new ImageIcon("./Log_in.jpg")
+	Image image = new ImageIcon("src/main/java/presentation/Clientui/Log_in.jpg")
 			.getImage();
 
 	public LoggingPanel() {

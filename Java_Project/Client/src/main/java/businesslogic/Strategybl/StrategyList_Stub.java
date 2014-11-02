@@ -28,3 +28,5 @@ public class StrategyList_Stub implements Strategy_List_BLservice{
 		list.add(s);
 	}
 }
+
+
