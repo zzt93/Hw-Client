@@ -23,6 +23,8 @@ public class StrategyUI {
 	private JFrame newFrame;
 	private JTextField textFieldCondition;
 	private JTextField textFieldTreatment;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -58,7 +60,7 @@ public class StrategyUI {
 		frame.getContentPane().setLayout(null);
 		
 		
-		//newFrame = new JFrame();
+		newFrame = new JFrame();
 		newFrame.setBounds(100, 100, 609, 430);
 		newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		newFrame.getContentPane().setLayout(null);
@@ -125,6 +127,10 @@ public class StrategyUI {
 		button_3.setBounds(462, 215, 93, 23);
 		panelStrategy.add(button_3);
 		
+		JLabel label = new JLabel("总经理");
+		label.setBounds(100, 10, 54, 15);
+		frame.getContentPane().add(label);
+		
 
 		
 		JLabel lblTimePeriod = new JLabel("起止时间 ");
@@ -150,6 +156,28 @@ public class StrategyUI {
 		JLabel lblHint = new JLabel("新促销策略");
 		lblHint.setBounds(10, 366, 386, 15);
 		newFrame.getContentPane().add(lblHint);
+		
+		textField = new JTextField();
+		textField.setBounds(184, 191, 109, 21);
+		newFrame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel label_1 = new JLabel("到");
+		label_1.setBounds(316, 194, 21, 15);
+		newFrame.getContentPane().add(label_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(357, 191, 128, 21);
+		newFrame.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		JButton button_4 = new JButton("确定");
+		button_4.setBounds(126, 297, 93, 23);
+		newFrame.getContentPane().add(button_4);
+		
+		JButton button_5 = new JButton("取消");
+		button_5.setBounds(323, 297, 93, 23);
+		newFrame.getContentPane().add(button_5);
 		
 		
 	}
