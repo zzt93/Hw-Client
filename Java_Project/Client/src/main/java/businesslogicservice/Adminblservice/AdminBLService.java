@@ -1,6 +1,5 @@
 package businesslogicservice.Adminblservice;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.UserPO;
