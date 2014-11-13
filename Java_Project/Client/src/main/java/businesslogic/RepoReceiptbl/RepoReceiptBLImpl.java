@@ -1,28 +1,36 @@
 package businesslogic.RepoReceiptbl;
 
+import java.util.ArrayList;
+
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
+import po.GoodsReceiptPO;
 import po.ReceiptPO;
 import po.RepoReceiptPO;
 import vo.GoodsVO;
 import vo.ReceiptConditionVO;
-import vo.Repo_receipt;
+import vo.RepoReceVO;
 import businesslogicservice.RepoReceiptblservice.RepoReceBLservice;
 
 public class RepoReceiptBLImpl implements RepoReceBLservice {
 
 	RepoReceiptDataService repoReceiptDataService = new RepoReceiptDataImpl();
 	
-	public Repo_receipt find(ReceiptConditionVO conditionVO) throws Exception {
+	public ArrayList<RepoReceVO> find(ReceiptConditionVO conditionVO) throws Exception {
+		//TODO add parameter for ifind
+		ArrayList<RepoReceiptPO> temp = repoReceiptDataService.ifind(null).getObj();
+		ArrayList<RepoReceVO> res = new ArrayList<RepoReceVO>();
+		for (RepoReceiptPO repoReceiptPO : temp) {
+			res.add(new RepoReceVO(repoReceiptPO));
+		}
+		return res;
+	}
+
+	public RepoReceVO showReceipt() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Repo_receipt showReceipt() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Repo_receipt sendReceipt() throws Exception {
+	public RepoReceVO sendReceipt() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -35,6 +43,12 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	public String input(GoodsVO goods, int amount) throws Exception {
 		// TODO Auto-generated method stub
 		repoReceiptDataService.insert(new RepoReceiptPO());
+		return null;
+	}
+
+
+	public GoodsReceiptPO giftReceipt() throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

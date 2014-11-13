@@ -17,6 +17,10 @@ public class GTBLImpl implements GTBLservice{
 		
 	}
 
+	public GTBLImpl(ArrayList<TreeNodePO> treeNodePOs) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean add(TreeNodeVO tNode) throws Exception {
 		// TODO Auto-generated method stub
 		goodsTypeDateService.insert(new TreeNodePO(tNode));

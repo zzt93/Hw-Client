@@ -12,4 +12,5 @@ public interface GL_receipt_BLservice {
 	//2. check the amount
 	ArrayList<GoodsModelPO> getGoodsModelPOs() throws Exception;
 	int amount(GoodsVO goods) throws Exception;
+	//update the amount if repo_receipt is approved
 }

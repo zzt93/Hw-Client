@@ -1,6 +1,5 @@
 package businesslogic.GoodsListbl;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,20 +7,14 @@ import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
 import vo.GoodsVO;
-import businesslogic.GoodsTypebl.GT_GL_BLImpl;
+import businesslogic.GoodsTypebl.GT_controller;
 import businesslogicservice.GoodsListblservice.GLBLservice;
 import businesslogicservice.GoodsTypeblservice.GT_GL_BLservice;
 
 public class GLBLImpl implements GLBLservice {
 	
-	public GLBLImpl(String account) {
-		// TODO Auto-generated constructor stub
-		try {
-			goodsList = new GoodsListDataImpl("account name").getGoodsList().getObj();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public GLBLImpl(GoodsListPO po) {
+		goodsList = po;
 	}
 	GoodsListPO goodsList ;
 	
@@ -33,7 +26,7 @@ public class GLBLImpl implements GLBLservice {
 	public boolean add(GoodsVO goods) throws Exception {
 		// TODO Auto-generated method stub
 		//whether 
-		GT_GL_BLservice  gl_BLservice = new GT_GL_BLImpl();
+		GT_GL_BLservice  gl_BLservice = new GT_controller();
 		if (!gl_BLservice.typeCheck(goods)){
 			return false;
 		}
