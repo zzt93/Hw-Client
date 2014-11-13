@@ -46,4 +46,10 @@ public class Approve_Stub implements Approve_Detail_BLservice,Approve_List_BLser
 		return null;
 	}
 
+	@Override
+	public boolean examine(ReceiptPO r) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
