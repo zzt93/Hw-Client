@@ -6,11 +6,27 @@ import vo.TreeNodeVO;
 
 public class TreeNodePO {
 	String type;
+	
+	/*
+	 * this member is to record the type info up to now
+	 */
+	String info;
+	
 	TreeNodePO fa;
 	ArrayList<TreeNodePO> so;
 	
-	ArrayList<GoodsModelPO> goodsList;
+	ArrayList<GoodsModelPO> goodsModels;
 
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
 	public TreeNodePO(TreeNodeVO treeNodeVO) {
 		// TODO Auto-generated constructor stub
 		
@@ -40,10 +56,10 @@ public class TreeNodePO {
 	}
 
 	public ArrayList<GoodsModelPO> getGoodsList() {
-		return goodsList;
+		return goodsModels;
 	}
 
 	public void setGoodsList(ArrayList<GoodsModelPO> goodsList) {
-		this.goodsList = goodsList;
+		this.goodsModels = goodsList;
 	}
 }

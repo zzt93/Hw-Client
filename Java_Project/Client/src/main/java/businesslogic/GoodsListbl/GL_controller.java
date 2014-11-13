@@ -7,6 +7,7 @@ import java.util.HashMap;
 import dataservice.GoodsListdataservice.GoodsListDataService;
 import po.GoodsListPO;
 import po.GoodsModelPO;
+import po.GoodsPO;
 import po.ResultMesPO;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
@@ -127,17 +128,12 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	
 	// for receipt
 	public boolean check(GoodsVO goods) throws Exception {
-		return gl_receipt_BLservice.check(goods);
+		return gl_receipt_BLservice.check(new GoodsPO(goods));
 	}
 
-	public ArrayList<GoodsModelPO> getGoodsModelPOs() throws Exception {
-		return gl_receipt_BLservice.getGoodsModelPOs();
+	public GoodsModelPO getGoodsModelPOs(String id) throws Exception {
+		return gl_receipt_BLservice.getGoodsModelPOs(id);
 	}
-
-	public int amount(GoodsVO goods) throws Exception {
-		return gl_receipt_BLservice.amount(goods);
-	}
-
 	
 	// for goodsType
 	public boolean checkAdd(String info) throws Exception {
@@ -148,7 +144,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		return gl_GT_BLservice.checkEverHas(info);
 	}
 
-	public HashMap<String, ArrayList<GoodsModelVO>> getGoodsModels() {
+	public HashMap<String, GoodsModelVO> getGoodsModels() {
 		return gl_GT_BLservice.getGoodsModels();
 	}
 
@@ -174,6 +170,16 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 
 	public String getDatabase(String account) throws Exception {
 		return gl_account_BLservice.getDatabase(account);
+	}
+
+	public boolean check(GoodsPO goods) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public int amount(GoodsPO goods) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

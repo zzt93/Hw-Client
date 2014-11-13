@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import po.GoodsListPO;
 import po.GoodsModelPO;
+import po.GoodsPO;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 import businesslogicservice.GoodsListblservice.GL_receipt_BLservice;
@@ -17,17 +18,17 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice, GL_receipt_BLserv
 		this.goodsListPO = goodsListPO;
 	}
 
-	public boolean check(GoodsVO goods) throws Exception {
+	public boolean check(GoodsPO goods) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public ArrayList<GoodsModelPO> getGoodsModelPOs() throws Exception {
+	public GoodsModelPO getGoodsModelPOs(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int amount(GoodsVO goods) throws Exception {
+	public int amount(GoodsPO goods) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -59,9 +60,11 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice, GL_receipt_BLserv
 		return false;
 	}
 
-	public HashMap<String, ArrayList<GoodsModelVO>> getGoodsModels() {
+	public HashMap<String, GoodsModelVO> getGoodsModels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

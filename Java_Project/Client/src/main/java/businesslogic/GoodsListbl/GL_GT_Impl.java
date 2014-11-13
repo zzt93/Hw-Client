@@ -1,6 +1,5 @@
 package businesslogic.GoodsListbl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import po.GoodsListPO;
@@ -24,7 +23,7 @@ public class GL_GT_Impl implements GL_GT_BLservice{
 		return false;
 	}
 
-	public HashMap<String, ArrayList<GoodsModelVO>> getGoodsModels() {
+	public HashMap<String, GoodsModelVO> getGoodsModels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
