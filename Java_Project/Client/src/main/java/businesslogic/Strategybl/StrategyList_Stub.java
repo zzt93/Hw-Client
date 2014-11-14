@@ -21,12 +21,18 @@ public class StrategyList_Stub implements Strategy_List_BLservice{
 	public ArrayList<StrategyPO> returnStrategy(int cusLevel,ArrayList<GoodsPO> goods){
 		return this.list;
 	}
+
 	public void addStrategy(StrategyPO s){
 		s.setCondition(new Condition());
 		s.setTimePeriod(new TimePeriod());
 		s.setTreatment(new Treatment());
 		list.add(s);
 	}
+
+	public ArrayList<StrategyPO> queryValidStrategy(String strategyFliter){
+		return null;
+	}
+	
 }
 
 

@@ -23,8 +23,8 @@ public class StrategyUI {
 	private JFrame newFrame;
 	private JTextField textFieldCondition;
 	private JTextField textFieldTreatment;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField startTimeText;
+	private JTextField endTimeText;
 
 	/**
 	 * Launch the application.
@@ -77,13 +77,13 @@ public class StrategyUI {
 		lblCondition.setBounds(56, 60, 54, 15);
 		newFrame.getContentPane().add(lblCondition);
 		
-		JComboBox<JTextField> comboBox = new JComboBox<JTextField>();
-		comboBox.setBounds(184, 57, 109, 21);
+		final JComboBox<JTextField> comboBoxContidion = new JComboBox<JTextField>();
+		comboBoxContidion.setBounds(184, 57, 109, 21);
 		
 		JTextField txtCustomerLevel = new JTextField("用户等级");
-		comboBox.addItem(txtCustomerLevel);
+		comboBoxContidion.addItem(txtCustomerLevel);
 		
-		newFrame.getContentPane().add(comboBox);
+		newFrame.getContentPane().add(comboBoxContidion);
 		
 		JLabel lblTreatment = new JLabel("优惠方式");
 		lblTreatment.setBounds(56, 128, 54, 15);
@@ -157,21 +157,27 @@ public class StrategyUI {
 		lblHint.setBounds(10, 366, 386, 15);
 		newFrame.getContentPane().add(lblHint);
 		
-		textField = new JTextField();
-		textField.setBounds(184, 191, 109, 21);
-		newFrame.getContentPane().add(textField);
-		textField.setColumns(10);
+		startTimeText = new JTextField();
+		startTimeText.setBounds(184, 191, 109, 21);
+		newFrame.getContentPane().add(startTimeText);
+		startTimeText.setColumns(10);
 		
 		JLabel label_1 = new JLabel("到");
 		label_1.setBounds(316, 194, 21, 15);
 		newFrame.getContentPane().add(label_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(357, 191, 128, 21);
-		newFrame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		endTimeText = new JTextField();
+		endTimeText.setBounds(357, 191, 128, 21);
+		newFrame.getContentPane().add(endTimeText);
+		endTimeText.setColumns(10);
 		
 		JButton button_4 = new JButton("确定");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				comboBoxContidion.getSelectedItem();
+				
+			}
+		});
 		button_4.setBounds(126, 297, 93, 23);
 		newFrame.getContentPane().add(button_4);
 		

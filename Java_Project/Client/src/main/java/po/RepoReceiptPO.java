@@ -1,6 +1,9 @@
 package po;
-
-public class RepoReceiptPO {
+/**
+ * Edited by dzh,add extension,11.12
+ *
+ */
+public class RepoReceiptPO extends ReceiptPO{
 	int aNum;
 	int cNum;
 	String type;

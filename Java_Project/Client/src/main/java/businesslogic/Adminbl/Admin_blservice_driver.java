@@ -9,7 +9,7 @@ public class Admin_blservice_driver {
 	public void drive(Admin_blservice_stub stub){
 		
 		try {
-			stub.confirm();
+			stub.confirm(null);
 			stub.delete(new UserPO(0, null, null, null));
 			stub.newUser();
 			stub.show();
