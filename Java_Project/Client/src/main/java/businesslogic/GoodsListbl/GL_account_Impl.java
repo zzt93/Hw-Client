@@ -13,18 +13,24 @@ public class GL_account_Impl implements GL_account_BLservice {
 		this.goodsListPO = goodsListPO;
 	}
 
-	public void initialize(String account) throws Exception {
-		// TODO Auto-generated method stub
-
+	public GoodsListPO initialize(String account) throws Exception {
+		return new GoodsListPO();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see businesslogicservice.GoodsListblservice.GL_account_BLservice#add(vo.GoodsVO)
+	 * those following two methods are ignored
+	 */
 	public boolean add(GoodsVO goodsVO) throws Exception {
-		// TODO Auto-generated method stub
+		System.err.println("This method shouldn't be invoked");
+		System.exit(0);
 		return false;
 	}
 
 	public boolean add(ArrayList<GoodsVO> goodsVOs) throws Exception {
-		// TODO Auto-generated method stub
+		System.err.println("This method shouldn't be invoked");
+		System.exit(0);
 		return false;
 	}
 

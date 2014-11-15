@@ -9,6 +9,7 @@ import po.GoodsPO;
 import po.ResultMessage;
 
 public interface GoodsListDataService {
+	ResultMessage<Boolean> saveGoodsList(GoodsListPO goodsListPO);
 	ResultMessage<GoodsListPO> getGoodsList() throws RemoteException;
 	ResultMessage<Boolean> initialize(GoodsListPO goodsListPO) throws RemoteException;
 	ResultMessage<Boolean> insert(GoodsPO goodsPO) throws RemoteException;

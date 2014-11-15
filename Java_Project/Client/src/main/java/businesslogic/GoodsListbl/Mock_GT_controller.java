@@ -1,30 +1,37 @@
 package businesslogic.GoodsListbl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import po.GoodsListPO;
+import po.GoodsModelPO;
+import po.TreeNodePO;
 import vo.GoodsVO;
 import vo.TreeNodeVO;
 import businesslogicservice.GoodsTypeblservice.GT_GL_BLservice;
 
 public class Mock_GT_controller implements GT_GL_BLservice{
 
-	ArrayList<TreeNodeVO> treeNodeVOs = new ArrayList<TreeNodeVO>(null);
+	ArrayList<TreeNodePO> treeNodePOs = new ArrayList<TreeNodePO>(null);
 	
-	public boolean typeCheck(GoodsVO goods) throws Exception {
-		String id = goods.id;
-		for (TreeNodeVO treeNodeVO : treeNodeVOs) {
-			if(treeNodeVO.getInfo().contains(id)){
-				return (treeNodeVO.getSons() == null);
+	public ArrayList<String> addable_type() throws Exception {
+		ArrayList<String> res = new ArrayList<String>();
+		for (TreeNodePO node : treeNodePOs) {
+			if(node.is_leaf()){
+				res.add(node.getType_so_far());
 			}
 		}
-		return false;
+		return res;
 	}
 
-	public void update(ArrayList<TreeNodeVO> treeNodes) {
-		for (TreeNodeVO treeNodeVO : treeNodeVOs) {
-			for (TreeNodeVO treeNodeVO1 : treeNodes) {
-				if (treeNodeVO.equals(treeNodeVO1)) {
-					treeNodeVO.getGoodsModelVOs().add(null);
+	public void update_nodelist(ArrayList<TreeNodeVO> treeNodes, GoodsListPO goodsListPO) throws Exception {
+		for (TreeNodeVO treeNodeVO : treeNodes) {
+			for (TreeNodePO treeNodePO : treeNodePOs) {
+				if(treeNodePO.getType_so_far().equals(treeNodeVO.getType_so_far())){
+					GoodsModelPO temp = goodsListPO.getGoodsModels().get(treeNodePO.getType_so_far());
+					treeNodePO.getGoodsModels().add(temp);
+				} else {
+					System.err.println("some treenode wrong");
 				}
 			}
 		}

@@ -3,8 +3,8 @@ package businesslogicservice.GoodsListblservice;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import po.GoodsModelPO;
 import po.GoodsPO;
-import vo.GoodsModelVO;
 import vo.GoodsVO;
 
 public interface GL_stock_BLservice {
@@ -17,5 +17,4 @@ public interface GL_stock_BLservice {
 	boolean reduAmount(GoodsVO goods) throws Exception;
 	boolean reduAmount(ArrayList<GoodsVO> goodsArrayList) throws Exception;
 	
-	HashMap<String, GoodsModelVO> getGoodsModels();
 }

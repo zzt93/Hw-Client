@@ -13,17 +13,26 @@ public class TreeNodeVO {
 		// TODO Auto-generated constructor stub
 	}
 	public TreeNodeVO(TreeNodeVO father){
-		this.info = father.info + type;
+		this.type_so_far = father.type_so_far + type;
 	}
 	
 	String type;
-	String info;
+	String type_so_far;
 	TreeNodeVO father;
-	ArrayList<TreeNodeVO> sons;
-	ArrayList<GoodsModelVO> goodsModelVOs;
+	ArrayList<TreeNodeVO> sons = new ArrayList<TreeNodeVO>();
+	ArrayList<GoodsModelVO> goodsModelVOs = new ArrayList<GoodsModelVO>();
+	
+	public String getType_so_far() {
+		return type_so_far;
+	}
+	public void setType_so_far(String type_so_far) {
+		this.type_so_far = type_so_far;
+	}
 	
 	
-	
+	public boolean is_leaf(){
+		return sons.isEmpty();
+	}
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
@@ -48,10 +57,10 @@ public class TreeNodeVO {
 		this.goodsModelVOs = goodsModelVOs;
 	}
 	public String getInfo() {
-		return info;
+		return type_so_far;
 	}
 	public void setInfo(String info) {
-		this.info = info;
+		this.type_so_far = info;
 	}
 	public TreeNodeVO getFather() {
 		return father;

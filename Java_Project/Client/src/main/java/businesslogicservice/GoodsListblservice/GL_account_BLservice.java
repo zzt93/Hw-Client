@@ -2,10 +2,11 @@ package businesslogicservice.GoodsListblservice;
 
 import java.util.ArrayList;
 
+import po.GoodsListPO;
 import vo.GoodsVO;
 
 public interface GL_account_BLservice {
-	void initialize(String account) throws Exception;
+	GoodsListPO initialize(String account) throws Exception;
 	boolean add(GoodsVO goodsVO) throws Exception;
 	boolean add(ArrayList<GoodsVO> goodsVOs) throws Exception;
 	

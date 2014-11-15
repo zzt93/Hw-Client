@@ -1,5 +1,7 @@
 package vo;
 
+import po.GoodsModelPO;
+
 public class GoodsModelVO {
 
 	// all the field is for all batches goods
@@ -11,6 +13,10 @@ public class GoodsModelVO {
 	
 	double lastInPrice;
 	double lastOutPrice;
+
+	public GoodsModelVO(GoodsModelPO goodsModelPO) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public boolean isGift() {
 		return gift;

@@ -1,9 +1,19 @@
 package po;
 
 public class RepoReceiptPO {
+	
+	public RepoReceiptPO() {
+		// TODO Auto-generated constructor stub
+	}
+	public RepoReceiptPO(int a, int c) {
+		aNum = a;
+		cNum = c;
+	}
+	
 	int aNum;
 	int cNum;
 	String type;
+	
 	public int getaNum() {
 		return aNum;
 	}

@@ -61,12 +61,12 @@ public class ButtonPanel extends JPanel{
 	public void addListener(){
 		
 		
-		try {
+/*		try {
 			glbLservice = new GL_controller();
 		} catch (RemoteException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}
+		}*/
 		
 		addButton.addActionListener(new ActionListener() {
 			
@@ -187,7 +187,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.eSearch(id.getText());
+					glbLservice.eSearch_batch(id.getText());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

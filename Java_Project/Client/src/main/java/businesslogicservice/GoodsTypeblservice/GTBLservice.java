@@ -14,6 +14,5 @@ public interface GTBLservice {
 	
 	ArrayList<TreeNodeVO> show() throws Exception;//return the tree so to build the tree
 	
-	void initialize(String account) throws Exception;
-	String getDatabase(String account)throws Exception; 
+	
 }

@@ -4,13 +4,16 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataservice.GoodsTypedataservice.GoodsTypeDateService;
+import po.GoodsListPO;
 import po.TreeNodePO;
 import vo.GoodsVO;
 import vo.TreeNodeVO;
+import businesslogic.GoodsListbl.GL_controller;
 import businesslogicservice.GoodsTypeblservice.GTBLservice;
 import businesslogicservice.GoodsTypeblservice.GT_GL_BLservice;
+import businesslogicservice.GoodsTypeblservice.GT_account_service;
 
-public class GT_controller implements GT_GL_BLservice, GTBLservice {
+public class GT_controller implements GT_GL_BLservice, GTBLservice, GT_account_service {
 	
 	ArrayList<TreeNodePO> treeNodePOs;
 	GoodsTypeDateService goodsTypeDateService = new GoodsTypeDataImpl();
@@ -19,22 +22,52 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice {
 		
 
 		gtbLservice = new GTBLImpl(treeNodePOs);
-		gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
+		gt_gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
 	}
 	
 	GTBLservice gtbLservice;
-	GT_GL_BLservice gl_BLservice;
+	GT_GL_BLservice gt_gl_BLservice;
+	
+	/*
+	 * for cross modules
+	 */
+	GL_controller gl_controller;
 
+	public GL_controller getGl_controller() {
+		return gl_controller;
+	}
+
+	public void setGl_controller(GL_controller gl_controller) {
+		this.gl_controller = gl_controller;
+	}
+
+	
 	public boolean add(TreeNodeVO tNode) throws Exception {
-		return gtbLservice.add(tNode);
+		if (gl_controller.checkEverHas(tNode.getType_so_far())) {
+			return false;
+		}
+		boolean res = gtbLservice.add(tNode);
+		if (res) {
+			goodsTypeDateService.insert(new TreeNodePO(tNode));
+		}
+		
+		return res;
 	}
 
 	public boolean update(TreeNodeVO tNode) throws Exception {
-		return gtbLservice.update(tNode);
+		boolean res = gtbLservice.update(tNode);
+		if (res) {
+			goodsTypeDateService.update(new TreeNodePO(tNode));
+		}
+		return res;
 	}
 
 	public boolean delete(TreeNodeVO tNode) throws Exception {
-		return gtbLservice.delete(tNode);
+		boolean res = gtbLservice.delete(tNode);
+		if (res) {
+			goodsTypeDateService.delete(new TreeNodePO(tNode));
+		}
+		return res;
 	}
 
 	public TreeNodeVO eSearch(String id) throws Exception {
@@ -46,19 +79,21 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice {
 	}
 
 	public void initialize(String account) throws Exception {
-		gtbLservice.initialize(account);
+		ArrayList<TreeNodePO> res = new ArrayList<TreeNodePO>();
+		goodsTypeDateService.initialize(res).getObj();
 	}
 
 	public String getDatabase(String account) throws Exception {
-		return gtbLservice.getDatabase(account);
+		return goodsTypeDateService.getDatabse(account).getObj();
 	}
 
-	public boolean typeCheck(GoodsVO goods) throws Exception {
-		return gl_BLservice.typeCheck(goods);
+	public ArrayList<String> addable_type() throws Exception {
+		return gt_gl_BLservice.addable_type();
 	}
 
-	public void update(ArrayList<TreeNodeVO> treeNodes) {
-		gl_BLservice.update(treeNodes);
+	public void update_nodelist(ArrayList<TreeNodeVO> treeNodes, GoodsListPO goodsListPO) throws Exception {
+		gt_gl_BLservice.update_nodelist(treeNodes, goodsListPO);
+		goodsTypeDateService.update(null);
 	}
 
 }

@@ -1,18 +1,17 @@
 package businesslogicservice.GoodsListblservice;
 
-import po.ResultMesPO;
 import vo.GoodsVO;
 import vo.SignalVO;
 
 public interface GL_signal_BLservice {
 	/*check whether some goods is exist and the signal is modifiable*/
-	boolean check(GoodsVO goods) throws Exception;
-	boolean checkSignalModifiable(GoodsVO goodsVO);
+	boolean check_signal(GoodsVO goods) throws Exception;
+	boolean checkSignalModifiable(GoodsVO goodsVO) throws Exception;
 	
-	boolean setSignal(GoodsVO goods, int amount) throws Exception;//Hashmap<String(id), int> signalMap
-	boolean getSignal(GoodsVO goods)  throws Exception;
+	boolean setSignal(GoodsVO goods) throws Exception;//Hashmap<String(id), int> signalMap
+	int getSignal(GoodsVO goods)  throws Exception;
 	
-	SignalVO sendSignal();
+	SignalVO sendSignal(int amout, int signal, String id) throws Exception;
 	
-	ResultMesPO update() throws Exception;
+	boolean update_when_sale(GoodsVO goodsVO) throws Exception;
 }
