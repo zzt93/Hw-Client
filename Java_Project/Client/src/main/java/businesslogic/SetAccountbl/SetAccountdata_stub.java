@@ -8,7 +8,7 @@ import po.*;
 
 public class SetAccountdata_stub implements SetAccountdataservice {
 	public ResultMessage setup(String[] name) throws RemoteException {
-		return ResultMessage.noErr;
+		return new ResultMessage(null,null);
 	}
 
 	public ResultMessage goods() throws RemoteException {

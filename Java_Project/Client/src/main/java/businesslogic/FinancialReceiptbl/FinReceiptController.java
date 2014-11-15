@@ -26,20 +26,20 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		itemList.delete(po);
 		return itemList.getTotal();
 	}
-	public void makePayment(PayReceiptVO vo) throws Exception{
-		PayReceiptPO po=new PayReceiptPO(vo,bankList.getData());
+	public void makePayment(PayVO vo) throws Exception{
+		PayPO po=new PayPO(vo,bankList.getData());
 		bankList.clear();
 		ResultMessage result=finReceipt.makePayMent(po);
 		result.throwIfFailed();
 	}
-	public void makeReceive(RecReceiptVO vo) throws Exception{
-		RecReceiptPO po=new RecReceiptPO(vo,bankList.getData());
+	public void makeReceive(RecVO vo) throws Exception{
+		RecPO po=new RecPO(vo,bankList.getData());
 		bankList.clear();
 		ResultMessage result=finReceipt.makeReceive(po);
 		result.throwIfFailed();
 	}
-	public void makeCash(CashReceiptVO vo) throws Exception{
-		CashReceiptPO po=new CashReceiptPO(vo,itemList.getData());
+	public void makeCash(CashVO vo) throws Exception{
+		CashPO po=new CashPO(vo,itemList.getData());
 		itemList.clear();
 		ResultMessage result=finReceipt.makeCash(po);
 		result.throwIfFailed();

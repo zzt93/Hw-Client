@@ -4,15 +4,15 @@ import po.*;
 
 public class FinReceipt {
 
-	public ResultMessage makePayMent(PayReceiptPO po){
+	public ResultMessage makePayMent(PayPO po){
 		//生成付款单
 		return new ResultMessage(null,null);
 	}
-	public ResultMessage makeReceive(RecReceiptPO po){
+	public ResultMessage makeReceive(RecPO po){
 		//生成收款单
 		return new ResultMessage(null,null);
 	}
-	public ResultMessage makeCash(CashReceiptPO po){
+	public ResultMessage makeCash(CashPO po){
 		//生成现金费用单
 		return new ResultMessage(null,null);
 	}

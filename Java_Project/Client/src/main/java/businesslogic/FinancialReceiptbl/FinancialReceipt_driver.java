@@ -6,17 +6,17 @@ import businesslogic.FinancialReceiptbl.FinancialReceipt_stub;
 public class FinancialReceipt_driver {
 	public void driver(FinancialReceipt_stub finReceipt){
 		try {
-			finReceipt.makeCash(new CashReceiptVO());
+			finReceipt.makeCash(new CashVO());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		try {
-			finReceipt.makePayment(new PayReceiptVO());
+			finReceipt.makePayment(new PayVO());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		try {
-			finReceipt.makeReceive(new RecReceiptVO());
+			finReceipt.makeReceive(new RecVO());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

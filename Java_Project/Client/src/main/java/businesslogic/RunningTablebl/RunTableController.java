@@ -1,5 +1,6 @@
 package businesslogic.RunningTablebl;
 
+import po.ReceiptPO;
 import vo.GoodsRecordVO;
 import vo.ProfitVO;
 import vo.ReceiptConditionVO;
@@ -9,16 +10,17 @@ import vo.TimeConditionVO;
 import businesslogicservice.RunningTableblservice.RunningTableblservice;
 
 public class RunTableController implements RunningTableblservice {
-
+	CheckReceipt checkReceipt=new CheckReceipt();
+	SaleRecord record=new SaleRecord();
 	@Override
 	public GoodsRecordVO[] getSaleTable(SaleConditionVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return record.getSaleTable();
 	}
 
 	@Override
 	public ReceiptVO[] getReceipt(ReceiptConditionVO vo) throws Exception {
-		// TODO Auto-generated method stub
+		ReceiptPO[] list=checkReceipt.getReceipt(vo);
+		//类型转换
 		return null;
 	}
 
@@ -30,8 +32,7 @@ public class RunTableController implements RunningTableblservice {
 
 	@Override
 	public void CreditNote(ReceiptVO vo) throws Exception {
-		// TODO Auto-generated method stub
-
+		checkReceipt.CreditNote(vo);
 	}
 
 }
