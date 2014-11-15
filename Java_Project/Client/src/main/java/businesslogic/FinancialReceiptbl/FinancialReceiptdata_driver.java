@@ -9,17 +9,17 @@ public class FinancialReceiptdata_driver {
 	ResultMessage result;
 	public void driver(FinancialReceiptdata_stub finReceiptdata){
 		try {
-			result=finReceiptdata.addCash(new CashPO());
+			result=finReceiptdata.addCash(new CashReceiptPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		try {
-			result=finReceiptdata.addPay(new PayPO());
+			result=finReceiptdata.addPay(new PayReceiptPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		try {
-			result=finReceiptdata.addRec(new RecPO());
+			result=finReceiptdata.addRec(new RecReceiptPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

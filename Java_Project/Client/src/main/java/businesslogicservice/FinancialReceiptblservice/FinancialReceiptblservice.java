@@ -1,11 +1,11 @@
 package businesslogicservice.FinancialReceiptblservice;
 
-import vo.CashVO;
-import vo.PayVO;
-import vo.RecVO;
+import vo.CashReceiptVO;
+import vo.PayReceiptVO;
+import vo.RecReceiptVO;
 
 public interface FinancialReceiptblservice {
-	public void makePayment(PayVO vo) throws Exception;
-	public void makeReceive(RecVO vo) throws Exception;
-	public void makeCash(CashVO vo) throws Exception;
+	public void makePayment(PayReceiptVO vo) throws Exception;
+	public void makeReceive(RecReceiptVO vo) throws Exception;
+	public void makeCash(CashReceiptVO vo) throws Exception;
 }
