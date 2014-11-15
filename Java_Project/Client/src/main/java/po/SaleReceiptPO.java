@@ -1,5 +1,8 @@
 package po;
-
+/**
+ * Edited by dzh,add extension,11.12
+ *
+ */
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Vector;
@@ -7,7 +10,7 @@ import java.util.Vector;
 /**
  * Created by Nifury on 2014/10/20.
  */
-public class SaleReceiptPO implements Serializable {
+public class SaleReceiptPO extends ReceiptPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String id;

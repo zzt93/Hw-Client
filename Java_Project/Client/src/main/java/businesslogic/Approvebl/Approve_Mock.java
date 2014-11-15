@@ -8,7 +8,7 @@ import businesslogicservice.Approveblservice.Approve_List_BLservice;
 import po.ReceiptPO;
 
 
-public class Approve_Stub implements Approve_Detail_BLservice,Approve_List_BLservice{
+public class Approve_Mock implements Approve_Detail_BLservice,Approve_List_BLservice{
 	
 
 	public ArrayList<ReceiptPO> showList() {

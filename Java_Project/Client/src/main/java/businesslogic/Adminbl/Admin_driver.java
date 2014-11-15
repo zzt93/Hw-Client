@@ -4,12 +4,12 @@ import java.rmi.RemoteException;
 
 import po.UserPO;
 
-public class Admin_blservice_driver {
+public class Admin_driver {
 	
-	public void drive(Admin_blservice_stub stub){
+	public void drive(Admin_mock stub){
 		
 		try {
-			stub.confirm();
+			stub.confirm(null);
 			stub.delete(new UserPO(0, null, null, null));
 			stub.newUser();
 			stub.show();
@@ -21,7 +21,7 @@ public class Admin_blservice_driver {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Admin_blservice_driver().drive(new Admin_blservice_stub());
+		new Admin_driver().drive(new Admin_mock());
 	}
 
 }

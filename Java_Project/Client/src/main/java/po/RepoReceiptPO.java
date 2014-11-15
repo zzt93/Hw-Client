@@ -1,10 +1,10 @@
 package po;
-
-public class RepoReceiptPO {
+/**
+ * Edited by dzh,add extension,11.12
+ *
+ */
+public class RepoReceiptPO extends ReceiptPO{
 	
-	public RepoReceiptPO() {
-		// TODO Auto-generated constructor stub
-	}
 	public RepoReceiptPO(int a, int c) {
 		aNum = a;
 		cNum = c;

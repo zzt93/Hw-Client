@@ -1,7 +1,7 @@
 package presentation.Clientui;
 
-import businesslogic.Clientbl.ClientUtility;
-import businesslogicservice.Clientblservice.ClientUtilityImpl;
+import businesslogic.Clientbl.ClientUtilityImpl;
+import businesslogicservice.Clientblservice.ClientUtility;
 import po.ClientLevel;
 import po.ClientPO;
 import po.ClientType;
@@ -21,7 +21,7 @@ public class buttonPanel extends JPanel {
      *
      */
     private static final long serialVersionUID = 1L;
-    private static ClientUtilityImpl impl;
+    private static ClientUtility impl;
     private static DefaultTableModel model;
 
     JButton addButton = new JButton("Add");
@@ -37,7 +37,7 @@ public class buttonPanel extends JPanel {
         model = _model;
 
         try {
-            impl = new ClientUtility();
+            impl = new ClientUtilityImpl();
             Vector<ClientPO> clientPOVector = impl.queryClient(null);
             String[] rowData = new String[12];
             for (ClientPO clientPO : clientPOVector) {

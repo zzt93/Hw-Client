@@ -1,17 +1,22 @@
 package po;
 
-enum UserRole{STOCK,IMPANDEXP,ACCOUNT,MANAGER}
+
 public class UserPO {
 	int id;
 	String name;
 	String password;
-	UserRole role;
+	String role;
 	
-	public UserPO(int i ,String n,String p,UserRole r){
+	public UserPO(int i ,String n,String p,String r){
 		id = i;
 		name = n;
 		password = p;
 		role = r;
+	}
+
+	
+	public UserPO(int i){
+		this(i,null,null,"STOCK");
 	}
 
 	public int getId() {
@@ -26,7 +31,7 @@ public class UserPO {
 		return password;
 	}
 
-	public UserRole getRole() {
+	public String getRole() {
 		return role;
 	}
 }
