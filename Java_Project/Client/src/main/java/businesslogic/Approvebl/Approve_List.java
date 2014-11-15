@@ -40,7 +40,7 @@ public class Approve_List implements Approve_List_BLservice{
 		RepoReceiptDataService rrb = new RepoReceiptDataImpl();
 		ArrayList<RepoReceiptPO> arrRepo =rrb.getRepoReceipts().getObj();
 		receipts.addAll(arrRepo);
-		/**
+		/*
 		 * Another 1
 		 */
 		return this.receipts;

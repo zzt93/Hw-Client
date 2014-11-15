@@ -6,13 +6,12 @@ import java.util.ArrayList;
 
 import po.GoodsPO;
 import po.StrategyPO;
-import vo.GoodsVO;
 import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
 import businesslogicservice.Strategyblservice.Strategy_New_BLservice;
 
 public class StrategyController implements Strategy_New_BLservice,Strategy_List_BLservice{
 	StrategyNew sn;
-	StrategyList_Stub sb = new StrategyList_Stub();
+	StrategyList_mock sb = new StrategyList_mock();
 	StrategyController(){
 		try {
 			sn = new StrategyNew();
@@ -42,7 +41,7 @@ public class StrategyController implements Strategy_New_BLservice,Strategy_List_
 	}
 
 	@Override
-	public ArrayList<GoodsVO> goodList(String goodsInfo) {
+	public ArrayList<GoodsPO> goodList(String goodsInfo) {
 		// TODO Auto-generated method stub
 		return sn.goodList(goodsInfo);
 	}
