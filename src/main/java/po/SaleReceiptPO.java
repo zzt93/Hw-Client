@@ -13,7 +13,6 @@ import java.util.Vector;
 public class SaleReceiptPO extends ReceiptPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String id;
     private ClientPO clientPO;
     private String salesman;
     private String operator;
@@ -28,7 +27,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     public SaleReceiptPO(String id, ClientPO clientPO, String salesman, String operator,
                          String repository, BigDecimal allowance,
                          BigDecimal coupon, String comment) {
-        this.id = id;
+        this.number = id;
         this.clientPO = clientPO;
         this.salesman = salesman;
         this.operator = operator;
@@ -39,7 +38,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     }
 
     public String getId() {
-        return id;
+        return number;
     }
 
     public ClientPO getClientPO() {

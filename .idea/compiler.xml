@@ -25,6 +25,8 @@
         <module name="BigWork" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BigWork" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
-

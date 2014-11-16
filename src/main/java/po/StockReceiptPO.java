@@ -7,10 +7,9 @@ import java.util.Vector;
 /**
  * Created by Nifury on 2014/10/20.
  */
-public class StockReceiptPO implements Serializable {
+public class StockReceiptPO extends ReceiptPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String id;
     private String supplier;
     private String repository;
     private String operator;
@@ -20,7 +19,7 @@ public class StockReceiptPO implements Serializable {
 
     public StockReceiptPO(String id, String supplier, String repository, String operator,
                           String comment) {
-        this.id = id;
+        this.number = id;
         this.supplier = supplier;
         this.repository = repository;
         this.operator = operator;
@@ -28,7 +27,7 @@ public class StockReceiptPO implements Serializable {
     }
 
     public String getId() {
-        return id;
+        return number;
     }
 
     public String getSupplier() {
