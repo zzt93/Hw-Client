@@ -18,6 +18,8 @@ public class StrategyNew implements Strategy_New_BLservice {
 	
 	private static StrategyDataService sds = null; 
 	
+	StrategyPO po;
+
 	public StrategyNew() throws RemoteException, NotBoundException{
 		super();
 		if(sds == null){
@@ -25,16 +27,16 @@ public class StrategyNew implements Strategy_New_BLservice {
 		}
 	}
 	@Override
-	public StrategyPO newStrategy() {
+	public void newStrategy() {
 
-		return new StrategyPO();
+		this.po = new StrategyPO();
 	}
 
 	@Override
 	public ArrayList<GoodsPO> goodList(String goodsInfo) {
 		// TODO Auto-generated method stub
 		GL_manager_BLservice glb = new GL_manager_repo_Impl();// ????????????????
-
+		//parameter:GoodsFilter[] filters
 		
 		try {
 			ArrayList<GoodsPO> arrgpo = new ArrayList<GoodsPO>();
@@ -50,7 +52,7 @@ public class StrategyNew implements Strategy_New_BLservice {
 	}
 
 	@Override
-	public boolean examine(StrategyPO po) {
+	public boolean examine() {
 		if (po.getTimePeriod().getStart().getTime() > po.getTimePeriod()
 				.getStart().getTime()) {
 			return false;
@@ -63,12 +65,11 @@ public class StrategyNew implements Strategy_New_BLservice {
 	}
 
 	@SuppressWarnings("unchecked")
-	boolean confirm(StrategyPO po){
+	boolean confirm(){
 		ResultMessage<StrategyPO> rm = null;
 		try {
 			rm = sds.confirm(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(rm.getErrMessage()==null){
