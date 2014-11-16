@@ -2,23 +2,20 @@ package po;
 
 import org.omg.PortableServer.POA;
 
-import vo.ItemVO;
 
 public class ItemPO {
 	String item,remark;
-	double account;
-	public ItemPO(String i,double a,String r){
-		item=i;
-		account=a;
-		remark=r;
+	double amount;
+	public ItemPO(String item,double amount,String remark){
+		this.item=item;
+		this.amount=amount;
+		this.remark=remark;
 	}
-	public ItemPO(ItemVO vo){
-		item=vo.item;
-		account=vo.account;
-		remark=vo.remark;
+	public ItemPO(String item,double amount){
+		this(item,amount,null);
 	}
 	public double getAccount(){
-		return account;
+		return amount;
 	}
 	public boolean equals(ItemPO po){
 		return item.equals(po.getName());
