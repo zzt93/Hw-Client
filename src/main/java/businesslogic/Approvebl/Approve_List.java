@@ -72,7 +72,12 @@ public class Approve_List implements Approve_List_BLservice{
 		return null;
 	}
 
-	
+	public ArrayList<ReceiptPO> screen(String item){//ReceiptFilter[] filter
+		return null;
+	}
+	public ArrayList<ReceiptPO> order(String item){
+		return null;
+	}
 
 	
 }

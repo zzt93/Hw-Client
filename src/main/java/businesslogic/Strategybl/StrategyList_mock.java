@@ -23,16 +23,20 @@ public class StrategyList_mock implements Strategy_List_BLservice{
 	}
 
 	public void addStrategy(StrategyPO s){
-		s.setCondition(new Condition());
-		s.setTimePeriod(new TimePeriod());
-		s.setTreatment(new Treatment());
+		//s.setCondition(new Condition());
+		//s.setTimePeriod(new TimePeriod());
+		//s.setTreatment(new Treatment());
 		list.add(s);
+		show();
 	}
 
 	public ArrayList<StrategyPO> queryValidStrategy(String strategyFliter){
 		return null;
 	}
 	
+	public ArrayList<StrategyPO> show(){
+		return this.list;
+	}
 }
 
 
