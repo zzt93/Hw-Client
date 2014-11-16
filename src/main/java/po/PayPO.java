@@ -13,6 +13,7 @@ public class PayPO extends ReceiptPO{
 		operator=vo.operator;
 		bankList=list;
 		total=vo.total;
+		type=ReceiptType.PAYMENT;
 	}
 	public PayPO(){}
 }

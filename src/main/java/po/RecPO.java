@@ -13,6 +13,7 @@ public class RecPO extends ReceiptPO {
 		operator=vo.operator;
 		bankList=list;
 		total=vo.total;
+		type=ReceiptType.RECEIVE;
 	}
 	public RecPO(){}
 }
