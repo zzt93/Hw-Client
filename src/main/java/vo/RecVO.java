@@ -1,13 +1,19 @@
 package vo;
 
-public class RecVO extends ReceiptVO{
+import po.ReceiptPO;
+import po.ReceiptType;
+
+public class RecVO extends ReceiptPO{
 	public String client,operator;
 	public double total=0;
 	public RecVO(String num,String client,String operator,double total){
-		this.number=num;
+		number=num;
 		this.client=client;
 		this.operator=operator;
 		this.total=total;
+		type=ReceiptType.RECEIVE;
 	}
-	public RecVO(){}
+	public RecVO(){
+		type=ReceiptType.RECEIVE;
+	}
 }

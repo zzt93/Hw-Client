@@ -1,4 +1,6 @@
 package businesslogic.FinancialReceiptbl;
+import java.util.ArrayList;
+
 import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
 import vo.*;
 import po.*;
@@ -58,5 +60,8 @@ public class FinReceiptController implements FinancialReceiptblservice{
 	}
 	public ReceiptPO[] getReceipt(){
 		return new ReceiptPO[1];
+	}
+	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo){
+		return null;
 	}
 }
