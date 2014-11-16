@@ -1,8 +1,11 @@
 package po;
 
 import java.util.ArrayList;
-
-public class GoodsReceiptPO {
+/**
+ * Edited by dzh,add extension,11.12
+ *
+ */
+public class GoodsReceiptPO extends ReceiptPO{
 	ArrayList<GoodsPO> goodsPOs;
 	double sumOfGifts;
 	

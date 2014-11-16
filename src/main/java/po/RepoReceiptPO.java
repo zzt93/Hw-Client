@@ -1,9 +1,19 @@
 package po;
-
-public class RepoReceiptPO {
+/**
+ * Edited by dzh,add extension,11.12
+ *
+ */
+public class RepoReceiptPO extends ReceiptPO{
+	
+	public RepoReceiptPO(int a, int c) {
+		aNum = a;
+		cNum = c;
+	}
+	
 	int aNum;
 	int cNum;
 	String type;
+	
 	public int getaNum() {
 		return aNum;
 	}

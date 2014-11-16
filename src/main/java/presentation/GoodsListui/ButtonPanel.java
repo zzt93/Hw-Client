@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import vo.GoodsVO;
-import businesslogic.GoodsListbl.GLBLImpl;
+import businesslogic.GoodsListbl.GL_controller;
 import businesslogicservice.GoodsListblservice.GLBLservice;
 /**
  * This is the intersection where ui and bl interact
@@ -30,6 +31,7 @@ public class ButtonPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	GLBLservice glbLservice = null;
 	JButton addButton = new JButton("Add");
 	JButton delButton = new JButton("Delete");
 	JButton updButton = new JButton("Update");
@@ -58,7 +60,13 @@ public class ButtonPanel extends JPanel{
 	
 	public void addListener(){
 		
-		final GLBLservice glbLservice = new GLBLImpl("account");
+		
+/*		try {
+			glbLservice = new GL_controller();
+		} catch (RemoteException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}*/
 		
 		addButton.addActionListener(new ActionListener() {
 			
@@ -146,7 +154,7 @@ public class ButtonPanel extends JPanel{
 				//method of bl
 
 				try {
-					glbLservice.update(new GoodsVO());
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -179,7 +187,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.eSearch(id.getText());
+					glbLservice.eSearch_batch(id.getText());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

@@ -51,5 +51,9 @@ public class GoodsListDataImpl implements GoodsListDataService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public ResultMessage<Boolean> saveGoodsList(GoodsListPO goodsListPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

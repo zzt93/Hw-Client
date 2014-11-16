@@ -6,15 +6,41 @@ import vo.TreeNodeVO;
 
 public class TreeNodePO {
 	String type;
-	TreeNodePO fa;
-	ArrayList<TreeNodePO> so;
 	
-	ArrayList<GoodsModelPO> goodsList;
+	/*
+	 * this member is to record the type info up to now
+	 */
+	String type_so_far;
+	
+	TreeNodePO fa;
+	ArrayList<TreeNodePO> sons = new ArrayList<TreeNodePO>();
+	
+	ArrayList<GoodsModelPO> goodsModels = new ArrayList<GoodsModelPO>();
 
 	public TreeNodePO(TreeNodeVO treeNodeVO) {
 		// TODO Auto-generated constructor stub
 		
 	}
+	
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+	
+	public boolean is_leaf() {
+		return sons.isEmpty();
+	}
+	public boolean type_editable() {
+		return is_leaf()&&(goodsModels.isEmpty());
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -31,19 +57,31 @@ public class TreeNodePO {
 		this.fa = fa;
 	}
 
-	public ArrayList<TreeNodePO> getSo() {
-		return so;
+	public ArrayList<TreeNodePO> getSons() {
+		return sons;
 	}
 
-	public void setSo(ArrayList<TreeNodePO> so) {
-		this.so = so;
+	public void setSons(ArrayList<TreeNodePO> so) {
+		this.sons = so;
 	}
 
-	public ArrayList<GoodsModelPO> getGoodsList() {
-		return goodsList;
+	
+	public String getType_so_far() {
+		return type_so_far;
 	}
 
-	public void setGoodsList(ArrayList<GoodsModelPO> goodsList) {
-		this.goodsList = goodsList;
+
+	public void setType_so_far(String type_so_far) {
+		this.type_so_far = type_so_far;
+	}
+
+
+	public ArrayList<GoodsModelPO> getGoodsModels() {
+		return goodsModels;
+	}
+
+
+	public void setGoodsModels(ArrayList<GoodsModelPO> goodsModels) {
+		this.goodsModels = goodsModels;
 	}
 }

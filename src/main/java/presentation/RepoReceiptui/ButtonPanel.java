@@ -85,7 +85,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					receBLservice.input(null, ABORT);
+					receBLservice.input(null);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

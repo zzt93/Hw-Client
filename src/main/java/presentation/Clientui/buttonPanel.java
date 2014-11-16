@@ -21,7 +21,7 @@ public class buttonPanel extends JPanel {
      *
      */
     private static final long serialVersionUID = 1L;
-    private static ClientUtilityImpl impl;
+    private static ClientUtility impl;
     private static DefaultTableModel model;
 
     JButton addButton = new JButton("Add");

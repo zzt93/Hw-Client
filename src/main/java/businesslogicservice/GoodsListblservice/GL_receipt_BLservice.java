@@ -1,15 +1,17 @@
 package businesslogicservice.GoodsListblservice;
 
-import java.util.ArrayList;
 
 import po.GoodsModelPO;
-import vo.GoodsVO;
+import po.GoodsPO;
+import po.RepoReceiptPO;
 
 public interface GL_receipt_BLservice {
 	//check whether some goods is exist
-	boolean check(GoodsVO goods) throws Exception;
+	boolean check_rece(GoodsPO goods) throws Exception;
 	//1. for check whether it can send as gift
 	//2. check the amount
-	ArrayList<GoodsModelPO> getGoodsModelPOs() throws Exception;
-	int amount(GoodsVO goods) throws Exception;
+	GoodsModelPO getGoodsModelPO(String id) throws Exception;
+	int amount(GoodsPO goods) throws Exception;
+	//update the amount if repo_receipt is approved
+	void receiveRece(RepoReceiptPO receiptPO) throws Exception;
 }

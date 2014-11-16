@@ -1,6 +1,9 @@
 package po;
 
 public class GoodsModelPO {
+	public GoodsModelPO(String id) {
+		this.id = id;
+	}
 	int signal;
 	int amount;
 	String id;

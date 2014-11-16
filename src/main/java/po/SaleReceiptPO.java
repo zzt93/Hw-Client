@@ -1,5 +1,8 @@
 package po;
-
+/**
+ * Edited by dzh,add extension,11.12
+ *
+ */
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Vector;
@@ -10,6 +13,7 @@ import java.util.Vector;
 public class SaleReceiptPO extends ReceiptPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private String id;
     private ClientPO clientPO;
     private String salesman;
     private String operator;
@@ -24,7 +28,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     public SaleReceiptPO(String id, ClientPO clientPO, String salesman, String operator,
                          String repository, BigDecimal allowance,
                          BigDecimal coupon, String comment) {
-        this.number = id;
+        this.id = id;
         this.clientPO = clientPO;
         this.salesman = salesman;
         this.operator = operator;
@@ -35,7 +39,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     }
 
     public String getId() {
-        return number;
+        return id;
     }
 
     public ClientPO getClientPO() {
