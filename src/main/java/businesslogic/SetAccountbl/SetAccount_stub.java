@@ -19,7 +19,7 @@ public class SetAccount_stub implements SetAccountblservice {
 		System.out.println("设置商品分类成功");
 	}
 
-	public void addGoods(GoodsVO[] vo, String name) throws Exception {
+	public void creatGoods(String name) throws Exception {
 		if(name==null){
 			System.out.println("不存在该账目");
 		}
@@ -29,7 +29,7 @@ public class SetAccount_stub implements SetAccountblservice {
 
 	}
 
-	public void addClient(ClientPO[] vo, String name) throws Exception {
+	public void creatClient(String name) throws Exception {
 		if(name==null){
 			System.out.println("不存在该账目");
 		}
@@ -38,7 +38,7 @@ public class SetAccount_stub implements SetAccountblservice {
 		}
 	}
 
-	public void addBank(BankVO[] vo, String name) throws Exception {
+	public void creatBank( String name) throws Exception {
 		if(name==null){
 			System.out.println("不存在该账目");
 		}
@@ -93,6 +93,41 @@ public class SetAccount_stub implements SetAccountblservice {
 		else{
 			return new BankVO[5];
 		}
+	}
+
+	public GoodsVO addGoods(GoodsVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delGoods(GoodsVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BankVO addBank(BankVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delBank(BankVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ClientPO addClient(ClientPO po) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delClient(ClientPO po) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

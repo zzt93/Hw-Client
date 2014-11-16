@@ -1,19 +1,22 @@
-package businesslogic.Approvebl;
+package businesslogic.Strategybl;
 import static org.junit.Assert.*;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
-public class Approve_test {
-	Approve_List al;
-	Approve_Detail ad;
-	
+
+
+import businesslogic.Strategybl.StrategyController;
+
+public class Strategy_test {
+
+	StrategyController sl;
 	@Before
-	public void setUp() throws Exception{
-		al = new Approve_List();
-		
+	public void setUp() throws Exception {
+		sl = new StrategyController();
 	}
+
 	@Test
 	public <T> void test() {
 		assertThat("test ", 0, new BaseMatcher<Integer>() {

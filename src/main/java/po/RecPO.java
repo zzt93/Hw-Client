@@ -5,13 +5,13 @@ import vo.RecVO;
 
 public class RecPO extends ReceiptPO {
 	String client,operator;
-	BankVO[] bankList;
+	BkTransPO[] bankList;
 	double total=0;
-	public RecPO(RecVO vo){
+	public RecPO(RecVO vo,BkTransPO[] list){
 		number=vo.number;
 		client=vo.client;
 		operator=vo.operator;
-		bankList=vo.bankList;
+		bankList=list;
 		total=vo.total;
 	}
 	public RecPO(){}

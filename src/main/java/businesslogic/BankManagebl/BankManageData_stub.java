@@ -17,24 +17,24 @@ public class BankManageData_stub implements BankManagedataservice {
 	}
 	public ResultMessage insert(BankPO po) throws RemoteException{
 		System.out.println("添加成功");
-		return ResultMessage.noErr;
+		return new ResultMessage(null,null);
 	}
 	public ResultMessage delete(BankPO po) throws RemoteException{
 		System.out.println("删除成功");
-		return ResultMessage.noErr;
+		return new ResultMessage(null,null);
 	}
 	public ResultMessage update(BankPO po) throws RemoteException{
 		System.out.println("更新成功");
-		return ResultMessage.noErr;
+		return new ResultMessage(null,null);
 	}
 	public  ResultMessage init() throws RemoteException{
 		System.out.println("初始化成功");
-		return ResultMessage.noErr;
+		return new ResultMessage(null,null);
 	}
 
 	public ResultMessage finish() throws RemoteException {
 		System.out.println("结束数据库使用");
-		return ResultMessage.noErr;
+		return new ResultMessage(null,null);
 	}
 
 	public ResultMessage finds() throws RemoteException {
@@ -43,7 +43,7 @@ public class BankManageData_stub implements BankManagedataservice {
 
 	public ResultMessage setup(String account) throws RemoteException{
 		System.out.println("新建数据库成功");
-		return ResultMessage.noErr;
+		return new ResultMessage(null,null);
 	}
 
 	public ResultMessage getID(String account) throws RemoteException {
