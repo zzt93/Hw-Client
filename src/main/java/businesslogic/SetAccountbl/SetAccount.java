@@ -45,4 +45,10 @@ public class SetAccount {
 		//查看期初银行
 		return new ResultMessage<BankVO[]>("未实现",null);
 	}
+	private ResultMessage changeAccount(String account){
+		return new  ResultMessage("尚未实现",null);
+	}
+	private ResultMessage<String> getAccount(){
+		return new  ResultMessage("尚未实现",null);
+	}
 }
