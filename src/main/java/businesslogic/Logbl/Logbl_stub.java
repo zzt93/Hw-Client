@@ -11,4 +11,14 @@ public class Logbl_stub implements Logblservice {
 		return a;
 	}
 
+	
+	public void open(){
+		
+	}
+	public void close(){
+		
+	}
+	public String record(String str){
+		return str;
+	}
 }

@@ -5,6 +5,9 @@ import dataservice.Saledataservice.SaleDataService;
 import po.ResultMessage;
 import po.SaleReceiptPO;
 import util.RMIUtility;
+import vo.GoodsRecordVO;
+import vo.ReceiptConditionVO;
+import vo.SaleConditionVO;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -29,8 +32,15 @@ public class SaleUtilityImpl implements SaleUtility {
     }
 
     @Override
-    public Vector<SaleReceiptPO> queryReceipt(Vector<String> filters) throws Exception {
-        ResultMessage<Vector<SaleReceiptPO>> result = impl.queryReceipt(filters);
+    public Vector<SaleReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
+        ResultMessage<Vector<SaleReceiptPO>> result = impl.queryReceipt(filter);
+        result.throwIfFailed();
+        return result.getObj();
+    }
+
+    @Override
+    public Vector<GoodsRecordVO> querySaleRecord(SaleConditionVO filter) throws Exception {
+        ResultMessage<Vector<GoodsRecordVO>> result = impl.querySaleRecord(filter);
         result.throwIfFailed();
         return result.getObj();
     }

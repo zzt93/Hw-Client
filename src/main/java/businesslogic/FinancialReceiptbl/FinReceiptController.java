@@ -56,4 +56,7 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		//通过Admin获得
 		return null;
 	}
+	public ReceiptPO[] getReceipt(){
+		return new ReceiptPO[1];
+	}
 }
