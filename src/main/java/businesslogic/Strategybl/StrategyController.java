@@ -35,9 +35,9 @@ public class StrategyController implements Strategy_New_BLservice,Strategy_List_
 	}
 
 	@Override
-	public StrategyPO newStrategy() {
+	public void newStrategy() {
 		// TODO Auto-generated method stub
-		return sn.newStrategy();
+		sn.newStrategy();
 	}
 
 	@Override
@@ -47,12 +47,12 @@ public class StrategyController implements Strategy_New_BLservice,Strategy_List_
 	}
 
 	@Override
-	public boolean examine(StrategyPO po) {
+	public boolean examine() {
 		// TODO Auto-generated method stub
-		return sn.examine(po);
+		return sn.examine();
 	}
 
-	boolean confirm(StrategyPO po){
-		return sn.confirm(po);
+	boolean confirm(){
+		return sn.confirm();
 	}
 }
