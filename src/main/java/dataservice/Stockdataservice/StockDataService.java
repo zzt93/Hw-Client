@@ -12,6 +12,6 @@ import java.util.Vector;
  */
 public interface StockDataService extends Remote {
     public ResultMessage makeReceipt(StockReceiptPO receiptPO) throws RemoteException;
-    public ResultMessage<Vector<StockReceiptPO>> queryReceipt(Vector<String> filters)
+    public ResultMessage<Vector<StockReceiptPO>> queryReceipt(String filter)
             throws RemoteException;
 }

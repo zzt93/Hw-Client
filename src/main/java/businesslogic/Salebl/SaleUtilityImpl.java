@@ -33,14 +33,16 @@ public class SaleUtilityImpl implements SaleUtility {
 
     @Override
     public Vector<SaleReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
-        ResultMessage<Vector<SaleReceiptPO>> result = impl.queryReceipt(filter);
+        //TODO get filter
+        ResultMessage<Vector<SaleReceiptPO>> result = impl.queryReceipt(null);
         result.throwIfFailed();
         return result.getObj();
     }
 
     @Override
     public Vector<GoodsRecordVO> querySaleRecord(SaleConditionVO filter) throws Exception {
-        ResultMessage<Vector<GoodsRecordVO>> result = impl.querySaleRecord(filter);
+        //TODO get filter
+        ResultMessage<Vector<GoodsRecordVO>> result = impl.querySaleRecord(null);
         result.throwIfFailed();
         return result.getObj();
     }

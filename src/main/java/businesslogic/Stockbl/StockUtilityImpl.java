@@ -5,6 +5,7 @@ import dataservice.Stockdataservice.StockDataService;
 import po.ResultMessage;
 import po.StockReceiptPO;
 import util.RMIUtility;
+import vo.ReceiptConditionVO;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -17,12 +18,9 @@ public class StockUtilityImpl implements StockUtility {
 
     private static StockDataService impl;
 
-    static {
-        try {
+    public StockUtilityImpl() throws RemoteException, NotBoundException {
+        if (impl == null)
             impl = (StockDataService) RMIUtility.getImpl("Stock");
-        } catch (RemoteException | NotBoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -32,8 +30,9 @@ public class StockUtilityImpl implements StockUtility {
     }
 
     @Override
-    public Vector<StockReceiptPO> queryReceipt(Vector<String> filters) throws Exception {
-        ResultMessage<Vector<StockReceiptPO>> result = impl.queryReceipt(filters);
+    public Vector<StockReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
+        //TODO get filter
+        ResultMessage<Vector<StockReceiptPO>> result = impl.queryReceipt(null);
         result.throwIfFailed();
         return result.getObj();
     }

@@ -16,7 +16,6 @@ import businesslogicservice.Saleblservice.SaleUtility;
 import businesslogicservice.Stockblservice.StockUtility;
 
 /**
- * Code:zzt's is not implemented.
  * @author Mebleyev.G.Longinus
  *
  */
@@ -26,7 +25,7 @@ public class Approve_List implements Approve_List_BLservice{
 	private <E> void addOneByOne(Vector<E> ver){
 		Iterator<E> itR = ver.iterator();
 		while(itR.hasNext()){
-			receipts.add((ReceiptPO)itR.next());
+			receipts.add((ReceiptPO) itR.next());
 		}
 	}
 	@Override
@@ -40,8 +39,9 @@ public class Approve_List implements Approve_List_BLservice{
 		RepoReceiptDataService rrb = new RepoReceiptDataImpl();
 		ArrayList<RepoReceiptPO> arrRepo =rrb.getRepoReceipts().getObj();
 		receipts.addAll(arrRepo);
+		
 		/*
-		 * Another 1
+		 * Another ?
 		 */
 		return this.receipts;
 	}
