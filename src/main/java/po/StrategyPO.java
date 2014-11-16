@@ -1,8 +1,5 @@
 package po;
 
-import businesslogic.Strategybl.Condition;
-import businesslogic.Strategybl.TimePeriod;
-import businesslogic.Strategybl.Treatment;
 
 
 public class StrategyPO {

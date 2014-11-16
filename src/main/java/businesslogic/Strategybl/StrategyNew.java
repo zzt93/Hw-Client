@@ -35,7 +35,7 @@ public class StrategyNew implements Strategy_New_BLservice {
 	@Override
 	public ArrayList<GoodsPO> goodList(String goodsInfo) {
 		// TODO Auto-generated method stub
-		GL_manager_BLservice glb = new GL_manager_repo_Impl();// ????????????????
+		GL_manager_BLservice glb = new GL_manager_repo_Impl(null);// ????????????????
 		//parameter:GoodsFilter[] filters
 		
 		try {

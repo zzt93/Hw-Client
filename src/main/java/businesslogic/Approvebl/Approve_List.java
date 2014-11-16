@@ -3,15 +3,18 @@ package businesslogic.Approvebl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
+
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
 import po.ReceiptPO;
 import po.RepoReceiptPO;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
+import businesslogic.FinancialReceiptbl.FinReceiptController;
 import businesslogic.RepoReceiptbl.RepoReceiptDataImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
+import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
 import businesslogicservice.Saleblservice.SaleUtility;
 import businesslogicservice.Stockblservice.StockUtility;
 
@@ -39,6 +42,9 @@ public class Approve_List implements Approve_List_BLservice{
 		RepoReceiptDataService rrb = new RepoReceiptDataImpl();
 		ArrayList<RepoReceiptPO> arrRepo =rrb.getRepoReceipts().getObj();
 		receipts.addAll(arrRepo);
+		FinancialReceiptblservice frb = new FinReceiptController();
+		//Interface not provided;
+		
 		
 		/*
 		 * Another ?
