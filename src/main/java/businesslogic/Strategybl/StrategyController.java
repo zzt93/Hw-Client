@@ -12,7 +12,7 @@ import businesslogicservice.Strategyblservice.Strategy_New_BLservice;
 public class StrategyController implements Strategy_New_BLservice,Strategy_List_BLservice{
 	StrategyNew sn;
 	StrategyList_mock sb = new StrategyList_mock();
-	StrategyController(){
+	public StrategyController(){
 		try {
 			sn = new StrategyNew();
 		} catch (RemoteException | NotBoundException e) {
