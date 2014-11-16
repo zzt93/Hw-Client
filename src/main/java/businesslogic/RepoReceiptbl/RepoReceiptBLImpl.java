@@ -40,9 +40,9 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 
 	}
 
-	public String input(GoodsVO goods, int amount) throws Exception {
+	public String input(GoodsVO goods) throws Exception {
 		// TODO Auto-generated method stub
-		repoReceiptDataService.insert(new RepoReceiptPO());
+		repoReceiptDataService.insert(new RepoReceiptPO(goods.amount, 0));
 		return null;
 	}
 

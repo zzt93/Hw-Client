@@ -11,6 +11,9 @@ public class GoodsVO {
 	public GoodsVO(GoodsPO goodsPO) {
 		// TODO Auto-generated constructor stub
 	}
+	public GoodsVO() {
+		// TODO Auto-generated constructor stub
+	}
 	public int amount;
 	public String name;
 	public String id;

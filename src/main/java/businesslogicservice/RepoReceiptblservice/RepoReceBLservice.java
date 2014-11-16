@@ -8,6 +8,7 @@ import vo.GoodsVO;
 import vo.ReceiptConditionVO;
 import vo.RepoReceVO;
 
+
 public interface RepoReceBLservice {
 	
 	ArrayList<RepoReceVO> find(ReceiptConditionVO conditionVO) throws Exception;
@@ -18,5 +19,5 @@ public interface RepoReceBLservice {
 
 	void receive_receipt(ReceiptPO po);
 	
-	String input(GoodsVO goods, int amount) throws Exception;
+	String input(GoodsVO goods) throws Exception;
 }

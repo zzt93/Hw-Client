@@ -154,7 +154,7 @@ public class ButtonPanel extends JPanel{
 				//method of bl
 
 				try {
-					glbLservice.update(new GoodsVO());
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
