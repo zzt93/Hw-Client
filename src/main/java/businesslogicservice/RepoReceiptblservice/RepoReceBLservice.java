@@ -16,9 +16,8 @@ public interface RepoReceBLservice {
 	ArrayList<RepoReceiptVO> find(ReceiptConditionVO conditionVO) throws Exception;
 	ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception;
 	ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception;
-	ArrayList<RepoReceiptPO> sendReceipt(ReceiptConditionVO condition) throws Exception;
+	ArrayList<ReceiptPO> sendReceipt(ReceiptConditionVO condition) throws Exception;
 	
-	GoodsReceiptPO giftReceipt(ReceiptConditionVO conditionVO) throws Exception;
 
 	void receive_receipt(ReceiptPO po);
 	

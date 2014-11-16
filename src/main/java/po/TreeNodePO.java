@@ -17,12 +17,18 @@ public class TreeNodePO {
 	
 	ArrayList<GoodsModelPO> goodsModels = new ArrayList<GoodsModelPO>();
 
-	public TreeNodePO(TreeNodeVO treeNodeVO) {
-		// TODO Auto-generated constructor stub
-		
+	public TreeNodePO(TreeNodeVO fa) {
+		type = "" + fa.getSons().size();
+		type_so_far += type;
 	}
 	
 	
+	public TreeNodePO(TreeNodeVO fa2, String son_type) {
+		type = son_type;
+		type_so_far += type;
+	}
+
+
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub

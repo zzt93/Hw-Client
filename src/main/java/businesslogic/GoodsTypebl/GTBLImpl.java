@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import po.TreeNodePO;
-import dataservice.GoodsTypedataservice.GoodsTypeDateService;
 import vo.TreeNodeVO;
 import businesslogicservice.GoodsTypeblservice.GTBLservice;
 
@@ -22,8 +21,11 @@ public class GTBLImpl implements GTBLservice{
 		this.treeNodePOs = treeNodePOs;
 	}
 
-	public boolean add(TreeNodeVO tNode) throws Exception {
-		treeNodePOs.add(new TreeNodePO(tNode));
+	public boolean add(TreeNodeVO fa, String son_type) throws Exception {
+		if (son_type == null) {
+			treeNodePOs.add(new TreeNodePO(fa));
+		} 
+		treeNodePOs.add(new TreeNodePO(fa, son_type));
 		return true;
 	}
 

@@ -20,7 +20,6 @@ public class GLBLImpl implements GLBLservice {
 	
 
 	public boolean add(GoodsModelVO goods) throws Exception {
-		
 		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO.getGoodsModels();
 				
 		GoodsModelPO goodsModelPO = new GoodsModelPO(goods.getId());

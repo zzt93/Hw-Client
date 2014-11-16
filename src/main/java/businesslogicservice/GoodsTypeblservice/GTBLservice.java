@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import vo.TreeNodeVO;
 
 public interface GTBLservice {
-	boolean add(TreeNodeVO tNode) throws Exception;
+	boolean add(TreeNodeVO fa, String son_type) throws Exception;
 	boolean update(TreeNodeVO tNode) throws Exception;
 	boolean delete(TreeNodeVO tNode) throws Exception;
 	

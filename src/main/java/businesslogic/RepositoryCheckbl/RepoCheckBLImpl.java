@@ -12,12 +12,15 @@ import po.RepoPO;
 
 public class RepoCheckBLImpl implements RepoCheckBLservice {
 
-	
+	GL_repo_BLservice gl_repo_BLservice ;
+	public RepoCheckBLImpl(GL_repo_BLservice gl_repo_BLservice) {
+		this.gl_repo_BLservice = gl_repo_BLservice;
+	}
 
 	public ArrayList<RepoPO> checkAndSum() {
 		// TODO Auto-generated method stub
 		ArrayList<RepoPO> result = new ArrayList<RepoPO>();
-		GL_repo_BLservice gl_repo_BLservice = new GL_manager_repo_Impl();
+		
 		GoodsListPO temp = null;
 		try {
 			temp = gl_repo_BLservice.sum();
