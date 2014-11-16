@@ -1,7 +1,10 @@
 package presentation.Strategyui;
 
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -11,9 +14,12 @@ import javax.swing.JList;
 import javax.swing.JEditorPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -59,6 +65,9 @@ public class StrategyUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		Image background = new ImageIcon("src/main/java/presentation/StrategyUI/background.jpg").getImage();
+
+
 		
 		newFrame = new JFrame();
 		newFrame.setBounds(100, 100, 609, 430);

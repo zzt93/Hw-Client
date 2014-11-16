@@ -1,14 +1,12 @@
-package businesslogic.Strategybl;
+package po;
 
 import java.util.ArrayList;
 
-import po.GoodsPO;
-
 public class Condition {
 	public CatOfCondition type;
-	int customerLevel;
-	ArrayList<GoodsPO> composition;
-	double totalPrice;
+	public int customerLevel;
+	public ArrayList<GoodsPO> composition;
+	public double totalPrice;
 	
 	
 	public Condition(CatOfCondition type, int customerLevel) {
