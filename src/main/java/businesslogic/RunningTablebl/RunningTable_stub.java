@@ -17,8 +17,8 @@ public class RunningTable_stub implements RunningTableblservice {
 	public GoodsRecordVO[] getSaleTable(SaleConditionVO vo) throws Exception {
 		right.throwIfFailed();
 		GoodsRecordVO[] record=new GoodsRecordVO[2];
-		record[0]=new GoodsRecordVO("商品1",300);
-		record[1]=new GoodsRecordVO("商品2",50);
+		record[0]=new GoodsRecordVO();
+		record[1]=new GoodsRecordVO();
 		return record;
 	}
 
