@@ -86,7 +86,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					gtbLservice.add(new TreeNodeVO());
+					gtbLservice.add(new TreeNodeVO(), null);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

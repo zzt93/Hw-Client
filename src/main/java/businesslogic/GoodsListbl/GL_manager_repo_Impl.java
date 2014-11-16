@@ -1,6 +1,7 @@
 package businesslogic.GoodsListbl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import po.GoodsListPO;
 import po.GoodsModelPO;
@@ -10,25 +11,26 @@ import businesslogicservice.GoodsListblservice.GL_repo_BLservice;
 
 public class GL_manager_repo_Impl implements GL_manager_BLservice, GL_repo_BLservice {
 
-	
+	GoodsListPO goodsListPO;
+	public GL_manager_repo_Impl(GoodsListPO goodsListPO) {
+		this.goodsListPO = goodsListPO;
+	}
+
 	public GoodsListPO sum() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return goodsListPO;
 	}
 	
 	public int amount(GoodsVO goods) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		HashMap<String, GoodsModelPO> goodsModels = goodsListPO.getGoodsModels();
+		GoodsModelPO goodsModel = goodsModels.get(goods.id);
+		if (goodsModel == null) {
+			return 0;
+		}
+		return goodsModel.getAmount();
 	}
 
 	public GoodsListPO getGoodsList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	// TODO whether to keep it  
-	public ArrayList<GoodsModelPO> getGoodsModelPOs() throws Exception {
-		return null;
+		return goodsListPO;
 	}
 
 }

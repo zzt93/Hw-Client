@@ -6,7 +6,7 @@ public class GoodsModelPO {
 	}
 	int signal;
 	int amount;
-	String id;
+	String id;//id = type + model
 	boolean everHas;
 	boolean gift;
 	

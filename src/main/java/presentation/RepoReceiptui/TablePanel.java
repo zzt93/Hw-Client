@@ -23,7 +23,8 @@ public class TablePanel extends JPanel implements TableModelListener{
 	static JTable statistic = new JTable(tableModel);
 	JScrollPane scrollPane = new JScrollPane(statistic);
 	
-	RepoCheckBLservice examinBLservice = new RepoCheckBLImpl();
+	//TODO
+//	RepoCheckBLservice examinBLservice = new RepoCheckBLImpl();
 	
 	public TablePanel() {
 		// TODO Auto-generated constructor stub
@@ -40,7 +41,7 @@ public class TablePanel extends JPanel implements TableModelListener{
 	}
 
 	public boolean addStatistic() {
-		examinBLservice.checkAndSum();
+//TODO		examinBLservice.checkAndSum();
 		tableModel.fireTableDataChanged();
 		return false;
 	}

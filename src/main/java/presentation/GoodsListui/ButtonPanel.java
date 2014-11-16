@@ -75,24 +75,25 @@ public class ButtonPanel extends JPanel{
 				// TODO Auto-generated method stub
 	
 				JTextField name = new JTextField();
-				JTextField id = new JTextField();
+				JTextField model = new JTextField();
 				JTextField num = new JTextField();
 				final JComponent[] inputs = new JComponent[] {
 						new JLabel("name"),
 						name,
-						new JLabel("id"),
-						id,
+						new JLabel("model"),
+						model,
 						new JLabel("Password"),
 						num
 				};
 				JOptionPane.showMessageDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
 				System.out.println("You entered " +
 						name.getText() + ", " +
-						id.getText() + ", " +
+						model.getText() + ", " +
 						num.getText());
-				
+				//TODO get type be choosing
+				String type = "";
 				try {
-					glbLservice.add(new GoodsModelVO(id.getText()));
+					glbLservice.add(new GoodsModelVO(type + model.getText()));
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

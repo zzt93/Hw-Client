@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import dataservice.GoodsTypedataservice.GoodsTypeDateService;
 import po.GoodsListPO;
 import po.TreeNodePO;
-import vo.GoodsVO;
 import vo.TreeNodeVO;
 import businesslogic.GoodsListbl.GL_controller;
 import businesslogicservice.GoodsTypeblservice.GTBLservice;
@@ -42,15 +41,14 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice, GT_account_s
 	}
 
 	
-	public boolean add(TreeNodeVO tNode) throws Exception {
-		if (gl_controller.checkEverHas(tNode.getType_so_far())) {
+	public boolean add(TreeNodeVO fa, String son_type) throws Exception {
+		if (gl_controller.checkEverHas(fa.getType_so_far())) {
 			return false;
 		}
-		boolean res = gtbLservice.add(tNode);
+		boolean res = gtbLservice.add(fa, null);
 		if (res) {
-			goodsTypeDateService.insert(new TreeNodePO(tNode));
+			goodsTypeDateService.insert(new TreeNodePO(fa));
 		}
-		
 		return res;
 	}
 

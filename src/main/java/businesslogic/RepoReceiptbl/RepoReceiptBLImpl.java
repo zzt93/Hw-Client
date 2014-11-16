@@ -26,30 +26,46 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		return res;
 	}
 
+	/*
+	 * for ui(non-Javadoc)
+	 * @see businesslogicservice.RepoReceiptblservice.RepoReceBLservice#showRepoReceipt()
+	 */
 	public ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	public ArrayList<RepoReceiptPO> sendReceipt(ReceiptConditionVO condition) throws Exception {
+	
+	@Override
+	public ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/*
+	 * for account(non-Javadoc)
+	 * @see businesslogicservice.RepoReceiptblservice.RepoReceBLservice#sendReceipt(vo.ReceiptConditionVO)
+	 */
+	public ArrayList<ReceiptPO> sendReceipt(ReceiptConditionVO condition) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * for manager(non-Javadoc)
+	 * @see businesslogicservice.RepoReceiptblservice.RepoReceBLservice#receive_receipt(po.ReceiptPO)
+	 */
 	public void receive_receipt(ReceiptPO po) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * for account and ui(non-Javadoc)
+	 * @see businesslogicservice.RepoReceiptblservice.RepoReceBLservice#produceRepoReceipt(java.util.ArrayList)
+	 */
 	public String produceRepoReceipt(ArrayList<GoodsVO> goods) throws Exception {
 		// TODO Auto-generated method stub
 		repoReceiptDataService.insert(new RepoReceiptPO(goods.get(0).amount, 0));
-		return null;
-	}
-
-
-	public GoodsReceiptPO giftReceipt(ReceiptConditionVO conditionVO) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -60,10 +76,5 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		return false;
 	}
 
-	@Override
-	public ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }
