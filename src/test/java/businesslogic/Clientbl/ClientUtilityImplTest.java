@@ -15,12 +15,12 @@ import static org.junit.Assert.assertTrue;
 
 public class ClientUtilityImplTest {
 
-    private ClientUtility impl;
+    private static ClientUtility impl;
     private int id;
     private ClientPO client;
 
     @BeforeClass
-    public void testBeforeClass() {
+    public static void testBeforeClass() {
         try {
             impl = new ClientUtilityImpl();
         } catch (RemoteException | NotBoundException e) {
@@ -29,6 +29,12 @@ public class ClientUtilityImplTest {
     }
 
     @Test
+    public void testSequense() throws Exception {
+        testAddClient();
+        testModifyClient();
+        testDeleteClient();
+    }
+
     public void testAddClient() throws Exception {
         client = new ClientPO(ClientType.SELLER, ClientLevel.LEVEL1, "name", "123456789", "addr", "210046", "email",
                 "default");
@@ -37,7 +43,6 @@ public class ClientUtilityImplTest {
         assertEquals(tmp.getName(), "name");
     }
 
-    @Test
     public void testModifyClient() throws Exception {
         ClientPO tmp = impl.queryClientById(id);
         tmp.setName("test");
@@ -46,7 +51,6 @@ public class ClientUtilityImplTest {
         assertEquals(tmp.getName(), "test");
     }
 
-    @Test
     public void testDeleteClient() throws Exception {
         impl.deleteClient(id);
         try {
