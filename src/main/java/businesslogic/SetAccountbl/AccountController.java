@@ -22,19 +22,19 @@ public class AccountController implements SetAccountblservice {
 		
 	}
 
-	public void creatGoods(String name) throws Exception {
+	public void creatGoods(GoodsVO[] list,String name) throws Exception {
 		ResultMessage result=setAccount.creatGoods(goodsList.get(), name);
 		result.throwIfFailed();
 	}
 
 	@Override
-	public void creatClient(String name) throws Exception {
+	public void creatClient(ClientPO[] list,String name) throws Exception {
 		ResultMessage result=setAccount.creatClient(clientList.get(),name);
 		result.throwIfFailed();
 	}
 
 	@Override
-	public void creatBank( String name) throws Exception {
+	public void creatBank(BankVO[] list ,String name) throws Exception {
 		ResultMessage result=setAccount.creatBank(bankList.get(),name);
 		result.throwIfFailed();
 

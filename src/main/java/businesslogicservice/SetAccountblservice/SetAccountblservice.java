@@ -4,9 +4,9 @@ import po.*;
 public interface SetAccountblservice {
 	public void inherit(String name , String accountName)throws Exception;
 	public void setGoodsType()throws Exception;
-	public void creatGoods(String name)throws Exception;
-	public void creatClient(String name)throws Exception;
-	public void creatBank(String name)throws Exception;
+	public void creatGoods(GoodsVO[] list,String name)throws Exception;
+	public void creatClient(ClientPO[] list,String name)throws Exception;
+	public void creatBank(BankVO[] list,String name)throws Exception;
 	public void setup(String name)throws Exception;
 	public void checkGoodsType(String name)throws Exception;
 	public GoodsVO[] checkGoods(String name)throws Exception;

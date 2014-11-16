@@ -42,7 +42,7 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		ResultMessage result=finReceipt.makeCash(po);
 		result.throwIfFailed();
 	}		
-	public String[] getBank(){
+	/*public String[] getBank(){
 		//通过BankManageBl获得
 		return null;
 	}
@@ -53,7 +53,7 @@ public class FinReceiptController implements FinancialReceiptblservice{
 	public String[] getOperator(){
 		//通过Admin获得
 		return null;
-	}
+	}*/
 	public ReceiptPO[] getReceipt()throws Exception{
 		return new ReceiptPO[1];
 	}
