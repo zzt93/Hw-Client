@@ -7,6 +7,8 @@ import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
 
+import vo.GoodsModelVO;
+
 public class GL_test {
 
 	GL_controller gl;
@@ -17,7 +19,17 @@ public class GL_test {
 
 	@Test
 	public <T> void test() {
-		assertThat("test ", 0, new BaseMatcher<Integer>() {
+		try {
+			GoodsModelVO test = new GoodsModelVO("test");
+			
+			assertTrue(gl.add(test));
+			assertTrue(gl.delete(test));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			assert(false);
+		}
+/*		assertThat("test ", 0, new BaseMatcher<Integer>() {
 
 			public boolean matches(Object arg0) {
 				// TODO Auto-generated method stub
@@ -28,7 +40,7 @@ public class GL_test {
 				// TODO Auto-generated method stub
 				
 			}
-		});
+		}); */
 	}
 
 }

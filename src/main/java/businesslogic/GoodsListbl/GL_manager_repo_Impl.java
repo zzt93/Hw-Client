@@ -16,6 +16,9 @@ public class GL_manager_repo_Impl implements GL_manager_BLservice, GL_repo_BLser
 		this.goodsListPO = goodsListPO;
 	}
 
+	public GL_manager_repo_Impl() {
+	}
+	
 	public GoodsListPO sum() throws Exception {
 		return goodsListPO;
 	}

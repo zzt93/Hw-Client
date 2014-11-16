@@ -6,6 +6,7 @@ import java.util.Vector;
 import po.InOutRepoPO;
 import po.StockReceiptPO;
 import vo.ReceiptConditionVO;
+import businesslogic.Stockbl.StockUtilityImpl;
 import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
 import businesslogicservice.Stockblservice.StockUtility;
 
@@ -16,8 +17,7 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 	public ArrayList<InOutRepoPO> countInOut() throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<InOutRepoPO> result = new ArrayList<InOutRepoPO>(null);
-//		StockUtility stockReceipt = new StockUtilityImpl();
-		StockUtility stockReceipt = new Mock_stock();
+		StockUtility stockReceipt = new StockUtilityImpl();
 		
 		ReceiptConditionVO conditionVO = new ReceiptConditionVO();
 		
