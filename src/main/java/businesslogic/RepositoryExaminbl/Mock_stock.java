@@ -16,9 +16,7 @@ public class Mock_stock implements StockUtility{
 
 	public Vector<StockReceiptPO> queryReceipt(ReceiptConditionVO filter)
 			throws Exception {
-		for (String string : filter) {
-			
-		}
+		
 		return receiptPOs;
 	}
 

@@ -1,4 +1,4 @@
-package businesslogic.Strategybl;
+package po;
 
 public enum CatOfCondition {
 	CUSTOMERLEVEL,COMPOSITION,TOTALPRICE

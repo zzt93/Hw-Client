@@ -1,14 +1,12 @@
-package businesslogic.Strategybl;
+package po;
 
 import java.util.ArrayList;
 
-import po.GoodsPO;
-
 
 public class Treatment {
-	CatOfTreatment type;
-	ArrayList<GoodsPO> give;
-	double discount;
+	public CatOfTreatment type;
+	public ArrayList<GoodsPO> give;
+	public double discount;
 	double coupon;
 	
 	

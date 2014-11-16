@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import po.InOutRepoPO;
 import po.StockReceiptPO;
+import vo.ReceiptConditionVO;
 import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
 import businesslogicservice.Stockblservice.StockUtility;
 
@@ -18,11 +19,9 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 //		StockUtility stockReceipt = new StockUtilityImpl();
 		StockUtility stockReceipt = new Mock_stock();
 		
-		String bDate = "";
-		String eData = "";
-		Vector<String> date = new Vector<String>();
-		date.add(bDate+eData);
-		Vector<StockReceiptPO> stockReceiptPOs = stockReceipt.queryReceipt(date);
+		ReceiptConditionVO conditionVO = new ReceiptConditionVO();
+		
+		Vector<StockReceiptPO> stockReceiptPOs = stockReceipt.queryReceipt(conditionVO);
 		
 		
 		return result;
