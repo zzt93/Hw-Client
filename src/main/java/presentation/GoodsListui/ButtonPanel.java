@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import vo.GoodsModelVO;
 import vo.GoodsVO;
 import businesslogic.GoodsListbl.GL_controller;
 import businesslogicservice.GoodsListblservice.GLBLservice;
@@ -91,7 +92,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.add(new GoodsVO());
+					glbLservice.add(new GoodsModelVO(id.getText()));
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -121,7 +122,7 @@ public class ButtonPanel extends JPanel{
 						num.getText());
 				
 				try {
-					glbLservice.delete(new GoodsVO());
+					glbLservice.delete(new GoodsModelVO(id.getText()));
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

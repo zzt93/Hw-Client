@@ -3,6 +3,7 @@ package businesslogic.GoodsListbl;
 import java.util.ArrayList;
 
 import po.GoodsListPO;
+import vo.GoodsModelVO;
 import vo.GoodsVO;
 import businesslogicservice.GoodsListblservice.GL_account_BLservice;
 
@@ -22,13 +23,13 @@ public class GL_account_Impl implements GL_account_BLservice {
 	 * @see businesslogicservice.GoodsListblservice.GL_account_BLservice#add(vo.GoodsVO)
 	 * those following two methods are ignored
 	 */
-	public boolean add(GoodsVO goodsVO) throws Exception {
+	public boolean add(GoodsModelVO goodsVO) throws Exception {
 		System.err.println("This method shouldn't be invoked");
 		System.exit(0);
 		return false;
 	}
 
-	public boolean add(ArrayList<GoodsVO> goodsVOs) throws Exception {
+	public boolean add(ArrayList<GoodsModelVO> goodsVOs) throws Exception {
 		System.err.println("This method shouldn't be invoked");
 		System.exit(0);
 		return false;

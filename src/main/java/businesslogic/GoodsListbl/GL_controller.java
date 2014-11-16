@@ -65,21 +65,21 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	}
 
 	// for glblservice
-	public boolean delete(GoodsVO goods) throws Exception {
+	public boolean delete(GoodsModelVO goods) throws Exception {
 		boolean res = glbLservice.delete(goods);
 		save();
 		return res;
 	}
 
-	public ArrayList<GoodsVO> iSearch(String info) throws Exception {
-		ArrayList<GoodsVO> res = glbLservice.iSearch(info);
+	public ArrayList<GoodsModelVO> iSearch(String info) throws Exception {
+		ArrayList<GoodsModelVO> res = glbLservice.iSearch(info);
 		save();
 		return res;
 	}
 
 	
-	public ArrayList<GoodsVO> iSearch(String[] infos) throws Exception {
-		ArrayList<GoodsVO> res = glbLservice.iSearch(infos);
+	public ArrayList<GoodsModelVO> iSearch(String[] infos) throws Exception {
+		ArrayList<GoodsModelVO> res = glbLservice.iSearch(infos);
 		save();
 		return res;
 	}
@@ -231,13 +231,13 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	 * @see businesslogicservice.GoodsListblservice.GL_account_BLservice#add(vo.GoodsVO)
 	 * they will be called both for blservice and account
 	 */
-	public boolean add(GoodsVO goodsVO) throws Exception {
+	public boolean add(GoodsModelVO goodsVO) throws Exception {
 		boolean res = glbLservice.add(goodsVO);
 		save();
 		return res;
 	}
 
-	public boolean add(ArrayList<GoodsVO> goodsVOs) throws Exception {
+	public boolean add(ArrayList<GoodsModelVO> goodsVOs) throws Exception {
 		boolean res = glbLservice.add(goodsVOs);
 		save();
 		return res;
@@ -261,4 +261,5 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	public ArrayList<String> addable_type() throws Exception {
 		return gt_controller.addable_type();
 	}
+	
 }

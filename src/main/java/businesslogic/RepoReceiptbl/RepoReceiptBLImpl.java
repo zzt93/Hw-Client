@@ -6,31 +6,32 @@ import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
 import po.GoodsReceiptPO;
 import po.ReceiptPO;
 import po.RepoReceiptPO;
+import vo.GoodsReceiptVO;
 import vo.GoodsVO;
 import vo.ReceiptConditionVO;
-import vo.RepoReceVO;
+import vo.RepoReceiptVO;
 import businesslogicservice.RepoReceiptblservice.RepoReceBLservice;
 
 public class RepoReceiptBLImpl implements RepoReceBLservice {
 
 	RepoReceiptDataService repoReceiptDataService = new RepoReceiptDataImpl();
 	
-	public ArrayList<RepoReceVO> find(ReceiptConditionVO conditionVO) throws Exception {
+	public ArrayList<RepoReceiptVO> find(ReceiptConditionVO conditionVO) throws Exception {
 		//TODO add parameter for ifind
 		ArrayList<RepoReceiptPO> temp = repoReceiptDataService.ifind(null).getObj();
-		ArrayList<RepoReceVO> res = new ArrayList<RepoReceVO>();
+		ArrayList<RepoReceiptVO> res = new ArrayList<RepoReceiptVO>();
 		for (RepoReceiptPO repoReceiptPO : temp) {
-			res.add(new RepoReceVO(repoReceiptPO));
+			res.add(new RepoReceiptVO(repoReceiptPO));
 		}
 		return res;
 	}
 
-	public RepoReceVO showReceipt() throws Exception {
+	public ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public RepoReceVO sendReceipt() throws Exception {
+	public ArrayList<RepoReceiptPO> sendReceipt(ReceiptConditionVO condition) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -40,14 +41,27 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 
 	}
 
-	public String input(GoodsVO goods) throws Exception {
+	public String produceRepoReceipt(ArrayList<GoodsVO> goods) throws Exception {
 		// TODO Auto-generated method stub
-		repoReceiptDataService.insert(new RepoReceiptPO(goods.amount, 0));
+		repoReceiptDataService.insert(new RepoReceiptPO(goods.get(0).amount, 0));
 		return null;
 	}
 
 
-	public GoodsReceiptPO giftReceipt() throws Exception {
+	public GoodsReceiptPO giftReceipt(ReceiptConditionVO conditionVO) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean produceGoodsReceipt(ArrayList<GoodsVO> goodsVOs)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

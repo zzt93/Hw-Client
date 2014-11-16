@@ -4,20 +4,24 @@ import java.util.ArrayList;
 
 import po.GoodsReceiptPO;
 import po.ReceiptPO;
+import po.RepoReceiptPO;
+import vo.GoodsReceiptVO;
 import vo.GoodsVO;
 import vo.ReceiptConditionVO;
-import vo.RepoReceVO;
+import vo.RepoReceiptVO;
 
 
 public interface RepoReceBLservice {
 	
-	ArrayList<RepoReceVO> find(ReceiptConditionVO conditionVO) throws Exception;
-	RepoReceVO showReceipt() throws Exception;
-	RepoReceVO sendReceipt() throws Exception;
+	ArrayList<RepoReceiptVO> find(ReceiptConditionVO conditionVO) throws Exception;
+	ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception;
+	ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception;
+	ArrayList<RepoReceiptPO> sendReceipt(ReceiptConditionVO condition) throws Exception;
 	
-	GoodsReceiptPO giftReceipt() throws Exception;
+	GoodsReceiptPO giftReceipt(ReceiptConditionVO conditionVO) throws Exception;
 
 	void receive_receipt(ReceiptPO po);
 	
-	String input(GoodsVO goods) throws Exception;
+	String produceRepoReceipt(ArrayList<GoodsVO> goods) throws Exception;
+	boolean produceGoodsReceipt(ArrayList<GoodsVO> goodsVOs) throws Exception;
 }

@@ -19,38 +19,38 @@ public class GLBLImpl implements GLBLservice {
 	
 	
 
-	public boolean add(GoodsVO goods) throws Exception {
+	public boolean add(GoodsModelVO goods) throws Exception {
 		
 		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO.getGoodsModels();
 				
-		GoodsModelPO goodsModelPO = new GoodsModelPO(goods.id);
-		tempGoodsModelPOs.put(goods.id, goodsModelPO);
+		GoodsModelPO goodsModelPO = new GoodsModelPO(goods.getId());
+		tempGoodsModelPOs.put(goods.getId(), goodsModelPO);
 		return true;
 	}
 
-	public boolean add(ArrayList<GoodsVO> goodsA) throws Exception {
-		for (GoodsVO goodsVO : goodsA) {
+	public boolean add(ArrayList<GoodsModelVO> goodsA) throws Exception {
+		for (GoodsModelVO goodsVO : goodsA) {
 			add(goodsVO);
 		}
 		return true;
 	}
 
-	public boolean delete(GoodsVO goods) throws Exception {
+	public boolean delete(GoodsModelVO goods) throws Exception {
 		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO.getGoodsModels();
 		
-		GoodsModelPO temp = tempGoodsModelPOs.get(goods.id);
+		GoodsModelPO temp = tempGoodsModelPOs.get(goods.getId());
 		if(temp == null || temp.isEverHas() || temp.getAmount() > 0){
 			return false;
 		}
 		return true;
 	}
 
-	public ArrayList<GoodsVO> iSearch(String info) throws Exception {
+	public ArrayList<GoodsModelVO> iSearch(String info) throws Exception {
 		return null;
 	}
 
 	
-	public ArrayList<GoodsVO> iSearch(String[] infos) throws Exception {
+	public ArrayList<GoodsModelVO> iSearch(String[] infos) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -2,8 +2,8 @@ package vo;
 
 import po.RepoReceiptPO;
 
-public class RepoReceVO {
-	public RepoReceVO(RepoReceiptPO repoReceiptPO) {
+public class RepoReceiptVO {
+	public RepoReceiptVO(RepoReceiptPO repoReceiptPO) {
 		// TODO Auto-generated constructor stub
 	}
 }

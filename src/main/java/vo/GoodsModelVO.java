@@ -18,6 +18,10 @@ public class GoodsModelVO {
 		// TODO Auto-generated constructor stub
 	}
 
+	public GoodsModelVO(String text) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean isGift() {
 		return gift;
 	}

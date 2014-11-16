@@ -6,25 +6,25 @@ package po;
 public class RepoReceiptPO extends ReceiptPO{
 	
 	public RepoReceiptPO(int a, int c) {
-		aNum = a;
-		cNum = c;
+		actualNum = a;
+		statisticNum = c;
 	}
 	
-	int aNum;
-	int cNum;
+	int actualNum;
+	int statisticNum;
 	String type;
 	
 	public int getaNum() {
-		return aNum;
+		return actualNum;
 	}
 	public void setaNum(int aNum) {
-		this.aNum = aNum;
+		this.actualNum = aNum;
 	}
 	public int getcNum() {
-		return cNum;
+		return statisticNum;
 	}
 	public void setcNum(int cNum) {
-		this.cNum = cNum;
+		this.statisticNum = cNum;
 	}
 	public String getType() {
 		return type;
