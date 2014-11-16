@@ -9,16 +9,16 @@ public class CheckProfit {
 		return null;
 	}
 	private void CheckSaleAndStock()throws Exception{
-		
+		//尚未实现
 	}
 	private void checkOverFlow()throws Exception{
-		
+		//尚未实现
 	}
 	private void checkGift()throws Exception{
-		
+		//尚未实现
 	}
 	private void checkBreak()throws Exception{
-		
+		//尚未实现
 	}
 			
 

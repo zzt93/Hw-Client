@@ -70,11 +70,13 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	}
 
 	@Override
-	public boolean produceGoodsReceipt(ArrayList<GoodsVO> goodsVOs)
+	public boolean produceGoodsReceipt(GoodsReceiptVO goodsVOs)
 			throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	public boolean produceRepoReceipt(RepoReceiptVO repoReceiptvo){
+		return false;
+	}
 	
 }

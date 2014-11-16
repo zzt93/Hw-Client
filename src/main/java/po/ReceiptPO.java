@@ -1,8 +1,8 @@
 package po;
 
 public class ReceiptPO {
-	ReceiptState statement=ReceiptState.disapprove;
-	String number;
-	ReceiptType type;
-	String time;
+	public ReceiptState statement=ReceiptState.disapprove;
+	public String number;
+	public ReceiptType type;
+	public String time;
 }

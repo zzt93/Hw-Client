@@ -1,28 +1,26 @@
 package businesslogic.FinancialReceiptbl;
+import java.util.ArrayList;
+
 import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
 import vo.*;
 import po.*;
 public class FinReceiptController implements FinancialReceiptblservice{
 	BankList bankList=new BankList();
 	ItemList itemList=new ItemList();
-	FinReceipt finReceipt=new FinReceipt();
-	public double addBank(BkTransVO vo){
-		BkTransPO po=new BkTransPO(vo);
+	MockFinReceipt finReceipt=new MockFinReceipt();
+	public double addBank(BkTransPO po){
 		bankList.add(po);
 		return bankList.getTotal();
 	}
-	public double addItem(ItemVO vo){
-		ItemPO po=new ItemPO(vo);
+	public double addItem(ItemPO po){
 		itemList.add(po);
 		return itemList.getTotal();
 	}
-	public double deleteBank(BkTransVO vo){
-		BkTransPO po=new BkTransPO(vo);
+	public double deleteBank(BkTransPO po){
 		bankList.delete(po);
 		return bankList.getTotal();
 	}
-	public double deleteItem(ItemVO vo){
-		ItemPO po=new ItemPO(vo);
+	public double deleteItem(ItemPO po){
 		itemList.delete(po);
 		return itemList.getTotal();
 	}
@@ -44,7 +42,7 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		ResultMessage result=finReceipt.makeCash(po);
 		result.throwIfFailed();
 	}		
-	public String[] getBank(){
+	/*public String[] getBank(){
 		//通过BankManageBl获得
 		return null;
 	}
@@ -55,8 +53,26 @@ public class FinReceiptController implements FinancialReceiptblservice{
 	public String[] getOperator(){
 		//通过Admin获得
 		return null;
-	}
-	public ReceiptPO[] getReceipt(){
+	}*/
+	public ReceiptPO[] getReceipt()throws Exception{
 		return new ReceiptPO[1];
+	}
+	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception{
+		return null;
+	}
+	public void creditCash(CashVO vo)throws Exception{
+		CashPO po=new CashPO(vo);
+		ResultMessage result=finReceipt.makeCash(po);
+		result.throwIfFailed();
+	}
+	public void creditPay(PayVO vo)throws Exception{
+		PayPO po=new PayPO(vo);
+		ResultMessage result=finReceipt.makePayMent(po);
+		result.throwIfFailed();
+	}
+	public void creditRec(RecVO vo)throws Exception{
+		RecPO po=new RecPO(vo);
+		ResultMessage result=finReceipt.makeReceive(po);
+		result.throwIfFailed();
 	}
 }

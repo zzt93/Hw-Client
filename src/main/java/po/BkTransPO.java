@@ -1,6 +1,5 @@
 package po;
 
-import vo.BkTransVO;
 
 public class BkTransPO {
 	public String name;
@@ -16,11 +15,6 @@ public class BkTransPO {
 		this.name=name;
 		this.account=account;
 		this.remark=remark;
-	}
-	public BkTransPO(BkTransVO vo){
-		name=vo.name;
-		account=vo.account;
-		remark=vo.remark;
 	}
 	public double getAccount(){
 		return account;

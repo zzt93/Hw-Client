@@ -19,7 +19,7 @@ public class SetAccount_stub implements SetAccountblservice {
 		System.out.println("设置商品分类成功");
 	}
 
-	public void creatGoods(String name) throws Exception {
+	public void creatGoods(GoodsVO[] vo,String name) throws Exception {
 		if(name==null){
 			System.out.println("不存在该账目");
 		}
@@ -29,7 +29,7 @@ public class SetAccount_stub implements SetAccountblservice {
 
 	}
 
-	public void creatClient(String name) throws Exception {
+	public void creatClient(ClientPO[] po,String name) throws Exception {
 		if(name==null){
 			System.out.println("不存在该账目");
 		}
@@ -38,7 +38,7 @@ public class SetAccount_stub implements SetAccountblservice {
 		}
 	}
 
-	public void creatBank( String name) throws Exception {
+	public void creatBank(BankVO[] vo,String name) throws Exception {
 		if(name==null){
 			System.out.println("不存在该账目");
 		}
@@ -129,5 +129,7 @@ public class SetAccount_stub implements SetAccountblservice {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

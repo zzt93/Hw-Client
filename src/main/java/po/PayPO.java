@@ -15,5 +15,13 @@ public class PayPO extends ReceiptPO{
 		total=vo.total;
 		type=ReceiptType.PAYMENT;
 	}
+	public PayPO(PayVO vo){
+		number=vo.number;
+		client=vo.client;
+		operator=vo.operator;
+		bankList=vo.bankList;
+		total=vo.total;
+		type=ReceiptType.PAYMENT;
+	}
 	public PayPO(){}
 }

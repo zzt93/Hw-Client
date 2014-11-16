@@ -19,17 +19,17 @@ public class SetAccount_driver {
 			System.out.println(e.getMessage());
 		}
 		try {
-			account.creatGoods(null);
+			account.creatGoods(new GoodsVO[1],null);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		try {
-			account.creatClient(null);
+			account.creatClient(new ClientPO[1],null);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		try {
-			account.creatBank("账目");
+			account.creatBank(new BankVO[1],"账目");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -5,7 +5,6 @@ import po.ResultMessage;
 import vo.GoodsRecordVO;
 import vo.ProfitVO;
 import vo.ReceiptConditionVO;
-import vo.ReceiptVO;
 import vo.SaleConditionVO;
 import vo.TimeConditionVO;
 import businesslogicservice.RunningTableblservice.RunningTableblservice;
@@ -23,9 +22,9 @@ public class RunningTable_stub implements RunningTableblservice {
 	}
 
 	
-	public ReceiptVO[] getReceipt(ReceiptConditionVO vo) throws Exception {
+	public ReceiptPO[] getReceipt(ReceiptConditionVO vo) throws Exception {
 		right.throwIfFailed();
-		return new ReceiptVO[5];
+		return new ReceiptPO[5];
 	}
 
 
@@ -35,7 +34,7 @@ public class RunningTable_stub implements RunningTableblservice {
 	}
 
 
-	public void CreditNote(ReceiptVO vo) throws Exception {
+	public void CreditNote(ReceiptPO po) throws Exception {
 		wrong.throwIfFailed();
 		System.out.println("创建成功");
 	}

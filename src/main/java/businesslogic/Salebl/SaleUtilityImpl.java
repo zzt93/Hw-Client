@@ -24,6 +24,9 @@ public class SaleUtilityImpl implements SaleUtility {
         if (impl == null)
             impl = (SaleDataService) RMIUtility.getImpl("Sale");
     }
+    public SaleUtilityImpl(String test){
+    	//MOCK使用，否则服务器未打开时无法创建对象
+    }
 
     @Override
     public void makeReceipt(SaleReceiptPO receipt) throws Exception {

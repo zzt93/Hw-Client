@@ -11,7 +11,7 @@ public class SetAccount {
 		setup(name);
 	}
 	public ResultMessage setGoodsType(){
-		//建立商品类型表,待定
+		//建立商品类型表
 		return null;
 	}
 	public ResultMessage creatGoods(GoodsVO[] goods,String name){
@@ -30,8 +30,8 @@ public class SetAccount {
 		//拷贝期初信息
 		//更换系统账目
 	}
-	public void checkGoodsType(){
-		//查看期初商品分类,待定
+	public void checkGoodsType(String name){
+		//查看期初商品分类
 	}
 	public ResultMessage<GoodsVO[]> checkGoods(String name){
 		//查看期初商品

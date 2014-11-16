@@ -22,5 +22,5 @@ public interface RepoReceBLservice {
 	void receive_receipt(ReceiptPO po);
 	
 	String produceRepoReceipt(ArrayList<GoodsVO> goods) throws Exception;
-	boolean produceGoodsReceipt(ArrayList<GoodsVO> goodsVOs) throws Exception;
+	boolean produceGoodsReceipt(GoodsReceiptVO goodsVO) throws Exception;
 }

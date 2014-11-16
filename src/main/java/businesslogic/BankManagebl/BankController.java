@@ -5,7 +5,7 @@ import vo.BankVO;
 import po.ResultMessage;
 
 public class BankController implements BankManageblservice{
-	BankManage manage=new BankManage();
+	MockBankManage manage=new MockBankManage();
 	public void add(BankVO vo)throws Exception{
 		BankPO po=new BankPO(vo);
 		ResultMessage result=manage.add(po);

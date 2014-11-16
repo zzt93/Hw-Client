@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import businesslogic.BankManagebl.BankController;
 import po.BankPO;
 import vo.BankVO;
 
@@ -23,9 +24,10 @@ public class BankControllerTest {
 	public void testAdd() {
 		try{
 			controller.add(vo);
+			assertTrue(false);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
-			assertTrue(false);
+			assertTrue(true);
 		}
 	}
 
@@ -49,20 +51,15 @@ public class BankControllerTest {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	@Ignore
+	@Test
 	public void testSearch() {
 		try{
-			BankVO[] list=new BankVO[1];
-			BankVO[] list2=new BankVO[1];
-			list[0]=new BankVO(new BankPO());
-			list2[0]=new BankVO();
-			BankVO a=new BankVO();
-			BankVO b=new BankVO();
-			int[] array1={1,2,3};
-	        int[] array2={1,2,3};
-	        System.out.println(a.equals(b));
-			assertEquals(b,a);
+			BankVO[] list=controller.search("测试");
+			if(list[0].equals(new BankVO())){
+				System.out.println("lala");
+				assertTrue(true);
+			}else
+			assertTrue(false);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			assertTrue(false);
