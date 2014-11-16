@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import po.StockReceiptPO;
 import businesslogicservice.Stockblservice.StockUtility;
+import vo.ReceiptConditionVO;
 
 public class Mock_stock implements StockUtility{
 	
@@ -13,9 +14,9 @@ public class Mock_stock implements StockUtility{
 		
 	}
 
-	public Vector<StockReceiptPO> queryReceipt(Vector<String> filters)
+	public Vector<StockReceiptPO> queryReceipt(ReceiptConditionVO filter)
 			throws Exception {
-		for (String string : filters) {
+		for (String string : filter) {
 			
 		}
 		return receiptPOs;
