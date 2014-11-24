@@ -1,8 +1,19 @@
 package po;
-
+/**
+ * 
+ * @author Mebleyev.G.Longinus
+ *
+ */
 
 
 public class StrategyPO {
+	public StrategyPO(Condition condition, Treatment treatment,
+			TimePeriod timePeriod) {
+		super();
+		this.condition = condition;
+		this.treatment = treatment;
+		this.timePeriod = timePeriod;
+	}
 	Condition condition;
 	Treatment treatment;
 	TimePeriod timePeriod;
