@@ -5,7 +5,9 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
+import po.GoodsReceiptPO;
 import po.ReceiptPO;
+import po.ReceiptState;
 import po.RepoReceiptPO;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
@@ -43,6 +45,7 @@ public class Approve_List implements Approve_List_BLservice{
 		ArrayList<RepoReceiptPO> arrRepo =rrb.getRepoReceipts().getObj();
 		receipts.addAll(arrRepo);
 		FinancialReceiptblservice frb = new FinReceiptController();
+		
 		//Interface not provided;
 		
 		
@@ -54,21 +57,65 @@ public class Approve_List implements Approve_List_BLservice{
 
 	@Override
 	public ArrayList<ReceiptPO> refresh() throws Exception {
+		/*
+		 * Request new info from 
+		 */
+		return showList();
 
-		showList();
-		return null;
 	}
 
 	@Override
 	public boolean passList(ArrayList<ReceiptPO> array) throws Exception {
 		// TODO Auto-generated method stub
-		
-		return false;
+		for(ReceiptPO rpo : array){
+			if(receipts.contains(rpo)){
+				receipts.get(receipts.indexOf(rpo)).statement=ReceiptState.approve;
+			}			
+		}
+
+		return true;
 	}
 
 	@Override
 	public ArrayList<ReceiptPO> upload() throws Exception {
 		// TODO Auto-generated method stub
+		ArrayList<GoodsReceiptPO> goods = new ArrayList<GoodsReceiptPO>();
+		ArrayList<RepoReceiptPO> repo = new ArrayList<RepoReceiptPO>();
+		ArrayList<SaleReceiptPO> sale = new ArrayList<SaleReceiptPO>();
+		ArrayList<StockReceiptPO> stock = new ArrayList<StockReceiptPO>();
+		for(ReceiptPO po : receipts){
+			switch(po.type){
+			case STOCK_ACCEPT:
+			case STOCK_REJECTION:
+				stock.add((StockReceiptPO)po);
+				break;
+			case SALE_ACCEPT:
+			case SALE_REJECTION:
+				sale.add((SaleReceiptPO)po);
+				break;
+			case RECEIVE: 
+			case PAYMENT: 
+			case CASH:
+				/*
+				 * Interface not provided!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+				 */
+				break;
+			case REPORECEIPT:
+				repo.add((RepoReceiptPO)po);
+				break;
+			case GOODSRECEIPT:
+				goods.add((GoodsReceiptPO)po);
+				break;
+			}
+			
+		}
+		/*
+		 * Lack of Financial Receipts
+		 */
+		SaleUtility su = new SaleUtilityImpl();
+		StockUtility stu = new StockUtilityImpl();
+		RepoReceiptDataService rrb = new RepoReceiptDataImpl();
+		FinancialReceiptblservice frb = new FinReceiptController();
 		return null;
 	}
 

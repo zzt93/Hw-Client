@@ -1,7 +1,10 @@
 package po;
-
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Mebleyev.G.Longinus
+ *
+ */
 public class Condition {
 	public CatOfCondition type;
 	public int customerLevel;
@@ -9,7 +12,7 @@ public class Condition {
 	public double totalPrice;
 	
 	
-	public Condition(CatOfCondition type, int customerLevel) {
+/*	public Condition(CatOfCondition type, int customerLevel) {
 		super();
 		this.type = type;
 		this.customerLevel = customerLevel;
@@ -24,6 +27,27 @@ public class Condition {
 		this.type = type;
 
 		this.totalPrice = totalPrice;
+	}
+	*/
+
+	@SuppressWarnings("unchecked")
+	public Condition(CatOfCondition type,Object E){
+		super();
+		this.type = type;
+		switch(type){
+		case TOTALPRICE:
+			this.totalPrice = (Double)E;
+			break;
+		case CUSTOMERLEVEL:
+			this.customerLevel = (Integer)E;
+			break;
+		case COMPOSITION:
+			this.composition = (ArrayList<GoodsPO>)E;
+			break;
+		default:
+			break;
+		}
+
 	}
 	public Condition(){
 		this(CatOfCondition.CUSTOMERLEVEL,1);

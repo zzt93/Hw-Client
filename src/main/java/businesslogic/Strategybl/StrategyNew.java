@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import dataservice.Strategydataservice.StrategyDataService;
+import po.Condition;
 import po.GoodsPO;
 import po.ResultMessage;
 import po.StrategyPO;
+import po.TimePeriod;
+import po.Treatment;
 import util.RMIUtility;
 import businesslogic.GoodsListbl.GL_manager_repo_Impl;
 import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
@@ -27,9 +30,9 @@ public class StrategyNew implements Strategy_New_BLservice {
 		}
 	}
 	@Override
-	public void newStrategy() {
+	public void newStrategy(Condition c,Treatment t,TimePeriod tp) {
 
-		this.po = new StrategyPO();
+		this.po = new StrategyPO(c,t,tp);
 	}
 
 	@Override
@@ -65,7 +68,7 @@ public class StrategyNew implements Strategy_New_BLservice {
 	}
 
 	@SuppressWarnings("unchecked")
-	boolean confirm(){
+	public boolean confirm(){
 		ResultMessage<StrategyPO> rm = null;
 		try {
 			rm = sds.confirm(po);

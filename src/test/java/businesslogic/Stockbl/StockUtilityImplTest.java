@@ -13,10 +13,10 @@ import static org.junit.Assert.*;
 
 public class StockUtilityImplTest {
 
-    private StockUtility impl;
+    private static StockUtility impl;
 
     @BeforeClass
-    public void testBeforeClass() {
+    public static void testBeforeClass() {
         try {
             impl = new StockUtilityImpl();
         } catch (RemoteException | NotBoundException e) {
