@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
+import po.GoodsReceiptPO;
 import po.RepoFilterPO;
 import po.RepoReceiptPO;
 import po.ResultMessage;
@@ -47,6 +48,20 @@ public class RepoReceiptDataImpl implements RepoReceiptDataService {
 	}
 
 	public ResultMessage<ArrayList<RepoReceiptPO>> ifind(RepoFilterPO filter)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage<ArrayList<GoodsReceiptPO>> getGoodsReceipts()
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage<Boolean> insert(GoodsReceiptPO receipt)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;

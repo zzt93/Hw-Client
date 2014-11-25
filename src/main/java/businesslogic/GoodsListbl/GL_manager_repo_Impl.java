@@ -1,8 +1,9 @@
 package businesslogic.GoodsListbl;
 
-import java.util.ArrayList;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
+import dataservice.GoodsListdataservice.GoodsListDataService;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import vo.GoodsVO;
@@ -12,11 +13,10 @@ import businesslogicservice.GoodsListblservice.GL_repo_BLservice;
 public class GL_manager_repo_Impl implements GL_manager_BLservice, GL_repo_BLservice {
 
 	GoodsListPO goodsListPO;
-	public GL_manager_repo_Impl(GoodsListPO goodsListPO) {
-		this.goodsListPO = goodsListPO;
-	}
+	GoodsListDataService glDataService = new GoodsListDataImpl("");
 
-	public GL_manager_repo_Impl() {
+	public GL_manager_repo_Impl() throws RemoteException {
+		goodsListPO = glDataService.getGoodsList().getObj();
 	}
 	
 	public GoodsListPO sum() throws Exception {

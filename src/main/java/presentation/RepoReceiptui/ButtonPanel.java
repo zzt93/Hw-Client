@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -37,7 +38,7 @@ public class ButtonPanel extends JPanel{
 	static GridLayout gridLayout = new GridLayout(2, 2);
 	
 	
-	
+	RepoReceBLservice receBLservice;
 	
 	public ButtonPanel() {
 		// TODO Auto-generated constructor stub
@@ -48,6 +49,12 @@ public class ButtonPanel extends JPanel{
 		this.add(seaButton);
 		this.add(updButton);
 		
+		try {
+			receBLservice = new RepoReceiptBLImpl();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		addListener();
 	}
 
@@ -59,8 +66,6 @@ public class ButtonPanel extends JPanel{
 	}
 	
 	public void addListener(){
-		
-		final RepoReceBLservice receBLservice = new RepoReceiptBLImpl();
 		
 		addButton.addActionListener(new ActionListener() {
 			

@@ -11,8 +11,9 @@ public class GoodsVO {
 	public GoodsVO(GoodsPO goodsPO) {
 		// TODO Auto-generated constructor stub
 	}
-	public GoodsVO() {
-		// TODO Auto-generated constructor stub
+	public GoodsVO(String id, int amount) {
+		this.id = id;
+		this.amount = amount;
 	}
 	public int amount;
 	public String name;

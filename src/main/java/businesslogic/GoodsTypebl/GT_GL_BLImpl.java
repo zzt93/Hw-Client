@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.TreeNodePO;
-import vo.GoodsVO;
 import vo.TreeNodeVO;
 import businesslogicservice.GoodsTypeblservice.GT_GL_BLservice;
 

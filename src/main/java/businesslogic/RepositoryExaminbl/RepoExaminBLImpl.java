@@ -1,6 +1,6 @@
 package businesslogic.RepositoryExaminbl;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Vector;
 
 import po.InOutRepoPO;
@@ -14,16 +14,21 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 
 	
 
-	public ArrayList<InOutRepoPO> countInOut() throws Exception {
+	public InOutRepoPO countInOut(String start, String end) throws Exception {
 		// TODO Auto-generated method stub
-		ArrayList<InOutRepoPO> result = new ArrayList<InOutRepoPO>(null);
-		StockUtility stockReceipt = new StockUtilityImpl();
+		BigDecimal money = new BigDecimal(0);
+		int num = 0;
+		InOutRepoPO result;
+		StockUtility stock = new StockUtilityImpl();
 		
 		ReceiptConditionVO conditionVO = new ReceiptConditionVO();
 		
-		Vector<StockReceiptPO> stockReceiptPOs = stockReceipt.queryReceipt(conditionVO);
-		
-		
+		Vector<StockReceiptPO> stockReceiptPOs = stock.queryReceipt(conditionVO);
+		for (StockReceiptPO stockReceiptPO : stockReceiptPOs) {
+			money.add(stockReceiptPO.getTotalValue());
+			//TODO add statistic of num
+		}
+		result = new InOutRepoPO(money, num);
 		return result;
 	}
 

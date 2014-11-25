@@ -41,9 +41,10 @@ public class TablePanel extends JPanel implements TableModelListener{
 
 	public boolean addStatistic() {
 		try {
-			examinBLservice.countInOut();
+			// TODO add date
+			examinBLservice.countInOut("", "");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		tableModel.fireTableDataChanged();

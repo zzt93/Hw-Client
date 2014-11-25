@@ -14,7 +14,6 @@ public class GTBLImpl implements GTBLservice{
 	
 	public GTBLImpl(String account) {
 		// TODO Auto-generated constructor stub
-		
 	}
 
 	public GTBLImpl(ArrayList<TreeNodePO> treeNodePOs) {

@@ -1,25 +1,29 @@
 package po;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class InOutRepoPO {
 	String date;
-	Double sumOfMoney;
+	BigDecimal sumOfMoney;
 	int sumOfNum;
+	
+	public InOutRepoPO(BigDecimal mon, int num) {
+		date = new Date().toString();
+		sumOfMoney = mon;
+		sumOfNum = num;
+	}
+	
 	public String getDate() {
 		return date;
 	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public Double getSumOfMoney() {
+	
+	public BigDecimal getSumOfMoney() {
 		return sumOfMoney;
 	}
-	public void setSumOfMoney(Double sumOfMoney) {
-		this.sumOfMoney = sumOfMoney;
-	}
+	
 	public int getSumOfNum() {
 		return sumOfNum;
 	}
-	public void setSumOfNum(int sumOfNum) {
-		this.sumOfNum = sumOfNum;
-	}
+	
 }

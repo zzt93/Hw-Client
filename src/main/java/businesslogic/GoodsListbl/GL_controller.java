@@ -16,9 +16,7 @@ import businesslogic.GoodsTypebl.GT_controller;
 import businesslogicservice.GoodsListblservice.GLBLservice;
 import businesslogicservice.GoodsListblservice.GL_GT_BLservice;
 import businesslogicservice.GoodsListblservice.GL_account_BLservice;
-import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
 import businesslogicservice.GoodsListblservice.GL_receipt_BLservice;
-import businesslogicservice.GoodsListblservice.GL_repo_BLservice;
 import businesslogicservice.GoodsListblservice.GL_signal_BLservice;
 import businesslogicservice.GoodsListblservice.GL_stock_BLservice;
 
@@ -38,9 +36,6 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		gl_stock_BLservice = new GL_stock_rece_Impl(goodsListPO);
 		gl_receipt_BLservice = new GL_stock_rece_Impl(goodsListPO);
 		gl_account_BLservice = new GL_account_Impl(goodsListPO);
-		
-		gl_manager_BLservice = new GL_manager_repo_Impl(goodsListPO);
-		gl_repo_BLservice = new GL_manager_repo_Impl(goodsListPO);
 	}
 	GoodsListPO goodsListPO;
 	
@@ -51,8 +46,6 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	GL_stock_BLservice gl_stock_BLservice ;
 	GL_receipt_BLservice gl_receipt_BLservice ;
 	GL_account_BLservice gl_account_BLservice ;
-	GL_manager_BLservice gl_manager_BLservice;
-	GL_repo_BLservice gl_repo_BLservice;
 	
 	/*
 	 * for across modules

@@ -1,17 +1,28 @@
 package po;
 
 public class GoodsModelPO {
+	
 	public GoodsModelPO(String id) {
 		this.id = id;
 	}
-	int signal;
+
 	int amount;
+	int signal;
 	String id;//id = type + model
 	boolean everHas;
 	boolean gift;
 	
 	double lastInPrice;
+	
 	double lastOutPrice;
+	
+	double aver_in;
+	
+	@Override
+	public String toString() {
+		return id+amount+signal;
+	}
+	
 	public int getSignal() {
 		return signal;
 	}
@@ -27,9 +38,7 @@ public class GoodsModelPO {
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public boolean isEverHas() {
 		return everHas;
 	}
@@ -55,5 +64,8 @@ public class GoodsModelPO {
 		this.lastOutPrice = lastOutPrice;
 	}
 	
-	
+	public double getAver_in() {
+		return aver_in;
+	}
+
 }

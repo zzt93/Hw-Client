@@ -22,6 +22,8 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice, GT_account_s
 
 		gtbLservice = new GTBLImpl(treeNodePOs);
 		gt_gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
+		
+		gl_controller = new GL_controller();
 	}
 	
 	GTBLservice gtbLservice;
@@ -31,14 +33,6 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice, GT_account_s
 	 * for cross modules
 	 */
 	GL_controller gl_controller;
-
-	public GL_controller getGl_controller() {
-		return gl_controller;
-	}
-
-	public void setGl_controller(GL_controller gl_controller) {
-		this.gl_controller = gl_controller;
-	}
 
 	
 	public boolean add(TreeNodeVO fa, String son_type) throws Exception {

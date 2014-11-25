@@ -2,12 +2,16 @@ package vo;
 
 import java.util.ArrayList;
 
+import po.GoodsReceiptPO;
 import po.ReceiptPO;
 
 public class GoodsReceiptVO extends ReceiptPO{
 	ArrayList<GoodsVO> goodsPOs;
 	double sumOfGifts;
 	
+	public GoodsReceiptVO(GoodsReceiptPO goodsReceiptPO) {
+		// TODO Auto-generated constructor stub
+	}
 	public ArrayList<GoodsVO> getGoodsPOs() {
 		return goodsPOs;
 	}
