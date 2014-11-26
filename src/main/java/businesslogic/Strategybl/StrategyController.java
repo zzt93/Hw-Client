@@ -59,4 +59,14 @@ public class StrategyController implements Strategy_New_BLservice,Strategy_List_
 	boolean confirm(){
 		return sn.confirm();
 	}
+	@Override
+	public ArrayList<StrategyPO> show() throws Exception {
+		// TODO Auto-generated method stub
+		return sb.show();
+	}
+	@Override
+	public ArrayList<StrategyPO> queryValidStrategy(String fliters) {
+		// TODO Auto-generated method stub
+		return sb.queryValidStrategy(fliters);
+	}
 }

@@ -53,6 +53,7 @@ public class StrategyNewUI {
 
 		initialize();
 		newFrame.setVisible(true);
+
 	}
 
 	/**
@@ -149,12 +150,12 @@ public class StrategyNewUI {
 						textFieldCondition.getText());
 				Treatment t = new Treatment(CatOfTreatment.values()[treatEnum],
 						textFieldTreatment.getText());
-				snb.newStrategy(c, t, tp);
+				/*snb.newStrategy(c, t, tp);
 				if(!snb.examine()){
 					lblHint.setText("输入折扣价格或时间有误，请检查");
 				}else{
 					
-				}
+				}*/
 			}
 		});
 		button_4.setBounds(126, 297, 93, 23);

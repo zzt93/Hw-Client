@@ -27,10 +27,13 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import businesslogic.Strategybl.StrategyController;
+import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
+
 public class StrategyListUI {
 
 	private JFrame frame;
-
+	Strategy_List_BLservice slb = new StrategyController();
 
 
 	/**
@@ -72,54 +75,59 @@ public class StrategyListUI {
 		label.setBounds(70, 21, 54, 15);
 		frame.getContentPane().add(label);
 		
-
+		JButton buttonNew = new JButton("新策略");
+		buttonNew.setBounds(638, 108, 93, 23);
+		frame.getContentPane().add(buttonNew);
 		
-
+		JButton buttonScreen = new JButton("筛选");
+		buttonScreen.setBounds(638, 170, 93, 23);
+		frame.getContentPane().add(buttonScreen);
 		
-		JButton button = new JButton("新策略");
-		button.setBounds(638, 108, 93, 23);
-		frame.getContentPane().add(button);
-		
-		JButton button_1 = new JButton("筛选");
-		button_1.setBounds(638, 170, 93, 23);
-		frame.getContentPane().add(button_1);
-		
-		JButton button_2 = new JButton("提交审批");
-		button_2.setBounds(638, 233, 93, 23);
-		frame.getContentPane().add(button_2);
-		
-		JButton button_3 = new JButton("返回");
-		button_3.setBounds(638, 299, 93, 23);
-		frame.getContentPane().add(button_3);
+		JButton buttonReturn = new JButton("返回");
+		buttonReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		buttonReturn.setBounds(638, 299, 93, 23);
+		frame.getContentPane().add(buttonReturn);
 		
 		JLabel lblListHint = new JLabel("我是卖萌的状态栏");
 		lblListHint.setBounds(20, 504, 310, 23);
 		frame.getContentPane().add(lblListHint);
 		
+		JPanel panel = new JPanel();
+		panel.setBounds(30, 55, 600, 480);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(40, 65, 558, 415);
-		frame.getContentPane().add(scrollPane);
+		scrollPane.setBounds(10, 20, 558, 415);
 		scrollPane.setLayout(null);
+		panel.add(scrollPane);
 		String[] name = {"满足条件","优惠方式","起止时间"};
+		
+		String[][] cellData = new String[4][3];
+		DefaultTableModel tm = new DefaultTableModel(cellData,name); 	
+		final JTable table = new JTable(tm);
+		
+		table.setBounds(10, 20, 558, 415);
+		scrollPane.setViewportView(table);
+		
 
-		TableModel tm = new DefaultTableModel(name,1); 	
-		JTable table = new JTable(tm);
 		
-		table.setBounds(0,0,558,415);
-		scrollPane.add(table);
 		
-		button.addActionListener(new ActionListener() {
+		buttonNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		button.addMouseListener(new MouseAdapter() {
+		buttonNew.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
 							StrategyNewUI snu = new StrategyNewUI();
-
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
