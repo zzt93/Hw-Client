@@ -20,7 +20,19 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     private Vector<ProductsReceipt> productList;
     private BigDecimal totalValue;      //折让前总额
     private BigDecimal allowance;       //折让
-    private BigDecimal coupon;          //代金券金额
+    public void setAllowance(BigDecimal allowance) {
+		this.allowance = allowance;
+	}
+
+	public void setCoupon(BigDecimal coupon) {
+		this.coupon = coupon;
+	}
+
+	public void setActualValue(BigDecimal actualValue) {
+		this.actualValue = actualValue;
+	}
+
+	private BigDecimal coupon;          //代金券金额
     private BigDecimal actualValue;     //折让后总额
     private String comment;
 
@@ -35,6 +47,16 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
         this.allowance = allowance;
         this.coupon = coupon;
         this.comment = comment;
+    }
+    public SaleReceiptPO(SaleReceiptPO po){
+        this.number = po.number;
+        this.clientId = po.clientId;
+        this.salesman = po.salesman;
+        this.operator = po.operator;
+        this.repository = po.repository;
+        this.allowance = po.allowance;
+        this.coupon = po.coupon;
+        this.comment = po.comment;
     }
 
     public String getId() {

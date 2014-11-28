@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
-
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -26,8 +25,11 @@ public class ApproveUI {
 
 	private JFrame frame;
 	private JTable table;
+	public JPanel totalPanel;
 	private Approve_List_BLservice approveBL;
-	private ArrayList<Integer> approveIndex;
+	private ArrayList<ReceiptPO> approveIndex;
+	private ArrayList<ReceiptPO> arr;
+	private String[][] cellData;
 
 	/**
 	 * Launch the application.
@@ -62,21 +64,26 @@ public class ApproveUI {
 		frame.setBounds(100, 100, 801, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		totalPanel = new JPanel();
+		totalPanel.setBounds(0, 0, 800, 600);
+		totalPanel.setLayout(null);
+		frame.getContentPane().add(totalPanel);
 
 		final JLabel labelStateHint = new JLabel("状态栏");
 		labelStateHint.setBounds(20, 525, 54, 15);
-		frame.getContentPane().add(labelStateHint);
+		totalPanel.add(labelStateHint);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 21, 526, 291);
-		frame.getContentPane().add(tabbedPane);
+		totalPanel.add(tabbedPane);
 
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Approve", null, panel, null);
 		panel.setLayout(null);
 		
-		
-		final ArrayList<ReceiptPO> arr = approveBL.showList();
+		///Read Receipts
+		arr = approveBL.showList();
 		
 		
 		String[] name = { "编号", "种类", "时间", "审批状态" };
@@ -86,7 +93,7 @@ public class ApproveUI {
 		 */
 		final JScrollPane detailScrollPane = new JScrollPane();
 		detailScrollPane.setBounds(108, 322, 325, 149);
-		frame.getContentPane().add(detailScrollPane);
+		totalPanel.add(detailScrollPane);
 
 		TableModel detailTableModel = new DefaultTableModel(new String[1][2],
 				new String[] { "项目", "值" });
@@ -94,12 +101,7 @@ public class ApproveUI {
 		detailTable.setBounds(107, 322, 325, 93);
 		detailScrollPane.setViewportView(detailTable);
 
-		final String cellData[][] = new String[arr.size()][4];
-		int i = 0;
-		for (ReceiptPO po : arr) {
-			insert(cellData[i], po);
-			i++;
-		}
+		refreshTable();
 
 		TableModel tm = new DefaultTableModel(cellData, name);
 
@@ -121,7 +123,7 @@ public class ApproveUI {
 
 		JLabel label = new JLabel("单据详细信息");
 		label.setBounds(20, 327, 92, 15);
-		frame.getContentPane().add(label);
+		totalPanel.add(label);
 
 		JButton buttonConfirm = new JButton("确认修改");
 		buttonConfirm.addActionListener(new ActionListener() {
@@ -130,7 +132,7 @@ public class ApproveUI {
 			}
 		});
 		buttonConfirm.setBounds(443, 323, 93, 23);
-		frame.getContentPane().add(buttonConfirm);
+		totalPanel.add(buttonConfirm);
 
 		JButton buttonApproveAll = new JButton("批量通过");
 		buttonApproveAll.addActionListener(new ActionListener() {
@@ -138,17 +140,19 @@ public class ApproveUI {
 				int approves[] = table.getSelectedRows();
 				for (int i : approves) {
 					arr.get(i).statement = ReceiptState.approve;
-					approveIndex.add(i);
+					refreshTable();
+					arr.get(i).statement = ReceiptState.disapprove;
+					approveIndex.add(arr.get(i));
 					
 				}
 			}
 		});
 		buttonApproveAll.setBounds(572, 140, 93, 23);
-		frame.getContentPane().add(buttonApproveAll);
+		totalPanel.add(buttonApproveAll);
 
 		JButton buttonScreen = new JButton("筛选");
 		buttonScreen.setBounds(572, 223, 93, 23);
-		frame.getContentPane().add(buttonScreen);
+		totalPanel.add(buttonScreen);
 
 		JButton buttonReturn = new JButton("返回");
 		buttonReturn.addActionListener(new ActionListener() {
@@ -157,7 +161,7 @@ public class ApproveUI {
 			}
 		});
 		buttonReturn.setBounds(572, 300, 93, 23);
-		frame.getContentPane().add(buttonReturn);
+		totalPanel.add(buttonReturn);
 
 		JButton buttonApproveSingle = new JButton("通过");
 		buttonApproveSingle.addActionListener(new ActionListener() {
@@ -167,23 +171,36 @@ public class ApproveUI {
 					labelStateHint.setText("这是已经通过了的单据");
 				}else{
 					arr.get(selectedRow).statement = ReceiptState.approve;
+					refreshTable();
+					arr.get(selectedRow).statement = ReceiptState.disapprove;
+					approveIndex.add(arr.get(selectedRow));
 					labelStateHint.setText("已审批为通过");
 				}
 				
 			}
 		});
 		buttonApproveSingle.setBounds(443, 356, 93, 23);
-		frame.getContentPane().add(buttonApproveSingle);
+		totalPanel.add(buttonApproveSingle);
 
-		JButton buttonRefresh = new JButton("刷新");
-		buttonRefresh.addActionListener(new ActionListener() {
+		JButton buttonUpload = new JButton("上传");
+		buttonUpload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				/**
+				 * 
+				 */
 				
+				try {
+					approveBL.passList(approveIndex);
+					approveBL.upload();
+					arr = approveBL.showList();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		buttonRefresh.setBounds(572, 60, 93, 23);
-		frame.getContentPane().add(buttonRefresh);
+		buttonUpload.setBounds(572, 60, 93, 23);
+		totalPanel.add(buttonUpload);
 		
 
 	}
@@ -248,5 +265,14 @@ public class ApproveUI {
 
 		}
 
+	}
+	
+	void refreshTable(){
+		cellData = new String[arr.size()][4];
+		int i = 0;
+		for (ReceiptPO po : arr) {
+			insert(cellData[i], po);
+			i++;
+		}
 	}
 }

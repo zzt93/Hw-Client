@@ -17,6 +17,8 @@ import po.CatOfTreatment;
 import po.Condition;
 import po.TimePeriod;
 import po.Treatment;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class StrategyNewUI {
 
@@ -27,7 +29,7 @@ public class StrategyNewUI {
 	private JTextField startTimeText;
 	private JTextField endTimeText;
 
-	Strategy_New_BLservice snb = new StrategyController();
+	//Strategy_New_BLservice snb = new StrategyController();
 
 	/**
 	 * Launch the application.
@@ -73,12 +75,13 @@ public class StrategyNewUI {
 		lblCondition.setBounds(56, 60, 54, 15);
 		newFrame.getContentPane().add(lblCondition);
 		final JComboBox<String> comboBoxCondition = new JComboBox<String>();
+		
 		comboBoxCondition.setBounds(184, 57, 109, 21);
 		String txtCustomerLevel = new String("用户等级");
 		comboBoxCondition.addItem(txtCustomerLevel);
 		String txtTotalPrice = new String("总价折扣");
 		comboBoxCondition.addItem(txtTotalPrice);
-		String txtComposition = new String("组合商品特价");
+		final String txtComposition = new String("组合商品特价");
 		comboBoxCondition.addItem(txtComposition);
 
 		newFrame.getContentPane().add(comboBoxCondition);
@@ -119,9 +122,9 @@ public class StrategyNewUI {
 		// newFrame.getContentPane().add(startTimeText);
 		// startTimeText.setColumns(10);
 
-		JLabel label_1 = new JLabel("到");
-		label_1.setBounds(316, 194, 21, 15);
-		newFrame.getContentPane().add(label_1);
+		JLabel labelTo = new JLabel("到");
+		labelTo.setBounds(316, 194, 21, 15);
+		newFrame.getContentPane().add(labelTo);
 
 		endTimeText = new JTextField("单击选择日期");
 		endTimeText.setBounds(357, 191, 128, 21);
@@ -139,17 +142,38 @@ public class StrategyNewUI {
 		newFrame.getContentPane().add(startTimeDate);
 		newFrame.getContentPane().add(endTimeDate);
 
-		JButton button_4 = new JButton("确定");
-		button_4.addActionListener(new ActionListener() {
+		JButton buttonConfirm = new JButton("确定");
+		buttonConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int condiEnum = comboBoxCondition.getSelectedIndex();
-				int treatEnum = comboBoxTreatment.getSelectedIndex();
+
 				TimePeriod tp = new TimePeriod(startTimeDate.getDate(),
 						endTimeDate.getDate());
-				Condition c = new Condition(CatOfCondition.values()[condiEnum],
-						textFieldCondition.getText());
-				Treatment t = new Treatment(CatOfTreatment.values()[treatEnum],
-						textFieldTreatment.getText());
+				Condition c = null;
+				Treatment t = null;
+				switch(comboBoxCondition.getSelectedIndex()){
+				case 0:
+					c = new Condition(CatOfCondition.CUSTOMERLEVEL,
+							Integer.parseInt(textFieldCondition.getText()));
+					break;
+				case 1:
+					c = new Condition(CatOfCondition.TOTALPRICE,
+							Double.parseDouble(textFieldCondition.getText()));
+				case 2:
+					
+				}
+				
+				
+				switch(comboBoxTreatment.getSelectedIndex()){
+				case 0:
+					t = new Treatment(CatOfTreatment.GIVE,
+							textFieldTreatment.getText());
+				case 1:
+					t = new Treatment(CatOfTreatment.DISCOUNT,
+							Double.parseDouble(textFieldTreatment.getText()));
+				case 2:
+					t = new Treatment(CatOfTreatment.COUPON,
+							Double.parseDouble(textFieldTreatment.getText()));
+				}
 				/*snb.newStrategy(c, t, tp);
 				if(!snb.examine()){
 					lblHint.setText("输入折扣价格或时间有误，请检查");
@@ -158,18 +182,27 @@ public class StrategyNewUI {
 				}*/
 			}
 		});
-		button_4.setBounds(126, 297, 93, 23);
-		newFrame.getContentPane().add(button_4);
+		buttonConfirm.setBounds(126, 297, 93, 23);
+		newFrame.getContentPane().add(buttonConfirm);
 
-		JButton button_5 = new JButton("取消");
-		button_5.addActionListener(new ActionListener() {
+		JButton buttonCancel = new JButton("取消");
+		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				newFrame.dispose();
 			}
 		});
-		button_5.setBounds(323, 297, 93, 23);
-		newFrame.getContentPane().add(button_5);
+		buttonCancel.setBounds(323, 297, 93, 23);
+		newFrame.getContentPane().add(buttonCancel);
 
+		
+		
+		comboBoxCondition.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if(comboBoxCondition.getSelectedItem().equals(txtComposition)){
+					
+				}
+			}
+		});
 	}
 
 }
