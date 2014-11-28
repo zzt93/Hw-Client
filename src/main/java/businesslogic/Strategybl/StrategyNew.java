@@ -36,9 +36,15 @@ public class StrategyNew implements Strategy_New_BLservice {
 	}
 
 	@Override
-	public ArrayList<GoodsPO> goodList(String goodsInfo) {
+	public ArrayList<GoodsPO> goodList(String goodsInfo) throws RemoteException {
 		// TODO Auto-generated method stub
-		GL_manager_BLservice glb = new GL_manager_repo_Impl(null);// ????????????????
+		GL_manager_BLservice glb = null;
+		try {
+			glb = new GL_manager_repo_Impl();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}// ????????????????
 		//parameter:GoodsFilter[] filters
 		
 		try {

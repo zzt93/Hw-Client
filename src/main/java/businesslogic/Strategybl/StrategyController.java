@@ -47,7 +47,12 @@ public class StrategyController implements Strategy_New_BLservice,Strategy_List_
 	@Override
 	public ArrayList<GoodsPO> goodList(String goodsInfo) {
 		// TODO Auto-generated method stub
-		return sn.goodList(goodsInfo);
+		try {
+			return sn.goodList(goodsInfo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}return null;
 	}
 
 	@Override
@@ -58,5 +63,15 @@ public class StrategyController implements Strategy_New_BLservice,Strategy_List_
 
 	boolean confirm(){
 		return sn.confirm();
+	}
+	@Override
+	public ArrayList<StrategyPO> show() throws Exception {
+		// TODO Auto-generated method stub
+		return sb.show();
+	}
+	@Override
+	public ArrayList<StrategyPO> queryValidStrategy(String fliters) {
+		// TODO Auto-generated method stub
+		return sb.queryValidStrategy(fliters);
 	}
 }
