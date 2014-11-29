@@ -11,7 +11,6 @@ import java.util.Vector;
 public class StockReceiptPO extends ReceiptPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id;
     private int clientId;
     private String repository;
     private String operator;
