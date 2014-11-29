@@ -8,6 +8,10 @@ public class GoodsModelVO {
 	int signal;
 	int amount;
 	String id;
+	String name;
+	String model;
+	
+
 	boolean everHas;
 	boolean gift;
 	
@@ -17,10 +21,22 @@ public class GoodsModelVO {
 	public GoodsModelVO(GoodsModelPO goodsModelPO) {
 		// TODO Auto-generated constructor stub
 	}
-
-	public GoodsModelVO(String text) {
+	public GoodsModelVO(String id, String name, String model) {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String getModel() {
+		return model;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
 
 	public boolean isGift() {
 		return gift;

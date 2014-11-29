@@ -60,8 +60,12 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		this.gt_controller = gt_controller;
 	}
 
-	public boolean save() throws Exception {
+	public boolean save() throws RemoteException {
 		return goodsListDataService.saveGoodsList(goodsListPO).getObj();
+	}
+	
+	public void refresh() throws RemoteException {
+		goodsListPO = new GoodsListDataImpl(null).getGoodsList().getObj();
 	}
 
 	// for glblservice
@@ -71,28 +75,25 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		return res;
 	}
 
-	public ArrayList<GoodsModelVO> iSearch(String info) throws Exception {
+	public ArrayList<GoodsModelVO> iSearch(String info) {
 		ArrayList<GoodsModelVO> res = glbLservice.iSearch(info);
-		save();
 		return res;
 	}
 
 	
-	public ArrayList<GoodsModelVO> iSearch(String[] infos) throws Exception {
+	public ArrayList<GoodsModelVO> iSearch(String[] infos){
 		ArrayList<GoodsModelVO> res = glbLservice.iSearch(infos);
-		save();
+		
 		return res;
 	}
 
-	public ArrayList<GoodsVO> eSearch_batch(String id) throws Exception {
+	public ArrayList<GoodsVO> eSearch_batch(String id){
 		ArrayList<GoodsVO> res = glbLservice.eSearch_batch(id);
-		save();
 		return res;
 	}
 
-	public GoodsModelVO eSearch_total(String id) throws Exception {
+	public GoodsModelVO eSearch_total(String id){
 		GoodsModelVO res = glbLservice.eSearch_total(id);
-		save();
 		return res;
 	}
 
@@ -233,13 +234,15 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	 */
 	public boolean add(GoodsModelVO goodsVO) throws Exception {
 		boolean res = glbLservice.add(goodsVO);
-		save();
+		goodsListDataService.insert(new GoodsModelPO(goodsVO));
 		return res;
 	}
 
-	public boolean add(ArrayList<GoodsModelVO> goodsVOs) throws Exception {
-		boolean res = glbLservice.add(goodsVOs);
-		save();
+	public boolean add(ArrayList<GoodsModelVO> goodsModelVOsVOs) throws Exception {
+		boolean res = glbLservice.add(goodsModelVOsVOs);
+		for (GoodsModelVO goodsModelVO : goodsModelVOsVOs) {
+			goodsListDataService.insert(new GoodsModelPO(goodsModelVO));
+		}
 		return res;
 	}
 
@@ -270,6 +273,12 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	@Override
 	public ArrayList<String> stock_type() {
 		return gl_stock_BLservice.stock_type();
+	}
+
+	@Override
+	public ArrayList<String> type_del() {
+		return glbLservice.type_del();
+		
 	}
 	
 }

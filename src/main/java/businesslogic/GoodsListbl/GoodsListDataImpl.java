@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import dataservice.GoodsListdataservice.GoodsListDataService;
 import po.GoodsListPO;
-import po.GoodsPO;
+import po.GoodsModelPO;
 import po.RepoFilterPO;
 import po.ResultMessage;
 
@@ -27,27 +27,27 @@ public class GoodsListDataImpl implements GoodsListDataService {
 		return new ResultMessage<Boolean>("", true);
 	}
 
-	public ResultMessage<Boolean> insert(GoodsPO goodsPO) throws RemoteException {
+	public ResultMessage<Boolean> insert(GoodsModelPO goodsPO) throws RemoteException {
 		// TODO Auto-generated method stub
 		return new ResultMessage<Boolean>("", true);
 	}
 
-	public ResultMessage<Boolean> delete(GoodsPO goodsPO) throws RemoteException {
+	public ResultMessage<Boolean> delete(GoodsModelPO goodsPO) throws RemoteException {
 		// TODO Auto-generated method stub
 		return new ResultMessage<Boolean>("", true);
 	}
 
-	public ResultMessage<Boolean> update(GoodsPO goodsPO) throws RemoteException {
+	public ResultMessage<Boolean> update(GoodsModelPO goodsPO) throws RemoteException {
 		// TODO Auto-generated method stub
 		return new ResultMessage<Boolean>("", true);
 	}
 
-	public ResultMessage<GoodsPO> efind(String id) throws RemoteException {
+	public ResultMessage<GoodsModelPO> efind(String id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage<ArrayList<GoodsPO>> ifind(RepoFilterPO filter) throws RemoteException {
+	public ResultMessage<ArrayList<GoodsModelPO>> ifind(RepoFilterPO filter) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -22,7 +22,7 @@ public class GLBLImpl implements GLBLservice {
 		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO
 				.getGoodsModels();
 
-		GoodsModelPO goodsModelPO = new GoodsModelPO(goods.getId());
+		GoodsModelPO goodsModelPO = new GoodsModelPO(goods.getId(), goods.getName(), goods.getModel());
 		tempGoodsModelPOs.put(goods.getId(), goodsModelPO);
 		return true;
 	}
@@ -39,13 +39,14 @@ public class GLBLImpl implements GLBLservice {
 				.getGoodsModels();
 
 		GoodsModelPO temp = tempGoodsModelPOs.get(goods.getId());
-		if (temp == null || temp.isEverHas() || temp.getAmount() > 0) {
+		if (is_del(temp)) {
 			return false;
 		}
+		tempGoodsModelPOs.remove(goods.getId());
 		return true;
 	}
 
-	public ArrayList<GoodsModelVO> iSearch(String info) throws Exception {
+	public ArrayList<GoodsModelVO> iSearch(String info){
 		ArrayList<GoodsModelVO> res = new ArrayList<GoodsModelVO>();
 		HashMap<String, GoodsModelPO> goodsModel = goodsListPO.getGoodsModels();
 		for (String id : goodsModel.keySet()) {
@@ -58,7 +59,7 @@ public class GLBLImpl implements GLBLservice {
 	}
 
 	// TODO whether to use different container to split different infos
-	public ArrayList<GoodsModelVO> iSearch(String[] infos) throws Exception {
+	public ArrayList<GoodsModelVO> iSearch(String[] infos) {
 		ArrayList<GoodsModelVO> res = new ArrayList<GoodsModelVO>();
 		HashMap<String, GoodsModelPO> goodsModel = goodsListPO.getGoodsModels();
 
@@ -74,7 +75,7 @@ public class GLBLImpl implements GLBLservice {
 		return res;
 	}
 
-	public ArrayList<GoodsVO> eSearch_batch(String id) throws Exception {
+	public ArrayList<GoodsVO> eSearch_batch(String id){
 		ArrayList<GoodsVO> res = new ArrayList<GoodsVO>();
 
 		HashMap<String, ArrayList<GoodsPO>> batch_goodsPO = goodsListPO
@@ -86,7 +87,7 @@ public class GLBLImpl implements GLBLservice {
 		return res;
 	}
 
-	public GoodsModelVO eSearch_total(String id) throws Exception {
+	public GoodsModelVO eSearch_total(String id){
 
 		HashMap<String, GoodsModelPO> total = goodsListPO.getGoodsModels();
 
@@ -114,6 +115,23 @@ public class GLBLImpl implements GLBLservice {
 		HashMap<String, GoodsModelVO> res = new HashMap<String, GoodsModelVO>();
 		for (String id : goodsModelPO.keySet()) {
 			res.put(id, new GoodsModelVO(goodsModelPO.get(id)));
+		}
+		return res;
+	}
+
+	private boolean is_del(GoodsModelPO temp){
+		if (temp == null || temp.isEverHas() || temp.getAmount() > 0) {
+			return false;
+		}
+		return true;
+	}
+	@Override
+	public ArrayList<String> type_del() {
+		ArrayList<String> res = new ArrayList<String>();
+		for (GoodsModelPO model : goodsListPO.getGoodsModels().values()) {
+			if (is_del(model)) {
+				res.add(model.getId());
+			}
 		}
 		return res;
 	}

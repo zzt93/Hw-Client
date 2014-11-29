@@ -50,5 +50,14 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		repoExaminDataService.insert(result);
 		return result;
 	}
+	
+	
+	public void refresh() throws Exception {
+		//TODO
+	}
+
+	public void synchronize() throws Exception {
+		//TODO
+	}
 
 }
