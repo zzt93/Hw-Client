@@ -1,6 +1,7 @@
 package businesslogicservice.Clientblservice;
 
 import po.ClientPO;
+import vo.Filter;
 
 import java.util.Vector;
 
@@ -15,7 +16,7 @@ public interface ClientUtility {
 
     void modifyClient(ClientPO newClientPO) throws Exception;
 
-    Vector<ClientPO> queryClient(Vector<String> filters) throws Exception;
+    Vector<ClientPO> queryClient(Vector<Filter> filters) throws Exception;
 
     ClientPO queryClientById(int id) throws Exception;
 
