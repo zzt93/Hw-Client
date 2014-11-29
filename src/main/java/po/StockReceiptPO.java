@@ -2,6 +2,7 @@ package po;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -13,7 +14,7 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
     private int clientId;
     private String repository;
     private String operator;
-    private Vector<ProductsReceipt> productList;
+    private List<ProductsReceipt> productList;
     private String comment;
     private BigDecimal totalValue;
 
