@@ -27,7 +27,8 @@ import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
 public class StrategyListUI {
 
 	private JFrame frame;
-	Strategy_List_BLservice slb = new StrategyController();
+	public JPanel panel;
+	//Strategy_List_BLservice slb = new StrategyController();
 
 
 	/**
@@ -64,21 +65,18 @@ public class StrategyListUI {
 		
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0,800, 600);
+		panel = new JPanel();
+		panel.setBounds(20, 40,750, 500);
 		panel.setLayout(null);
 		frame.getContentPane().add(panel);
-		
-		JLabel label = new JLabel("总经理");
-		label.setBounds(70, 21, 55, 15);
-		panel.add(label);
+		panel.setName("制定促销策略");
 		
 		JButton buttonNew = new JButton("新策略");
-		buttonNew.setBounds(638, 108, 93, 23);
+		buttonNew.setBounds(607, 106, 93, 23);
 		panel.add(buttonNew);
 		
 		JButton buttonScreen = new JButton("筛选");
-		buttonScreen.setBounds(638, 170, 93, 23);
+		buttonScreen.setBounds(607, 167, 93, 23);
 		panel.add(buttonScreen);
 		
 		JButton buttonReturn = new JButton("返回");
@@ -87,15 +85,15 @@ public class StrategyListUI {
 				frame.dispose();
 			}
 		});
-		buttonReturn.setBounds(638, 299, 93, 23);
+		buttonReturn.setBounds(607, 300, 93, 23);
 		panel.add(buttonReturn);
 		
 		JLabel lblListHint = new JLabel("我是卖萌的状态栏");
-		lblListHint.setBounds(22, 532, 310, 23);
+		lblListHint.setBounds(34, 467, 310, 23);
 		panel.add(lblListHint);
 		
 		JPanel subpanel = new JPanel();
-		subpanel.setBounds(34, 55, 596, 449);
+		subpanel.setBounds(34, 10, 553, 438);
 		panel.add(subpanel);
 		subpanel.setLayout(null);
 		
@@ -103,11 +101,11 @@ public class StrategyListUI {
 		String[] name = {"满足条件","优惠方式","起止时间"};
 		
 		final String[][] cellData = new String[4][3];
-		TableModel tm = new DefaultTableModel(cellData,name); 	
+		TableModel tm = new MyTableModel(cellData,name); 	
 		final JTable table = new JTable(tm);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 20, 558, 415);
+		scrollPane.setBounds(10, 20, 532, 408);
 
 		subpanel.add(scrollPane);
 		table.setBounds(10, 20, 558, 415);
@@ -140,5 +138,19 @@ public class StrategyListUI {
 
 		
 		
+	}
+	public class MyTableModel extends DefaultTableModel{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		
+		public MyTableModel(Object[][] data, Object[] columnNames) {
+		        setDataVector(data, columnNames);
+		    }
+
+		public boolean isCellEditlable(int row, int column){
+			return false;
+		}
 	}
 }

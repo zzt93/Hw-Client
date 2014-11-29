@@ -19,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import po.*;
+import businesslogicservice.Approveblservice.Approve_Detail_BLservice;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
 
 public class ApproveUI {
@@ -26,7 +27,8 @@ public class ApproveUI {
 	private JFrame frame;
 	private JTable table;
 	public JPanel totalPanel;
-	private Approve_List_BLservice approveBL;
+	//private Approve_List_BLservice approveBL;
+	//private Approve_Detail_BLservice approveDetail;
 	private ArrayList<ReceiptPO> approveIndex;
 	private ArrayList<ReceiptPO> arr;
 	private String[][] cellData;
@@ -66,24 +68,18 @@ public class ApproveUI {
 		frame.getContentPane().setLayout(null);
 		
 		totalPanel = new JPanel();
-		totalPanel.setBounds(0, 0, 800, 600);
+		totalPanel.setBounds(0, 0, 750, 498);
 		totalPanel.setLayout(null);
 		frame.getContentPane().add(totalPanel);
 
-		final JLabel labelStateHint = new JLabel("状态栏");
-		labelStateHint.setBounds(20, 525, 54, 15);
-		totalPanel.add(labelStateHint);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 21, 526, 291);
-		totalPanel.add(tabbedPane);
 
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("Approve", null, panel, null);
+		totalPanel.add(panel);
 		panel.setLayout(null);
 		
 		///Read Receipts
-		arr = approveBL.showList();
+		//arr = approveBL.showList();
 		
 		
 		String[] name = { "编号", "种类", "时间", "审批状态" };
@@ -92,7 +88,7 @@ public class ApproveUI {
 		 * Details
 		 */
 		final JScrollPane detailScrollPane = new JScrollPane();
-		detailScrollPane.setBounds(108, 322, 325, 149);
+		detailScrollPane.setBounds(108, 322, 325, 128);
 		totalPanel.add(detailScrollPane);
 
 		TableModel detailTableModel = new DefaultTableModel(new String[1][2],
@@ -101,7 +97,7 @@ public class ApproveUI {
 		detailTable.setBounds(107, 322, 325, 93);
 		detailScrollPane.setViewportView(detailTable);
 
-		refreshTable();
+		//refreshTable();
 
 		TableModel tm = new DefaultTableModel(cellData, name);
 
@@ -120,6 +116,10 @@ public class ApproveUI {
 		scrollPane.setBounds(10, 10, 507, 249);
 		scrollPane.setViewportView(table);
 		panel.add(scrollPane);
+		
+				final JLabel labelStateHint = new JLabel("状态栏");
+				labelStateHint.setBounds(0, 0, 160, 15);
+				panel.add(labelStateHint);
 
 		JLabel label = new JLabel("单据详细信息");
 		label.setBounds(20, 327, 92, 15);
@@ -189,18 +189,22 @@ public class ApproveUI {
 				 * 
 				 */
 				
-				try {
+				/*try {
 					approveBL.passList(approveIndex);
 					approveBL.upload();
 					arr = approveBL.showList();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				}*/
 			}
 		});
 		buttonUpload.setBounds(572, 60, 93, 23);
 		totalPanel.add(buttonUpload);
+		
+		JLabel labelHint = new JLabel("状态栏");
+		labelHint.setBounds(39, 473, 54, 15);
+		totalPanel.add(labelHint);
 		
 
 	}
