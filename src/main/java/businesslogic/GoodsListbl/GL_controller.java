@@ -261,5 +261,15 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	public ArrayList<String> addable_type() throws Exception {
 		return gt_controller.addable_type();
 	}
+
+	@Override
+	public ArrayList<String> sell_type() {
+		return gl_stock_BLservice.sell_type();
+	}
+
+	@Override
+	public ArrayList<String> stock_type() {
+		return gl_stock_BLservice.stock_type();
+	}
 	
 }
