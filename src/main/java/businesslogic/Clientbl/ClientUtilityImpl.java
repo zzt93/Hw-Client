@@ -10,6 +10,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Nifury on 2014/10/20.
@@ -47,7 +48,7 @@ public class ClientUtilityImpl implements ClientUtility {
      * @return 当没有满足条件时，返回空List，否则返回符合条件的客户Vector
      */
     @Override
-    public List<ClientPO> queryClient(HashMap<String, Object> filters) throws Exception {
+    public List<ClientPO> queryClient(Map<String, Object> filters) throws Exception {
         ResultMessage<List<ClientPO>> result = impl.queryClient(filters);
         result.throwIfFailed();
         return result.getObj();
