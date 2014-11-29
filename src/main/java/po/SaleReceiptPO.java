@@ -12,13 +12,18 @@ import java.util.Vector;
  */
 public class SaleReceiptPO extends ReceiptPO implements Serializable {
 
+
     private static final long serialVersionUID = 1L;
     private int clientId;
     private String salesman;
     private String operator;
     private String repository;
     private Vector<ProductsReceipt> productList;
-    private BigDecimal totalValue;      //折让前总额
+    public Vector<ProductsReceipt> getProductList() {
+		return productList;
+	}
+
+	private BigDecimal totalValue;      //折让前总额
     private BigDecimal allowance;       //折让
     public void setAllowance(BigDecimal allowance) {
 		this.allowance = allowance;
@@ -30,6 +35,10 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
 
 	public void setActualValue(BigDecimal actualValue) {
 		this.actualValue = actualValue;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	private BigDecimal coupon;          //代金券金额
@@ -47,6 +56,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
         this.allowance = allowance;
         this.coupon = coupon;
         this.comment = comment;
+        this.type = ReceiptType.SALE_ACCEPT;
     }
     public SaleReceiptPO(SaleReceiptPO po){
         this.number = po.number;
@@ -57,6 +67,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
         this.allowance = po.allowance;
         this.coupon = po.coupon;
         this.comment = po.comment;
+        this.type = ReceiptType.SALE_ACCEPT;
     }
 
     public String getId() {

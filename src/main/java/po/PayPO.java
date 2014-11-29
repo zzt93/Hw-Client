@@ -35,5 +35,7 @@ public class PayPO extends ReceiptPO{
 		total=vo.total;
 		type=ReceiptType.PAYMENT;
 	}
-	public PayPO(){}
+	public PayPO(){
+		type = ReceiptType.PAYMENT;
+	}
 }
