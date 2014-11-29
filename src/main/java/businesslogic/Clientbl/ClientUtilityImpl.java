@@ -5,11 +5,12 @@ import dataservice.Clientdataservice.ClientDataService;
 import po.ClientPO;
 import po.ResultMessage;
 import util.RMIUtility;
-import vo.Filter;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Vector;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Nifury on 2014/10/20.
@@ -43,6 +44,17 @@ public class ClientUtilityImpl implements ClientUtility {
     }
 
     /**
+     * @param filters 客户信息过滤向量，可为null
+     * @return 当没有满足条件时，返回空List，否则返回符合条件的客户Vector
+     */
+    @Override
+    public List<ClientPO> queryClient(Map<String, Object> filters) throws Exception {
+        ResultMessage<List<ClientPO>> result = impl.queryClient(filters);
+        result.throwIfFailed();
+        return result.getObj();
+    }
+
+    /**
      * @param id 客户编号
      * @return 找不到此编号时抛出异常，否则返回对应客户
      */
@@ -50,20 +62,6 @@ public class ClientUtilityImpl implements ClientUtility {
         ResultMessage<ClientPO> result = impl.queryClientById(id);
         result.throwIfFailed();
         return result.getObj();
-    }
-
-    /**
-     * @param filters 客户信息过滤向量，可为null
-     * @return 当没有满足条件时，返回空Vector，否则返回符合条件的客户Vector
-     */
-    @Override
-    public Vector<ClientPO> queryClient(Vector<Filter> filters) throws Exception {
-        ResultMessage<Vector<ClientPO>> result = impl.queryClient(filters);
-        result.throwIfFailed();
-        Vector<ClientPO> vector = result.getObj();
-        if (vector != null && vector.isEmpty())
-            vector = null;
-        return vector;
     }
 
 }
