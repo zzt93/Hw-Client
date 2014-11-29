@@ -15,10 +15,13 @@ import businesslogicservice.Strategyblservice.Strategy_New_BLservice;
 import po.CatOfCondition;
 import po.CatOfTreatment;
 import po.Condition;
+import po.GoodsPO;
 import po.TimePeriod;
 import po.Treatment;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
 
 public class StrategyNewUI {
 
@@ -28,6 +31,7 @@ public class StrategyNewUI {
 	private JTextField textFieldTreatment;
 	private JTextField startTimeText;
 	private JTextField endTimeText;
+	private ArrayList<GoodsPO> goodsPO;
 
 	//Strategy_New_BLservice snb = new StrategyController();
 
@@ -159,14 +163,15 @@ public class StrategyNewUI {
 					c = new Condition(CatOfCondition.TOTALPRICE,
 							Double.parseDouble(textFieldCondition.getText()));
 				case 2:
-					
+					c = new Condition(CatOfCondition.COMPOSITION,
+							goodsPO);
 				}
 				
 				
 				switch(comboBoxTreatment.getSelectedIndex()){
 				case 0:
 					t = new Treatment(CatOfTreatment.GIVE,
-							textFieldTreatment.getText());
+							goodsPO);
 				case 1:
 					t = new Treatment(CatOfTreatment.DISCOUNT,
 							Double.parseDouble(textFieldTreatment.getText()));

@@ -21,6 +21,7 @@ public class CashPO extends ReceiptPO{
 		type=ReceiptType.CASH;
 	}
 	public CashPO(){
+		
 		number="测试单据";
 		type=ReceiptType.CASH;
 	}

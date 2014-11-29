@@ -1,11 +1,17 @@
 package presentation.RepoUI;
+
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.io.File;
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
+
+import vo.InOutRepoVO;
+import businesslogic.RepositoryExaminbl.RepoExaminBLImpl;
+import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -85,8 +91,8 @@ public class MainFrame extends javax.swing.JFrame {
         upload = new javax.swing.JButton();
         goodsListPanel1 = new GoodsListPanel();
         goodsTypePanel1 = new GoodsTypePanel();
-        repo_receipt1 = new Repo_Receipt();
-        goods_receipt1 = new Goods_receipt();
+        repo_receipt1 = new Repo_Receipt_mana();
+        goods_receipt1 = new Goods_receipt_management();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -444,33 +450,41 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goodsListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goodsListActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout) this.getContentPane().getLayout();
         card.show(this.getContentPane(), "goodsList_card");
     }//GEN-LAST:event_goodsListActionPerformed
 
     private void goods_receActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goods_receActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout) this.getContentPane().getLayout();
         card.show(this.getContentPane(), "goods_receipt_card");
     }//GEN-LAST:event_goods_receActionPerformed
 
     private void goodsTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goodsTypeActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout) this.getContentPane().getLayout();
         card.show(this.getContentPane(), "goodsType_card");
     }//GEN-LAST:event_goodsTypeActionPerformed
-
+    
+    RepoExaminBLservice repoExaminBLservice = new RepoExaminBLImpl();
+    
     private void repo_examinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repo_examinActionPerformed
 
         String[] data = new String[4];
 
-        data[0] = (String) s_year.getSelectedItem() + "/" + s_mon.getSelectedItem() + "/" + s_day.getSelectedItem();
-        data[1] = (String) s_year1.getSelectedItem() + "/" + s_mon1.getSelectedItem() + "/" + s_day1.getSelectedItem();
+        data[0] = (String) s_year.getSelectedItem() + "-" + s_mon.getSelectedItem() + "-" + s_day.getSelectedItem();
+        data[1] = (String) s_year1.getSelectedItem() + "-" + s_mon1.getSelectedItem() + "-" + s_day1.getSelectedItem();
         // TODO 
-        //bl service
-        data[2] = "all in";
-        data[3] = "all out";
+        InOutRepoVO inout = null;
+        try {
+			inout = repoExaminBLservice.countInOut(data[0], data[1]);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        data[2] = inout.getSumOfIn().toString();
+        data[3] = inout.getSumOfOut().toString();
         //show a dialog
         final Repo_examin_dialog dialog = new Repo_examin_dialog(frame, true, data);
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -657,7 +671,7 @@ public class MainFrame extends javax.swing.JFrame {
     private GoodsTypePanel goodsTypePanel1;
     private javax.swing.JPanel goods_panel;
     private javax.swing.JButton goods_rece;
-    private Goods_receipt goods_receipt1;
+    private Goods_receipt_management goods_receipt1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -672,7 +686,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton repo_examin;
     private javax.swing.JPanel repo_panel;
     private javax.swing.JButton repo_rece;
-    private Repo_Receipt repo_receipt1;
+    private Repo_Receipt_mana repo_receipt1;
     private javax.swing.JComboBox s_day;
     private javax.swing.JComboBox s_day1;
     private javax.swing.JComboBox s_mon;

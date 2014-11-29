@@ -1,5 +1,6 @@
 package presentation.RepoUI;
 
+
 import java.awt.CardLayout;
 
 /*
@@ -11,12 +12,12 @@ import java.awt.CardLayout;
  *
  * @author zzt
  */
-public class Repo_Receipt extends javax.swing.JPanel {
+public class Repo_Receipt_mana extends javax.swing.JPanel {
 
     /**
      * Creates new form Receipt
      */
-    public Repo_Receipt() {
+    public Repo_Receipt_mana() {
         initComponents();
     }
 
@@ -55,9 +56,9 @@ public class Repo_Receipt extends javax.swing.JPanel {
         c_amount = new javax.swing.JLabel();
         s_amount = new javax.swing.JLabel();
         repo_rece_list = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
+        rece_name = new javax.swing.JComboBox();
         back = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -118,8 +119,18 @@ public class Repo_Receipt extends javax.swing.JPanel {
         jLabel1.setText("商品id：");
 
         comp.setText("数量对比");
+        comp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                compActionPerformed(evt);
+            }
+        });
 
         choose_id.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        choose_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choose_idActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -239,9 +250,9 @@ public class Repo_Receipt extends javax.swing.JPanel {
         make_repo_receLayout.setHorizontalGroup(
             make_repo_receLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(make_repo_receLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         make_repo_receLayout.setVerticalGroup(
             make_repo_receLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,18 +265,12 @@ public class Repo_Receipt extends javax.swing.JPanel {
 
         repo_rece_list.setPreferredSize(new java.awt.Dimension(524, 367));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
-        );
+        rece_name.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rece_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rece_nameActionPerformed(evt);
+            }
+        });
 
         back.setText("返回");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -274,33 +279,41 @@ public class Repo_Receipt extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 492, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout repo_rece_listLayout = new javax.swing.GroupLayout(repo_rece_list);
         repo_rece_list.setLayout(repo_rece_listLayout);
         repo_rece_listLayout.setHorizontalGroup(
             repo_rece_listLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(repo_rece_listLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 443, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addGroup(repo_rece_listLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, repo_rece_listLayout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, repo_rece_listLayout.createSequentialGroup()
-                        .addComponent(back)
-                        .addGap(32, 32, 32))))
+                    .addComponent(rece_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(back))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         repo_rece_listLayout.setVerticalGroup(
             repo_rece_listLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(repo_rece_listLayout.createSequentialGroup()
-                .addGap(106, 106, 106)
+                .addGap(141, 141, 141)
                 .addComponent(back)
-                .addGap(28, 28, 28)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, repo_rece_listLayout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(rece_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(237, Short.MAX_VALUE))
+            .addGroup(repo_rece_listLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -316,7 +329,7 @@ public class Repo_Receipt extends javax.swing.JPanel {
                         .addGap(42, 42, 42)
                         .addComponent(Repo_navigator, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addContainerGap()
                         .addComponent(change, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -348,7 +361,7 @@ public class Repo_Receipt extends javax.swing.JPanel {
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_outActionPerformed
         // TODO add your handling code here:
         CardLayout card = (CardLayout)MainFrame.frame.getContentPane().getLayout();
-        card.show(MainFrame.frame.getContentPane(), "main_card");
+        card.show(MainFrame.frame.getContentPane(), "log_card");
         MainFrame.tab_pane.setSelectedIndex(3);
     }//GEN-LAST:event_log_outActionPerformed
 
@@ -362,6 +375,18 @@ public class Repo_Receipt extends javax.swing.JPanel {
         CardLayout card = (CardLayout)change.getLayout();
         card.show(change, "make");
     }//GEN-LAST:event_backActionPerformed
+
+    private void choose_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choose_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_choose_idActionPerformed
+
+    private void compActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_compActionPerformed
+
+    private void rece_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rece_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rece_nameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -377,19 +402,19 @@ public class Repo_Receipt extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler3;
     private javax.swing.JButton goods_navi;
     private javax.swing.JLabel id;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton log_out;
     private javax.swing.JPanel make_repo_rece;
+    private javax.swing.JComboBox rece_name;
     private javax.swing.JButton repo_navi;
     private javax.swing.JPanel repo_rece_list;
     private javax.swing.JLabel s_amount;

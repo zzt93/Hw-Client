@@ -1,5 +1,6 @@
 package presentation.RepoUI;
 
+
 import java.awt.CardLayout;
 
 /*
@@ -40,7 +41,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         log_out = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
-        upload = new javax.swing.JButton();
+        update = new javax.swing.JButton();
         goodslist_buttons = new javax.swing.JPanel();
         find = new javax.swing.JButton();
         delete = new javax.swing.JButton();
@@ -66,10 +67,10 @@ public class GoodsListPanel extends javax.swing.JPanel {
         detailed_list_back = new javax.swing.JButton();
         search_panel = new javax.swing.JPanel();
         search_buttons = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        search = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        ambiguous = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         back = new javax.swing.JButton();
@@ -78,9 +79,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
         jTable5 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        more1 = new javax.swing.JButton();
-        addable_type1 = new javax.swing.JComboBox();
-        subscribe1 = new javax.swing.JButton();
+        more_del = new javax.swing.JButton();
+        addable_type_del = new javax.swing.JComboBox();
+        subscribe_del = new javax.swing.JButton();
         back_del = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -167,13 +168,13 @@ public class GoodsListPanel extends javax.swing.JPanel {
         GL_navigator.add(log_out);
         GL_navigator.add(filler3);
 
-        upload.setText("确认修改");
-        upload.addActionListener(new java.awt.event.ActionListener() {
+        update.setText("确认修改");
+        update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uploadActionPerformed(evt);
+                updateActionPerformed(evt);
             }
         });
-        GL_navigator.add(upload);
+        GL_navigator.add(update);
 
         find.setText("查询商品");
         find.addActionListener(new java.awt.event.ActionListener() {
@@ -238,36 +239,35 @@ public class GoodsListPanel extends javax.swing.JPanel {
         gL_mainLayout.setHorizontalGroup(
             gL_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gL_mainLayout.createSequentialGroup()
-                .addGroup(gL_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(gL_mainLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(GL_navigator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(gL_mainLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(gL_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(gL_mainLayout.createSequentialGroup()
-                                .addComponent(goodslist_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(goodslist_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 138, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(GL_navigator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(gL_mainLayout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(goodslist_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(goodslist_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
+            .addGroup(gL_mainLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gL_mainLayout.setVerticalGroup(
             gL_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gL_mainLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(GL_navigator, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(gL_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gL_mainLayout.createSequentialGroup()
                         .addComponent(goodslist_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))
+                        .addGap(107, 107, 107))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gL_mainLayout.createSequentialGroup()
                         .addComponent(goodslist_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))))
+                        .addGap(33, 33, 33))))
         );
 
         add(gL_main, "GL_main");
@@ -304,12 +304,27 @@ public class GoodsListPanel extends javax.swing.JPanel {
         jLabel1.setText("可选类型:");
 
         more.setText("添加商品");
+        more.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moreActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("型号:");
 
         addable_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        addable_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addable_typeActionPerformed(evt);
+            }
+        });
 
         subscribe.setText("提交");
+        subscribe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subscribeActionPerformed(evt);
+            }
+        });
 
         model.setText("A");
         model.addActionListener(new java.awt.event.ActionListener() {
@@ -469,10 +484,10 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
         add(detailed_table, "detailed_list");
 
-        jButton6.setText("查询");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        search.setText("查询");
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
 
@@ -485,7 +500,12 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
         jLabel4.setText("商品信息：");
 
-        jCheckBox1.setText("模糊查询");
+        ambiguous.setText("模糊查询");
+        ambiguous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ambiguousActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout search_buttonsLayout = new javax.swing.GroupLayout(search_buttons);
         search_buttons.setLayout(search_buttonsLayout);
@@ -497,9 +517,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(jButton6)
+                .addComponent(search)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(ambiguous)
                 .addContainerGap())
         );
         search_buttonsLayout.setVerticalGroup(
@@ -508,9 +528,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(search_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton6)
+                    .addComponent(search)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(ambiguous))
                 .addContainerGap())
         );
 
@@ -604,11 +624,26 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
         jLabel5.setText("可选类型:");
 
-        more1.setText("添加商品");
+        more_del.setText("添加商品");
+        more_del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                more_delActionPerformed(evt);
+            }
+        });
 
-        addable_type1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        addable_type_del.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        addable_type_del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addable_type_delActionPerformed(evt);
+            }
+        });
 
-        subscribe1.setText("提交");
+        subscribe_del.setText("提交");
+        subscribe_del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subscribe_delActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -618,14 +653,14 @@ public class GoodsListPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(more1)
+                        .addComponent(more_del)
                         .addGap(118, 118, 118)
-                        .addComponent(subscribe1))
+                        .addComponent(subscribe_del))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addable_type1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addable_type_del, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(79, 79, 79))
         );
         jPanel2Layout.setVerticalGroup(
@@ -634,11 +669,11 @@ public class GoodsListPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(addable_type1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addable_type_del, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(more1)
-                    .addComponent(subscribe1))
+                    .addComponent(more_del)
+                    .addComponent(subscribe_del))
                 .addContainerGap())
         );
 
@@ -690,9 +725,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_modelActionPerformed
 
-    private void uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadActionPerformed
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_uploadActionPerformed
+    }//GEN-LAST:event_updateActionPerformed
 
     private void detailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailActionPerformed
         CardLayout card = (CardLayout)this.getLayout();
@@ -703,9 +738,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_searchActionPerformed
 
     private void repo_naviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repo_naviActionPerformed
         // TODO add your handling code here:
@@ -724,7 +759,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_outActionPerformed
         
         CardLayout card = (CardLayout)MainFrame.frame.getContentPane().getLayout();
-        card.show(MainFrame.frame.getContentPane(), "main_card");
+        card.show(MainFrame.frame.getContentPane(), "log_card");
     }//GEN-LAST:event_log_outActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
@@ -757,12 +792,41 @@ public class GoodsListPanel extends javax.swing.JPanel {
         card.show(this, "GL_main");
     }//GEN-LAST:event_detailed_list_backActionPerformed
 
+    private void moreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moreActionPerformed
+
+    private void subscribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subscribeActionPerformed
+
+    private void addable_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addable_typeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addable_typeActionPerformed
+
+    private void ambiguousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambiguousActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ambiguousActionPerformed
+
+    private void more_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_more_delActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_more_delActionPerformed
+
+    private void subscribe_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribe_delActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subscribe_delActionPerformed
+
+    private void addable_type_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addable_type_delActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addable_type_delActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar GL_navigator;
     private javax.swing.JButton add;
     private javax.swing.JComboBox addable_type;
-    private javax.swing.JComboBox addable_type1;
+    private javax.swing.JComboBox addable_type_del;
+    private javax.swing.JCheckBox ambiguous;
     private javax.swing.JButton back;
     private javax.swing.JButton back_add;
     private javax.swing.JButton back_del;
@@ -781,8 +845,6 @@ public class GoodsListPanel extends javax.swing.JPanel {
     private javax.swing.JPanel gl_del;
     private javax.swing.JPanel goodslist_buttons;
     private javax.swing.JScrollPane goodslist_pane;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -804,13 +866,14 @@ public class GoodsListPanel extends javax.swing.JPanel {
     private javax.swing.JButton log_out;
     private javax.swing.JTextField model;
     private javax.swing.JButton more;
-    private javax.swing.JButton more1;
+    private javax.swing.JButton more_del;
     private javax.swing.JButton rece_navi;
     private javax.swing.JButton repo_navi;
+    private javax.swing.JButton search;
     private javax.swing.JPanel search_buttons;
     private javax.swing.JPanel search_panel;
     private javax.swing.JButton subscribe;
-    private javax.swing.JButton subscribe1;
-    private javax.swing.JButton upload;
+    private javax.swing.JButton subscribe_del;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }
