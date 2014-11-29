@@ -15,11 +15,11 @@ public class RepoCheckBLImplTest {
 	@Before
 	public void setUp() throws Exception {
 		GL_repo_BLservice repo = new GL_manager_repo_Impl();
-		repoCheck = new RepoCheckBLImpl(repo);
+		repoCheck = new RepoCheckBLImpl();
 	}
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		assert(repoCheck.checkAndSum()==null);
 	}
 

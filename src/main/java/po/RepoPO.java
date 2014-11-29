@@ -10,40 +10,32 @@ public class RepoPO {
 	static Random random = new Random();
 	static int count = 0;
 	
-	public class RepoGoods {
-		public RepoGoods(GoodsModelPO goodsModelPO, ArrayList<GoodsPO> arrayList) {
-			amount = goodsModelPO.getAmount();
-			aver_price = goodsModelPO.getAver_in();
-			//TODO whose name and model
-			name = arrayList.get(0).name;
-			model = arrayList.get(0).model;
-		}
-		String name;
-		String model;
-		int amount;
-		double aver_price;
-	}
+	
 	
 	public RepoPO(GoodsListPO tem) {
 		count ++;
 		date = new Date().toString();
-		batch = random.nextLong();
+		batch = Math.abs(random.nextLong());
 		batchNum = Integer.toHexString(count);
 		
 		HashMap<String, GoodsModelPO> goodsModel = tem.getGoodsModels();
 		HashMap<String, ArrayList<GoodsPO>> goodsHashMap = tem.getGoods();
 		for (String id : goodsModel.keySet()) {
 			if (goodsModel.get(id).getAmount() > 0) {
-				repoGoods.put(id, new RepoGoods(goodsModel.get(id), goodsHashMap.get(id)));
+				repoGoods.add(new RepoGoods(id, goodsModel.get(id), goodsHashMap.get(id)));
 			}
 		}
 	}
 	
-	HashMap<String, RepoGoods> repoGoods;
+	ArrayList<RepoGoods> repoGoods = new ArrayList<RepoGoods>();
 	long batch;
 	String batchNum;
 	String date;
 	
+	public String getDate() {
+		return date;
+	}
+
 	public long getBatch() {
 		return batch;
 	}
@@ -52,7 +44,7 @@ public class RepoPO {
 		return batchNum;
 	}
 
-	public HashMap<String, RepoGoods> getRepoGoods() {
+	public ArrayList<RepoGoods> getRepoGoods() {
 		return repoGoods;
 	}
 

@@ -18,7 +18,7 @@ public class RepoExaminBLImplTest {
 	@Test
 	public void test() {
 		try {
-			assert(repoExamin.countInOut()==null);
+			assert(repoExamin.countInOut("", "")==null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
