@@ -11,6 +11,7 @@ import java.util.Vector;
 public class StockReceiptPO extends ReceiptPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private int id;
     private int clientId;
     private String repository;
     private String operator;
@@ -26,7 +27,7 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
         this.comment = comment;
     }
 
-    public String getId() {
+    public String getNumber() {
         return number;
     }
 
@@ -50,4 +51,19 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
         return totalValue;
     }
 
+    public List<ProductsReceipt> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<ProductsReceipt> productList) {
+        this.productList = productList;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 }
