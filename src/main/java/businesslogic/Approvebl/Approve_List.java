@@ -1,16 +1,24 @@
 package businesslogic.Approvebl;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 
+import dataservice.ApproveDataService.ApproveDataService;
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
+import dataservice.Strategydataservice.StrategyDataService;
+import po.CashPO;
 import po.GoodsReceiptPO;
+import po.PayPO;
+import po.RecPO;
 import po.ReceiptPO;
 import po.ReceiptState;
 import po.RepoReceiptPO;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
+import util.RMIUtility;
 import businesslogic.FinancialReceiptbl.FinReceiptController;
 import businesslogic.RepoReceiptbl.RepoReceiptDataImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
@@ -26,7 +34,13 @@ import businesslogicservice.Stockblservice.StockUtility;
  */
 public class Approve_List implements Approve_List_BLservice{
 	ArrayList<ReceiptPO> receipts = new ArrayList<ReceiptPO>();
+	ApproveDataService ads;
 	
+	public Approve_List() throws RemoteException, NotBoundException{
+		if(ads==null){
+			ads = (ApproveDataService) RMIUtility.getImpl("Approve");
+		}
+	}
 	private <E> void addOneByOne(Vector<E> ver){
 		Iterator<E> itR = ver.iterator();
 		while(itR.hasNext()){
@@ -83,6 +97,11 @@ public class Approve_List implements Approve_List_BLservice{
 		ArrayList<RepoReceiptPO> repo = new ArrayList<RepoReceiptPO>();
 		ArrayList<SaleReceiptPO> sale = new ArrayList<SaleReceiptPO>();
 		ArrayList<StockReceiptPO> stock = new ArrayList<StockReceiptPO>();
+		ArrayList<CashPO> cash = new ArrayList<CashPO>();
+		ArrayList<PayPO> pay = new ArrayList<PayPO>();
+		ArrayList<RecPO> rec = new ArrayList<RecPO>();//Receive);
+		
+		
 		for(ReceiptPO po : receipts){
 			switch(po.type){
 			case STOCK_ACCEPT:
@@ -94,8 +113,13 @@ public class Approve_List implements Approve_List_BLservice{
 				sale.add((SaleReceiptPO)po);
 				break;
 			case RECEIVE: 
+				rec.add((RecPO)po);
+				break;
 			case PAYMENT: 
+				pay.add((PayPO)po);
+				break;
 			case CASH:
+			
 				/*
 				 * Interface not provided!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 				 */
@@ -119,6 +143,15 @@ public class Approve_List implements Approve_List_BLservice{
 		return null;
 	}
 
+	/**
+	 * 11.29
+	 * dzh
+	 * Interface Changed
+	 * @param po
+	 */
+	public void upload(ArrayList<ReceiptPO> po){
+		
+	}
 	@Override
 	public String message(String userName) throws Exception {
 		// TODO Auto-generated method stub
