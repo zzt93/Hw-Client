@@ -1,5 +1,6 @@
 package po;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -21,11 +22,14 @@ public class RepoReceiptPO extends ReceiptPO{
 		actualNum = a;
 		statisticNum = c;
 		date = new Date().toString();
-	}
-	
+		type = ReceiptType.REPORECEIPT;
+		super.type = ReceiptType.REPORECEIPT;
+		super.time=new DateGetter().toString();
+		
+	}	
 	int actualNum;
 	int statisticNum;
-	String type;
+	ReceiptType type;
 	String date;
 	String id;
 	
@@ -41,11 +45,11 @@ public class RepoReceiptPO extends ReceiptPO{
 	public void setcNum(int cNum) {
 		this.statisticNum = cNum;
 	}
-	public String getType() {
+	public ReceiptType getType() {
 		return type;
 	}
 	public void setType(String type) {
-		this.type = type;
+		this.type = ReceiptType.valueOf(type);
 	}
 	
 }

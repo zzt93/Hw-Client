@@ -5,6 +5,7 @@ import dataservice.Clientdataservice.ClientDataService;
 import po.ClientPO;
 import po.ResultMessage;
 import util.RMIUtility;
+import vo.Filter;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -56,10 +57,13 @@ public class ClientUtilityImpl implements ClientUtility {
      * @return 当没有满足条件时，返回空Vector，否则返回符合条件的客户Vector
      */
     @Override
-    public Vector<ClientPO> queryClient(Vector<String> filters) throws Exception {
+    public Vector<ClientPO> queryClient(Vector<Filter> filters) throws Exception {
         ResultMessage<Vector<ClientPO>> result = impl.queryClient(filters);
         result.throwIfFailed();
-        return result.getObj();
+        Vector<ClientPO> vector = result.getObj();
+        if (vector != null && vector.isEmpty())
+            vector = null;
+        return vector;
     }
 
 }

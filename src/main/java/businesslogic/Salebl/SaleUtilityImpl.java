@@ -24,9 +24,6 @@ public class SaleUtilityImpl implements SaleUtility {
         if (impl == null)
             impl = (SaleDataService) RMIUtility.getImpl("Sale");
     }
-    public SaleUtilityImpl(String test){
-    	//MOCK使用，否则服务器未打开时无法创建对象
-    }
 
     @Override
     public void makeReceipt(SaleReceiptPO receipt) throws Exception {
@@ -36,16 +33,14 @@ public class SaleUtilityImpl implements SaleUtility {
 
     @Override
     public Vector<SaleReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
-        //TODO get filter
-        ResultMessage<Vector<SaleReceiptPO>> result = impl.queryReceipt(null);
+        ResultMessage<Vector<SaleReceiptPO>> result = impl.queryReceipt(filter);
         result.throwIfFailed();
         return result.getObj();
     }
 
     @Override
     public Vector<GoodsRecordVO> querySaleRecord(SaleConditionVO filter) throws Exception {
-        //TODO get filter
-        ResultMessage<Vector<GoodsRecordVO>> result = impl.querySaleRecord(null);
+        ResultMessage<Vector<GoodsRecordVO>> result = impl.querySaleRecord(filter);
         result.throwIfFailed();
         return result.getObj();
     }

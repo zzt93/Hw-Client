@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import dataservice.Strategydataservice.StrategyDataService;
 import businesslogic.Clientbl.ClientUtilityImpl;
@@ -12,7 +13,6 @@ import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
 import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
 import po.*;
 import util.RMIUtility;
-import vo.CashVO;
 
 public class StrategyList implements Strategy_List_BLservice {
 	private ArrayList<StrategyPO> list;
@@ -91,8 +91,22 @@ public class StrategyList implements Strategy_List_BLservice {
 				pos.add(po);
 
 			} else if(spo.getCondition().type == CatOfCondition.COMPOSITION){
-				GL_manager_BLservice gmb = new GL_manager_repo_Impl();
-				GoodsListPO gpo = gmb.getGoodsList();
+				ArrayList<GoodsPO> goodsPO = spo.getCondition().composition;
+				Vector<ProductsReceipt> products = po.getProductList();
+				int temp = 0;
+				for(ProductsReceipt pr:products){
+					for(GoodsPO tempPO:goodsPO){
+						if(pr.getId().equals(tempPO.getId())){
+							temp++;
+							break;
+						}
+					}
+				}
+				if(temp==goodsPO.size()){
+					SaleReceiptPO npo = new SaleReceiptPO(po);
+					setTreatment(spo,npo);
+					pos.add(po);
+				}
 				
 			}
 
@@ -100,7 +114,7 @@ public class StrategyList implements Strategy_List_BLservice {
 		return pos;
 	}
 
-	BigDecimal setTreatment(StrategyPO spo, SaleReceiptPO po) {
+	BigDecimal setTreatment(StrategyPO spo, SaleReceiptPO po) throws Exception {
 		BigDecimal bd = new BigDecimal(0);
 		if (spo.getTreatment().type == CatOfTreatment.DISCOUNT) {
 			po.setAllowance(BigDecimal
@@ -114,9 +128,15 @@ public class StrategyList implements Strategy_List_BLservice {
 					.valueOf(spo.getTreatment().getCoupon()));
 		}
 		if (spo.getTreatment().type == CatOfTreatment.GIVE) {
-
+			po.setComment("有礼品赠送哦亲~^0^");
+			
+			
+			
+			
 		}
 		return bd;
+		
+
 	}
 
 }

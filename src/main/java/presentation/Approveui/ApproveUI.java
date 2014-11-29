@@ -71,16 +71,13 @@ public class ApproveUI {
 		totalPanel.setBounds(0, 0, 750, 498);
 		totalPanel.setLayout(null);
 		frame.getContentPane().add(totalPanel);
-
-
-
-		JPanel panel = new JPanel();
-		totalPanel.add(panel);
-		panel.setLayout(null);
 		
 		///Read Receipts
 		//arr = approveBL.showList();
 		
+		final JLabel labelHint = new JLabel("状态栏");
+		labelHint.setBounds(39, 473, 211, 15);
+		totalPanel.add(labelHint);
 		
 		String[] name = { "编号", "种类", "时间", "审批状态" };
 
@@ -96,7 +93,9 @@ public class ApproveUI {
 		final JTable detailTable = new JTable(detailTableModel);
 		detailTable.setBounds(107, 322, 325, 93);
 		detailScrollPane.setViewportView(detailTable);
-
+		
+		// TODO 就是想搞你一下的存根;
+		refreshTableDebug();
 		//refreshTable();
 
 		TableModel tm = new DefaultTableModel(cellData, name);
@@ -115,11 +114,7 @@ public class ApproveUI {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 507, 249);
 		scrollPane.setViewportView(table);
-		panel.add(scrollPane);
-		
-				final JLabel labelStateHint = new JLabel("状态栏");
-				labelStateHint.setBounds(0, 0, 160, 15);
-				panel.add(labelStateHint);
+		totalPanel.add(scrollPane);
 
 		JLabel label = new JLabel("单据详细信息");
 		label.setBounds(20, 327, 92, 15);
@@ -168,13 +163,13 @@ public class ApproveUI {
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedRow = table.getSelectedRow();
 				if(arr.get(selectedRow).statement == ReceiptState.approve){
-					labelStateHint.setText("这是已经通过了的单据");
+					labelHint.setText("这是已经通过了的单据");
 				}else{
 					arr.get(selectedRow).statement = ReceiptState.approve;
 					refreshTable();
 					arr.get(selectedRow).statement = ReceiptState.disapprove;
 					approveIndex.add(arr.get(selectedRow));
-					labelStateHint.setText("已审批为通过");
+					labelHint.setText("已审批为通过");
 				}
 				
 			}
@@ -202,9 +197,7 @@ public class ApproveUI {
 		buttonUpload.setBounds(572, 60, 93, 23);
 		totalPanel.add(buttonUpload);
 		
-		JLabel labelHint = new JLabel("状态栏");
-		labelHint.setBounds(39, 473, 54, 15);
-		totalPanel.add(labelHint);
+
 		
 
 	}
@@ -278,5 +271,18 @@ public class ApproveUI {
 			insert(cellData[i], po);
 			i++;
 		}
+	}
+	
+	void refreshTableDebug(){
+		cellData = new String[2][4];
+		int i = 0;
+		ArrayList<ReceiptPO> arr = new ArrayList<ReceiptPO>();
+		arr.add(new RepoReceiptPO("hehe", 2, 2));
+		arr.add(new CashPO());
+		for (ReceiptPO po : arr) {
+			insert(cellData[i], po);
+			i++;
+		}
+		
 	}
 }

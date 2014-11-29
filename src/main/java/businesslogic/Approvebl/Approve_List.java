@@ -119,10 +119,8 @@ public class Approve_List implements Approve_List_BLservice{
 				pay.add((PayPO)po);
 				break;
 			case CASH:
-			
-				/*
-				 * Interface not provided!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-				 */
+				cash.add((CashPO)po);
+
 				break;
 			case REPORECEIPT:
 				repo.add((RepoReceiptPO)po);
@@ -150,7 +148,7 @@ public class Approve_List implements Approve_List_BLservice{
 	 * @param po
 	 */
 	public void upload(ArrayList<ReceiptPO> po){
-		
+		ads.uploadReceipt(po);
 	}
 	@Override
 	public String message(String userName) throws Exception {

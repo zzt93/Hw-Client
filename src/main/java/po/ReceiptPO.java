@@ -10,4 +10,11 @@ public class ReceiptPO {
 	public String number;
 	public ReceiptType type;
 	public String time;
+
+	public ReceiptPO() {
+	}
+
+	public ReceiptPO(ReceiptType type) {
+		this.type = type;
+	}
 }

@@ -14,6 +14,7 @@ public class GoodsReceiptPO extends ReceiptPO{
 	public GoodsReceiptPO(GoodsReceiptVO goodsVOs) {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public ArrayList<GoodsPO> getGoodsPOs() {
 		return goodsPOs;
 	}
