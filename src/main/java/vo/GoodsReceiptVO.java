@@ -12,6 +12,10 @@ public class GoodsReceiptVO extends ReceiptPO{
 	public GoodsReceiptVO(GoodsReceiptPO goodsReceiptPO) {
 		// TODO Auto-generated constructor stub
 	}
+	public GoodsReceiptVO(ArrayList<GoodsVO> goodsVOs, String date, String user) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public ArrayList<GoodsVO> getGoodsPOs() {
 		return goodsPOs;
 	}
@@ -21,7 +25,5 @@ public class GoodsReceiptVO extends ReceiptPO{
 	public double getSumOfGifts() {
 		return sumOfGifts;
 	}
-	public void setSumOfGifts(double sumOfGifts) {
-		this.sumOfGifts = sumOfGifts;
-	}
+	
 }
