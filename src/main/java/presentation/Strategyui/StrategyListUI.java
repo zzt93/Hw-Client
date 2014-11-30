@@ -28,7 +28,7 @@ public class StrategyListUI {
 
 	private JFrame frame;
 	public JPanel panel;
-	//Strategy_List_BLservice slb = new StrategyController();
+	Strategy_List_BLservice slb = new StrategyController();
 
 
 	/**
@@ -76,7 +76,7 @@ public class StrategyListUI {
 		panel.add(buttonNew);
 		
 		JButton buttonScreen = new JButton("筛选");
-		buttonScreen.setBounds(607, 167, 93, 23);
+		buttonScreen.setBounds(607, 171, 93, 23);
 		panel.add(buttonScreen);
 		
 		JButton buttonReturn = new JButton("返回");
@@ -111,11 +111,22 @@ public class StrategyListUI {
 		table.setBounds(10, 20, 558, 415);
 		scrollPane.setViewportView(table);
 		
+		JButton button = new JButton("上传");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		button.setBounds(607, 237, 93, 23);
+		panel.add(button);
+		
 
 		
 		
 		buttonNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		buttonNew.addMouseListener(new MouseAdapter() {
