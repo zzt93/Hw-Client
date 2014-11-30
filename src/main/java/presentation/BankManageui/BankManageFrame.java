@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import vo.BankVO;
@@ -206,7 +207,7 @@ public class BankManageFrame {
 						,JOptionPane.ERROR_MESSAGE);
 			}
 			else{
-				//调用删除
+				//调用修改
 			}
 		}
 	}

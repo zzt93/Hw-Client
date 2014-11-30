@@ -13,6 +13,7 @@ import po.ReceiptPO;
 import po.ReceiptType;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
+import presentation.Saleui.GoodsTableModel;
 
 public class SaleAndStockReceipt {
 	JFrame frame;
