@@ -1,6 +1,6 @@
 package presentation.RepoReceiptui;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class RepoReceiptDriver {
 	public static void main(String[] args) {

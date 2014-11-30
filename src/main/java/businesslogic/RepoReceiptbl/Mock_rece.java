@@ -1,12 +1,12 @@
 package businesslogic.RepoReceiptbl;
 
-import java.util.HashMap;
-
+import businesslogicservice.GoodsListblservice.GL_receipt_BLservice;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
 import po.RepoReceiptPO;
-import businesslogicservice.GoodsListblservice.GL_receipt_BLservice;
+
+import java.util.HashMap;
 
 public class Mock_rece implements GL_receipt_BLservice{
 

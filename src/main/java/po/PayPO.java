@@ -1,6 +1,5 @@
 package po;
 
-import vo.BankVO;
 import vo.PayVO;
 /**
  * Created by MethyleneBlue on 2014/10/??.

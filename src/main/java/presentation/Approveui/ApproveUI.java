@@ -1,26 +1,16 @@
 package presentation.Approveui;
 
-import java.awt.EventQueue;
+import po.*;
 
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
-import po.*;
-import businesslogicservice.Approveblservice.Approve_Detail_BLservice;
-import businesslogicservice.Approveblservice.Approve_List_BLservice;
 
 public class ApproveUI {
 

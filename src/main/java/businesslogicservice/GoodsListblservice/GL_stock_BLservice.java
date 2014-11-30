@@ -1,11 +1,9 @@
 package businesslogicservice.GoodsListblservice;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import po.GoodsModelPO;
 import po.GoodsPO;
 import vo.GoodsVO;
+
+import java.util.ArrayList;
 
 public interface GL_stock_BLservice {
 	int amount(GoodsPO goods) throws Exception;

@@ -1,11 +1,7 @@
 package presentation.Adminui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTable;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.*;
+import java.awt.*;
 
 public class AdminUI {
 

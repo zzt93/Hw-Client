@@ -1,8 +1,8 @@
 package dataservice.Logdataservice;
 
-import java.rmi.RemoteException;
-
 import po.ResultMessage;
+
+import java.rmi.RemoteException;
 
 public interface Logdataservice {
 	public ResultMessage finds() throws RemoteException;

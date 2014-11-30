@@ -1,10 +1,13 @@
 package po;
 
+<<<<<<< HEAD
 import org.omg.PortableServer.POA;
 
 /**
  * Created by MethyleneBlue on 2014/10/??.
  */
+=======
+>>>>>>> origin/master
 public class ItemPO {
 	String item,remark;
 	double amount;

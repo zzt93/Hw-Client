@@ -1,8 +1,8 @@
 package businesslogic.BankManagebl;
 
+import businesslogicservice.BankManageblservice.BankManageblservice;
 import po.ResultMessage;
 import vo.BankVO;
-import businesslogicservice.BankManageblservice.BankManageblservice;
 
 public class BankManagebl_stub implements BankManageblservice {
 	ResultMessage right=new ResultMessage(null,null);

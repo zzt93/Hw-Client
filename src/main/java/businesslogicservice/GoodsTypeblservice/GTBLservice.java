@@ -1,9 +1,9 @@
 package businesslogicservice.GoodsTypeblservice;
 
 
-import java.util.ArrayList;
-
 import vo.TreeNodeVO;
+
+import java.util.ArrayList;
 
 public interface GTBLservice {
 	boolean add(TreeNodeVO fa, String son_type) throws Exception;

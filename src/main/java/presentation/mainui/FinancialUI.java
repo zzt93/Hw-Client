@@ -1,16 +1,10 @@
 package presentation.mainui;
 
-import java.awt.Font;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import presentation.BankManageui.BankManageFrame;
 import presentation.FinancialReceiptui.FinancialReceiptFrame;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class FinancialUI {
 	JFrame frame;

@@ -1,8 +1,8 @@
 package vo;
 
-import java.util.HashMap;
-
 import po.GoodsListPO;
+
+import java.util.HashMap;
 
 public class GoodsListVO {
 

@@ -1,13 +1,11 @@
 package businesslogic.Strategybl;
-import static org.junit.Assert.*;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
 
-
-import businesslogic.Strategybl.StrategyController;
+import static org.junit.Assert.assertThat;
 
 public class Strategy_test {
 

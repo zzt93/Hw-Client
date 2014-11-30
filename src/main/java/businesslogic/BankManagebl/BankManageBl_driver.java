@@ -1,7 +1,5 @@
 package businesslogic.BankManagebl;
 
-import businesslogic.BankManagebl.BankManagebl_stub;
-import po.ResultMessage;
 import vo.BankVO;
 
 public class BankManageBl_driver {
