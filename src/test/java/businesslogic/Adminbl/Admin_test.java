@@ -1,11 +1,11 @@
 package businesslogic.Adminbl;
 
-import static org.junit.Assert.assertThat;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertThat;
 
 public class Admin_test {
 	Admin_mock am;

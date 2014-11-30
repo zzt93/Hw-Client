@@ -1,10 +1,8 @@
 package businesslogic.SetAccountbl;
 
 import po.ClientPO;
-import po.ResultMessage;
 import vo.BankVO;
 import vo.GoodsVO;
-import businesslogic.SetAccountbl.SetAccount_stub;
 
 public class SetAccount_driver {
 	public void driver(SetAccount_stub account){

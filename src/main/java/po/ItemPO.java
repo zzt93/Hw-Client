@@ -1,8 +1,5 @@
 package po;
 
-import org.omg.PortableServer.POA;
-
-
 public class ItemPO {
 	String item,remark;
 	double amount;

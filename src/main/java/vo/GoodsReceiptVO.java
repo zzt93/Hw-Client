@@ -1,9 +1,9 @@
 package vo;
 
-import java.util.ArrayList;
-
 import po.GoodsReceiptPO;
 import po.ReceiptPO;
+
+import java.util.ArrayList;
 
 public class GoodsReceiptVO extends ReceiptPO{
 	ArrayList<GoodsVO> goodsPOs;

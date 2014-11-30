@@ -1,18 +1,15 @@
 package businesslogic.RunningTablebl;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-
-import businesslogic.RunningTablebl.RunTableController;
 import po.ReceiptPO;
 import po.ReceiptType;
 import vo.CashVO;
 import vo.GoodsRecordVO;
 import vo.ReceiptConditionVO;
 import vo.SaleConditionVO;
+
+import static org.junit.Assert.assertTrue;
 
 public class RunTableControllerTest {
 	RunTableController controller=new RunTableController();

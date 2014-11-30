@@ -1,11 +1,9 @@
 package businesslogic.RunningTablebl;
 
-import java.util.Vector;
-
-import businesslogic.Salebl.SaleUtilityImpl;
-import po.ResultMessage;
 import vo.GoodsRecordVO;
 import vo.SaleConditionVO;
+
+import java.util.Vector;
 
 public class SaleRecord {
 	public GoodsRecordVO[]  getSaleTable(SaleConditionVO vo) throws Exception{

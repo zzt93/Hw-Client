@@ -1,17 +1,16 @@
 package presentation.BankManageui;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import businesslogic.BankManagebl.BankController;
+import vo.BankVO;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
-
-import vo.BankVO;
-import businesslogic.BankManagebl.BankController;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class BankManageFrame {
 	private JTextField search,name,balance,remark;

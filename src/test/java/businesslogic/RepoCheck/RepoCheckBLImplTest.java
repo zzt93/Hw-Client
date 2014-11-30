@@ -1,13 +1,10 @@
 package businesslogic.RepoCheck;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import businesslogic.GoodsListbl.GL_manager_repo_Impl;
 import businesslogic.RepositoryCheckbl.RepoCheckBLImpl;
 import businesslogicservice.GoodsListblservice.GL_repo_BLservice;
+import org.junit.Before;
+import org.junit.Test;
 
 public class RepoCheckBLImplTest {
 

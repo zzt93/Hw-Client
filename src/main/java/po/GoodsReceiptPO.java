@@ -1,8 +1,8 @@
 package po;
 
-import java.util.ArrayList;
-
 import vo.GoodsReceiptVO;
+
+import java.util.ArrayList;
 /**
  * Edited by dzh,add extension,11.12
  *

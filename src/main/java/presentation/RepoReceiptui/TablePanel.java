@@ -1,17 +1,11 @@
 package presentation.RepoReceiptui;
 
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-
-import businesslogic.RepositoryCheckbl.RepoCheckBLImpl;
-import businesslogicservice.RepositoryCheckblservice.RepoCheckBLservice;
 
 public class TablePanel extends JPanel implements TableModelListener{
 

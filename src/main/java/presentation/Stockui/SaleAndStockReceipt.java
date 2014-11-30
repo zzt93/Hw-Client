@@ -1,18 +1,12 @@
 package presentation.Stockui;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-
 import po.ReceiptPO;
 import po.ReceiptType;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class SaleAndStockReceipt {
 	JFrame frame;

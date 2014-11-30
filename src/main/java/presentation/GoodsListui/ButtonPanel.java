@@ -1,22 +1,12 @@
 package presentation.GoodsListui;
 
-import java.awt.Graphics;
-import java.awt.GridLayout;
+import businesslogicservice.GoodsListblservice.GLBLservice;
+import vo.GoodsModelVO;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import vo.GoodsModelVO;
-import vo.GoodsVO;
-import businesslogic.GoodsListbl.GL_controller;
-import businesslogicservice.GoodsListblservice.GLBLservice;
 /**
  * This is the intersection where ui and bl interact
  * 

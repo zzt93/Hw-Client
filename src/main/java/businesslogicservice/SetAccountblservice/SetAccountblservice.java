@@ -1,6 +1,8 @@
 package businesslogicservice.SetAccountblservice;
-import vo.*;
-import po.*;
+
+import po.ClientPO;
+import vo.BankVO;
+import vo.GoodsVO;
 public interface SetAccountblservice {
 	public void inherit(String name , String accountName)throws Exception;
 	public void setGoodsType()throws Exception;

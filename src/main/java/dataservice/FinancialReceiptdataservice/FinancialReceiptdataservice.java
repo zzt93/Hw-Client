@@ -1,8 +1,8 @@
 package dataservice.FinancialReceiptdataservice;
 
-import java.rmi.RemoteException;
-
 import po.*;
+
+import java.rmi.RemoteException;
 
 public interface FinancialReceiptdataservice {
 	public ResultMessage addPay(PayPO po) throws RemoteException;

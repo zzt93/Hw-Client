@@ -1,18 +1,16 @@
 package businesslogic.Strategybl;
 
+import businesslogic.Clientbl.ClientUtilityImpl;
+import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
+import dataservice.Strategydataservice.StrategyDataService;
+import po.*;
+import util.RMIUtility;
+
 import java.math.BigDecimal;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
-
-import dataservice.Strategydataservice.StrategyDataService;
-import businesslogic.Clientbl.ClientUtilityImpl;
-import businesslogic.GoodsListbl.GL_manager_repo_Impl;
-import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
-import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
-import po.*;
-import util.RMIUtility;
 
 public class StrategyList implements Strategy_List_BLservice {
 	private ArrayList<StrategyPO> list;

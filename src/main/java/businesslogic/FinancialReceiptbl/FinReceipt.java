@@ -1,6 +1,9 @@
 package businesslogic.FinancialReceiptbl;
 
-import po.*;
+import po.CashPO;
+import po.PayPO;
+import po.RecPO;
+import po.ResultMessage;
 
 public class FinReceipt {
 

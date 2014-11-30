@@ -11,12 +11,11 @@ public class GoodsModelPO {
 	String id;//id = type + model
 	boolean everHas;
 	boolean gift;
+	String type;
 	
 	double lastInPrice;
 	
 	double lastOutPrice;
-	
-	double aver_in;
 	
 	@Override
 	public String toString() {
@@ -63,9 +62,6 @@ public class GoodsModelPO {
 	public void setLastOutPrice(double lastOutPrice) {
 		this.lastOutPrice = lastOutPrice;
 	}
-	
-	public double getAver_in() {
-		return aver_in;
-	}
+
 
 }

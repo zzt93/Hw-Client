@@ -1,6 +1,5 @@
 package po;
 
-import vo.BankVO;
 import vo.RecVO;
 
 public class RecPO extends ReceiptPO {

@@ -1,6 +1,6 @@
 package presentation.GoosTypeui;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class GoodsTypeDriver {
 	public static void main(String[] args) {

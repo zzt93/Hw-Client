@@ -2,7 +2,6 @@ package businesslogic.RunningTablebl;
 
 import po.ReceiptPO;
 import vo.*;
-import businesslogic.RunningTablebl.RunningTable_stub;
 
 public class RunningTable_driver {
 	public void driver(RunningTable_stub table){

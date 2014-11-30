@@ -1,7 +1,7 @@
 package presentation.Clientui;
 
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 
 public class Beginer {

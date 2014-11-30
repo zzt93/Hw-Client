@@ -1,8 +1,8 @@
 package businesslogic.SetAccountbl;
 
-import java.util.ArrayList;
-
 import vo.BankVO;
+
+import java.util.ArrayList;
 
 public class BankList {
 	ArrayList<BankVO> list=new ArrayList<BankVO>();

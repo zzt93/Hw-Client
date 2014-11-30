@@ -1,9 +1,6 @@
 package presentation.RepoUI;
 
-import java.awt.CardLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

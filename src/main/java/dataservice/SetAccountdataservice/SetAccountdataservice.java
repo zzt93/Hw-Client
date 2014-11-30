@@ -1,8 +1,8 @@
 package dataservice.SetAccountdataservice;
 
-import java.rmi.RemoteException;
-
 import po.ResultMessage;
+
+import java.rmi.RemoteException;
 
 public interface SetAccountdataservice {
 	public ResultMessage setup(String[] name) throws RemoteException;

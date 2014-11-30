@@ -1,15 +1,9 @@
 package presentation.RepositoryExaminui;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 
 public class Gui {

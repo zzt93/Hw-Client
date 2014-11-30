@@ -1,8 +1,8 @@
 package po;
 
-import java.io.Serializable;
-
 import vo.BankVO;
+
+import java.io.Serializable;
 
 public class BankPO implements Serializable{
 	String name;
