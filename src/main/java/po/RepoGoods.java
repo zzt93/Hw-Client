@@ -8,7 +8,7 @@ public class RepoGoods {
 		amount = goodsModelPO.getAmount();
 		aver_price = goodsModelPO.getAver_in();
 		//TODO whose name and model
-		name = arrayList.get(0).name;
+		name = goodsModelPO.getName();
 		model = arrayList.get(0).model;
 	}
 	String id;

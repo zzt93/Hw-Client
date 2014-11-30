@@ -4,6 +4,7 @@ import po.ReceiptPO;
 import po.ReceiptType;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
+import presentation.Saleui.GoodsTableModel;
 
 import javax.swing.*;
 import java.awt.*;

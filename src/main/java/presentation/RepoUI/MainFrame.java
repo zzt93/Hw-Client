@@ -1,13 +1,20 @@
 package presentation.RepoUI;
 
-import businesslogic.RepositoryExaminbl.RepoExaminBLImpl;
-import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
-import vo.InOutRepoVO;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Cursor;
 import java.io.File;
+import java.rmi.RemoteException;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+
+import vo.InOutRepoVO;
+import businesslogic.RepositoryCheckbl.RepoCheckBLImpl;
+import businesslogic.RepositoryExaminbl.RepoExaminBLImpl;
+import businesslogicservice.RepositoryCheckblservice.RepoCheckBLservice;
+import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,7 +30,15 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+	RepoCheckBLservice repoCheckBLservice ;
+	RepoExaminBLservice repoExaminBLservice = new RepoExaminBLImpl();
     public MainFrame() {
+    	try {
+			repoCheckBLservice = new RepoCheckBLImpl();
+		} catch (RemoteException e) {
+			JOptionPane.showMessageDialog(frame, "Repo Check fail to get data");
+		}
+    	
         initComponents();
     }
 
@@ -84,10 +99,10 @@ public class MainFrame extends javax.swing.JFrame {
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         refresh = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
-        upload = new javax.swing.JButton();
+        
         goodsListPanel1 = new GoodsListPanel();
         goodsTypePanel1 = new GoodsTypePanel();
-        repo_receipt1 = new Repo_Receipt_mana();
+        repo_receipt1 = new Repo_Receipt_management();
         goods_receipt1 = new Goods_receipt_management();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -396,16 +411,7 @@ public class MainFrame extends javax.swing.JFrame {
         tool.add(refresh);
         tool.add(filler3);
 
-        upload.setText("上传");
-        upload.setFocusable(false);
-        upload.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        upload.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        upload.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uploadActionPerformed(evt);
-            }
-        });
-        tool.add(upload);
+        
 
         javax.swing.GroupLayout firstLayout = new javax.swing.GroupLayout(first);
         first.setLayout(firstLayout);
@@ -463,7 +469,7 @@ public class MainFrame extends javax.swing.JFrame {
         card.show(this.getContentPane(), "goodsType_card");
     }//GEN-LAST:event_goodsTypeActionPerformed
     
-    RepoExaminBLservice repoExaminBLservice = new RepoExaminBLImpl();
+    
     
     private void repo_examinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repo_examinActionPerformed
 
@@ -471,12 +477,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         data[0] = (String) s_year.getSelectedItem() + "-" + s_mon.getSelectedItem() + "-" + s_day.getSelectedItem();
         data[1] = (String) s_year1.getSelectedItem() + "-" + s_mon1.getSelectedItem() + "-" + s_day1.getSelectedItem();
-        // TODO 
+        
         InOutRepoVO inout = null;
         try {
 			inout = repoExaminBLservice.countInOut(data[0], data[1]);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(frame, "Can't connect to get data");
 			e1.printStackTrace();
 		}
         data[2] = inout.getSumOfIn().toString();
@@ -493,13 +499,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_repo_examinActionPerformed
 
     private void repo_receActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repo_receActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout) this.getContentPane().getLayout();
         card.show(this.getContentPane(), "repo_receipt_card");
     }//GEN-LAST:event_repo_receActionPerformed
 
+    
     private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
-        // TODO add your handling code here:
+        
         JFileChooser exporter = new JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -523,7 +530,11 @@ public class MainFrame extends javax.swing.JFrame {
         
         int result = exporter.showSaveDialog(MainFrame.frame);
         if (result == JFileChooser.APPROVE_OPTION) {
-            
+            try {
+				repoCheckBLservice.export();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(frame, "Repo Check fail to run export");
+			}
         } else if (result == JFileChooser.CANCEL_OPTION) {
             export = null;
         }
@@ -532,11 +543,14 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     private void repo_checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repo_checkActionPerformed
-        // TODO add your handling code here:
+        try {
+			repoCheckBLservice.checkAndSum();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(frame, "Repo Check fail to get data to CheckAndSum");
+		}
     }//GEN-LAST:event_repo_checkActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_outActionPerformed
-        // TODO add your handling code here:
         CardLayout card = (CardLayout) this.getContentPane().getLayout();
         card.show(this.getContentPane(), "log_card");
     }//GEN-LAST:event_log_outActionPerformed
@@ -552,21 +566,19 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshActionPerformed
 
     private void s_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s_yearActionPerformed
-        // TODO add your handling code here:
         s_monActionPerformed(evt);
     }//GEN-LAST:event_s_yearActionPerformed
 
     private void s_year1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s_year1ActionPerformed
-        // TODO add your handling code here:
-        s_mon1ActionPerformed(evt);
+       s_mon1ActionPerformed(evt);
     }//GEN-LAST:event_s_year1ActionPerformed
 
     private void s_monPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_s_monPropertyChange
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_s_monPropertyChange
 
     private void s_monActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s_monActionPerformed
-        // TODO add your handling code here:
+        
         int index = s_mon.getSelectedIndex() + 1;
         if (index == 1 || index == 3 || index == 5
                 || index == 7 || index == 8 || index == 10
@@ -587,7 +599,6 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_s_monActionPerformed
 
     private void s_mon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s_mon1ActionPerformed
-        // TODO add your handling code here:
         int index = s_mon1.getSelectedIndex() + 1;
         if (index == 1 || index == 3 || index == 5
                 || index == 7 || index == 8 || index == 10
@@ -607,16 +618,7 @@ public class MainFrame extends javax.swing.JFrame {
         s_day1.setModel(new javax.swing.DefaultComboBoxModel(day[index]));
     }//GEN-LAST:event_s_mon1ActionPerformed
 
-    private void uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadActionPerformed
-        frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        update_bar.setIndeterminate(true);
-        // TODO add your handling code here:
-        
-        // change back
-        frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        update_bar.setIndeterminate(false);
-    }//GEN-LAST:event_uploadActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -682,7 +684,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton repo_examin;
     private javax.swing.JPanel repo_panel;
     private javax.swing.JButton repo_rece;
-    private Repo_Receipt_mana repo_receipt1;
+    private Repo_Receipt_management repo_receipt1;
     private javax.swing.JComboBox s_day;
     private javax.swing.JComboBox s_day1;
     private javax.swing.JComboBox s_mon;
@@ -692,6 +694,5 @@ public class MainFrame extends javax.swing.JFrame {
     public static javax.swing.JTabbedPane tab_pane;
     private javax.swing.JToolBar tool;
     private javax.swing.JProgressBar update_bar;
-    private javax.swing.JButton upload;
     // End of variables declaration//GEN-END:variables
 }

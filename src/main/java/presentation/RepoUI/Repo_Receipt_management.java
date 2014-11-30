@@ -12,12 +12,12 @@ import java.awt.CardLayout;
  *
  * @author zzt
  */
-public class Repo_Receipt_mana extends javax.swing.JPanel {
+public class Repo_Receipt_management extends javax.swing.JPanel {
 
     /**
      * Creates new form Receipt
      */
-    public Repo_Receipt_mana() {
+    public Repo_Receipt_management() {
         initComponents();
     }
 
@@ -345,28 +345,28 @@ public class Repo_Receipt_mana extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goods_naviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goods_naviActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout)MainFrame.frame.getContentPane().getLayout();
         card.show(MainFrame.frame.getContentPane(), "main_card");
         MainFrame.tab_pane.setSelectedIndex(0);
     }//GEN-LAST:event_goods_naviActionPerformed
 
     private void repo_naviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repo_naviActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout)MainFrame.frame.getContentPane().getLayout();
         card.show(MainFrame.frame.getContentPane(), "main_card");
         MainFrame.tab_pane.setSelectedIndex(2);
     }//GEN-LAST:event_repo_naviActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_outActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout)MainFrame.frame.getContentPane().getLayout();
         card.show(MainFrame.frame.getContentPane(), "log_card");
         MainFrame.tab_pane.setSelectedIndex(3);
     }//GEN-LAST:event_log_outActionPerformed
 
     private void show_receActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_receActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout)change.getLayout();
         card.show(change, "show");
     }//GEN-LAST:event_show_receActionPerformed

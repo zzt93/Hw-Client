@@ -1,12 +1,12 @@
 package dataservice.GoodsListdataservice;
 
-import po.GoodsListPO;
-import po.GoodsPO;
-import po.RepoFilterPO;
-import po.ResultMessage;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
+import po.RepoFilterPO;
+import po.GoodsListPO;
+import po.GoodsPO;
+import po.ResultMessage;
 
 public interface GoodsListDataService {
 	ResultMessage<Boolean> saveGoodsList(GoodsListPO goodsListPO);
