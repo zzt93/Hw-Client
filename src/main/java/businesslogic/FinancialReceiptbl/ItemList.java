@@ -1,9 +1,8 @@
 package businesslogic.FinancialReceiptbl;
 
-import java.util.ArrayList;
+import po.ItemPO;
 
-import po.ItemPO;
-import po.ItemPO;
+import java.util.ArrayList;
 
 public class ItemList {
 	ArrayList<ItemPO> list=new ArrayList<ItemPO>();

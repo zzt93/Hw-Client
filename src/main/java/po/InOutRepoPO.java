@@ -4,22 +4,35 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class InOutRepoPO {
-	String date;
-	BigDecimal sumOfMoney;
+	String produce_date;
+	String[] date = new String[2];
+	BigDecimal sumOfIn;
+	BigDecimal sumOfOut;
 	int sumOfNum;
 	
-	public InOutRepoPO(BigDecimal mon, int num) {
-		date = new Date().toString();
-		sumOfMoney = mon;
+	public InOutRepoPO(BigDecimal in, BigDecimal out, int num, String s, String e) {
+		produce_date = new Date().toString();
+		sumOfOut = out;
+		sumOfIn = in;
 		sumOfNum = num;
+		date[0] = s;
+		date[1] = e;
 	}
 	
+	public String getProduce_date() {
+		return produce_date;
+	}
+
+	public BigDecimal getSumOfIn() {
+		return sumOfIn;
+	}
+
+	public BigDecimal getSumOfOut() {
+		return sumOfOut;
+	}
+
 	public String getDate() {
-		return date;
-	}
-	
-	public BigDecimal getSumOfMoney() {
-		return sumOfMoney;
+		return produce_date;
 	}
 	
 	public int getSumOfNum() {

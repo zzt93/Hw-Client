@@ -1,8 +1,8 @@
 package vo;
 
-import java.util.ArrayList;
-
 import po.TreeNodePO;
+
+import java.util.ArrayList;
 
 public class TreeNodeVO {
 	

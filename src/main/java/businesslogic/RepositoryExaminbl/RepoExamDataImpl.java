@@ -1,51 +1,51 @@
 package businesslogic.RepositoryExaminbl;
 
+import dataservice.RepositoryExamindataservice.RepoExaminDataService;
+import po.RepoFilterPO;
+import po.ResultMessage;
+import vo.InOutRepoVO;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import dataservice.RepositoryExamindataservice.RepoExaminDataService;
-import po.InOutRepoPO;
-import po.RepoFilterPO;
-import po.ResultMessage;
-
 public class RepoExamDataImpl implements RepoExaminDataService {
 
-	public ResultMessage<ArrayList<InOutRepoPO>> getRepoReceipt()
+	public ResultMessage<ArrayList<InOutRepoVO>> getRepoReceipt()
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage<Boolean> initialize(ArrayList<InOutRepoPO> receipts)
+	public ResultMessage<Boolean> initialize(ArrayList<InOutRepoVO> receipts)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage<Boolean> insert(InOutRepoPO receipt)
+	public ResultMessage<Boolean> insert(InOutRepoVO receipt)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage<Boolean> delete(InOutRepoPO receipt)
+	public ResultMessage<Boolean> delete(InOutRepoVO receipt)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage<Boolean> update(InOutRepoPO receipt)
+	public ResultMessage<Boolean> update(InOutRepoVO receipt)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage<InOutRepoPO> efind(String info) throws RemoteException {
+	public ResultMessage<InOutRepoVO> efind(String info) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage<ArrayList<InOutRepoPO>> ifind(RepoFilterPO filterPO)
+	public ResultMessage<ArrayList<InOutRepoVO>> ifind(RepoFilterPO filterPO)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;

@@ -21,7 +21,7 @@ public class ClientPO implements Serializable {
     private BigDecimal toReceive;
     private BigDecimal toPay;
     private String defaultSalesMan;
-
+    
     public ClientPO(ClientType type, ClientLevel level,
                     String name, String phone, String address,
                     String zip, String email, String defaultSalesMan) {
@@ -37,7 +37,19 @@ public class ClientPO implements Serializable {
         this.toPay = BigDecimal.ZERO;
         this.defaultSalesMan = defaultSalesMan;
     }
-
+    public ClientPO(){
+    	type=ClientType.SELLER;
+    	level=ClientLevel.LEVEL1;
+    	name="茶农";
+    	phone="122221020201";
+    	address="南京大学仙林大道";
+    	zip="384021";
+    	email="chanong@gmail.com";
+        this.upperBound = BigDecimal.ZERO;
+        this.toReceive = BigDecimal.ZERO;
+        this.toPay = BigDecimal.ZERO;
+        defaultSalesMan="王尼玛";
+    }
     public int getId() {
         return id;
     }

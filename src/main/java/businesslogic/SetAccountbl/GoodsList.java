@@ -1,9 +1,8 @@
 package businesslogic.SetAccountbl;
 
-import java.util.ArrayList;
+import vo.GoodsVO;
 
-import vo.GoodsVO;
-import vo.GoodsVO;
+import java.util.ArrayList;
 
 public class GoodsList {
 	ArrayList<GoodsVO> list=new ArrayList<GoodsVO>();

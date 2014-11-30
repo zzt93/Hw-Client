@@ -6,6 +6,7 @@ package po;
  */
 
 public class ReceiptPO {
+	public int id;
 	public ReceiptState statement=ReceiptState.disapprove;
 	public String number;
 	public ReceiptType type;

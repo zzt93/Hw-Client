@@ -1,9 +1,8 @@
 package businesslogic.FinancialReceiptbl;
 
-import java.rmi.RemoteException;
-
-import vo.*;
 import po.*;
+
+import java.rmi.RemoteException;
 
 public class FinancialReceiptdata_driver {
 	ResultMessage result;

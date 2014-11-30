@@ -1,12 +1,11 @@
 package presentation.RepoUI;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
+
+import vo.GoodsReceiptVO;
+import vo.GoodsVO;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,12 +16,12 @@ import javax.swing.JLabel;
  *
  * @author zzt
  */
-public class Goods_receipt extends javax.swing.JPanel {
+public class Goods_receipt_management extends javax.swing.JPanel {
 
     /**
      * Creates new form Goods_receipt
      */
-    public Goods_receipt() {
+    public Goods_receipt_management() {
         initComponents();
     }
 
@@ -46,23 +45,23 @@ public class Goods_receipt extends javax.swing.JPanel {
         change = new javax.swing.JPanel();
         make = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        gift_table = new javax.swing.JTable();
         buttons = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        produce = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton5 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        goods_id = new javax.swing.JComboBox();
+        del = new javax.swing.JButton();
+        add = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        amount = new javax.swing.JTextField();
         show = new javax.swing.JPanel();
         show_buttons = new javax.swing.JPanel();
-        back_make = new javax.swing.JButton();
-        layerList = new javax.swing.JComboBox(layerStrings);
         back = new javax.swing.JPanel()
         ;
-        layeredPane = new javax.swing.JLayeredPane();
-        goods_rece1 = new Goods_rece();
+        goods_rece2 = new Goods_rece();
+        rece_buttons = new javax.swing.JPanel();
+        layerList = new javax.swing.JComboBox(layerStrings);
+        back_make = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -118,7 +117,7 @@ public class Goods_receipt extends javax.swing.JPanel {
 
         change.setLayout(new java.awt.CardLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        gift_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
             },
@@ -141,29 +140,49 @@ public class Goods_receipt extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        gift_table.setColumnSelectionAllowed(true);
+        gift_table.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(gift_table);
+        gift_table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (gift_table.getColumnModel().getColumnCount() > 0) {
+            gift_table.getColumnModel().getColumn(0).setResizable(false);
+            gift_table.getColumnModel().getColumn(1).setResizable(false);
+            gift_table.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jButton1.setText("确定提交");
+        produce.setText("确定提交");
+        produce.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                produceActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("商品id：");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        goods_id.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        goods_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goods_idActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("删除");
+        del.setText("删除");
+        del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("添加");
+        add.setText("添加");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("数量：");
 
-        jTextField1.setText("jTextField1");
+        amount.setText("jTextField1");
 
         javax.swing.GroupLayout buttonsLayout = new javax.swing.GroupLayout(buttons);
         buttons.setLayout(buttonsLayout);
@@ -174,40 +193,41 @@ public class Goods_receipt extends javax.swing.JPanel {
                 .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(buttonsLayout.createSequentialGroup()
                         .addGap(0, 127, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(add)
                         .addGap(16, 16, 16))
-                    .addGroup(buttonsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1))
                     .addGroup(buttonsLayout.createSequentialGroup()
                         .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton5)
+                                .addComponent(del)
                                 .addComponent(jLabel1)))
                         .addGap(18, 18, 18)
                         .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(amount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goods_id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(produce)
+                .addGap(61, 61, 61))
         );
         buttonsLayout.setVerticalGroup(
             buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goods_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(35, 35, 35)
                 .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5))
+                    .addComponent(add)
+                    .addComponent(del))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(produce)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -237,12 +257,32 @@ public class Goods_receipt extends javax.swing.JPanel {
 
         change.add(make, "make");
 
-        back_make.setText("返回");
-        back_make.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                back_makeActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout show_buttonsLayout = new javax.swing.GroupLayout(show_buttons);
+        show_buttons.setLayout(show_buttonsLayout);
+        show_buttonsLayout.setHorizontalGroup(
+            show_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 82, Short.MAX_VALUE)
+        );
+        show_buttonsLayout.setVerticalGroup(
+            show_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 98, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
+        back.setLayout(backLayout);
+        backLayout.setHorizontalGroup(
+            backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addComponent(goods_rece2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+        backLayout.setVerticalGroup(
+            backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
+                .addGap(0, 38, Short.MAX_VALUE)
+                .addComponent(goods_rece2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         layerList.setSelectedIndex(2);    //cyan layer
         layerList.addActionListener(new java.awt.event.ActionListener() {
@@ -251,67 +291,31 @@ public class Goods_receipt extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout show_buttonsLayout = new javax.swing.GroupLayout(show_buttons);
-        show_buttons.setLayout(show_buttonsLayout);
-        show_buttonsLayout.setHorizontalGroup(
-            show_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(show_buttonsLayout.createSequentialGroup()
+        back_make.setText("返回");
+        back_make.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back_makeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout rece_buttonsLayout = new javax.swing.GroupLayout(rece_buttons);
+        rece_buttons.setLayout(rece_buttonsLayout);
+        rece_buttonsLayout.setHorizontalGroup(
+            rece_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rece_buttonsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(show_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(rece_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(layerList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(show_buttonsLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(back_make)))
+                    .addComponent(back_make))
                 .addContainerGap())
         );
-        show_buttonsLayout.setVerticalGroup(
-            show_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(show_buttonsLayout.createSequentialGroup()
+        rece_buttonsLayout.setVerticalGroup(
+            rece_buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rece_buttonsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(back_make)
                 .addGap(18, 18, 18)
                 .addComponent(layerList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        initial_back();
-
-        layeredPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Choose a receipt to show", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), javax.swing.UIManager.getDefaults().getColor("winclassic_tab_sel_gradient"))); // NOI18N
-        //layeredPane.add(back, new Integer(0));
-        //layeredPane.add(jPanel3, new Integer(1));
-
-        javax.swing.GroupLayout layeredPaneLayout = new javax.swing.GroupLayout(layeredPane);
-        layeredPane.setLayout(layeredPaneLayout);
-        layeredPaneLayout.setHorizontalGroup(
-            layeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layeredPaneLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(goods_rece1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-        layeredPaneLayout.setVerticalGroup(
-            layeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layeredPaneLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(goods_rece1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
-        );
-        layeredPane.setLayer(goods_rece1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
-        back.setLayout(backLayout);
-        backLayout.setHorizontalGroup(
-            backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(layeredPane)
-                .addContainerGap())
-        );
-        backLayout.setVerticalGroup(
-            backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(layeredPane)
                 .addContainerGap())
         );
 
@@ -322,19 +326,26 @@ public class Goods_receipt extends javax.swing.JPanel {
             .addGroup(showLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(show_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGroup(showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(showLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(show_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(showLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(rece_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         showLayout.setVerticalGroup(
             showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(showLayout.createSequentialGroup()
-                .addContainerGap(236, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rece_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(show_buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(171, 171, 171))
             .addGroup(showLayout.createSequentialGroup()
                 .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 76, Short.MAX_VALUE))
         );
 
         change.add(show, "show");
@@ -346,13 +357,9 @@ public class Goods_receipt extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(change, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Repo_navigator, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(change, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Repo_navigator, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,79 +373,88 @@ public class Goods_receipt extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void show_receActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_receActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout cardlayout = (CardLayout) change.getLayout();
         cardlayout.show(change, "show");
     }//GEN-LAST:event_show_receActionPerformed
 
     private void back_makeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_makeActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout cardlayout = (CardLayout) change.getLayout();
         cardlayout.show(change, "make");
     }//GEN-LAST:event_back_makeActionPerformed
 
     private void goods_naviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goods_naviActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout) MainFrame.frame.getContentPane().getLayout();
         card.show(MainFrame.frame.getContentPane(), "main_card");
         MainFrame.tab_pane.setSelectedIndex(0);
     }//GEN-LAST:event_goods_naviActionPerformed
 
     private void repo_naviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repo_naviActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout) MainFrame.frame.getContentPane().getLayout();
         card.show(MainFrame.frame.getContentPane(), "main_card");
         MainFrame.tab_pane.setSelectedIndex(2);
     }//GEN-LAST:event_repo_naviActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_outActionPerformed
-        // TODO add your handling code here:
+        
         CardLayout card = (CardLayout) MainFrame.frame.getContentPane().getLayout();
-        card.show(MainFrame.frame.getContentPane(), "main_card");
+        card.show(MainFrame.frame.getContentPane(), "log_card");
     }//GEN-LAST:event_log_outActionPerformed
 
     private void layerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerListActionPerformed
         String cmd = evt.getActionCommand();
-        layeredPane.setLayer(back, layerList.getSelectedIndex());
+       
     }//GEN-LAST:event_layerListActionPerformed
 
-    private JLabel createColoredLabel(String text,
-            Color color,
-            Point origin) {
-        JLabel label = new JLabel(text);
-        label.setVerticalAlignment(JLabel.TOP);
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setOpaque(true);
-        label.setBackground(color);
-        label.setForeground(Color.black);
-        label.setBorder(BorderFactory.createLineBorder(Color.black));
-        label.setBounds(origin.x, origin.y, 140, 140);
-        return label;
-    }
+    private void goods_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goods_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goods_idActionPerformed
+
+    private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_delActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addActionPerformed
+
+    private void produceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produceActionPerformed
+        // TODO get goods and user
+    	ArrayList<GoodsVO> goodsVOs = new ArrayList<GoodsVO>();
+    	
+    	String date = new Date().toString();
+    	new GoodsReceiptVO(goodsVOs, date, "user");
+    	
+    }//GEN-LAST:event_produceActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar Repo_navigator;
+    private javax.swing.JButton add;
+    private javax.swing.JTextField amount;
     private javax.swing.JPanel back;
     private javax.swing.JButton back_make;
     private javax.swing.JPanel buttons;
     private javax.swing.JPanel change;
+    private javax.swing.JButton del;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
+    private javax.swing.JTable gift_table;
+    private javax.swing.JComboBox goods_id;
     private javax.swing.JButton goods_navi;
-    private Goods_rece goods_rece1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBox1;
+    private Goods_rece goods_rece2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox layerList;
-    private javax.swing.JLayeredPane layeredPane;
     private javax.swing.JButton log_out;
     private javax.swing.JPanel make;
+    private javax.swing.JButton produce;
+    private javax.swing.JPanel rece_buttons;
     private javax.swing.JButton repo_navi;
     private javax.swing.JPanel show;
     private javax.swing.JPanel show_buttons;
@@ -451,29 +467,5 @@ public class Goods_receipt extends javax.swing.JPanel {
         Color.cyan, Color.red,
         Color.green};
 
-    private void initial_back() {
-        back.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
-        //This is the origin of the first label added.
-        Point origin = new Point(10, 20);
-
-        //This is the offset for computing the origin for the next label.
-        int offset = 35;
-
-    //Add several overlapping, colored labels to the layered pane
-        //using absolute positioning/sizing.
-        for (int i = 0; i < layerStrings.length; i++) {
-            JLabel label = createColoredLabel(layerStrings[i],
-                    layerColors[i], origin);
-            layeredPane.add(label, new Integer(i));
-            origin.x += offset;
-            origin.y += offset;
-        }
-
-        //Add control pane and layered pane to this JPanel.
-        add(Box.createRigidArea(new Dimension(0, 10)));
-        add(show_buttons);
-        add(Box.createRigidArea(new Dimension(0, 10)));
-        add(layeredPane);
-    }
+    
 }

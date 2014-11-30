@@ -3,7 +3,6 @@ package po;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Created by Nifury on 2014/10/20.
@@ -26,7 +25,7 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
         this.comment = comment;
     }
 
-    public String getId() {
+    public String getNumber() {
         return number;
     }
 
@@ -50,4 +49,19 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
         return totalValue;
     }
 
+    public List<ProductsReceipt> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<ProductsReceipt> productList) {
+        this.productList = productList;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

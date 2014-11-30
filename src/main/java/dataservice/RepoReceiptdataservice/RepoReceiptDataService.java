@@ -1,12 +1,12 @@
 package dataservice.RepoReceiptdataservice;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-
 import po.GoodsReceiptPO;
 import po.RepoFilterPO;
 import po.RepoReceiptPO;
 import po.ResultMessage;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface RepoReceiptDataService {
 	ResultMessage<ArrayList<RepoReceiptPO>> getRepoReceipts() throws RemoteException;

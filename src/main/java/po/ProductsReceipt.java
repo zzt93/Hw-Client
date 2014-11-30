@@ -9,26 +9,27 @@ import java.math.BigDecimal;
 public class ProductsReceipt implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String id;
+
+    private int commodity_id;
     private int number;
     private BigDecimal price;
+    private BigDecimal total_value;
     private String comment;
-    private int stock_After_Op;
-
-    public ProductsReceipt(String id, int number, BigDecimal price, String comment, int stock_After_Op) {
-        this.id = id;
+    private String type;
+    public ProductsReceipt(int commodity_id, int number, BigDecimal price, String comment,String type) {
+        this.commodity_id = commodity_id;
         this.number = number;
         this.price = price;
         this.comment = comment;
-        this.stock_After_Op = stock_After_Op;
+        this.type=type;
     }
 
-    public String getId() {
-        return id;
+    public int getCommodity_id() {
+        return commodity_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCommodity_id(int commodity_id) {
+        this.commodity_id = commodity_id;
     }
 
     public int getNumber() {
@@ -53,13 +54,5 @@ public class ProductsReceipt implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public int getStock_After_Op() {
-        return stock_After_Op;
-    }
-
-    public void setStock_After_Op(int stock_After_Op) {
-        this.stock_After_Op = stock_After_Op;
     }
 }

@@ -1,11 +1,11 @@
 package dataservice.GoodsTypedataservice;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-
 import po.RepoFilterPO;
 import po.ResultMessage;
 import po.TreeNodePO;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface GoodsTypeDateService {
 	ResultMessage<ArrayList<TreeNodePO>> getGoodsTypde() throws RemoteException;

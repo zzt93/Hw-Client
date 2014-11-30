@@ -1,14 +1,32 @@
 package po;
 
+import vo.GoodsModelVO;
+
 public class GoodsModelPO {
 	
-	public GoodsModelPO(String id) {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public GoodsModelPO(String id, String name, String model) {
 		this.id = id;
+		this.name = name;
+		this.model = model;
+	}
+
+	public GoodsModelPO(GoodsModelVO goodsVO) {
+		// TODO Auto-generated constructor stub
 	}
 
 	int amount;
 	int signal;
 	String id;//id = type + model
+	String name;
+	String model;
 	boolean everHas;
 	boolean gift;
 	
@@ -16,11 +34,9 @@ public class GoodsModelPO {
 	
 	double lastOutPrice;
 	
-	double aver_in;
-	
 	@Override
 	public String toString() {
-		return id+amount+signal;
+		return id+" "+amount+" "+signal;
 	}
 	
 	public int getSignal() {
@@ -63,9 +79,11 @@ public class GoodsModelPO {
 	public void setLastOutPrice(double lastOutPrice) {
 		this.lastOutPrice = lastOutPrice;
 	}
-	
-	public double getAver_in() {
-		return aver_in;
+
+	public int getAver_in() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+	
 
 }

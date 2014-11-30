@@ -1,35 +1,63 @@
 package businesslogic.RepositoryExaminbl;
 
+import businesslogic.Salebl.SaleUtilityImpl;
+import businesslogic.Stockbl.StockUtilityImpl;
+import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
+import businesslogicservice.Saleblservice.SaleUtility;
+import businesslogicservice.Stockblservice.StockUtility;
+import dataservice.RepositoryExamindataservice.RepoExaminDataService;
+import po.SaleReceiptPO;
+import po.StockReceiptPO;
+import vo.GoodsRecordVO;
+import vo.InOutRepoVO;
+import vo.ReceiptConditionVO;
+import vo.SaleConditionVO;
+
 import java.math.BigDecimal;
 import java.util.Vector;
 
-import po.InOutRepoPO;
-import po.StockReceiptPO;
-import vo.ReceiptConditionVO;
-import businesslogic.Stockbl.StockUtilityImpl;
-import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
-import businesslogicservice.Stockblservice.StockUtility;
-
 public class RepoExaminBLImpl implements RepoExaminBLservice {
 
-	
+	RepoExaminDataService repoExaminDataService = new RepoExamDataImpl();
 
-	public InOutRepoPO countInOut(String start, String end) throws Exception {
+	public InOutRepoVO countInOut(String start, String end) throws Exception {
 		// TODO Auto-generated method stub
-		BigDecimal money = new BigDecimal(0);
-		int num = 0;
-		InOutRepoPO result;
+		BigDecimal in = new BigDecimal(0);
+		BigDecimal out = new BigDecimal(0);
+		int in_num = 0;
+		int out_num = 0;
+		InOutRepoVO result;
 		StockUtility stock = new StockUtilityImpl();
+		SaleUtility sale = new SaleUtilityImpl();
 		
 		ReceiptConditionVO conditionVO = new ReceiptConditionVO();
+		SaleConditionVO saleConditionVO = new SaleConditionVO();
 		
 		Vector<StockReceiptPO> stockReceiptPOs = stock.queryReceipt(conditionVO);
+		Vector<SaleReceiptPO> saleReceiptPOs = sale.queryReceipt(conditionVO);
+		Vector<GoodsRecordVO> goodsRecordVOs = sale.querySaleRecord(saleConditionVO);
+		
+		
 		for (StockReceiptPO stockReceiptPO : stockReceiptPOs) {
-			money.add(stockReceiptPO.getTotalValue());
-			//TODO add statistic of num
+			out.add(stockReceiptPO.getTotalValue());
+			//TODO  num
 		}
-		result = new InOutRepoPO(money, num);
+		for (SaleReceiptPO saleReceiptPO : saleReceiptPOs) {
+			in.add(saleReceiptPO.getTotalValue());
+			//TODO  num
+		}
+		result = new InOutRepoVO(in, out, in_num,out_num, start, end);
+		repoExaminDataService.insert(result);
 		return result;
+	}
+	
+	
+	public void refresh() throws Exception {
+		//TODO
+	}
+
+	public void synchronize() throws Exception {
+		//TODO
 	}
 
 }

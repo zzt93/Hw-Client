@@ -1,8 +1,9 @@
 package dataservice.Strategydataservice;
 
-import java.rmi.RemoteException;
+import po.ResultMessage;
+import po.StrategyPO;
 
-import po.*;
+import java.rmi.RemoteException;
 
 public interface StrategyDataService {
 	public ResultMessage confirm(StrategyPO strategyPO) throws RemoteException;

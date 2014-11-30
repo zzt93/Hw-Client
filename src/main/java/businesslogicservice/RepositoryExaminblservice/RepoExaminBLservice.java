@@ -1,7 +1,7 @@
 package businesslogicservice.RepositoryExaminblservice;
 
-import po.InOutRepoPO;
+import vo.InOutRepoVO;
 
 public interface RepoExaminBLservice {
-	InOutRepoPO countInOut(String start, String end) throws Exception;
+	InOutRepoVO countInOut(String start, String end) throws Exception;
 }

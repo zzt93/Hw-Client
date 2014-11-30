@@ -1,10 +1,10 @@
 package businesslogic.SetAccountbl;
 
+import businesslogicservice.SetAccountblservice.SetAccountblservice;
 import po.ClientPO;
 import po.ResultMessage;
 import vo.BankVO;
 import vo.GoodsVO;
-import businesslogicservice.SetAccountblservice.SetAccountblservice;
 
 public class AccountController implements SetAccountblservice {
 	SetAccount setAccount=new SetAccount();

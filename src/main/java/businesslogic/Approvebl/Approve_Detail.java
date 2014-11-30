@@ -1,7 +1,7 @@
 package businesslogic.Approvebl;
 
-import po.ReceiptPO;
 import businesslogicservice.Approveblservice.Approve_Detail_BLservice;
+import po.ReceiptPO;
 
 public class Approve_Detail implements Approve_Detail_BLservice{
 

@@ -1,11 +1,10 @@
 package businesslogic.RunningTablebl;
 
-import java.util.Vector;
-
-import po.ResultMessage;
+import businesslogic.Salebl.SaleUtilityImpl;
 import vo.GoodsRecordVO;
 import vo.SaleConditionVO;
-import businesslogic.Salebl.SaleUtilityImpl;
+
+import java.util.Vector;
 
 public class MockSaleUtilityImpl extends SaleUtilityImpl{
 	public MockSaleUtilityImpl(){

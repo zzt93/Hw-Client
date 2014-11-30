@@ -1,8 +1,9 @@
 package po;
 
-import vo.BankVO;
 import vo.PayVO;
-
+/**
+ * Created by MethyleneBlue on 2014/10/??.
+ */
 public class PayPO extends ReceiptPO{
 	String client,operator;
 	BkTransPO[] bankList;

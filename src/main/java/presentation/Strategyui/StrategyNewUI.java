@@ -1,26 +1,13 @@
 package presentation.Strategyui;
 
-import java.awt.EventQueue;
+import po.*;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import businesslogic.Strategybl.StrategyController;
-import businesslogicservice.Strategyblservice.Strategy_New_BLservice;
-import po.CatOfCondition;
-import po.CatOfTreatment;
-import po.Condition;
-import po.GoodsPO;
-import po.TimePeriod;
-import po.Treatment;
-
-import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 public class StrategyNewUI {

@@ -1,15 +1,8 @@
 package presentation.AnotherClientUI;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
 public class ClientUI extends JPanel {
 	/**
