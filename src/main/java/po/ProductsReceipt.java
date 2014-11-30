@@ -15,12 +15,13 @@ public class ProductsReceipt implements Serializable {
     private BigDecimal price;
     private BigDecimal total_value;
     private String comment;
-
-    public ProductsReceipt(int commodity_id, int number, BigDecimal price, String comment) {
+    private String type;
+    public ProductsReceipt(int commodity_id, int number, BigDecimal price, String comment,String type) {
         this.commodity_id = commodity_id;
         this.number = number;
         this.price = price;
         this.comment = comment;
+        this.type=type;
     }
 
     public int getCommodity_id() {

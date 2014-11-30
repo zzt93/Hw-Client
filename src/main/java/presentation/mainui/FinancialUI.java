@@ -33,18 +33,18 @@ public class FinancialUI {
 		frame.setVisible(true);
 		
 		topPanel=new JPanel();
-		topPanel.setBounds(0,0,800,100);
+		topPanel.setBounds(0,0,800,60);
 		topPanel.setLayout(null);
 		frame.add(topPanel);
 		
 		JLabel label = new JLabel("账户：操作员1");
 		label.setFont(new Font("宋体", Font.PLAIN, 18));
-		label.setBounds(590, 20, 150, 70);
+		label.setBounds(590, 20, 150, 50);
 		topPanel.add(label);
 		
 		mainPanel=new JTabbedPane(JTabbedPane.TOP);
 		mainPanel.setFont(new Font("宋体", Font.PLAIN, 18));
-		mainPanel.setBounds(0,105,800,500);
+		mainPanel.setBounds(0,60,800,500);
 		frame.add(mainPanel);
 		mainPanel.add("银行账户",BMF.getPanel());
 		mainPanel.add("财务单据",FRF.getPanel());

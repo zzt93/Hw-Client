@@ -2,7 +2,9 @@ package po;
 
 import org.omg.PortableServer.POA;
 
-
+/**
+ * Created by MethyleneBlue on 2014/10/??.
+ */
 public class ItemPO {
 	String item,remark;
 	double amount;

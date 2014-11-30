@@ -11,6 +11,13 @@ package presentation.Saleui;
  */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -44,6 +51,8 @@ public class ClientUI extends JPanel {
 	private JTextField textFieldUpperBound;
 	private ClientUtilityImpl clientController;
 	private ClientPO client;
+	private List<ClientPO> list=new ArrayList<ClientPO>();
+	PublicTableModel tableModel;
 	JTable listTable;
 	JComboBox typeBox;
 	/**
@@ -61,26 +70,28 @@ public class ClientUI extends JPanel {
 		panel.setLayout(null);
 				
 		textField = new JTextField();
-		textField.setBounds(40, 41, 557, 21);
+		textField.setBounds(40, 41, 557, 30);
 		panel.add(textField);
 		textField.setColumns(10);
+		textField.addKeyListener(new Search());
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(40, 107, 570, 271);
 		panel.add(scrollPane);
-		String[] header = new String[]{"姓名","编号","类型","电话","地址","邮编","E-mail","上限","应收","应付","操作员"};
-		
-		TableModel tm = new DefaultTableModel(new String[2][11],header);
-		listTable = new JTable(tm);
+		tableModel=new PublicTableModel(ModelType.CLIENT);
+		listTable = new JTable(tableModel);
+		listTable.addMouseListener(new MouseClick());
 		scrollPane.setViewportView(listTable);
 		
 		JButton buttonModify = new JButton("修改客户");
 		buttonModify.setBounds(132, 426, 93, 23);
 		panel.add(buttonModify);
+		buttonModify.addActionListener(new Modify());
 		
 		JButton buttonDelete = new JButton("删除客户");
 		buttonDelete.setBounds(302, 426, 93, 23);
 		panel.add(buttonDelete);
+		buttonDelete.addActionListener(new Delete());
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("增加客户", null, panel_1, null);
@@ -182,7 +193,7 @@ public class ClientUI extends JPanel {
 				type=ClientType.STOCKER;
 			}
 			else{
-				//报错，未选择
+				JOptionPane.showMessageDialog(null, "请选择用户类型");
 			}
 			client=new ClientPO(type,ClientLevel.LEVEL1,textFieldName.getText(),textFieldPhone.getText()
 					,textFieldAddress.getText(),textFieldZip.getText(),textFieldEmail.getText(),"操作员");
@@ -200,7 +211,12 @@ public class ClientUI extends JPanel {
 				if(row==-1){
 					JOptionPane.showMessageDialog(null, "未选中客户");
 				}else{
-					//删除操作
+					client=list.get(row);
+					try {
+						clientController.deleteClient(client.getId());
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+					}
 				}
 		}
 	}
@@ -211,12 +227,43 @@ public class ClientUI extends JPanel {
 					JOptionPane.showMessageDialog(null, "未选中客户");
 				}else{
 					//修改操作
+					ClientPanel pane=new ClientPanel(list.get(row));
+					pane.modify();
 				}
 		}
 	}
-	public class Search implements ActionListener{
-			public void actionPerformed(ActionEvent e){	
-				
+	public class Search extends KeyAdapter{
+			public void keyPressed(KeyEvent e){
+				if(e.getKeyCode()==10){
+					HashMap<String,Object> map=new HashMap<String,Object>();
+					map.put("name", textField.getText());
+					
+//					try {
+//						list=clientController.queryClient(map);
+//					} catch (Exception e1) {
+//						JOptionPane.showMessageDialog(null, e1.getMessage());
+//					}
+					
+					//测试代码
+					{
+						list.add(new ClientPO());
+						tableModel.update(list);
+					}
+				}
+			}
+	}
+	public class MouseClick extends MouseAdapter{
+		public void mouseClicked(MouseEvent e){
+			int row=listTable.getSelectedRow();
+			if(row==-1){
+				JOptionPane.showMessageDialog(null, "未选中客户");
+			}else{
+				if(e.getClickCount()>=2){
+					ClientPanel pane=new ClientPanel(list.get(row));
+				}
+				ClientPanel pane=new ClientPanel(list.get(row));
+				pane.show();
+			}
 		}
 	}
 }

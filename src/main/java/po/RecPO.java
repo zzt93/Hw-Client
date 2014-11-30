@@ -2,7 +2,9 @@ package po;
 
 import vo.BankVO;
 import vo.RecVO;
-
+/**
+ * Created by MethyleneBlue on 2014/10/??.
+ */
 public class RecPO extends ReceiptPO {
 	public String client,operator;
 	public BkTransPO[] bankList;
