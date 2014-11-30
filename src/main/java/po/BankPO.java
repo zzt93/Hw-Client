@@ -1,15 +1,13 @@
 package po;
 
 import vo.BankVO;
-<<<<<<< HEAD
 /**
  * Created by MethyleneBlue on 2014/10/??.
  */
-=======
+
 
 import java.io.Serializable;
 
->>>>>>> origin/master
 public class BankPO implements Serializable{
 	String name;
 	double balance;
