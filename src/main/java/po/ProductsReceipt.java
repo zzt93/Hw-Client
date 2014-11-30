@@ -12,16 +12,33 @@ public class ProductsReceipt implements Serializable {
 
     private int commodity_id;
     private int number;
+    private String name;
     private BigDecimal price;
     private BigDecimal total_value;
     private String comment;
     private String type;
-    public ProductsReceipt(int commodity_id, int number, BigDecimal price, String comment,String type) {
+    public ProductsReceipt(int commodity_id, int number, BigDecimal price, String comment,String type,String name) {
         this.commodity_id = commodity_id;
         this.number = number;
         this.price = price;
         this.comment = comment;
         this.type=type;
+        total_value=new BigDecimal(0);
+        price=price.multiply(new BigDecimal(number));
+        total_value=total_value.add(price);
+    }
+    public ProductsReceipt(){}
+    public String getName(){
+    	return name;
+    }
+    public void setName(String name){
+    	this.name=name;
+    }
+    public String getType(){
+    	return type;
+    }
+    public void setType(String type){
+    	this.type=type;
     }
 
     public int getCommodity_id() {
@@ -55,4 +72,8 @@ public class ProductsReceipt implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    
+    public BigDecimal getTotal(){
+    	return total_value;
+    } 
 }

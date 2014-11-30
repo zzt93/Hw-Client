@@ -1,5 +1,7 @@
 package presentation.Saleui;
 
+import java.util.Vector;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -11,6 +13,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle;
+
+import po.ProductsReceipt;
+import po.StockReceiptPO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -45,16 +50,16 @@ public class Stock1 extends JPanel {
         operator_label = new JLabel();
         jLabel3 = new JLabel();
         jLabel4 = new JLabel();
-        jTextField1 = new JTextField();
-        jTextField2 = new JTextField();
-        jTextField3 = new JTextField();
+        textClient = new JTextField();
+        textSalesman = new JTextField();
+        textRepository = new JTextField();
         jComboBox1 = new JComboBox();
         jScrollPane1 = new JScrollPane();
         jTable1 = new JTable();
         jPanel1 = new JPanel();
         jLabel13 = new JLabel();
         jScrollPane2 = new JScrollPane();
-        jTextPane1 = new JTextPane();
+        textComment = new JTextPane();
         jPanel2 = new JPanel();
         jPanel3 = new JPanel();
         jButton1 = new JButton();
@@ -72,20 +77,20 @@ public class Stock1 extends JPanel {
 
         jLabel4.setText("单据类型");
 
-        jTextField1.setText("请输入供应商");
+        textClient.setText("请输入供应商");
 
-        jTextField2.setText("请输入业务员");
+        textSalesman.setText("请输入业务员");
 
-        jTextField3.setText("请输入仓库");
+        textRepository.setText("请输入仓库");
 
         jComboBox1.setModel(new DefaultComboBoxModel(new String[] { "进货","进货退货"}));
 
-        jTable1.setModel(new GoodsTableModel());
+        jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel13.setText("备注");
 
-        jScrollPane2.setViewportView(jTextPane1);
+        jScrollPane2.setViewportView(textComment);
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -189,15 +194,15 @@ public class Stock1 extends JPanel {
                 .addGap(36, 36, 36)
                 .addComponent(custom_label)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(textClient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(operator_label)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(textSalesman, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(textRepository, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
@@ -220,9 +225,9 @@ public class Stock1 extends JPanel {
             .addGroup(saleLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(saleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textClient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textSalesman, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textRepository, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGroup(saleLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
@@ -266,27 +271,23 @@ public class Stock1 extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        goodsPane.showAddPane();
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+    	stockReceipt=new StockReceiptPO(textClient.getText(),textRepository.getText(),
+    			textSalesman.getText(),textComment.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JLabel custom_label;
     private JButton jButton1;
     private JButton jButton2;
-//    private JButton jButton3;
     private JComboBox jComboBox1;
-//    private JLabel jLabel10;
-//    private JLabel jLabel11;
-//    private JLabel jLabel12;
     private JLabel jLabel13;
     private JLabel jLabel3;
     private JLabel jLabel4;
-//    private JLabel jLabel5;
-//    private JLabel jLabel6;
-//    private JLabel jLabel7;
-//    private JLabel jLabel8;
-//    private JLabel jLabel9;
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JPanel jPanel3;
@@ -294,11 +295,16 @@ public class Stock1 extends JPanel {
     private JScrollPane jScrollPane2;
     private JScrollPane jScrollPane3;
     private JTable jTable1;
-    private JTextField jTextField1;
-    private JTextField jTextField2;
-    private JTextField jTextField3;
-    private JTextPane jTextPane1;
+    private JTextField textClient;
+    private JTextField textSalesman;
+    private JTextField textRepository;
+    private JTextPane textComment;
     private JLabel operator_label;
     private JPanel sale;
+    
+    private PublicTableModel tableModel=new PublicTableModel(ModelType.GOODS);
+    private StockReceiptPO stockReceipt;
+    private Vector<ProductsReceipt> list=new Vector<ProductsReceipt>();
+    private GoodsPanel goodsPane=new GoodsPanel(list,tableModel,GoodsPaneType.STOCK);
     // End of variables declaration//GEN-END:variables
 }

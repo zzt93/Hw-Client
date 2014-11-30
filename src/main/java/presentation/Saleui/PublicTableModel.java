@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import po.ClientPO;
+import po.ProductsReceipt;
 import vo.BankVO;
 
 public class PublicTableModel extends DefaultTableModel {
@@ -30,6 +31,10 @@ public class PublicTableModel extends DefaultTableModel {
 					"级别","应收","应付","业务员"};
 			setDataVector(data,name);
 			break;		
+		case GOODS:
+			name=new String[]{"商品编号","商品名称","型号","数量","单价","金额","备注"};
+			setDataVector(data,name);
+			break;
 		}
 	}
 	public boolean isCellEditable(int row,int column){
@@ -65,6 +70,17 @@ public class PublicTableModel extends DefaultTableModel {
 			data[i][2]=temp.remark;
 		}
 		update(data);
+	}
+	public void addRow(ProductsReceipt pr){
+		Object[] data=new Object[7];
+		data[0]=pr.getCommodity_id();
+		data[1]=pr.getName();
+		data[2]=pr.getType();
+		data[3]=pr.getNumber();
+		data[4]=pr.getPrice();
+		data[5]=pr.getTotal();
+		data[6]=pr.getComment();
+		addRow(data);
 	}
 	
 }
