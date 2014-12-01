@@ -1,23 +1,19 @@
 package businesslogic.RepoCheck;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import businesslogic.RepositoryCheckbl.Exporter;
 import net.sf.jxls.exception.ParsePropertyException;
-
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Before;
 import org.junit.Test;
-
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
 import po.RepoPO;
 import vo.GoodsVO;
-import businesslogic.RepositoryCheckbl.Exporter;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Exporter_test {
 

@@ -1,9 +1,7 @@
 package businesslogic.GoodsListbl;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import businesslogic.GoodsTypebl.GT_controller;
+import businesslogicservice.GoodsListblservice.*;
 import dataservice.GoodsListdataservice.GoodsListDataService;
 import po.GoodsListPO;
 import po.GoodsModelPO;
@@ -12,13 +10,10 @@ import po.RepoReceiptPO;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 import vo.SignalVO;
-import businesslogic.GoodsTypebl.GT_controller;
-import businesslogicservice.GoodsListblservice.GLBLservice;
-import businesslogicservice.GoodsListblservice.GL_GT_BLservice;
-import businesslogicservice.GoodsListblservice.GL_account_BLservice;
-import businesslogicservice.GoodsListblservice.GL_receipt_BLservice;
-import businesslogicservice.GoodsListblservice.GL_signal_BLservice;
-import businesslogicservice.GoodsListblservice.GL_stock_BLservice;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		 GL_receipt_BLservice, GL_signal_BLservice, GL_stock_BLservice, GLBLservice {

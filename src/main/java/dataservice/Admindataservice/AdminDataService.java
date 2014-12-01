@@ -1,9 +1,9 @@
 package dataservice.Admindataservice;
 
-import java.rmi.RemoteException;
-
 import po.ResultMessage;
 import po.UserPO;
+
+import java.rmi.RemoteException;
 
 public interface AdminDataService {
 	public ResultMessage confirm(UserPO upo) throws RemoteException;

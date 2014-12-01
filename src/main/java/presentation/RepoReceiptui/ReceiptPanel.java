@@ -1,6 +1,6 @@
 package presentation.RepoReceiptui;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class ReceiptPanel extends JPanel {
 

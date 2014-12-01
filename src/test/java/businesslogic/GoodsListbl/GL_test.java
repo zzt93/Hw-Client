@@ -1,13 +1,10 @@
 package businesslogic.GoodsListbl;
 
-import static org.junit.Assert.*;
-
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
-
 import vo.GoodsModelVO;
+
+import static org.junit.Assert.assertTrue;
 
 public class GL_test {
 

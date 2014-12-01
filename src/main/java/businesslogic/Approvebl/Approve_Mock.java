@@ -1,11 +1,10 @@
 package businesslogic.Approvebl;
 
-import java.util.ArrayList;
-
 import businesslogicservice.Approveblservice.Approve_Detail_BLservice;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
-
 import po.ReceiptPO;
+
+import java.util.ArrayList;
 
 
 public class Approve_Mock implements Approve_Detail_BLservice,Approve_List_BLservice{

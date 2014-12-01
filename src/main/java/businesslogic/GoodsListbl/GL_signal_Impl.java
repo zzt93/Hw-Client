@@ -1,13 +1,12 @@
 package businesslogic.GoodsListbl;
 
-import java.util.HashMap;
-
+import businesslogicservice.GoodsListblservice.GL_signal_BLservice;
 import po.GoodsListPO;
 import po.GoodsModelPO;
-import po.ResultMesPO;
 import vo.GoodsVO;
 import vo.SignalVO;
-import businesslogicservice.GoodsListblservice.GL_signal_BLservice;
+
+import java.util.HashMap;
 
 public class GL_signal_Impl implements GL_signal_BLservice {
 	

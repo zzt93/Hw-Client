@@ -1,13 +1,9 @@
 package businesslogic.RunningTablebl;
 
+import businesslogicservice.RunningTableblservice.RunningTableblservice;
 import po.ReceiptPO;
 import po.ResultMessage;
-import vo.GoodsRecordVO;
-import vo.ProfitVO;
-import vo.ReceiptConditionVO;
-import vo.SaleConditionVO;
-import vo.TimeConditionVO;
-import businesslogicservice.RunningTableblservice.RunningTableblservice;
+import vo.*;
 
 public class RunningTable_stub implements RunningTableblservice {
 	ResultMessage right=new ResultMessage(null,null);

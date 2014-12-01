@@ -1,7 +1,8 @@
 package businesslogic.FinancialReceiptbl;
 
-import vo.*;
-import businesslogic.FinancialReceiptbl.FinancialReceipt_stub;
+import vo.CashVO;
+import vo.PayVO;
+import vo.RecVO;
 
 public class FinancialReceipt_driver {
 	public void driver(FinancialReceipt_stub finReceipt){

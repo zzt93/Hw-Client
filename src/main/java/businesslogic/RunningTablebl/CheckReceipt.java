@@ -1,23 +1,16 @@
 package businesslogic.RunningTablebl;
 
-import java.util.ArrayList;
-import java.util.Vector;
 import businesslogic.FinancialReceiptbl.FinReceiptController;
 import businesslogic.RepoReceiptbl.RepoReceiptBLImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
-import po.RecPO;
 import po.ReceiptPO;
-import po.ReceiptType;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
-import vo.CashVO;
-import vo.GoodsReceiptVO;
-import vo.GoodsVO;
-import vo.PayVO;
-import vo.RecVO;
-import vo.ReceiptConditionVO;
-import vo.RepoReceiptVO;
+import vo.*;
+
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class CheckReceipt {
 	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception{

@@ -1,5 +1,7 @@
 package po;
-
+/**
+ * Created by MethyleneBlue on 2014/10/??.
+ */
 
 public class BkTransPO {
 	public String name;

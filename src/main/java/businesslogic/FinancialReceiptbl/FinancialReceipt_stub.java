@@ -1,10 +1,10 @@
 package businesslogic.FinancialReceiptbl;
 
+import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
 import po.ResultMessage;
 import vo.CashVO;
 import vo.PayVO;
 import vo.RecVO;
-import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
 
 public class FinancialReceipt_stub implements FinancialReceiptblservice {
 	ResultMessage right=new ResultMessage(null,null);

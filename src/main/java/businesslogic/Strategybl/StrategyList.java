@@ -1,18 +1,17 @@
 package businesslogic.Strategybl;
 
+import businesslogic.Clientbl.ClientUtilityImpl;
+import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
+import dataservice.Strategydataservice.StrategyDataService;
+import po.*;
+import util.RMIUtility;
+
 import java.math.BigDecimal;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
-
-import dataservice.Strategydataservice.StrategyDataService;
-import businesslogic.Clientbl.ClientUtilityImpl;
-import businesslogic.GoodsListbl.GL_manager_repo_Impl;
-import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
-import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
-import po.*;
-import util.RMIUtility;
 
 public class StrategyList implements Strategy_List_BLservice {
 	private ArrayList<StrategyPO> list;
@@ -68,44 +67,40 @@ public class StrategyList implements Strategy_List_BLservice {
 		}
 	}
 
-	public ArrayList<SaleReceiptPO> usingStrategy(SaleReceiptPO po) throws Exception {
+	public ArrayList<StrategyPO> queryValidStrategy(SaleReceiptPO po) throws Exception {
 		ClientUtilityImpl cu = new ClientUtilityImpl();
 
 		ClientPO cl = cu.queryClientById(po.getClientId());
-		ArrayList<SaleReceiptPO> pos = new ArrayList<SaleReceiptPO>();
+		ArrayList<StrategyPO> pos = new ArrayList<StrategyPO>();
 		for (StrategyPO spo : list) {
 			if (spo.getCondition().type == CatOfCondition.CUSTOMERLEVEL
 					&& spo.getCondition().getCustomerLevel() <= cl.getLevel()
 							.ordinal() + 1) {
-				SaleReceiptPO npo = new SaleReceiptPO(po);
-				setTreatment(spo, npo);
 
-				pos.add(po);
+
+				pos.add(spo);
 
 
 			} else if (spo.getCondition().type == CatOfCondition.TOTALPRICE
 					&& BigDecimal.valueOf(spo.getCondition().getTotalPrice())
 							.compareTo(po.getActualValue()) > 0) {
-				SaleReceiptPO npo = new SaleReceiptPO(po);
-				setTreatment(spo,npo);
-				pos.add(po);
+
+				pos.add(spo);
 
 			} else if(spo.getCondition().type == CatOfCondition.COMPOSITION){
 				ArrayList<GoodsPO> goodsPO = spo.getCondition().composition;
-				Vector<ProductsReceipt> products = po.getProductList();
+				List<ProductsReceipt> products = po.getProductList();
 				int temp = 0;
 				for(ProductsReceipt pr:products){
 					for(GoodsPO tempPO:goodsPO){
-						if(pr.getId().equals(tempPO.getId())){
+						if(String.valueOf(pr.getCommodity_id()).equals(tempPO.getId())){
 							temp++;
 							break;
 						}
 					}
 				}
 				if(temp==goodsPO.size()){
-					SaleReceiptPO npo = new SaleReceiptPO(po);
-					setTreatment(spo,npo);
-					pos.add(po);
+					pos.add(spo);
 				}
 				
 			}

@@ -1,7 +1,9 @@
 package po;
 
 import vo.CashVO;
-
+/**
+ * Created by MethyleneBlue on 2014/10/??.
+ */
 public class CashPO extends ReceiptPO{
 	public String number,operator;
 	public double total=0;

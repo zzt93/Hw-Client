@@ -1,9 +1,9 @@
 package businesslogic.SetAccountbl;
 
+import businesslogicservice.SetAccountblservice.SetAccountblservice;
 import po.ClientPO;
 import vo.BankVO;
 import vo.GoodsVO;
-import businesslogicservice.SetAccountblservice.SetAccountblservice;
 
 public class SetAccount_stub implements SetAccountblservice {
 

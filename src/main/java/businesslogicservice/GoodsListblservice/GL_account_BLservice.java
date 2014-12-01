@@ -1,9 +1,9 @@
 package businesslogicservice.GoodsListblservice;
 
-import java.util.ArrayList;
-
 import po.GoodsListPO;
 import vo.GoodsModelVO;
+
+import java.util.ArrayList;
 
 public interface GL_account_BLservice {
 	GoodsListPO initialize(String account) throws Exception;

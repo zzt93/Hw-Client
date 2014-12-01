@@ -1,8 +1,8 @@
 package po;
 
-import java.util.ArrayList;
-
 import vo.TreeNodeVO;
+
+import java.util.ArrayList;
 
 public class TreeNodePO {
 	@Override

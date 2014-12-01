@@ -1,11 +1,11 @@
 package dataservice.RepositoryCheckdataservice;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-
 import po.RepoFilterPO;
 import po.RepoPO;
 import po.ResultMessage;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface RepoCheckDataService {
 	ResultMessage<ArrayList<RepoPO>> getRepo() throws RemoteException;

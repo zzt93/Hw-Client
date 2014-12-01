@@ -1,21 +1,16 @@
 package businesslogic.Strategybl;
 
+import businesslogic.GoodsListbl.GL_manager_repo_Impl;
+import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
+import businesslogicservice.Strategyblservice.Strategy_New_BLservice;
+import dataservice.Strategydataservice.StrategyDataService;
+import po.*;
+import util.RMIUtility;
+
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import dataservice.Strategydataservice.StrategyDataService;
-import po.Condition;
-import po.GoodsPO;
-import po.ResultMessage;
-import po.StrategyPO;
-import po.TimePeriod;
-import po.Treatment;
-import util.RMIUtility;
-import businesslogic.GoodsListbl.GL_manager_repo_Impl;
-import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
-import businesslogicservice.Strategyblservice.Strategy_New_BLservice;
 
 public class StrategyNew implements Strategy_New_BLservice {
 	

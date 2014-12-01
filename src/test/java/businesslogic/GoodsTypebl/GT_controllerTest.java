@@ -1,11 +1,10 @@
 package businesslogic.GoodsTypebl;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import vo.TreeNodeVO;
+
+import static org.junit.Assert.assertTrue;
 
 public class GT_controllerTest {
 

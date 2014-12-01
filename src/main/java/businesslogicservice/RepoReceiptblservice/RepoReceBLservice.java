@@ -1,15 +1,9 @@
 package businesslogicservice.RepoReceiptblservice;
 
-import java.util.ArrayList;
-
-import po.GoodsReceiptPO;
 import po.ReceiptPO;
-import po.RepoReceiptPO;
-import vo.GoodsModelVO;
-import vo.GoodsReceiptVO;
-import vo.GoodsVO;
-import vo.ReceiptConditionVO;
-import vo.RepoReceiptVO;
+import vo.*;
+
+import java.util.ArrayList;
 
 
 public interface RepoReceBLservice {
