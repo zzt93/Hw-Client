@@ -1,16 +1,15 @@
 package businesslogic.GoodsListbl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import businesslogicservice.GoodsListblservice.GL_receipt_BLservice;
+import businesslogicservice.GoodsListblservice.GL_stock_BLservice;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
 import po.RepoReceiptPO;
-import vo.GoodsModelVO;
 import vo.GoodsVO;
-import businesslogicservice.GoodsListblservice.GL_receipt_BLservice;
-import businesslogicservice.GoodsListblservice.GL_stock_BLservice;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GL_stock_rece_Impl implements GL_stock_BLservice,
 		GL_receipt_BLservice {

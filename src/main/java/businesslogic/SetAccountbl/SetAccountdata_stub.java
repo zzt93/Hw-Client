@@ -1,9 +1,12 @@
 package businesslogic.SetAccountbl;
 
-import java.rmi.RemoteException;
-
 import dataservice.SetAccountdataservice.SetAccountdataservice;
-import po.*;
+import po.BankPO;
+import po.ClientPO;
+import po.GoodsPO;
+import po.ResultMessage;
+
+import java.rmi.RemoteException;
 
 
 public class SetAccountdata_stub implements SetAccountdataservice {

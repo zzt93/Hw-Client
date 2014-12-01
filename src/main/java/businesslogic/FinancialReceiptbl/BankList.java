@@ -1,8 +1,8 @@
 package businesslogic.FinancialReceiptbl;
 
-import java.util.ArrayList;
-
 import po.BkTransPO;
+
+import java.util.ArrayList;
 
 public class BankList {
 	ArrayList<BkTransPO> list=new ArrayList<BkTransPO>();

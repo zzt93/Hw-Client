@@ -9,8 +9,6 @@ import po.SaleReceiptPO;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import static org.junit.Assert.*;
-
 public class SaleUtilityImplTest {
 
     private static SaleUtility impl;

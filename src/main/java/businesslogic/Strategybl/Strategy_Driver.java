@@ -1,13 +1,9 @@
 package businesslogic.Strategybl;
 
+import po.*;
+
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
-import po.CatOfCondition;
-import po.CatOfTreatment;
-import po.Condition;
-import po.StrategyPO;
-import po.Treatment;
 public class Strategy_Driver{
 	
 	public void drive(StrategyList sl,StrategyPO spo){

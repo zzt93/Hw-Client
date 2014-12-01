@@ -1,11 +1,8 @@
 package businesslogic.RepoExamin;
 
-import static org.junit.Assert.*;
-
+import businesslogic.RepositoryExaminbl.RepoExaminBLImpl;
 import org.junit.Before;
 import org.junit.Test;
-
-import businesslogic.RepositoryExaminbl.RepoExaminBLImpl;
 
 public class RepoExaminBLImplTest {
 

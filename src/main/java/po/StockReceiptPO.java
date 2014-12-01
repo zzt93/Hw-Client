@@ -3,7 +3,6 @@ package po;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Created by Nifury on 2014/10/20.

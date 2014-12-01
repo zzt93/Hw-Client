@@ -1,10 +1,9 @@
 package businesslogicservice.GoodsTypeblservice;
 
-import java.util.ArrayList;
-
 import po.GoodsListPO;
-import vo.GoodsVO;
 import vo.TreeNodeVO;
+
+import java.util.ArrayList;
 
 public interface GT_GL_BLservice {
 	

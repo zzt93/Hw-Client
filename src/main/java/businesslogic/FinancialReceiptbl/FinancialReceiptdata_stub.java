@@ -1,13 +1,9 @@
 package businesslogic.FinancialReceiptbl;
 
-import java.rmi.RemoteException;
-
 import dataservice.FinancialReceiptdataservice.FinancialReceiptdataservice;
-import po.CashPO;
-import po.PayPO;
-import po.RecPO;
-import po.ReceiptPO;
-import po.ResultMessage;
+import po.*;
+
+import java.rmi.RemoteException;
 
 public class FinancialReceiptdata_stub implements FinancialReceiptdataservice {
 	ResultMessage result=new ResultMessage(null,null);

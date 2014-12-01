@@ -1,8 +1,8 @@
 package businesslogic.SetAccountbl;
 
-import java.util.ArrayList;
-
 import po.ClientPO;
+
+import java.util.ArrayList;
 
 public class ClientList {
 ArrayList<ClientPO> list=new ArrayList<ClientPO>();

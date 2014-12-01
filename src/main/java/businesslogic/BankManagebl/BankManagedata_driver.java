@@ -1,10 +1,10 @@
 package businesslogic.BankManagebl;
 
-import java.rmi.RemoteException;
-
 import po.BankPO;
 import po.ResultMessage;
 import vo.BankVO;
+
+import java.rmi.RemoteException;
 
 public class BankManagedata_driver {
 	ResultMessage result;

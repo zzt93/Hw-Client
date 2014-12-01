@@ -1,16 +1,10 @@
 package presentation.mainui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-
 import presentation.Approveui.ApproveUI;
 import presentation.Strategyui.StrategyListUI;
 
-
-import javax.swing.JTabbedPane;
+import javax.swing.*;
+import java.awt.*;
 
 public class ManagerUI {
 

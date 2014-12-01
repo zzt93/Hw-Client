@@ -1,14 +1,14 @@
 package businesslogic.RunningTablebl;
 
-import java.util.ArrayList;
-
+import businesslogic.FinancialReceiptbl.FinReceiptController;
 import po.CashPO;
 import po.ReceiptPO;
 import po.ReceiptType;
 import po.ResultMessage;
 import vo.CashVO;
 import vo.ReceiptConditionVO;
-import businesslogic.FinancialReceiptbl.FinReceiptController;
+
+import java.util.ArrayList;
 
 public class MockFinReceiptController extends FinReceiptController{
 	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception{

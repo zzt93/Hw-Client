@@ -1,15 +1,11 @@
 package presentation.RepoUI;
 
 import java.awt.BasicStroke;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;

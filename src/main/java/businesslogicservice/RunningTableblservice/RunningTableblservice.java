@@ -1,6 +1,6 @@
 package businesslogicservice.RunningTableblservice;
 
-import po.*;
+import po.ReceiptPO;
 import vo.*;
 
 public interface RunningTableblservice {

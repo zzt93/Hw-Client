@@ -1,12 +1,12 @@
 package businesslogic.GoodsTypebl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import businesslogicservice.GoodsListblservice.GL_GT_BLservice;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import vo.GoodsModelVO;
-import businesslogicservice.GoodsListblservice.GL_GT_BLservice;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Mock_GL_controller implements GL_GT_BLservice{
 	

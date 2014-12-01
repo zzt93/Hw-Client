@@ -1,17 +1,14 @@
 package presentation.RepositoryExaminui;
 
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import businesslogic.RepositoryExaminbl.RepoExaminBLImpl;
+import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
+
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-
-import businesslogic.RepositoryExaminbl.RepoExaminBLImpl;
-import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
 
 public class TablePanel extends JPanel implements TableModelListener{
 

@@ -1,6 +1,6 @@
 package presentation.RepositoryCheckui;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class RepositoryCheckDriver {
 	public static void main(String[] args) {

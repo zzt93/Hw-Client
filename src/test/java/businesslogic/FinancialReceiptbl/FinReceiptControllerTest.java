@@ -1,15 +1,13 @@
 package businesslogic.FinancialReceiptbl;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import businesslogic.FinancialReceiptbl.FinReceiptController;
 import po.BkTransPO;
 import po.ItemPO;
 import vo.CashVO;
 import vo.PayVO;
+
+import static org.junit.Assert.assertTrue;
 
 public class FinReceiptControllerTest {
 
