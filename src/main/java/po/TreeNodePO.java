@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import vo.TreeNodeVO;
 
 public class TreeNodePO {
+	@Override
+	public String toString() {
+		return "TreeNodePO [type=" + type + "\n type_so_far=" + type_so_far
+				+ "\n fa=" + fa.type + "\n sons=" + sons + "]\n";
+	}
+
+
 	String type;
 	
 	/*

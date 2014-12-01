@@ -17,7 +17,11 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 	RepoCheckDataService repoCheckDataService;
 	ArrayList<RepoPO> checkRes;
 
-	public RepoCheckBLImpl() throws RemoteException {
+	public ArrayList<RepoPO> getCheckRes() {
+		return checkRes;
+	}
+
+	public RepoCheckBLImpl() throws RemoteException, NullPointerException {
 		this.gl_repo_BLservice = new GL_manager_repo_Impl();
 		expoter = new Exporter();
 		repoCheckDataService = new RepoCheckDataImpl();
@@ -33,11 +37,11 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 	}
 
 	@Override
-	public boolean export() throws Exception {
-		if (checkRes.isEmpty() || checkRes == null) {
+	public boolean export(int which) throws Exception {
+		if (checkRes.isEmpty() || checkRes == null || which < checkRes.size() - 1) {
 			return false;
 		}
-		expoter.export_excel(checkRes.get(checkRes.size() - 1));
+		expoter.export_excel(checkRes.get(which));
 		return true;
 	}
 

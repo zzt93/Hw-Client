@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,7 +23,9 @@ public class NodePanel extends javax.swing.JPanel {
     /**
      * Creates new form NodePanel
      */
-    public NodePanel() {
+	String type_info;
+    public NodePanel(String type) {
+    	this.type_info = type;
         initComponents();
     }
 
@@ -93,7 +98,7 @@ public class NodePanel extends javax.swing.JPanel {
             }
         });
 
-        type.setText("Light/灯");
+        type.setText(type_info);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,7 +172,12 @@ public class NodePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_delActionPerformed
 
     private void checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActionPerformed
-        // TODO add your handling code here:
+    	//TODO
+    	JLabel label1 = new JLabel("Full type:");
+    	JLabel label2 = new JLabel("Children:");
+    	JLabel full_type = new JLabel();//type so far and \n
+    	JLabel childern = new JLabel("\n"+"\n");
+        JOptionPane.showMessageDialog(MainFrame.frame, new Object[]{label1, full_type, label2, childern});
     }//GEN-LAST:event_checkActionPerformed
 
     private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered

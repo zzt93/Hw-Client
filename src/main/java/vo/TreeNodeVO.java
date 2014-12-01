@@ -9,8 +9,8 @@ public class TreeNodeVO {
 	public TreeNodeVO(TreeNodePO temNodePO) {
 		// TODO Auto-generated constructor stub
 	}
-	public TreeNodeVO() {
-		// TODO Auto-generated constructor stub
+	public TreeNodeVO(String type) {
+		this.type = type;
 	}
 	public TreeNodeVO(TreeNodeVO father){
 		this.type_so_far = father.type_so_far + type;

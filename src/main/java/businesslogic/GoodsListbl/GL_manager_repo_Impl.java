@@ -3,9 +3,12 @@ package businesslogic.GoodsListbl;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
 import dataservice.GoodsListdataservice.GoodsListDataService;
 import po.GoodsListPO;
 import po.GoodsModelPO;
+import presentation.RepoUI.MainFrame;
 import vo.GoodsVO;
 import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
 import businesslogicservice.GoodsListblservice.GL_repo_BLservice;
@@ -15,7 +18,7 @@ public class GL_manager_repo_Impl implements GL_manager_BLservice, GL_repo_BLser
 	GoodsListPO goodsListPO;
 	GoodsListDataService glDataService = new GoodsListDataImpl("");
 
-	public GL_manager_repo_Impl() throws RemoteException {
+	public GL_manager_repo_Impl() throws RemoteException, NullPointerException{
 		goodsListPO = glDataService.getGoodsList().getObj();
 	}
 	

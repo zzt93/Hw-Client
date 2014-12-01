@@ -1,5 +1,6 @@
 package po;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class RepoPO {
 	
 	public RepoPO(GoodsListPO tem) {
 		count ++;
-		date = new Date().toString();
+		date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		batch = Math.abs(random.nextLong());
 		batchNum = Integer.toHexString(count);
 		

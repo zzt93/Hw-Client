@@ -12,29 +12,37 @@ import businesslogicservice.GoodsTypeblservice.GTBLservice;
 import businesslogicservice.GoodsTypeblservice.GT_GL_BLservice;
 import businesslogicservice.GoodsTypeblservice.GT_account_service;
 
-public class GT_controller implements GT_GL_BLservice, GTBLservice, GT_account_service {
-	
+public class GT_controller implements GT_GL_BLservice, GTBLservice,
+		GT_account_service {
+
 	ArrayList<TreeNodePO> treeNodePOs;
+
+	public ArrayList<TreeNodePO> getTreeNodePOs() {
+		return treeNodePOs;
+	}
+
 	GoodsTypeDateService goodsTypeDateService = new GoodsTypeDataImpl();
+
 	public GT_controller() throws RemoteException {
 		treeNodePOs = goodsTypeDateService.getGoodsTypde().getObj();
-		
 
+		if (treeNodePOs == null) {
+			treeNodePOs.add(new TreeNodePO(new TreeNodeVO("Light/灯")));
+		}
 		gtbLservice = new GTBLImpl(treeNodePOs);
 		gt_gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
-		
+
 		gl_controller = new GL_controller();
 	}
-	
+
 	GTBLservice gtbLservice;
 	GT_GL_BLservice gt_gl_BLservice;
-	
+
 	/*
 	 * for cross modules
 	 */
 	GL_controller gl_controller;
 
-	
 	public boolean add(TreeNodeVO fa, String son_type) throws Exception {
 		if (gl_controller.checkEverHas(fa.getType_so_far())) {
 			return false;
@@ -83,9 +91,34 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice, GT_account_s
 		return gt_gl_BLservice.addable_type();
 	}
 
-	public void update_nodelist(ArrayList<TreeNodeVO> treeNodes, GoodsListPO goodsListPO) throws Exception {
+	public void update_nodelist(ArrayList<TreeNodeVO> treeNodes,
+			GoodsListPO goodsListPO) throws Exception {
 		gt_gl_BLservice.update_nodelist(treeNodes, goodsListPO);
 		goodsTypeDateService.update(null);
 	}
 
+	public int height() {
+		int height = 0;
+		TreeNodePO fa = treeNodePOs.get(0);
+		while (fa != null) {
+			for (TreeNodePO treeNodePO : fa.getSons()) {
+				int temp = travel(treeNodePO, height);
+				if (height > temp) {
+					System.err.println("some thing wrong");
+					assert(false);
+				} else {
+					height = temp;
+				}
+			}
+		}
+		return height;
+	}
+
+	private int travel(TreeNodePO po, int i) {
+		if (po == null) {
+			return i;
+		} else {
+			return travel(po, i + 1);
+		}
+	}
 }

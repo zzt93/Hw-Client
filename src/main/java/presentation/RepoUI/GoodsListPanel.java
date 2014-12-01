@@ -37,12 +37,15 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static boolean DEBUG = false;
+	
 	/**
 	 * Creates new form GoodsListPanel
 	 */
 	GL_controller gl_controller;
 	HashMap<String, GoodsModelPO> goodsModels;
+	ArrayList<GoodsModelVO> goodsModel_add = new ArrayList<GoodsModelVO>();
+	ArrayList<GoodsModelVO> goodsModel_del = new ArrayList<GoodsModelVO>();
+	ArrayList<GoodsModelVO> goodsModel_search = new ArrayList<GoodsModelVO>();
 
 	public GoodsListPanel() {
 		try {
@@ -50,6 +53,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		} catch (RemoteException e) {
 			JOptionPane.showMessageDialog(MainFrame.frame,
 					"Fail to connect to get goods list");
+		} catch (NullPointerException e2){
+			JOptionPane.showMessageDialog(MainFrame.frame,
+					"NullPointerException: Fail to connect to get goods list");
 		}
 		goodsModels = gl_controller.getGoodsModelPOs();
 		initComponents();
@@ -132,7 +138,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		setPreferredSize(new java.awt.Dimension(800, 600));
 		setLayout(new java.awt.CardLayout());
 
-		general_table.setModel(new GL_general_TableModel());
+		general_table.setModel(new GL_general_TableModel(goodsModels));
 		general_table.setColumnSelectionAllowed(true);
 		general_table.getTableHeader().setReorderingAllowed(false);
 		goodslist_pane.setViewportView(general_table);
@@ -354,9 +360,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 		add(gL_main, "GL_main");
 
-		add_table.setModel(new GL_general_TableModel());
-		add_table.getCellEditor().stopCellEditing();
-		((DefaultTableModel) add_table.getModel()).setRowCount(0);
+		add_table.setModel(new GL_general_TableModel(goodsModel_add));
 
 		add_table.getTableHeader().setReorderingAllowed(false);
 		jScrollPane2.setViewportView(add_table);
@@ -373,17 +377,16 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		jLabel2.setText("型号:");
 		GT_GL_BLservice temp = null;
 		try {
-			 temp = new GT_controller();
+			temp = new GT_controller();
 		} catch (RemoteException e) {
 			JOptionPane.showMessageDialog(MainFrame.frame,
 					"Fail to get type info");
 			e.printStackTrace();
 		}
 		try {
-			addable_type.setModel(new javax.swing.DefaultComboBoxModel(
-					temp.addable_type().toArray()));
+			addable_type.setModel(new javax.swing.DefaultComboBoxModel(temp
+					.addable_type().toArray()));
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -395,11 +398,6 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		});
 
 		model.setText("A");
-		model.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				modelActionPerformed(evt);
-			}
-		});
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
 				jPanel1);
@@ -592,7 +590,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 						return canEdit[columnIndex];
 					}
 				});
-		set_detail_data();
+		set_detail_data(goodsModels);
 
 		detailed_table.getTableHeader().setReorderingAllowed(false);
 		jScrollPane3.setViewportView(detailed_table);
@@ -716,9 +714,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 														.addComponent(ambiguous))
 										.addContainerGap()));
 
-		search_result.setModel(new GL_general_TableModel());
-		search_result.getCellEditor().stopCellEditing();
-		((DefaultTableModel) search_result.getModel()).setRowCount(0);
+		search_result.setModel(new GL_general_TableModel(goodsModel_search));
 
 		jScrollPane1.setViewportView(search_result);
 
@@ -800,9 +796,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 		add(search_panel, "search");
 
-		del_table.setModel(new GL_general_TableModel());
-		del_table.getCellEditor().stopCellEditing();
-		((DefaultTableModel) del_table.getModel()).setRowCount(0);
+		del_table.setModel(new GL_general_TableModel(goodsModel_del));
 
 		del_table.getTableHeader().setReorderingAllowed(false);
 		jScrollPane4.setViewportView(del_table);
@@ -815,8 +809,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
 				more_delActionPerformed(evt);
 			}
 		});
-		type_del.setModel(new javax.swing.DefaultComboBoxModel(gl_controller.type_del().toArray()));
-		
+		type_del.setModel(new javax.swing.DefaultComboBoxModel(gl_controller
+				.type_del().toArray()));
+
 		subscribe_del.setText("提交");
 		subscribe_del.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -974,11 +969,11 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		add(gl_del, "gl_del");
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void set_detail_data() {
+	private void set_detail_data(HashMap<String, GoodsModelPO> goods) {
 		TableModel detail_model = detailed_table.getModel();
 		int i = 0;
-		for (String string : goodsModels.keySet()) {
-			GoodsModelPO temp = goodsModels.get(string);
+		for (String string : goods.keySet()) {
+			GoodsModelPO temp = goods.get(string);
 			detail_model.setValueAt(temp.getName(), i, 0);
 			detail_model.setValueAt(temp.getId(), i, 1);
 			detail_model.setValueAt(temp.getAmount(), i, 2);
@@ -1005,10 +1000,6 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		card.show(this, "gl_add_del");
 	}// GEN-LAST:event_addActionPerformed
 
-	private void modelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_modelActionPerformed
-
-	}// GEN-LAST:event_modelActionPerformed
-
 	private void updateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateActionPerformed
 		try {
 			gl_controller.refresh();
@@ -1017,11 +1008,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			JOptionPane
 					.showMessageDialog(MainFrame.frame, "Fail to fetch data");
 		}
-		general_table.setModel(new GL_general_TableModel());
-		add_table.setModel(new GL_general_TableModel());
-		del_table.setModel(new GL_general_TableModel());
-		search_result.setModel(new GL_general_TableModel());
-		set_detail_data();
+		general_table.setModel(new GL_general_TableModel(goodsModels));
+		set_detail_data(goodsModels);
 	}// GEN-LAST:event_updateActionPerformed
 
 	private void detailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_detailActionPerformed
@@ -1034,11 +1022,11 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		if (ambiguous.isSelected()) {
 			String info = goods_info_search.getText();
 			if (info.contains(" ")) {
-				gl_controller.iSearch(info.split(" "));
+				goodsModel_search = gl_controller.iSearch(info.split(" "));
 			} else {
-				gl_controller.iSearch(info);
+				goodsModel_search = gl_controller.iSearch(info);
 			}
-		} else {
+		} else {//TODO
 			gl_controller.eSearch_total(goods_info_search.getText());
 		}
 	}// GEN-LAST:event_searchActionPerformed
@@ -1095,9 +1083,6 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		CardLayout card = (CardLayout) this.getLayout();
 		card.show(this, "GL_main");
 	}// GEN-LAST:event_detailed_list_backActionPerformed
-
-	ArrayList<GoodsModelVO> goodsModel_add = new ArrayList<GoodsModelVO>();
-	ArrayList<GoodsModelVO> goodsModel_del = new ArrayList<GoodsModelVO>();
 
 	private void moreActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_moreActionPerformed
 		String add_type = (String) addable_type.getSelectedItem();
@@ -1201,118 +1186,5 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 	// End of variables declaration//GEN-END:variables
 
-	class GL_general_TableModel extends DefaultTableModel implements
-			TableModelListener {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		public GL_general_TableModel() {
-
-			int i = 0;
-			for (GoodsModelPO temp : goodsModels.values()) {
-				if (temp != null) {
-					data[i][0] = temp.getName();
-					data[i][1] = temp.getId();
-					data[i][2] = temp.getAmount();
-					data[i][3] = temp.getSignal();
-				}
-				++i;
-			}
-
-			addTableModelListener(this);
-		}
-
-		private String[] columnNames = { "商品名称", "商品id", "数量", "警戒值" };
-
-		private Object[][] data = new Object[goodsModels.keySet().size()][4];
-
-		public int getColumnCount() {
-			return columnNames.length;
-		}
-
-		public int getRowCount() {
-			return data.length;
-		}
-
-		public String getColumnName(int col) {
-			return columnNames[col];
-		}
-
-		public Object getValueAt(int row, int col) {
-			return data[row][col];
-		}
-
-		/*
-		 * JTable uses this method to determine the default renderer/ editor for
-		 * each cell. If we didn't implement this method, then the last column
-		 * would contain text ("true"/"false"), rather than a check box.
-		 */
-		public Class getColumnClass(int c) {
-			return getValueAt(0, c).getClass();
-		}
-
-		public boolean isCellEditable(int row, int col) {
-			// Note that the data/cell address is constant,
-			// no matter where the cell appears onscreen.
-			if (col == 1 && col == 2) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		public void setValueAt(Object value, int row, int col) {
-			if (DEBUG) {
-				System.out.println("Setting value at " + row + "," + col
-						+ " to " + value + " (an instance of "
-						+ value.getClass() + ")");
-			}
-
-			data[row][col] = value;
-			fireTableCellUpdated(row, col);
-
-			if (DEBUG) {
-				System.out.println("New value of data:");
-				printDebugData();
-			}
-		}
-
-		private void printDebugData() {
-			int numRows = getRowCount();
-			int numCols = getColumnCount();
-
-			for (int i = 0; i < numRows; i++) {
-				System.out.print("    row " + i + ":");
-				for (int j = 0; j < numCols; j++) {
-					System.out.print("  " + data[i][j]);
-				}
-				System.out.println();
-			}
-			System.out.println("--------------------------");
-		}
-
-		@Override
-		public void tableChanged(TableModelEvent e) {// check whether the change
-														// is valid
-			int row = e.getFirstRow();
-			int column = e.getColumn();
-			TableModel model = (TableModel) e.getSource();
-			String columnName = model.getColumnName(column);
-			Object data = model.getValueAt(row, column);
-
-			if (column == 0 && data != null) {// name is vaild
-
-			} else if (column == 3 && data != null && (Integer) data >= 0) {// signal
-																			// is
-																			// valid
-
-			} else {
-				JOptionPane
-						.showMessageDialog(MainFrame.frame, "Invalid change");
-			}
-		}
-	}
+	
 }

@@ -25,9 +25,13 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	
 	GoodsListDataService goodsListDataService = new GoodsListDataImpl(null);
 	
-	public GL_controller() throws RemoteException {
-		goodsListPO = goodsListDataService.getGoodsList().getObj();
-
+	public GL_controller() throws RemoteException, NullPointerException {
+		
+		try {
+			goodsListPO = goodsListDataService.getGoodsList().getObj();
+		} catch (NullPointerException e) {
+			//e.printStackTrace();
+		}
 		// TODO add account name
 		glbLservice = new GLBLImpl(goodsListPO);
 		gl_signal_BLservice = new GL_signal_Impl(goodsListPO);

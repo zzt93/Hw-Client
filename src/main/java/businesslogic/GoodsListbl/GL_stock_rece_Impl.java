@@ -143,7 +143,7 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice,
 			//TODO whose name???
 			GoodsPO goodsPO = goods.get(temp).get(0);
 			if (gm.getAmount() > 0) {
-				sell.add(temp+" "+goodsPO.getName());
+				sell.add(temp+"("+goodsPO.getName()+")");
 			} 
 		}
 		return sell;
@@ -155,7 +155,7 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice,
 		HashMap<String, ArrayList<GoodsPO>> goods = goodsListPO.getGoods();
 		for (String temp : goods.keySet()) {
 			GoodsPO gm = goods.get(temp).get(0);
-			stock.add(temp+" "+gm.getName());
+			stock.add(temp+"("+gm.getName()+")");
 		}
 		return stock;
 	}

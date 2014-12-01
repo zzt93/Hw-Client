@@ -29,35 +29,51 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		InOutRepoVO result;
 		StockUtility stock = new StockUtilityImpl();
 		SaleUtility sale = new SaleUtilityImpl();
-		
+
 		ReceiptConditionVO conditionVO = new ReceiptConditionVO();
 		SaleConditionVO saleConditionVO = new SaleConditionVO();
-		
-		Vector<StockReceiptPO> stockReceiptPOs = stock.queryReceipt(conditionVO);
+
+		Vector<StockReceiptPO> stockReceiptPOs = stock
+				.queryReceipt(conditionVO);
 		Vector<SaleReceiptPO> saleReceiptPOs = sale.queryReceipt(conditionVO);
-		Vector<GoodsRecordVO> goodsRecordVOs = sale.querySaleRecord(saleConditionVO);
-		
-		
+		Vector<GoodsRecordVO> goodsRecordVOs = sale
+				.querySaleRecord(saleConditionVO);
+
 		for (StockReceiptPO stockReceiptPO : stockReceiptPOs) {
 			out.add(stockReceiptPO.getTotalValue());
-			//TODO  num
 		}
 		for (SaleReceiptPO saleReceiptPO : saleReceiptPOs) {
 			in.add(saleReceiptPO.getTotalValue());
-			//TODO  num
 		}
-		result = new InOutRepoVO(in, out, in_num,out_num, start, end);
+		for (GoodsRecordVO goodsRecordVO : goodsRecordVOs) {
+			switch (goodsRecordVO.type) {
+			case STOCK_ACCEPT:
+				in_num += goodsRecordVO.number;
+				break;
+			case STOCK_REJECTION:
+				in_num -= goodsRecordVO.number;
+				break;
+			case SALE_ACCEPT:
+				out_num += goodsRecordVO.number;
+				break;
+			case SALE_REJECTION:
+				out_num -= goodsRecordVO.number;
+				break;
+			default:
+				break;
+			}
+		}
+		result = new InOutRepoVO(in, out, in_num, out_num, start, end);
 		repoExaminDataService.insert(result);
 		return result;
 	}
-	
-	
+
 	public void refresh() throws Exception {
-		//TODO
+		// TODO
 	}
 
 	public void synchronize() throws Exception {
-		//TODO
+		// TODO
 	}
 
 }
