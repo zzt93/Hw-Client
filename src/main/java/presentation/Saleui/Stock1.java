@@ -1,5 +1,10 @@
 package presentation.Saleui;
 
+import java.math.BigDecimal;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
@@ -7,6 +12,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,6 +20,10 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle;
 
+import businesslogic.Clientbl.ClientUtilityImpl;
+import businesslogic.Stockbl.StockUtilityImpl;
+import po.ClientPO;
+import po.ClientType;
 import po.ProductsReceipt;
 import po.StockReceiptPO;
 
@@ -27,6 +37,37 @@ import po.StockReceiptPO;
  * @author zzt
  */
 public class Stock1 extends JPanel {
+	 // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JLabel custom_label;
+    private JButton jButton1;
+    private JButton jButton2;
+    private JComboBox boxType;
+    private JLabel jLabel13;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    public static JLabel labelTotal;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JPanel jPanel3;
+    private JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane2;
+    private JScrollPane jScrollPane3;
+    private JTable GoodsTable;
+    private JComboBox boxClient;
+//    private JTextField textSalesman;
+    private JTextField textRepository;
+    private JTextPane textComment;
+//    private JLabel operator_label;
+    private JPanel sale;
+    List<ClientPO> clientList;
+    public static double total;
+    private StockUtilityImpl stockController;
+    private PublicTableModel tableModel=new PublicTableModel(ModelType.PRODUCTS);
+    private StockReceiptPO stockReceipt;
+    private Vector<ProductsReceipt> list=new Vector<ProductsReceipt>();
+    private GoodsPanel goodsPane;
+    // End of variables declaration//GEN-END:variables
 
     /**
      * Creates new form Stock1
@@ -47,15 +88,15 @@ public class Stock1 extends JPanel {
         jScrollPane3 = new JScrollPane();
         sale = new JPanel();
         custom_label = new JLabel();
-        operator_label = new JLabel();
+//        operator_label = new JLabel();
         jLabel3 = new JLabel();
         jLabel4 = new JLabel();
-        textClient = new JTextField();
-        textSalesman = new JTextField();
+        jLabel5=new JLabel();
+        labelTotal=new JLabel();
+ //       textSalesman = new JTextField();
         textRepository = new JTextField();
-        jComboBox1 = new JComboBox();
         jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
+        GoodsTable = new JTable();
         jPanel1 = new JPanel();
         jLabel13 = new JLabel();
         jScrollPane2 = new JScrollPane();
@@ -64,29 +105,56 @@ public class Stock1 extends JPanel {
         jPanel3 = new JPanel();
         jButton1 = new JButton();
         jButton2 = new JButton();
-
+       //FIXME,涉及服务器，暂时无法测试
+//        ClientUtilityImpl client;
+//		try {
+//	        stockController= new StockUtilityImpl();
+//	        HashMap<String,Object> map=new HashMap<String,Object>();
+//	        map.put("type",ClientType.STOCKER);
+//			client = new ClientUtilityImpl();
+//	        try {
+//				clientList=client.queryClient(map);
+//			} catch (Exception e) {
+//				JOptionPane.showMessageDialog(null, e.getMessage());
+//			}
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//			JOptionPane.showMessageDialog(null, "服务器出现问题");
+//			System.exit(ERROR);
+//		} catch (NotBoundException e) {
+//			e.printStackTrace();
+//			JOptionPane.showMessageDialog(null, "服务器出现问题");
+//			System.exit(ERROR);
+//		}
+//        String[] temp=new String[clientList.size()];
+//        for(int i=0;i<temp.length;i++){
+//        	temp[i]=clientList.get(i).getName();
+//        }
+//        boxClient = new JComboBox(temp);
+        boxClient=new JComboBox(new String[]{"张三","李四"});
+        boxType = new JComboBox(new String[]{"进货","进货退货"});
+        
         jScrollPane3.setPreferredSize(new java.awt.Dimension(750, 500));
 
         sale.setPreferredSize(new java.awt.Dimension(850, 650));
 
         custom_label.setText("供应商");
 
-        operator_label.setText("业务员");
+//        operator_label.setText("业务员");
 
         jLabel3.setText("仓库");
 
         jLabel4.setText("单据类型");
 
-        textClient.setText("请输入供应商");
 
-        textSalesman.setText("请输入业务员");
+//        textSalesman.setText("请输入业务员");
 
         textRepository.setText("请输入仓库");
+        
+        
 
-        jComboBox1.setModel(new DefaultComboBoxModel(new String[] { "进货","进货退货"}));
-
-        jTable1.setModel(tableModel);
-        jScrollPane1.setViewportView(jTable1);
+        GoodsTable.setModel(tableModel);
+        jScrollPane1.setViewportView(GoodsTable);
 
         jLabel13.setText("备注");
 
@@ -111,17 +179,19 @@ public class Stock1 extends JPanel {
                 .addComponent(jLabel13)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
+        jLabel5.setText("总额：");
 
-//        GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
-//        jPanel2.setLayout(jPanel2Layout);
-//        jPanel2Layout.setHorizontalGroup(
-//            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//            .addGroup(jPanel2Layout.createSequentialGroup()
-//                .addContainerGap()
-//                .addComponent(jLabel5)
-//                .addGap(18, 18, 18)
-//                .addComponent(jLabel6)
-//                .addGap(65, 65, 65)
+        labelTotal.setText("");	
+        GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(labelTotal)
+                .addGap(65, 65, 65)
 //                .addComponent(jLabel7)
 //                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 //                .addComponent(jLabel8)
@@ -133,23 +203,24 @@ public class Stock1 extends JPanel {
 //                .addComponent(jLabel11)
 //                .addGap(18, 18, 18)
 //                .addComponent(jLabel12)
-//                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-//        );
-//        jPanel2Layout.setVerticalGroup(
-//            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//            .addGroup(jPanel2Layout.createSequentialGroup()
-//                .addContainerGap()
-//                .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-//                    .addComponent(jLabel5)
-//                    .addComponent(jLabel6)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(labelTotal)
 //                    .addComponent(jLabel7)
 //                    .addComponent(jLabel8)
 //                    .addComponent(jLabel9)
 //                    .addComponent(jLabel10)
 //                    .addComponent(jLabel11)
-//                    .addComponent(jLabel12))
-//                .addContainerGap())
-//        );
+//                    .addComponent(jLabel12)
+                    )
+                .addContainerGap())
+        );
 
         jButton1.setText("添加商品");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +232,12 @@ public class Stock1 extends JPanel {
 
 
         jButton2.setText("制定单据");
-
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        
         GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -194,19 +270,19 @@ public class Stock1 extends JPanel {
                 .addGap(36, 36, 36)
                 .addComponent(custom_label)
                 .addGap(18, 18, 18)
-                .addComponent(textClient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxClient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(operator_label)
-                .addGap(18, 18, 18)
-                .addComponent(textSalesman, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+         //       .addComponent(operator_label)
+            //    .addGap(18, 18, 18)
+           //     .addComponent(textSalesman, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            //    .addGap(34, 34, 34)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(textRepository, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(boxType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addGroup(saleLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 709, GroupLayout.PREFERRED_SIZE))
@@ -225,15 +301,15 @@ public class Stock1 extends JPanel {
             .addGroup(saleLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(saleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(textClient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textSalesman, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxClient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                   // .addComponent(textSalesman, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(textRepository, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGroup(saleLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(saleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(custom_label)
-                            .addComponent(operator_label)
+                            //.addComponent(operator_label)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))))
                 .addGap(31, 31, 31)
@@ -271,40 +347,22 @@ public class Stock1 extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        goodsPane.showAddPane();
+    	goodsPane=new GoodsPanel(list,tableModel,GoodsPaneType.STOCK);
+    	goodsPane.showAddPane();
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    	stockReceipt=new StockReceiptPO(textClient.getText(),textRepository.getText(),
-    			textSalesman.getText(),textComment.getText());
+    	int id=clientList.get(boxClient.getSelectedIndex()).getId();
+    	//FIXME,操作员get
+    	stockReceipt=new StockReceiptPO(id,textRepository.getText(),
+    			"操作员",textComment.getText(),new BigDecimal(total));
+    	try {
+			stockController.makeReceipt(stockReceipt);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+    	
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JLabel custom_label;
-    private JButton jButton1;
-    private JButton jButton2;
-    private JComboBox jComboBox1;
-    private JLabel jLabel13;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JPanel jPanel1;
-    private JPanel jPanel2;
-    private JPanel jPanel3;
-    private JScrollPane jScrollPane1;
-    private JScrollPane jScrollPane2;
-    private JScrollPane jScrollPane3;
-    private JTable jTable1;
-    private JTextField textClient;
-    private JTextField textSalesman;
-    private JTextField textRepository;
-    private JTextPane textComment;
-    private JLabel operator_label;
-    private JPanel sale;
-    
-    private PublicTableModel tableModel=new PublicTableModel(ModelType.GOODS);
-    private StockReceiptPO stockReceipt;
-    private Vector<ProductsReceipt> list=new Vector<ProductsReceipt>();
-    private GoodsPanel goodsPane=new GoodsPanel(list,tableModel,GoodsPaneType.STOCK);
-    // End of variables declaration//GEN-END:variables
+
 }

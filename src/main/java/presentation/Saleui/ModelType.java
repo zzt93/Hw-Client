@@ -1,5 +1,5 @@
 package presentation.Saleui;
 
 public enum ModelType {
-	CLIENT,BANK,GOODS
+	CLIENT,BANK,PRODUCTS,GIFT
 }

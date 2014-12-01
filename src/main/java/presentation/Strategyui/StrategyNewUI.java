@@ -3,12 +3,21 @@ package presentation.Strategyui;
 import po.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import businesslogic.GoodsListbl.GL_manager_repo_Impl;
+import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class StrategyNewUI {
 
@@ -18,9 +27,11 @@ public class StrategyNewUI {
 	private JTextField textFieldTreatment;
 	private JTextField startTimeText;
 	private JTextField endTimeText;
-	private ArrayList<GoodsPO> goodsPO;
+	private ArrayList<GoodsModelPO> goodsPO;
+	private ArrayList<GoodsModelPO> tempGoodsPO;
+	private ArrayList<GoodsModelPO> goodsPOGive;
 
-	//Strategy_New_BLservice snb = new StrategyController();
+	// Strategy_New_BLservice snb = new StrategyController();
 
 	/**
 	 * Launch the application.
@@ -45,7 +56,6 @@ public class StrategyNewUI {
 	public StrategyNewUI() {
 
 		initialize();
-		newFrame.setVisible(true);
 
 	}
 
@@ -66,7 +76,12 @@ public class StrategyNewUI {
 		lblCondition.setBounds(56, 60, 54, 15);
 		newFrame.getContentPane().add(lblCondition);
 		final JComboBox<String> comboBoxCondition = new JComboBox<String>();
-		
+		comboBoxCondition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+			}
+		});
+
 		comboBoxCondition.setBounds(184, 57, 109, 21);
 		String txtCustomerLevel = new String("用户等级");
 		comboBoxCondition.addItem(txtCustomerLevel);
@@ -141,37 +156,34 @@ public class StrategyNewUI {
 						endTimeDate.getDate());
 				Condition c = null;
 				Treatment t = null;
-				switch(comboBoxCondition.getSelectedIndex()){
+				switch (comboBoxCondition.getSelectedIndex()) {
 				case 0:
-					c = new Condition(CatOfCondition.CUSTOMERLEVEL,
-							Integer.parseInt(textFieldCondition.getText()));
+					c = new Condition(CatOfCondition.CUSTOMERLEVEL, Integer
+							.parseInt(textFieldCondition.getText()));
 					break;
 				case 1:
-					c = new Condition(CatOfCondition.TOTALPRICE,
-							Double.parseDouble(textFieldCondition.getText()));
+					c = new Condition(CatOfCondition.TOTALPRICE, Double
+							.parseDouble(textFieldCondition.getText()));
 				case 2:
-					c = new Condition(CatOfCondition.COMPOSITION,
-							goodsPO);
+					c = new Condition(CatOfCondition.COMPOSITION, goodsPO);
 				}
-				
-				
-				switch(comboBoxTreatment.getSelectedIndex()){
+
+				switch (comboBoxTreatment.getSelectedIndex()) {
 				case 0:
-					t = new Treatment(CatOfTreatment.GIVE,
-							goodsPO);
+					t = new Treatment(CatOfTreatment.GIVE, goodsPOGive);
 				case 1:
-					t = new Treatment(CatOfTreatment.DISCOUNT,
-							Double.parseDouble(textFieldTreatment.getText()));
+					t = new Treatment(CatOfTreatment.DISCOUNT, Double
+							.parseDouble(textFieldTreatment.getText()));
 				case 2:
-					t = new Treatment(CatOfTreatment.COUPON,
-							Double.parseDouble(textFieldTreatment.getText()));
+					t = new Treatment(CatOfTreatment.COUPON, Double
+							.parseDouble(textFieldTreatment.getText()));
 				}
-				/*snb.newStrategy(c, t, tp);
-				if(!snb.examine()){
-					lblHint.setText("输入折扣价格或时间有误，请检查");
-				}else{
-					
-				}*/
+				/*
+				 * snb.newStrategy(c, t, tp); if(!snb.examine()){
+				 * lblHint.setText("输入折扣价格或时间有误，请检查"); }else{
+				 * 
+				 * }
+				 */
 			}
 		});
 		buttonConfirm.setBounds(126, 297, 93, 23);
@@ -186,15 +198,112 @@ public class StrategyNewUI {
 		buttonCancel.setBounds(323, 297, 93, 23);
 		newFrame.getContentPane().add(buttonCancel);
 
-		
-		
-		comboBoxCondition.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-				if(comboBoxCondition.getSelectedItem().equals(txtComposition)){
-					
+		comboBoxCondition.addItemListener(new MyItemListener(comboBoxCondition,
+				txtComposition, lblHint, textFieldCondition,goodsPO));
+		comboBoxTreatment.addItemListener(new MyItemListener(comboBoxTreatment,
+				txtGive,lblHint,textFieldTreatment,goodsPOGive));
+	}
+
+	class MyTableModel extends DefaultTableModel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public MyTableModel(Object[][] data, Object[] columnNames) {
+			setDataVector(data, columnNames);
+		}
+
+		public boolean isCellEditlable(int row, int column) {
+			return false;
+		}
+	}
+
+	void insert(String[] item, GoodsModelPO po) {
+		item[0] = po.getId();
+		item[1] = po.getName();
+		// item[2] = po.getModel();
+
+	}
+
+	/**
+	 * This means to deal with cases to choose Goods.
+	 * @author Mebleyev.G.Longinus
+	 *
+	 */
+	class MyItemListener implements ItemListener {
+
+		JComboBox<String> comboBox;
+		String txt;
+		JLabel lblHint;
+		JTextField textField;
+		ArrayList<GoodsModelPO> myGoodsPO;
+
+		public MyItemListener(JComboBox<String> comboBox, String txt,
+				JLabel lblHint, JTextField textField,ArrayList<GoodsModelPO> myGoodsPO) {
+			super();
+			this.comboBox = comboBox;
+			this.txt = txt;
+			this.lblHint = lblHint;
+			this.textField = textField;
+			this.myGoodsPO = myGoodsPO;
+		}
+
+		public void itemStateChanged(ItemEvent arg0) {
+			if (comboBox.getSelectedItem().equals(txt)) {
+				final JFrame listFrame;
+				listFrame = new JFrame();
+				listFrame.setBounds(0, 0, 200, 400);
+				listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				GL_manager_BLservice gmb;
+
+				try {
+					gmb = new GL_manager_repo_Impl();
+
+					tempGoodsPO = new ArrayList<GoodsModelPO>(gmb
+							.getGoodsList().getGoodsModels().values());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+
+				String str[] = new String[] { "id", "name", "model" };
+				String data[][] = new String[tempGoodsPO.size()][3];
+
+				int i = 0;
+				for (GoodsModelPO gpo : tempGoodsPO) {
+					insert(data[i], gpo);
+					i++;
+				}
+				TableModel tm = new MyTableModel(data, str);
+				final JTable listTable = new JTable(tm);
+				JScrollPane scrollpane = new JScrollPane();
+				scrollpane.setBounds(0, 0, 190, 380);
+				scrollpane.setViewportView(listTable);
+				listFrame.getContentPane().add(scrollpane);
+				listFrame.setVisible(true);
+
+				JButton subConfirm = new JButton("确定");
+				subConfirm.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						int a[] = listTable.getSelectedRows();
+						for (int i : a) {
+							myGoodsPO.add(tempGoodsPO.get(a[i]));
+							lblHint.setText("已经保存了商品啦");
+							String names = "";
+							for (GoodsModelPO model : myGoodsPO) {
+								names += model.getName() + ",";
+							}
+							textField.setText(names);
+						}
+
+						listFrame.dispose();
+					}
+				});
+
 			}
-		});
+		}
+
 	}
 
 }

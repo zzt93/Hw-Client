@@ -184,12 +184,12 @@ public class ClientUI extends JPanel {
 	}
 	public class Add implements ActionListener{
 		public void actionPerformed(ActionEvent e){	
-			String temp=(String)typeBox.getSelectedItem();
+			int temp=typeBox.getSelectedIndex();
 			ClientType type=null;
-			if(temp.equals("销售商")){
+			if(temp==0){
 				type=ClientType.SELLER;
 			}
-			else if(temp.equals("供应商")){
+			else if(temp==1){
 				type=ClientType.STOCKER;
 			}
 			else{
@@ -237,7 +237,7 @@ public class ClientUI extends JPanel {
 				if(e.getKeyCode()==10){
 					HashMap<String,Object> map=new HashMap<String,Object>();
 					map.put("name", textField.getText());
-					
+//FIXME,测试注销掉					
 //					try {
 //						list=clientController.queryClient(map);
 //					} catch (Exception e1) {

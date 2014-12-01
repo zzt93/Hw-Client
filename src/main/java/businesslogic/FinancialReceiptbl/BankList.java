@@ -8,7 +8,7 @@ public class BankList {
 	ArrayList<BkTransPO> list=new ArrayList<BkTransPO>();
 	double total=0;
 	public void add(BkTransPO po){
-		total+=po.getAccount();
+		total+=po.getAmount();
 		list.add(po);
 	}
 	public void delete(BkTransPO po){
@@ -16,11 +16,14 @@ public class BankList {
 		for(int i=0;i<list.size();i++){
 			temp=list.get(i);
 			if(temp.equals(po)){
-				total-=temp.getAccount();
+				total-=temp.getAmount();
 				list.remove(i);
 				return;
 			}
 		}
+	}
+	public void delete(int i){
+		list.remove(i);
 	}
 	public double getTotal(){
 		return total;
