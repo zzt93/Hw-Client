@@ -1,6 +1,9 @@
 package businesslogic.Strategybl;
 
 import businesslogic.Clientbl.ClientUtilityImpl;
+import businesslogic.GoodsListbl.GL_manager_repo_Impl;
+import businesslogic.RepoReceiptbl.RepoReceiptBLImpl;
+import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
 import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
 import dataservice.Strategydataservice.StrategyDataService;
 import po.*;
@@ -11,7 +14,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
+
 
 public class StrategyList implements Strategy_List_BLservice {
 	private ArrayList<StrategyPO> list;
@@ -109,7 +112,7 @@ public class StrategyList implements Strategy_List_BLservice {
 		return pos;
 	}
 
-	BigDecimal setTreatment(StrategyPO spo, SaleReceiptPO po) throws Exception {
+	SaleReceiptPO setTreatment(StrategyPO spo, SaleReceiptPO po) throws Exception {
 		BigDecimal bd = new BigDecimal(0);
 		if (spo.getTreatment().type == CatOfTreatment.DISCOUNT) {
 			po.setAllowance(BigDecimal
@@ -123,15 +126,21 @@ public class StrategyList implements Strategy_List_BLservice {
 					.valueOf(spo.getTreatment().getCoupon()));
 		}
 		if (spo.getTreatment().type == CatOfTreatment.GIVE) {
-			po.setComment("有礼品赠送哦亲~^0^");
 			
+			
+			po.setComment("有礼品赠送哦亲~^0^");
+			GL_manager_BLservice gmb = new  GL_manager_repo_Impl();
+			RepoReceiptBLImpl ri = new RepoReceiptBLImpl();
 			
 			
 			
 		}
-		return bd;
+		return po;
 		
 
-	}
+	}		
+	
 
+	
+	
 }

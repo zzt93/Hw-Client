@@ -76,4 +76,21 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+	public void setAllowance(BigDecimal allowance) {
+		this.allowance = allowance;
+	}
+
+	public void setCoupon(BigDecimal coupon) {
+		this.coupon = coupon;
+	}
+
+	public void setActualValue(BigDecimal actualValue) {
+		this.actualValue = actualValue;
+	}
+
+	public void setComment(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -124,7 +124,7 @@ public class StrategyListUI {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							StrategyNewUI snu = new StrategyNewUI();
+							StrategyNewUI.main(null);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -132,11 +132,6 @@ public class StrategyListUI {
 				});
 			}
 		});
-		
-
-		
-
-		
 		
 	}
 	public class MyTableModel extends DefaultTableModel{
