@@ -3,6 +3,10 @@ package presentation.Strategyui;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import businesslogic.Strategybl.StrategyController;
+import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
