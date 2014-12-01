@@ -1,7 +1,9 @@
 package presentation.RepoUI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
@@ -18,60 +20,63 @@ public class GL_general_TableModel extends DefaultTableModel {
 * 
 */
 	private static final long serialVersionUID = 1L;
-
-	ArrayList<Object[]> data;
+	private String[] columnNames = { "商品名称", "商品id", "数量", "警戒值" };
+	Vector< Vector<Object> > data = new Vector<Vector<Object> >();
+	Vector<Object> col = new Vector<Object>(Arrays.asList(columnNames));
 	boolean isvo = true;
 
 	public GL_general_TableModel(ArrayList<GoodsModelVO> modelVOs) {
-
-		for (GoodsModelVO goodsModelVO : modelVOs) {
-			Object[] t = new Object[] { goodsModelVO.getName(),
-					goodsModelVO.getId(), goodsModelVO.getAmount(),
-					goodsModelVO.getSignal() };
-			data.add(t);
-		}
+		setData_vo(modelVOs);
 //		addTableModelListener(this);
 	}
 
 	public void setData_vo(ArrayList<GoodsModelVO> modelVOs) {
 		for (GoodsModelVO goodsModelVO : modelVOs) {
-			Object[] t = new Object[] { goodsModelVO.getName(),
-					goodsModelVO.getId(), goodsModelVO.getAmount(),
-					goodsModelVO.getSignal() };
+			Vector t = new Vector();
+			t.add(goodsModelVO.getName());
+			t.add(goodsModelVO.getId());
+			t.add(goodsModelVO.getAmount());
+			t.add(goodsModelVO.getSignal());
+					
 			data.add(t);
 		}
+		setDataVector(data, col);
 		fireTableDataChanged();
 	}
 	
 	public void addData(Object[] temp){
-		data.add(temp);
 		this.addRow(temp);
 	}
 
 	public GL_general_TableModel(HashMap<String, GoodsModelPO> modelPOs) {
 		setData_po(modelPOs);
 		isvo = false;
-//		addTableModelListener(this);
+//		addTableModelListener(datathis);
 	}
 
 	public void setData_po(HashMap<String, GoodsModelPO> modelPOs) {
 
 		for (GoodsModelPO goodsModelpo : modelPOs.values()) {
-			Object[] t = new Object[] { goodsModelpo.getName(),
-					goodsModelpo.getId(), goodsModelpo.getAmount(),
-					goodsModelpo.getSignal() };
+			Vector t = new Vector();
+			t.add(goodsModelpo.getName());
+			t.add(goodsModelpo.getId());
+			t.add(goodsModelpo.getAmount());
+			t.add(goodsModelpo.getSignal());
 			data.add(t);
 		}
-		fireTableDataChanged();
+		setDataVector(data, col);
 	}
 
-	private String[] columnNames = { "商品名称", "商品id", "数量", "警戒值" };
+	
 
 	public int getColumnCount() {
 		return columnNames.length;
 	}
 
 	public int getRowCount() {
+		if (data == null) {
+			data = new Vector<Vector<Object>>();
+		} 
 		return data.size();
 	}
 
@@ -81,11 +86,11 @@ public class GL_general_TableModel extends DefaultTableModel {
 
 	public Object getValueAt(int row, int col) {
 		if (isvo) {
-			Object[] temp = data.get(row);
-			return temp[col];
+			Vector temp = data.get(row);
+			return temp.get(col);
 		} else {
-			Object[] temp = data.get(row);
-			return temp[col];
+			Vector temp = data.get(row);
+			return temp.get(col);
 		}
 	}
 
@@ -122,7 +127,7 @@ public class GL_general_TableModel extends DefaultTableModel {
 			assert (false);
 		} else {
 			if (col == 0 || col == 3) {
-				data.get(row)[col] = value;
+				data.get(row).set(col, value);
 			}
 		}
 		fireTableCellUpdated(row, col);
@@ -140,7 +145,7 @@ public class GL_general_TableModel extends DefaultTableModel {
 		for (int i = 0; i < numRows; i++) {
 			System.out.print("    row " + i + ":");
 			for (int j = 0; j < numCols; j++) {
-				System.out.print("  " + data.get(i)[j]);
+				System.out.print("  " + data.get(i).get(j));
 			}
 			System.out.println();
 		}

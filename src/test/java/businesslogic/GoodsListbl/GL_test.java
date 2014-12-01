@@ -17,10 +17,7 @@ public class GL_test {
 	@Test
 	public <T> void test() {
 		try {
-			GoodsModelVO test = new GoodsModelVO("test");
 			
-			assertTrue(gl.add(test));
-			assertTrue(gl.delete(test));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

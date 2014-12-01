@@ -7,6 +7,7 @@ import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
 import po.RepoReceiptPO;
+import presentation.RepoUI.MainFrame;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 import vo.SignalVO;
@@ -14,6 +15,8 @@ import vo.SignalVO;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.swing.JOptionPane;
 
 public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		 GL_receipt_BLservice, GL_signal_BLservice, GL_stock_BLservice, GLBLservice {
@@ -26,11 +29,17 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 			goodsListPO = goodsListDataService.getGoodsList().getObj();
 		} catch (NullPointerException e) {
 			//e.printStackTrace();
+			goodsListPO = new GoodsListPO();
 		}
-		// TODO add account name
+		
 		glbLservice = new GLBLImpl(goodsListPO);
 		gl_signal_BLservice = new GL_signal_Impl(goodsListPO);
-		gl_GT_BLservice = new GL_GT_Impl(goodsListPO);
+		try {
+			gl_GT_BLservice = new GL_GT_Impl(goodsListPO);
+		} catch (NullPointerException e) {
+			//e.printStackTrace();
+		}
+		
 
 		gl_stock_BLservice = new GL_stock_rece_Impl(goodsListPO);
 		gl_receipt_BLservice = new GL_stock_rece_Impl(goodsListPO);

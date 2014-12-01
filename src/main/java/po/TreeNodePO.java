@@ -36,6 +36,11 @@ public class TreeNodePO {
 	}
 
 
+	public TreeNodePO(String type) {
+		this.type = type;
+	}
+
+
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub

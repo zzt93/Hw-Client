@@ -12,6 +12,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import javax.swing.JLabel;
@@ -49,15 +50,25 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 	public GoodsTypePanel() {
 		try {
 			gt_controller = new GT_controller();
+			
 		} catch (RemoteException e) {
-			JOptionPane.showMessageDialog(MainFrame.frame,
-					"Fail to fetch data--GT_controller");
+			JOptionPane.showMessageDialog(MainFrame.frame, e
+					+ ": Fail to fetch data--GT_controller");
+		} catch (NullPointerException nullPointerException) {
+			JOptionPane.showMessageDialog(MainFrame.frame, nullPointerException
+					+ ": Fail to get gt_controller");
 		}
-		treeNodePOs = gt_controller.getTreeNodePOs();
-		for (TreeNodePO treeNodePO : treeNodePOs) {
-			nodes.put(treeNodePO, new NodePanel(treeNodePO));
+		if (MainFrame.DEBUG) {
+			treeNodePOs = new ArrayList<TreeNodePO>();
+			TreeNodePO temp = new TreeNodePO("light");
+			treeNodePOs.add(temp);
+			nodes.put(temp, new NodePanel(temp));
+		} else {
+			treeNodePOs = gt_controller.getTreeNodePOs();
+			for (TreeNodePO treeNodePO : treeNodePOs) {
+				nodes.put(treeNodePO, new NodePanel(treeNodePO));
+			}
 		}
-
 		initComponents();
 	}
 
@@ -208,30 +219,41 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 		private static final long serialVersionUID = 1L;
 
 		public TreePanel() {
-			
-			this.setPreferredSize(new java.awt.Dimension(2000 + NODE_W*gt_controller.getTreeNodePOs().size()/2,
-					1000 + NODE_H*gt_controller.height()));
+			if (MainFrame.DEBUG) {
+				this.setPreferredSize(new Dimension(2000, 1000));
+			} else {
+				this.setPreferredSize(new java.awt.Dimension(2000 + NODE_W
+						* gt_controller.getTreeNodePOs().size() / 2, 1000
+						+ NODE_H * gt_controller.height()));
+			}
+
 			this.setLayout(new java.awt.GridBagLayout());
-	        trees_scroll_panel.setViewportView(this);
-			
+			trees_scroll_panel.setViewportView(this);
+
 		}
 
 		@Override
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // Do the original draw
-			this.setPreferredSize(new java.awt.Dimension(2000 + NODE_W*gt_controller.getTreeNodePOs().size()/2,
-					1000 + NODE_H*gt_controller.height()));
+			if (MainFrame.DEBUG) {
+				this.setPreferredSize(new Dimension(2000, 1000));
+			} else {
+				this.setPreferredSize(new java.awt.Dimension(2000 + NODE_W
+						* gt_controller.getTreeNodePOs().size() / 2, 1000 + NODE_H
+						* gt_controller.height()));
+			}
 			Rectangle bounds = trees_scroll_panel.getViewport().getViewRect();
-	        Dimension size = trees_scroll_panel.getViewport().getViewSize();
-	        int x = (size.width - bounds.width) / 2;
-	        int y = (size.height - bounds.height) / 2;
-	        trees_scroll_panel.getViewport().setViewPosition(new Point(x, y));
-	        
-	        TreeNodePO fa = treeNodePOs.get(0);
-	        
-	        int initial = (treeNodePOs.size()/2>=4)?treeNodePOs.size()-1:3;
-	        draw_node(fa, 0, initial);
-	        
+			Dimension size = trees_scroll_panel.getViewport().getViewSize();
+			int x = (size.width - bounds.width) / 2;
+			int y = (size.height - bounds.height) / 2;
+			trees_scroll_panel.getViewport().setViewPosition(new Point(x, y));
+
+			TreeNodePO fa = treeNodePOs.get(0);
+
+			int initial = (treeNodePOs.size() / 2 >= 4) ? treeNodePOs.size() - 1
+					: 3;
+			draw_node(fa, 0, initial);
+
 			setAntiAliasing(g, true);
 			mydrawline(g, fa);
 		}
@@ -239,19 +261,23 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 		private void draw_node(TreeNodePO fa, int height, int row) {
 			while (fa != null) {
 				GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-				
-		        gridBagConstraints.gridx = row;
-		        gridBagConstraints.gridy = height;
-		        tree_panel.add(nodes.get(treeNodePOs.get(0)), gridBagConstraints);
-		        
-		        int i = 0;
-		        for (TreeNodePO treeNodePO : fa.getSons()) {
+
+				gridBagConstraints.gridx = row;
+				gridBagConstraints.gridy = height;
+				tree_panel.add(nodes.get(treeNodePOs.get(0)),
+						gridBagConstraints);
+
+				int i = 0;
+				if (fa.getSons().size() == 0) {
+					return;
+				}
+				for (TreeNodePO treeNodePO : fa.getSons()) {
 					fa = treeNodePO;
-					draw_node(fa, height+1, row+i);
+					draw_node(fa, height + 1, row + i);
 					++i;
 				}
 			}
-	    }
+		}
 
 		public void mydrawline(Graphics g, TreeNodePO fa) {
 			NodePanel fa_panNodePanel = nodes.get(fa);
@@ -259,6 +285,9 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 				int[] fa_loc = new int[] {
 						fa_panNodePanel.getX() + fa_panNodePanel.getWidth() / 2,
 						fa_panNodePanel.getY() + fa_panNodePanel.getHeight() };
+				if (fa.getSons().size() == 0) {
+					return;
+				}
 				for (TreeNodePO son : fa.getSons()) {
 					NodePanel sonNodePanel = nodes.get(son);
 
@@ -278,9 +307,9 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 					: RenderingHints.VALUE_ANTIALIAS_OFF;
 
 			Graphics2D g2d = (Graphics2D) g;
-	        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, obj);
-	        g2d.setStroke(new BasicStroke(4,
-	            BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, obj);
+			g2d.setStroke(new BasicStroke(4, BasicStroke.CAP_ROUND,
+					BasicStroke.JOIN_BEVEL));
 		}
 	}
 
@@ -295,7 +324,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 		String type_info;
 		String type_so_far;
 		TreeNodePO treeNodePO_in_nodepanel;
-		
+
 		public NodePanel(TreeNodePO po) {
 			type_info = po.getType();
 			type_so_far = po.getType_so_far();
@@ -454,30 +483,34 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 			String type = JOptionPane.showInputDialog("New type name:");
 			boolean add_result = false;
 			try {
-				add_result = gt_controller.add(new TreeNodeVO(treeNodePO_in_nodepanel), type);
+				add_result = gt_controller.add(new TreeNodeVO(
+						treeNodePO_in_nodepanel), type);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			if (add_result) {
-				JOptionPane.showMessageDialog(MainFrame.frame, "Successfully added");
-				//TODO update node 
+				JOptionPane.showMessageDialog(MainFrame.frame,
+						"Successfully added");
+				// TODO update node
 				tree_panel.repaint();
 			} else {
 				JOptionPane.showMessageDialog(MainFrame.frame, "Fail to add");
 			}
-			
+
 		}// GEN-LAST:event_addActionPerformed
 
 		private void delActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_delActionPerformed
 			boolean del_result = false;
 			try {
-				del_result = gt_controller.delete(new TreeNodeVO(treeNodePO_in_nodepanel));
+				del_result = gt_controller.delete(new TreeNodeVO(
+						treeNodePO_in_nodepanel));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			if (del_result) {
-				JOptionPane.showMessageDialog(MainFrame.frame, "Successfully added");
-				//TODO update node 
+				JOptionPane.showMessageDialog(MainFrame.frame,
+						"Successfully added");
+				// TODO update node
 				tree_panel.repaint();
 			} else {
 				JOptionPane.showMessageDialog(MainFrame.frame, "Fail to del");
@@ -530,10 +563,10 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 			g2d.dispose();
 		}
 
-		 @Override
-		 public Dimension getPreferredSize() {
-		 return new Dimension(NODE_W, NODE_H);
-		 }
+		@Override
+		public Dimension getPreferredSize() {
+			return new Dimension(202, 144);
+		}
 
 		protected int getRadius() {
 			// Determines the radius based on the smaller of the width

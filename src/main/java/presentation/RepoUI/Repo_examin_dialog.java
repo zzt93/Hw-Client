@@ -61,9 +61,9 @@ public class Repo_examin_dialog extends javax.swing.JDialog {
 
         in_all.setText("入库总额：");
 
-        i_all.setText("××××");
+        i_all.setText(all_in);
 
-        o_all.setText("××××");
+        o_all.setText(all_out);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

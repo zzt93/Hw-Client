@@ -6,6 +6,7 @@ import po.GoodsModelPO;
 import po.TreeNodePO;
 import vo.TreeNodeVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class GT_GL_BLImpl implements GT_GL_BLservice {
@@ -16,7 +17,7 @@ public class GT_GL_BLImpl implements GT_GL_BLservice {
 		this.treeNodePOs = treeNodePOs;
 	}
 
-	public ArrayList<String> addable_type() throws Exception {
+	public ArrayList<String> addable_type() throws RemoteException {
 		ArrayList<String> res = new ArrayList<String>();
 		for (TreeNodePO node : treeNodePOs) {
 			if(node.is_leaf()){

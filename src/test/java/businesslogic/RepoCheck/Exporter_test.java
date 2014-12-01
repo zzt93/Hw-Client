@@ -26,13 +26,13 @@ public class Exporter_test {
 		GoodsListPO tem = new GoodsListPO();
 		
 		HashMap<String, GoodsModelPO> goodsModel = new HashMap<String, GoodsModelPO>();
-		GoodsModelPO a1m = new GoodsModelPO("a1");
+		GoodsModelPO a1m = new GoodsModelPO("a1", "a1", "a1");
 		a1m.setAmount(30);
-		GoodsModelPO a2m = new GoodsModelPO("a1");
+		GoodsModelPO a2m = new GoodsModelPO("a1", "a1", "a1");
 		a2m.setAmount(30);
 		goodsModel.put("a1", a1m);
 		goodsModel.put("a2", a2m);
-		goodsModel.put("a3", new GoodsModelPO("a3"));
+		goodsModel.put("a3", new GoodsModelPO("a3", "a1", "a1"));
 		tem.setGoodsModels(goodsModel);
 		
 		HashMap<String, ArrayList<GoodsPO>> goods = new HashMap<String, ArrayList<GoodsPO>>();

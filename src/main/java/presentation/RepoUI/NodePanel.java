@@ -159,16 +159,16 @@ public class NodePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseExited
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        // TODO add your handling code here:
+        
         System.out.print("asdfasdf");
     }//GEN-LAST:event_addActionPerformed
 
     private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_delActionPerformed
 
     private void checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActionPerformed
-    	//TODO
+    	
     	JLabel label1 = new JLabel("Full type:");
     	JLabel label2 = new JLabel("Children:");
     	JLabel full_type = new JLabel();//type so far and \n

@@ -29,7 +29,7 @@ import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-	static boolean DEBUG = false;
+	public static boolean DEBUG = true;
 
 	/**
 	 * Creates new form MainFrame
@@ -696,6 +696,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 	private void repo_examinActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_repo_examinActionPerformed
 
+		
 		String[] data = new String[4];
 
 		data[0] = (String) s_year.getSelectedItem() + "-"
@@ -704,14 +705,20 @@ public class MainFrame extends javax.swing.JFrame {
 				+ s_mon1.getSelectedItem() + "-" + s_day1.getSelectedItem();
 
 		InOutRepoVO inout = null;
-		try {
-			inout = repoExaminBLservice.countInOut(data[0], data[1]);
-		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(frame, "Can't connect to get data");
-			e1.printStackTrace();
+		
+		if (DEBUG) {
+			data[2] = "20";
+			data[3] = "20";
+		} else {
+			try {
+				inout = repoExaminBLservice.countInOut(data[0], data[1]);
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(frame, e1+": Can't connect to get data");
+				e1.printStackTrace();
+			}
+			data[2] = inout.getSumOfIn().toString();
+			data[3] = inout.getSumOfOut().toString();
 		}
-		data[2] = inout.getSumOfIn().toString();
-		data[3] = inout.getSumOfOut().toString();
 		// show a dialog
 		final Repo_examin_dialog dialog = new Repo_examin_dialog(frame, true,
 				data);

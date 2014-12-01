@@ -7,15 +7,18 @@ import businesslogicservice.GoodsTypeblservice.GT_account_service;
 import dataservice.GoodsTypedataservice.GoodsTypeDateService;
 import po.GoodsListPO;
 import po.TreeNodePO;
+import presentation.RepoUI.MainFrame;
 import vo.TreeNodeVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		GT_account_service {
 
-	ArrayList<TreeNodePO> treeNodePOs;
+	ArrayList<TreeNodePO> treeNodePOs = new ArrayList<TreeNodePO>();
 
 	public ArrayList<TreeNodePO> getTreeNodePOs() {
 		return treeNodePOs;
@@ -23,10 +26,15 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 
 	GoodsTypeDateService goodsTypeDateService = new GoodsTypeDataImpl();
 
-	public GT_controller() throws RemoteException {
-		treeNodePOs = goodsTypeDateService.getGoodsTypde().getObj();
+	public GT_controller() throws RemoteException, NullPointerException {
 
-		if (treeNodePOs == null) {
+		if (MainFrame.DEBUG) {
+			treeNodePOs = new ArrayList<TreeNodePO>();
+		} else {
+			treeNodePOs = goodsTypeDateService.getGoodsTypde().getObj();
+		}
+
+		if (treeNodePOs == null || treeNodePOs.size()==0) {
 			treeNodePOs.add(new TreeNodePO(new TreeNodeVO("Light/灯")));
 		}
 		gtbLservice = new GTBLImpl(treeNodePOs);
@@ -87,7 +95,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		return goodsTypeDateService.getDatabse(account).getObj();
 	}
 
-	public ArrayList<String> addable_type() throws Exception {
+	public ArrayList<String> addable_type() throws RemoteException {
 		return gt_gl_BLservice.addable_type();
 	}
 
@@ -105,7 +113,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 				int temp = travel(treeNodePO, height);
 				if (height > temp) {
 					System.err.println("some thing wrong");
-					assert(false);
+					assert (false);
 				} else {
 					height = temp;
 				}

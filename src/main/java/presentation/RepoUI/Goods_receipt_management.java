@@ -160,11 +160,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
         jLabel2.setText("商品id：");
 
         goods_id.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        goods_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goods_idActionPerformed(evt);
-            }
-        });
+        
 
         del.setText("删除");
         del.addActionListener(new java.awt.event.ActionListener() {
@@ -409,10 +405,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
        
     }//GEN-LAST:event_layerListActionPerformed
 
-    private void goods_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goods_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_goods_idActionPerformed
-
+    
     private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_delActionPerformed

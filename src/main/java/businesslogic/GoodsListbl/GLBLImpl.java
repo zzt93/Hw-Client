@@ -16,7 +16,7 @@ public class GLBLImpl implements GLBLservice {
 		goodsListPO = po;
 	}
 
-	GoodsListPO goodsListPO;
+	GoodsListPO goodsListPO ;
 
 	public boolean add(GoodsModelVO goods) throws Exception {
 		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO

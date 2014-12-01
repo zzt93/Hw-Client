@@ -3,6 +3,7 @@ package businesslogicservice.GoodsTypeblservice;
 import po.GoodsListPO;
 import vo.TreeNodeVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface GT_GL_BLservice {
@@ -10,7 +11,7 @@ public interface GT_GL_BLservice {
 	/* used to check whether it is a leaf node
 	 * invoked by GL_controller
 	 */
-	ArrayList<String> addable_type() throws Exception;
+	ArrayList<String> addable_type() throws RemoteException;
 
 	/*
 	 * if some goods is added under a type, invoke it to update the tree node
