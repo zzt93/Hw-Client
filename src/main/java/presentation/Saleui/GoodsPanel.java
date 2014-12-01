@@ -135,15 +135,18 @@ public class GoodsPanel {
 		listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		String[] temp;
 		ArrayList tempList;
-		if(type==GoodsPaneType.SALE){
-			tempList=controller.sell_type();
-		}else{
-			tempList=controller.stock_type();
-		}
-		temp=new String[tempList.size()];
-		for(int i=0;i<tempList.size();i++){//可能造成巨大的消耗
-			temp[i]=(String)tempList.get(i);
-		}
+		//FIXME,测试暂时隐掉
+//		if(type==GoodsPaneType.SALE){
+//			tempList=controller.sell_type();
+//		}else{
+//			tempList=controller.stock_type();
+//		}
+//		temp=new String[tempList.size()];
+//		for(int i=0;i<tempList.size();i++){//可能造成巨大的消耗
+//			temp[i]=(String)tempList.get(i);
+//		}
+		temp=new String[]{"0001(商品1)"};
+		
 		goodsList=new JList<String>(temp);
 		goodsList.addMouseListener(new MouseClick());
 		JScrollPane scroll=new JScrollPane();
@@ -159,8 +162,14 @@ public class GoodsPanel {
 				temp=(String)goodsList.getSelectedValue();
 				//System.out.println(temp);
 				//处理temp,获得商品信息，修改界面信息
-				String temp2[]=temp.split("(");
-				goods=controller.eSearch_batch(temp2[0]).get(0);
+//				FIXME,测试暂时注释掉
+//				String temp2[]=temp.split("(");
+//				goods=controller.eSearch_batch(temp2[0]).get(0);
+				GoodsVO goods=new GoodsVO("0001",20);
+				goods.name="商品1";
+				goods.model="类型1";
+				goods.inPrice=15;
+				goods.outPrice=15;
 				textName.setText(goods.name);
 				textType.setText(goods.model);
 				textId.setText(goods.id);
@@ -176,6 +185,7 @@ public class GoodsPanel {
 	public class Right implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
+			pr=new ProductsReceipt();
 			pr.setCommodity_id(Integer.valueOf(textId.getText()));
 			pr.setComment(textComment.getText());
 			pr.setNumber(Integer.valueOf(textNum.getText()));
@@ -185,6 +195,15 @@ public class GoodsPanel {
 			//添加到表格，添加到list
 			tableModel.addRow(pr);
 			list.add(pr);
+			if(type==GoodsPaneType.SALE){
+				Sale1.total+=(Double.valueOf(textPrice.getText())*Integer.valueOf(textNum.getText()));
+				Sale1.labelTotal.setText(String.valueOf(Sale1.total));
+				Sale1.labelTotal.repaint();
+			}else{
+				Stock1.total+=(Double.valueOf(textPrice.getText())*Integer.valueOf(textNum.getText()));
+				Stock1.labelTotal.setText(String.valueOf(Stock1.total));
+				Stock1.labelTotal.repaint();
+			}
 			frame.dispose();		
 		}
 		

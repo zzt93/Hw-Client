@@ -15,6 +15,7 @@ public class GoodsVO {
 		this.id = id;
 		this.amount = amount;
 	}
+	
 	public int amount;
 	public String name;
 	public String id;

@@ -8,10 +8,12 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import presentation.Saleui.Main;
 import presentation.Saleui.ModelType;
 import presentation.Saleui.PublicTableModel;
 import vo.BankVO;
 import businesslogic.BankManagebl.BankController;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +34,23 @@ public class BankManageFrame {
 		initialize();
 	}
 	private void initialize(){
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+		
 		panel =new JPanel();
 		panel.setLayout(null);
 		panel.setBounds(0,0,800,500);
@@ -39,31 +58,31 @@ public class BankManageFrame {
 		JButton button = new JButton("增加");
 		button.setBounds(50, 90, 130, 40);
 		panel.add(button);
-		button.setFont(new Font("宋体", Font.PLAIN, 18));
+//		button.setFont(new Font("宋体", Font.PLAIN, 18));
 		button.addActionListener(new Add());
 		
 		JButton button_1 = new JButton("删除");
 		button_1.setBounds(50, 150, 130, 40);
 		panel.add(button_1);
 		button_1.addActionListener(new Delete());
-		button_1.setFont(new Font("宋体", Font.PLAIN, 18));
+//		button_1.setFont(new Font("宋体", Font.PLAIN, 18));
 		
 		JButton button_2 = new JButton("修改");
 		button_2.setBounds(50, 210, 130, 40);
 		panel.add(button_2);
-		button_2.setFont(new Font("宋体", Font.PLAIN, 18));
+//		button_2.setFont(new Font("宋体", Font.PLAIN, 18));
 		button_2.addActionListener(new Modify());
 		
 		JButton button_3 = new JButton("查找");
 		button_3.setBounds(570, 15, 80, 30);
 		panel.add(button_3);
 		button_3.addActionListener(new Search());
-		button_3.setFont(new Font("宋体", Font.PLAIN, 18));
+//		button_3.setFont(new Font("宋体", Font.PLAIN, 18));
 		
 		JLabel label = new JLabel("关键字");
 		label.setBounds(280, 15, 60, 30);
 		panel.add(label);
-		label.setFont(new Font("宋体", Font.PLAIN, 18));
+//		label.setFont(new Font("宋体", Font.PLAIN, 18));
 		
 		search = new JTextField();
 		search.setBounds(340, 15, 190, 30);
@@ -82,8 +101,8 @@ public class BankManageFrame {
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
 		table.setFillsViewportHeight(true);
-		table.getTableHeader().setFont(new Font("宋体", Font.PLAIN, 14));
-		table.setFont(new Font("宋体", Font.PLAIN, 14));
+//		table.getTableHeader().setFont(new Font("宋体", Font.PLAIN, 14));
+//		table.setFont(new Font("宋体", Font.PLAIN, 14));
 		table.addMouseListener(new MouseClick());
 //		TableColumn column=null;
 //		for(int i=0;i<3;i++){

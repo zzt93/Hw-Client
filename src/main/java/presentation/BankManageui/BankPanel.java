@@ -3,18 +3,25 @@ package presentation.BankManageui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import businesslogic.FinancialReceiptbl.FinReceiptController;
+import po.BkTransPO;
+import presentation.Saleui.PublicTableModel;
 import vo.BankVO;
 
 public class BankPanel {
 	BankVO bank;
+	BkTransPO bankTrans;
 	JFrame frame;
 	JTextField name;
 	JTextField balance;
@@ -32,6 +39,7 @@ public class BankPanel {
 	public void initialize(){
 		frame=new JFrame();
 		frame.setBounds(100,100,350,250);
+		frame.setLocationRelativeTo(null);
 		
 		panel = new JPanel();
 		frame.getContentPane().add(panel);
@@ -53,13 +61,13 @@ public class BankPanel {
 		panel.add(label_2);
 		
 		name = new JTextField();
-		name.setBounds(92, 13, 124, 26);
+		name.setBounds(90, 13, 120, 26);
 		panel.add(name);
 		name.setColumns(10);
 		
 		balance = new JTextField();
 		balance.setColumns(10);
-		balance.setBounds(92, 54, 124, 26);
+		balance.setBounds(90, 54, 124, 26);
 		panel.add(balance);
 		
 		remark = new JTextField();
@@ -123,5 +131,9 @@ public class BankPanel {
 		});
 		
 		frame.setVisible(true);
+	}
+
+	public static void main(String[] args){
+		BankPanel pane=new BankPanel();
 	}
 }

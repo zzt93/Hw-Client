@@ -2,8 +2,10 @@ package presentation.mainui;
 
 import presentation.BankManageui.BankManageFrame;
 import presentation.FinancialReceiptui.FinancialReceiptFrame;
+import presentation.Saleui.Main;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class FinancialUI {
@@ -13,18 +15,34 @@ public class FinancialUI {
 	BankManageFrame BMF=new BankManageFrame();
 	FinancialReceiptFrame FRF=new FinancialReceiptFrame();
 	public FinancialUI(){
-		try {
-			UIManager.setLookAndFeel(new com.sun.java.swing.plaf.windows.WindowsLookAndFeel());
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+//		try {
+//			UIManager.setLookAndFeel(new com.sun.java.swing.plaf.windows.WindowsLookAndFeel());
+//		} catch (UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 		frame=new JFrame();
 		frame.setBounds(0, 0,800, 600);
+		frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//frame.add(mainPanel);
-		frame.setVisible(true);
 		
 		topPanel=new JPanel();
 		topPanel.setBounds(0,0,800,60);
@@ -42,6 +60,8 @@ public class FinancialUI {
 		frame.add(mainPanel);
 		mainPanel.add("银行账户",BMF.getPanel());
 		mainPanel.add("财务单据",FRF.getPanel());
+		
+		frame.setVisible(true);
 	}
 	public static void main(String[] args){
 		FinancialUI main=new FinancialUI();

@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
+import po.BkTransPO;
 import po.ClientPO;
+import po.GoodsPO;
 import po.ProductsReceipt;
 import vo.BankVO;
 
@@ -31,10 +33,12 @@ public class PublicTableModel extends DefaultTableModel {
 					"级别","应收","应付","业务员"};
 			setDataVector(data,name);
 			break;		
-		case GOODS:
+		case PRODUCTS:
 			name=new String[]{"商品编号","商品名称","型号","数量","单价","金额","备注"};
 			setDataVector(data,name);
 			break;
+		case GIFT:
+			name=new String[]{"商品","型号","单价"};
 		}
 	}
 	public boolean isCellEditable(int row,int column){
@@ -44,8 +48,9 @@ public class PublicTableModel extends DefaultTableModel {
 		setDataVector(data,name);
 	}
 	public void update(List list){
-		if(type==ModelType.CLIENT){
-			Object[][] data=new Object[list.size()][7];
+		switch(type){
+		case CLIENT:{
+			data=new Object[list.size()][7];
 			ClientPO temp;
 			for(int i=0;i<list.size();i++){
 				temp=(ClientPO)list.get(i);
@@ -58,6 +63,21 @@ public class PublicTableModel extends DefaultTableModel {
 				data[i][6]=temp.getDefaultSalesMan();
 			}
 			update(data);
+			break;
+		}
+		case GIFT:{
+			data=new Object[list.size()][4];
+			GoodsPO temp;
+			for(int i=0;i<list.size();i++){
+				temp=(GoodsPO)list.get(i);
+				data[i][0]=temp.getName();
+				data[i][1]=temp.getModel();
+				data[i][2]=temp.getOutPrice();
+			}
+			update(data);
+			break;
+		}
+
 		}
 	}
 	public void update(BankVO[] list){
@@ -80,6 +100,13 @@ public class PublicTableModel extends DefaultTableModel {
 		data[4]=pr.getPrice();
 		data[5]=pr.getTotal();
 		data[6]=pr.getComment();
+		addRow(data);
+	}
+	public void addRow(BkTransPO po ){
+		Object[] data=new Object[3];
+		data[0]=po.getName();
+		data[1]=po.getAmount();
+		data[2]=po.getRemark();
 		addRow(data);
 	}
 	

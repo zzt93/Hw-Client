@@ -20,7 +20,14 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     private BigDecimal coupon;          //代金券金额
     private BigDecimal actualValue;     //折让后总额
     private String comment;
-
+    public SaleReceiptPO(int clientId,String salesman,
+    		String repository,String comment,BigDecimal totalValue){
+    	this.clientId=clientId;
+    	this.salesman=salesman;
+    	this.repository=repository;
+    	this.comment=comment;
+    	this.totalValue=totalValue;
+    }
     public String getNumber() {
         return number;
     }
@@ -67,6 +74,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
 
     public void setProductList(List<ProductsReceipt> productList) {
         this.productList = productList;
+        
     }
 
     public int getId() {

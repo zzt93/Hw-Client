@@ -24,6 +24,10 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		bankList.delete(po);
 		return bankList.getTotal();
 	}
+	public double deleteBank(int i){
+		bankList.delete(i);
+		return bankList.getTotal();
+	}
 	public double deleteItem(ItemPO po){
 		itemList.delete(po);
 		return itemList.getTotal();

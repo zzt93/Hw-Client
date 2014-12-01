@@ -18,11 +18,12 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
     private BigDecimal totalValue;
 
     public StockReceiptPO(int clientId, String repository, String operator,
-                          String comment) {
+                          String comment,BigDecimal totalValue) {
         this.clientId = clientId;
         this.repository = repository;
         this.operator = operator;
         this.comment = comment;
+        this.totalValue=totalValue;
     }
 
     public String getNumber() {

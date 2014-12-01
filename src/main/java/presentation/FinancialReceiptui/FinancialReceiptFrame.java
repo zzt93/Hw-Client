@@ -2,33 +2,39 @@ package presentation.FinancialReceiptui;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FinancialReceiptFrame {
 	private JPanel panel;
 	private JTable table;
+	private FinReceiptPanel receiptPane;
 	public FinancialReceiptFrame(){
 		initialize();
-	};
+		receiptPane=new FinReceiptPanel();
+	}
 	public void initialize(){
 		panel = new JPanel();
 		panel.setBounds(0, 100, 800, 500);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("付款单");
-		btnNewButton.setFont(new Font("宋体", Font.PLAIN, 18));
-		btnNewButton.setBounds(50, 90, 130, 40);
-		panel.add(btnNewButton);
+		JButton btnPay = new JButton("付款单");
+		btnPay.setFont(new Font("宋体", Font.PLAIN, 18));
+		btnPay.setBounds(50, 90, 130, 40);
+		panel.add(btnPay);
+		btnPay.addActionListener(new Payment());
 		
-		JButton button = new JButton("收款单");
-		button.setFont(new Font("宋体", Font.PLAIN, 18));
-		button.setBounds(50, 170, 130, 40);
-		panel.add(button);
+		JButton btnRec = new JButton("收款单");
+		btnRec.setFont(new Font("宋体", Font.PLAIN, 18));
+		btnRec.setBounds(50, 170, 130, 40);
+		panel.add(btnRec);
 		
-		JButton button_1 = new JButton("现金费用单");
-		button_1.setFont(new Font("宋体", Font.PLAIN, 18));
-		button_1.setBounds(50, 250, 130, 40);
-		panel.add(button_1);
+		JButton btnCash = new JButton("现金费用单");
+		btnCash.setFont(new Font("宋体", Font.PLAIN, 18));
+		btnCash.setBounds(50, 250, 130, 40);
+		panel.add(btnCash);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(240, 60, 475, 320);
@@ -50,6 +56,12 @@ public class FinancialReceiptFrame {
 	public JPanel getPanel(){
 		return panel;
 	}
+	public class Payment implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			receiptPane.creatPay();
+		}
+		
+	}
 	public class FinReceiptTableModel extends AbstractTableModel{
 		public String[] columnNames={"日期","类型","总额","审批状况","处理状况"};
 		public Object[][] data=new Object[10][5];
@@ -65,6 +77,5 @@ public class FinancialReceiptFrame {
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			return data[rowIndex][columnIndex];
 		}
-		
 	}
 }
