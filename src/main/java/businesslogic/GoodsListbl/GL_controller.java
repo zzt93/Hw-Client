@@ -238,6 +238,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	 */
 	public boolean add(GoodsModelVO goodsVO) throws Exception {
 		boolean res = glbLservice.add(goodsVO);
+		
 		goodsListDataService.insert(new GoodsModelPO(goodsVO));
 		return res;
 	}

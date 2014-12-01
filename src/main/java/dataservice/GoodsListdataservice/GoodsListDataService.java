@@ -12,6 +12,7 @@ public interface GoodsListDataService {
 	ResultMessage<Boolean> saveGoodsList(GoodsListPO goodsListPO);
 	ResultMessage<GoodsListPO> getGoodsList() throws RemoteException;
 	ResultMessage<Boolean> initialize(GoodsListPO goodsListPO) throws RemoteException;
+	
 	ResultMessage<Boolean> insert(GoodsModelPO goodsPO) throws RemoteException;
 	ResultMessage<Boolean> delete(GoodsModelPO goodsPO) throws RemoteException;
 	ResultMessage<Boolean> update(GoodsModelPO goodsPO) throws RemoteException;

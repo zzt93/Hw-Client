@@ -29,6 +29,7 @@ public class GoodsListDataImpl implements GoodsListDataService {
 
 	public ResultMessage<Boolean> insert(GoodsModelPO goodsPO) throws RemoteException {
 		// TODO Auto-generated method stub
+		
 		return new ResultMessage<Boolean>("", true);
 	}
 

@@ -27,6 +27,10 @@ public class GoodsModelPO {
 	String id;//id = type + model
 	String name;
 	String model;
+	public String getModel() {
+		return model;
+	}
+
 	boolean everHas;
 	boolean gift;
 	
