@@ -112,7 +112,7 @@ public class StrategyList implements Strategy_List_BLservice {
 		return pos;
 	}
 
-	SaleReceiptPO setTreatment(StrategyPO spo, SaleReceiptPO po) throws Exception {
+	public SaleReceiptPO setTreatment(StrategyPO spo, SaleReceiptPO po) throws Exception {
 		BigDecimal bd = new BigDecimal(0);
 		if (spo.getTreatment().type == CatOfTreatment.DISCOUNT) {
 			po.setAllowance(BigDecimal

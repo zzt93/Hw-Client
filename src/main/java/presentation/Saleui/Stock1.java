@@ -63,7 +63,7 @@ public class Stock1 extends JPanel {
     List<ClientPO> clientList;
     public static double total;
     private StockUtilityImpl stockController;
-    private PublicTableModel tableModel=new PublicTableModel(ModelType.GOODS);
+    private PublicTableModel tableModel=new PublicTableModel(ModelType.PRODUCTS);
     private StockReceiptPO stockReceipt;
     private Vector<ProductsReceipt> list=new Vector<ProductsReceipt>();
     private GoodsPanel goodsPane;

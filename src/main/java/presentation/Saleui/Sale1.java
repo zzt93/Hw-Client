@@ -3,6 +3,8 @@ package presentation.Saleui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -28,11 +30,13 @@ import javax.swing.table.DefaultTableModel;
 import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
+import businesslogic.Strategybl.StrategyList;
 import po.ClientPO;
 import po.ClientType;
 import po.ProductsReceipt;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
+import po.StrategyPO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -54,14 +58,14 @@ public class Sale1 extends JPanel {
     private JComboBox boxType;
     private JLabel labelCoupon;
     private JLabel jLabel11;
-    private JLabel labelNewTotal;
+    private JLabel labelActualValue;
     private JLabel jLabel13;
     private JLabel jLabel3;
     private JLabel jLabel4;
     private JLabel jLabel5;
     public static JLabel labelTotal;
     private JLabel jLabel7;
-    private JLabel labelDiscount;
+    private JLabel labelAllowance;
     private JLabel jLabel9;
     private JPanel jPanel1;
     private JPanel jPanel2;
@@ -77,12 +81,15 @@ public class Sale1 extends JPanel {
     private JLabel operator_label;
     private JPanel sale;
     
+    List<StrategyPO> strategyList;
+    private StrategyList strategyController;
+    
     public static double total; 
     List<ClientPO> clientList;
     private SaleUtilityImpl saleController;
     private PublicTableModel tableModel=new PublicTableModel(ModelType.PRODUCTS);
     private SaleReceiptPO saleReceipt;
-    private Vector<ProductsReceipt> list=new Vector<ProductsReceipt>();
+    private Vector<ProductsReceipt> prList=new Vector<ProductsReceipt>();
     private GoodsPanel goodsPane;
     // End of variables declaration//GEN-END:variables
 
@@ -121,11 +128,11 @@ public class Sale1 extends JPanel {
         jLabel5 = new JLabel();
         labelTotal = new JLabel();
         jLabel7 = new JLabel();
-        labelDiscount = new JLabel();
+        labelAllowance = new JLabel();
         jLabel9 = new JLabel();
         labelCoupon = new JLabel();
         jLabel11 = new JLabel();
-        labelNewTotal = new JLabel();
+        labelActualValue = new JLabel();
         jPanel3 = new JPanel();
         jButton1 = new JButton();
         jButton2 = new JButton();
@@ -159,6 +166,16 @@ public class Sale1 extends JPanel {
 //      boxClient = new JComboBox(temp);
         boxClient=new JComboBox(new String[]{"张三","李四"});
         boxType=new JComboBox(new String[]{"销售","销售退货"});
+        boxType.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent e) {
+				if(boxType.getSelectedIndex()==1){
+					jButton2.setEnabled(false);
+				}else{
+					jButton2.setEnabled(true);
+				}
+			}
+        	
+        });
         
         jScrollPane3.setPreferredSize(new java.awt.Dimension(750, 500));
 
@@ -209,7 +226,7 @@ public class Sale1 extends JPanel {
 
         jLabel7.setText("折让：");
 
-        labelDiscount.setText("");
+        labelAllowance.setText("");
 
         jLabel9.setText("代金券：");
 
@@ -217,7 +234,7 @@ public class Sale1 extends JPanel {
 
         jLabel11.setText("折让后总额：");
 
-        labelNewTotal.setText("");
+        labelActualValue.setText("");
 
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -231,7 +248,7 @@ public class Sale1 extends JPanel {
                 .addGap(65, 65, 65)
                 .addComponent(jLabel7)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelDiscount)
+                .addComponent(labelAllowance)
                 .addGap(83, 83, 83)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
@@ -239,7 +256,7 @@ public class Sale1 extends JPanel {
                 .addGap(58, 58, 58)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
-                .addComponent(labelNewTotal)
+                .addComponent(labelActualValue)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -250,30 +267,30 @@ public class Sale1 extends JPanel {
                     .addComponent(jLabel5)
                     .addComponent(labelTotal)
                     .addComponent(jLabel7)
-                    .addComponent(labelDiscount)
+                    .addComponent(labelAllowance)
                     .addComponent(jLabel9)
                     .addComponent(labelCoupon)
                     .addComponent(jLabel11)
-                    .addComponent(labelNewTotal))
+                    .addComponent(labelActualValue))
                 .addContainerGap())
         );
 
         jButton1.setText("添加商品");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
         jButton2.setText("选择促销策略");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         jButton3.setText("生成单据");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
@@ -386,39 +403,55 @@ public class Sale1 extends JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	goodsPane=new GoodsPanel(list,tableModel,GoodsPaneType.SALE); 
+    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	goodsPane=new GoodsPanel(prList,tableModel,GoodsPaneType.SALE); 
     	goodsPane.showAddPane();
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	未实现
-  
+    private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	//setSaleReceipt();
+//    	try {
+//			strategyList=strategyController.queryValidStrategy(saleReceipt);
+//			StrategyPane strategyPane=new StrategyPane();
+//		} catch (Exception e) {
+//			JOptionPane.showMessageDialog(null,e.getMessage());
+//		}
+    	StrategyPane strategyPane=new StrategyPane();
+    	System.out.println("?");
    }//GEN-LAST:event_jButton1ActionPerformed
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	int id=clientList.get(boxClient.getSelectedIndex()).getId();
-    	//FIXME,操作员get
-    	saleReceipt=new SaleReceiptPO(id,textRepository.getText(),
-    			"操作员",textComment.getText(),new BigDecimal(total));
-    	saleReceipt.setProductList(list);
+    private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	if(saleReceipt==null){
+        	setSaleReceipt();
+    	}
     	try {
 			saleController.makeReceipt(saleReceipt);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
    }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void setSaleReceipt(){
+    	//FIXME,测试注释掉
+    	//int id=clientList.get(boxClient.getSelectedIndex()).getId();
+    	//FIXME,操作员get
+    	int id=123;
+    	saleReceipt=new SaleReceiptPO(id,textRepository.getText(),
+    			"操作员",textComment.getText(),new BigDecimal(total));
+    	saleReceipt.setProductList(prList);
+    }
     public class StrategyPane{
     	private JFrame frame;
     	private JTextField textDiscount;
     	private JTextField textCoupon;
+    	JComboBox boxStrategy;
     	private JTable table;
     	private PublicTableModel giftModel;
-    	
+    	public StrategyPane(){
+    		initialize();
+    	}
     	private void initialize() {
     		frame = new JFrame();
     		frame.setBounds(100, 100,600, 300);
-    		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     		
     		JPanel panel = new JPanel();
     		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -427,9 +460,17 @@ public class Sale1 extends JPanel {
     		JLabel label1 = new JLabel("策略选择：");
     		label1.setBounds(30, 30, 60, 15);
     		panel.add(label1);
-    		
-    		JComboBox boxStrategy = new JComboBox();
+    		String[] temp=new String[strategyList.size()];
+    		for(int i=0;i<temp.length;i++){
+    			temp[i]="策略"+String.valueOf(i+1);
+    		}
+    		boxStrategy = new JComboBox(temp);
     		boxStrategy.setBounds(84, 27, 80, 21);
+    		boxStrategy.addItemListener(new ItemListener(){
+				public void itemStateChanged(ItemEvent e) {
+					refresh(strategyList.get(boxStrategy.getSelectedIndex()));
+				}
+    		});
     		panel.add(boxStrategy);
     		
     		JLabel label2 = new JLabel("折扣：");
@@ -440,6 +481,7 @@ public class Sale1 extends JPanel {
     		textDiscount.setBounds(84, 67, 80, 21);
     		panel.add(textDiscount);
     		textDiscount.setColumns(10);
+    		textDiscount.setEditable(false);
     		
     		JLabel label3 = new JLabel("代金券：");
     		label3.setBounds(30, 111, 54, 15);
@@ -449,6 +491,7 @@ public class Sale1 extends JPanel {
     		textCoupon.setBounds(84, 108, 80, 21);
     		panel.add(textCoupon);
     		textCoupon.setColumns(10);
+    		textDiscount.setEditable(false);
     		
     		JScrollPane scrollPane = new JScrollPane();
     		scrollPane.setBounds(203, 63, 357, 189);
@@ -481,10 +524,26 @@ public class Sale1 extends JPanel {
     			
     		});
     		panel.add(btnCancel);
+    		
+    		refresh(strategyList.get(0));
+    		frame.setVisible(true);
     	}
+    	 public void calculate(){
+    	    	try {
+					saleReceipt=strategyController.setTreatment(strategyList.get(boxStrategy.getSelectedIndex()), saleReceipt);
+					labelAllowance.setText(saleReceipt.getAllowance().toString());
+					labelCoupon.setText(saleReceipt.getCoupon().toString());
+					labelActualValue.setText(saleReceipt.getActualValue().toString());
+    	    	} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+    	    }
+    	 public void refresh(StrategyPO po){
+    		 textDiscount.setText(String.valueOf(po.getTreatment().getDiscount()));
+    		 textCoupon.setText(String.valueOf(po.getTreatment().getCoupon()));
+    		 giftModel.update(po.getTreatment().getGive());
+    	 }
     }
-    public void calculate(){
-    	sha
-    }
+ 
     
 }

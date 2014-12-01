@@ -192,7 +192,7 @@ public class GoodsPanel {
 			pr.setPrice(new BigDecimal(textPrice.getText()));
 			pr.setType(textType.getText());
 			pr.setName(textName.getText());
-			//添加到表格，添加到list
+			//添加到表格，添加到list,刷新界面总额
 			tableModel.addRow(pr);
 			list.add(pr);
 			if(type==GoodsPaneType.SALE){
