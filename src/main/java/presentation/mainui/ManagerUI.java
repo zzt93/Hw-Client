@@ -1,9 +1,11 @@
 package presentation.mainui;
 
+import presentation.Adminui.AdminUI;
 import presentation.Approveui.ApproveUI;
 import presentation.Strategyui.StrategyListUI;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class ManagerUI {
@@ -11,6 +13,7 @@ public class ManagerUI {
 	private JFrame frame;
 	private StrategyListUI strategyList;
 	private ApproveUI approveList;
+	private AdminUI adminList;
 
 	/**
 	 * Launch the application.
@@ -60,10 +63,11 @@ public class ManagerUI {
 		
 		strategyList = new StrategyListUI();
 		approveList = new ApproveUI();
+		adminList=new AdminUI();
 		
 		tabbedPane.addTab("制定促销策略",strategyList.panel);
 		tabbedPane.addTab("审批单据",approveList.totalPanel);
-		
+		tabbedPane.addTab("用户管理",adminList.panel);
 		
 
 	}
