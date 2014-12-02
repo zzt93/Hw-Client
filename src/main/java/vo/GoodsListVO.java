@@ -2,9 +2,10 @@ package vo;
 
 import po.GoodsListPO;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class GoodsListVO {
+public class GoodsListVO implements Serializable {
 
 	
 	HashMap<String, GoodsModelVO> goodsModels;

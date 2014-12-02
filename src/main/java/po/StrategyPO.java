@@ -1,4 +1,7 @@
 package po;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author Mebleyev.G.Longinus
@@ -6,7 +9,7 @@ package po;
  */
 
 
-public class StrategyPO {
+public class StrategyPO implements Serializable {
 	public StrategyPO(Condition condition, Treatment treatment,
 			TimePeriod timePeriod) {
 		super();

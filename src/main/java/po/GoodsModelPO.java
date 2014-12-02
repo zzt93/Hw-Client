@@ -2,7 +2,9 @@ package po;
 
 import vo.GoodsModelVO;
 
-public class GoodsModelPO {
+import java.io.Serializable;
+
+public class GoodsModelPO implements Serializable {
 	
 	public String getName() {
 		return name;

@@ -2,12 +2,13 @@ package po;
 
 import vo.GoodsReceiptVO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * Edited by dzh,add extension,11.12
  *
  */
-public class GoodsReceiptPO extends ReceiptPO{
+public class GoodsReceiptPO extends ReceiptPO implements Serializable {
 	ArrayList<GoodsPO> goodsPOs;
 	double sumOfGifts;
 	

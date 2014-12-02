@@ -1,5 +1,6 @@
 package po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * Edited by dzh,add extension,11.12
  *
  */
-public class RepoReceiptPO extends ReceiptPO{
+public class RepoReceiptPO extends ReceiptPO implements Serializable {
 	
 	public String getId() {
 		return id;

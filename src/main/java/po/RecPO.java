@@ -1,10 +1,13 @@
 package po;
 
 import vo.RecVO;
+
+import java.io.Serializable;
+
 /**
  * Created by MethyleneBlue on 2014/10/??.
  */
-public class RecPO extends ReceiptPO {
+public class RecPO extends ReceiptPO implements Serializable {
 	public String client,operator;
 	public BkTransPO[] bankList;
 	public double total=0;

@@ -5,7 +5,9 @@ import po.ItemPO;
 import po.ReceiptPO;
 import po.ReceiptType;
 
-public class CashVO extends ReceiptPO {
+import java.io.Serializable;
+
+public class CashVO extends ReceiptPO implements Serializable {
 	public String operator;
 	public double total=0;
 	public ItemPO[] itemList;

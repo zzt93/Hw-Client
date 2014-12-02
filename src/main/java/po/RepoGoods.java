@@ -1,8 +1,9 @@
 package po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RepoGoods {
+public class RepoGoods implements Serializable {
 	public RepoGoods(String id, GoodsModelPO goodsModelPO, ArrayList<GoodsPO> arrayList) {
 		this.id = id;
 		amount = goodsModelPO.getAmount();

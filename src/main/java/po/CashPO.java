@@ -1,10 +1,13 @@
 package po;
 
 import vo.CashVO;
+
+import java.io.Serializable;
+
 /**
  * Created by MethyleneBlue on 2014/10/??.
  */
-public class CashPO extends ReceiptPO{
+public class CashPO extends ReceiptPO implements Serializable {
 	public String operator;
 	public double total=0;
 	public ItemPO[] itemList;

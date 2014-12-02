@@ -3,9 +3,10 @@ package vo;
 import po.GoodsReceiptPO;
 import po.ReceiptPO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GoodsReceiptVO extends ReceiptPO{
+public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	ArrayList<GoodsVO> goodsPOs;
 	double sumOfGifts;
 	

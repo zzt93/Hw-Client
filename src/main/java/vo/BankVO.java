@@ -2,7 +2,9 @@ package vo;
 
 import po.BankPO;
 
-public class BankVO {
+import java.io.Serializable;
+
+public class BankVO implements Serializable {
 	public String name;
 	public double balance;
 	public String remark;

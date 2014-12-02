@@ -2,7 +2,9 @@ package po;
 
 import vo.GoodsVO;
 
-public class GoodsPO {
+import java.io.Serializable;
+
+public class GoodsPO implements Serializable {
 	int amount;
 	String name;
 	String id;

@@ -2,9 +2,10 @@ package po;
 
 import vo.TreeNodeVO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TreeNodePO {
+public class TreeNodePO implements Serializable {
 	@Override
 	public String toString() {
 		return "TreeNodePO [type=" + type + "\n type_so_far=" + type_so_far

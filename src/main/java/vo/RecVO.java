@@ -5,7 +5,9 @@ import po.RecPO;
 import po.ReceiptPO;
 import po.ReceiptType;
 
-public class RecVO extends ReceiptPO{
+import java.io.Serializable;
+
+public class RecVO extends ReceiptPO implements Serializable {
 	public String client,operator;
 	public BkTransPO[] bankList;
 	public double total=0;

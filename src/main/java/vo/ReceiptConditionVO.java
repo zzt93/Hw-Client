@@ -2,7 +2,9 @@ package vo;
 
 import po.ReceiptType;
 
-public class ReceiptConditionVO extends TimeConditionVO {
+import java.io.Serializable;
+
+public class ReceiptConditionVO extends TimeConditionVO implements Serializable {
     public String startTime, endTime, client, operator, storage;
     public ReceiptType type;
 

@@ -1,11 +1,12 @@
 package po;
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * 
  * @author Mebleyev.G.Longinus
  *
  */
-public class Condition {
+public class Condition implements Serializable {
 	public CatOfCondition type;
 	public int customerLevel;
 	public ArrayList<GoodsPO> composition;

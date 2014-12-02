@@ -2,9 +2,10 @@ package vo;
 
 import po.TreeNodePO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TreeNodeVO {
+public class TreeNodeVO implements Serializable {
 	
 	public TreeNodeVO(TreeNodePO temNodePO) {
 		// TODO Auto-generated constructor stub

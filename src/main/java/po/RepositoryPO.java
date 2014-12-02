@@ -1,6 +1,8 @@
 package po;
 
-public class RepositoryPO {
+import java.io.Serializable;
+
+public class RepositoryPO implements Serializable {
 	String batch;
 	String batchNum;
 	GoodsListPO now;

@@ -1,9 +1,10 @@
 package po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GoodsTypePO {
+public class GoodsTypePO implements Serializable {
 	ArrayList<TreeNodePO> goodsType;
 	//record the node that has goods -- show the goods at the ui of a node
 	HashMap<TreeNodePO, GoodsModelPO> type_goodsMap;

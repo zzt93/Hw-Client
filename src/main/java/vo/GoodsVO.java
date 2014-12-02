@@ -2,12 +2,14 @@ package vo;
 
 import po.GoodsPO;
 
+import java.io.Serializable;
+
 /**
  * An object of Goods is a batch of goods
  * @author zzt
  *
  */
-public class GoodsVO {
+public class GoodsVO implements Serializable {
 	public GoodsVO(GoodsPO goodsPO) {
 		// TODO Auto-generated constructor stub
 	}

@@ -1,5 +1,7 @@
 package po;
 
-public class RepoFilterPO {
+import java.io.Serializable;
+
+public class RepoFilterPO implements Serializable {
 
 }

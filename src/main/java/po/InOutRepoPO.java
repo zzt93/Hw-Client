@@ -1,9 +1,10 @@
 package po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class InOutRepoPO {
+public class InOutRepoPO implements Serializable {
 	String produce_date;
 	String[] date = new String[2];
 	BigDecimal sumOfIn;

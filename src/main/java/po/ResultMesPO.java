@@ -1,5 +1,7 @@
 package po;
 
-public class ResultMesPO {
+import java.io.Serializable;
+
+public class ResultMesPO implements Serializable {
 
 }

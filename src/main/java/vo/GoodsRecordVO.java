@@ -2,7 +2,9 @@ package vo;
 
 import po.ReceiptType;
 
-public class GoodsRecordVO {
+import java.io.Serializable;
+
+public class GoodsRecordVO implements Serializable {
 	public String time,goods,goodsType;
 	public int number;
 	public double price,total;

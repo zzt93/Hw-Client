@@ -2,7 +2,9 @@ package vo;
 
 import po.GoodsModelPO;
 
-public class GoodsModelVO {
+import java.io.Serializable;
+
+public class GoodsModelVO implements Serializable {
 
 	// all the field is for all batches goods
 	int signal;

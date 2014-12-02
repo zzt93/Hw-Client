@@ -1,8 +1,9 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class SignalVO {
+public class SignalVO implements Serializable {
 	
 	public SignalVO(int a, int s, String string) {
 		amount = a;

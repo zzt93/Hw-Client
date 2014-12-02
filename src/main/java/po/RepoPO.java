@@ -1,5 +1,6 @@
 package po;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 
-public class RepoPO {
+public class RepoPO implements Serializable {
 	static Random random = new Random();
 	static int count = 0;
 	

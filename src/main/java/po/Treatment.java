@@ -1,9 +1,10 @@
 package po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Treatment {
+public class Treatment implements Serializable {
 	public CatOfTreatment type;
 	public ArrayList<GoodsPO> give;
 	public double discount;

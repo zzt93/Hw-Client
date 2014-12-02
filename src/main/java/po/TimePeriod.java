@@ -1,8 +1,9 @@
 package po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TimePeriod {
+public class TimePeriod implements Serializable {
 	private Date start;
 	private Date end;
 	

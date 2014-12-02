@@ -3,11 +3,13 @@ package po;
 
 import org.omg.PortableServer.POA;
 
+import java.io.Serializable;
+
 /**
  * Created by MethyleneBlue on 2014/10/??.
  */
 
-public class ItemPO {
+public class ItemPO implements Serializable {
 	String item,remark;
 	double amount;
 	public ItemPO(String item,double amount,String remark){

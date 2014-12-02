@@ -1,5 +1,7 @@
 package vo;
 
-public class TimeConditionVO {
+import java.io.Serializable;
+
+public class TimeConditionVO implements Serializable {
 	
 }

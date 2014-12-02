@@ -1,9 +1,12 @@
 package po;
+
+import java.io.Serializable;
+
 /**
  * Created by MethyleneBlue on 2014/10/??.
  */
 
-public class BkTransPO {
+public class BkTransPO implements Serializable {
 	public String name;
 	public double amount;
 	public String remark;

@@ -1,5 +1,7 @@
 package vo;
 
-public class ResultMesVO {
+import java.io.Serializable;
+
+public class ResultMesVO implements Serializable {
 
 }
