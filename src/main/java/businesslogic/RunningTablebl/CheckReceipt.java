@@ -58,11 +58,12 @@ public class CheckReceipt {
 			temp.produceGoodsReceipt((GoodsReceiptVO)vo);
 			break;
 		}
-		case REPORECEIPT:{
-			RepoReceiptBLImpl temp=new RepoReceiptBLImpl();
-			temp.produceRepoReceipt((RepoReceiptVO)vo);
-			break;
-		}
+		//FIXME,该红冲是否生成有待商榷
+//		case REPORECEIPT:{
+//			RepoReceiptBLImpl temp=new RepoReceiptBLImpl();
+//			temp.produceRepoReceipt((RepoReceiptVO)vo);
+//			break;
+//		}
 		case SALE_ACCEPT:
 		case SALE_REJECTION:{
 			SaleUtilityImpl temp=new SaleUtilityImpl();

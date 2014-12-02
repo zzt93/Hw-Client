@@ -8,8 +8,8 @@ public class RecPO extends ReceiptPO {
 	public String client,operator;
 	public BkTransPO[] bankList;
 	public double total=0;
+	public DealState dealState=DealState.UNDEAL;
 	public RecPO(RecVO vo,BkTransPO[] list){
-		number=vo.number;
 		client=vo.client;
 		operator=vo.operator;
 		bankList=list;
@@ -17,7 +17,6 @@ public class RecPO extends ReceiptPO {
 		type=ReceiptType.RECEIVE;
 	}
 	public RecPO(RecVO vo){
-		number=vo.number;
 		client=vo.client;
 		operator=vo.operator;
 		bankList=vo.bankList;
@@ -25,4 +24,16 @@ public class RecPO extends ReceiptPO {
 		type=ReceiptType.RECEIVE;
 	}
 	public RecPO(){}
+	public String getClient() {
+		return client;
+	}
+	public String getOperator() {
+		return operator;
+	}
+	public BkTransPO[] getBankList() {
+		return bankList;
+	}
+	public double getTotal() {
+		return total;
+	}
 }

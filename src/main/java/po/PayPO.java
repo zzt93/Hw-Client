@@ -4,12 +4,8 @@ import vo.PayVO;
 /**
  * Created by MethyleneBlue on 2014/10/??.
  */
-public class PayPO extends ReceiptPO{
-	String client,operator;
-	BkTransPO[] bankList;
-	double total=0;
+public class PayPO extends RecPO{
 	public PayPO(PayVO vo,BkTransPO[] list){
-		number=vo.number;
 		client=vo.client;
 		operator=vo.operator;
 		bankList=list;
@@ -17,7 +13,6 @@ public class PayPO extends ReceiptPO{
 		type=ReceiptType.PAYMENT;
 	}
 	public PayPO(PayVO vo){
-		number=vo.number;
 		client=vo.client;
 		operator=vo.operator;
 		bankList=vo.bankList;
@@ -27,16 +22,5 @@ public class PayPO extends ReceiptPO{
 	public PayPO(){
 		type = ReceiptType.PAYMENT;
 	}
-	public String getClient() {
-		return client;
-	}
-	public String getOperator() {
-		return operator;
-	}
-	public BkTransPO[] getBankList() {
-		return bankList;
-	}
-	public double getTotal() {
-		return total;
-	}
+	
 }

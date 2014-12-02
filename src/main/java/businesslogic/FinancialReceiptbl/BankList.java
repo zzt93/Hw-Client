@@ -24,6 +24,7 @@ public class BankList {
 	}
 	public void delete(int i){
 		list.remove(i);
+		
 	}
 	public double getTotal(){
 		return total;

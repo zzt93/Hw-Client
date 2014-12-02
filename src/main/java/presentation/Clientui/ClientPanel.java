@@ -206,6 +206,7 @@ public class ClientPanel {
 	}
 	public class Right implements ActionListener{
 		public void actionPerformed(ActionEvent e){
+			//FIXME,检查数据是否完整，检查生成PO
 			client.setAddress(textAddress.getText());
 			client.setDefaultSalesMan(textSalesman.getText());
 			client.setEmail(textEmail.getText());

@@ -96,6 +96,8 @@ public class BankPanel {
 				BankVO bank=new BankVO(name.getText(),
 						Double.valueOf(balance.getText()),remark.getText());
 				JOptionPane.showMessageDialog(null,"添加成功");
+				frame.dispose();
+//FXIEME,底层
 //				try {
 //					controller.add(bank);
 //					JOptionPane.showMessageDialog(null,"添加成功");
@@ -103,12 +105,11 @@ public class BankPanel {
 //				} catch (Exception e1) {
 //					JOptionPane.showMessageDialog(null,e1.getMessage());
 //				}
-				frame.dispose();
+
 				
 			}
 		});
-		
-		frame.setVisible(true);
+
 	}
 	public void modify(){
 		remark.setText(bank.remark);
@@ -119,6 +120,8 @@ public class BankPanel {
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JOptionPane.showMessageDialog(null,"修改成功");
+				frame.dispose();
+				//FIXME,底层
 //				try {
 //					controller.modify(bank);
 //					JOptionPane.showMessageDialog(null,"修改成功");
@@ -126,10 +129,11 @@ public class BankPanel {
 //				} catch (Exception e1) {
 //					JOptionPane.showMessageDialog(null,e1.getMessage());
 //				}
-				frame.dispose();
 			}
 		});
-		
+
+	}
+	public void visit(){
 		frame.setVisible(true);
 	}
 

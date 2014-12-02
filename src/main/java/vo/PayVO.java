@@ -8,8 +8,7 @@ public class PayVO extends ReceiptPO{
 	public String client,operator;
 	public BkTransPO[] bankList;
 	public double total=0;
-	public PayVO(String num,String client,String operator,double total){
-		number=num;
+	public PayVO(String client,String operator,double total){
 		this.client=client;
 		this.operator=operator;
 		this.total=total;

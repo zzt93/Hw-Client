@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,19 +19,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.BankManagebl.BankController;
+import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogic.FinancialReceiptbl.FinReceiptController;
 import po.BkTransPO;
+import po.ClientPO;
 import presentation.BankManageui.BankPanel;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
 import vo.BankVO;
+import vo.PayVO;
+import vo.RecVO;
 
 public class FinReceiptPanel {
 	static private JFrame frame;
 	private JPanel panel;
 	private JTable table;
-	private JTextField textNum;
-	private JTextField textField;
+//	private JTextField textNum;
+	private JTextField textOperator;
 //	ArrayList<BkTransPO> bankList;
 	PublicTableModel tableModel;
 	FinReceiptController controller;
@@ -37,9 +45,13 @@ public class FinReceiptPanel {
 	JButton btnCancel; 
 	JButton btnAdd;
 	JButton btnDel; 
+	JLabel labelTotal;
+	double total;
+	JComboBox comboBox;
+	ClientUtilityImpl clientController;
+	
 	public FinReceiptPanel(){
 		initialize();
-		controller=new FinReceiptController();
 	}
 	public void initialize(){
 		frame = new JFrame();
@@ -50,38 +62,64 @@ public class FinReceiptPanel {
 		panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		//FIXME,编号获得
-		JLabel label1 = new JLabel("编号");
-		label1.setFont(new Font("宋体", Font.PLAIN, 18));
-		label1.setBounds(90, 44, 54, 20);
-		panel.add(label1);
+		//不显示编号
+//		JLabel label1 = new JLabel("编号");
+//		label1.setFont(new Font("宋体", Font.PLAIN, 18));
+//		label1.setBounds(90, 44, 54, 20);
+//		panel.add(label1);
 		
-		textNum = new JTextField();
-		textNum.setFont(new Font("宋体", Font.PLAIN, 14));
-		textNum.setText("SKD-20140507-99999");
-		textNum.setBounds(155, 41, 150, 25);
-		panel.add(textNum);
-		textNum.setColumns(10);
-		textNum.setEditable(false);
+//		textNum = new JTextField();
+//		textNum.setFont(new Font("宋体", Font.PLAIN, 14));
+//		textNum.setText("SKD-20140507-99999");
+//		textNum.setBounds(155, 41, 150, 25);
+//		panel.add(textNum);
+//		textNum.setColumns(10);
+//		textNum.setEditable(false);
 		//FIXME,操作员获得
 		JLabel label2 = new JLabel("操作员");
 		label2.setFont(new Font("宋体", Font.PLAIN, 18));
 		label2.setBounds(90, 93, 54, 20);
 		panel.add(label2);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("宋体", Font.PLAIN, 14));
-		textField.setBounds(155, 91, 150, 25);
-		panel.add(textField);
-		textField.setColumns(10);
-		textField.setEditable(false);
-		//FIXME,客户获得
+		textOperator = new JTextField();
+		textOperator.setFont(new Font("宋体", Font.PLAIN, 14));
+		textOperator.setBounds(155, 91, 150, 25);
+		panel.add(textOperator);
+		textOperator.setColumns(10);
+		textOperator.setEditable(false);
+		
+		//客户获得
+		List<ClientPO> clientList=null;
+		try {
+			clientController=new ClientUtilityImpl();
+			try {
+				clientList=clientController.queryClient(null);
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+				frame.dispose();
+				return;
+			}
+		} catch (RemoteException e1) {
+			JOptionPane.showMessageDialog(null, "服务器出问题啦");
+			e1.printStackTrace();
+			System.exit(0);
+		} catch (NotBoundException e1) {
+			JOptionPane.showMessageDialog(null, "服务器出问题啦");
+			e1.printStackTrace();
+			System.exit(0);
+		}
+
 		JLabel label3 = new JLabel("客户");
 		label3.setFont(new Font("宋体", Font.PLAIN, 18));
 		label3.setBounds(90, 140, 54, 20);
 		panel.add(label3);
 		
-		JComboBox comboBox = new JComboBox();
+		String[] temp=new String[clientList.size()];
+		for(int i=0;i<temp.length;i++){
+			temp[i]=clientList.get(i).getName();
+		}
+		
+		comboBox = new JComboBox(temp);
 		comboBox.setFont(new Font("宋体", Font.PLAIN, 14));
 		comboBox.setBounds(155, 137, 100, 25);
 		panel.add(comboBox);
@@ -103,6 +141,11 @@ public class FinReceiptPanel {
 		label5.setFont(new Font("宋体", Font.PLAIN, 18));
 		label5.setBounds(230, 446, 200, 20);
 		panel.add(label5);
+		
+		labelTotal = new JLabel("");
+		labelTotal.setFont(new Font("宋体", Font.PLAIN, 18));
+		labelTotal.setBounds(280, 446, 200, 20);
+		panel.add(labelTotal);
 		
 		btnRight = new JButton("确定");
 		btnRight.setFont(new Font("宋体", Font.PLAIN, 18));
@@ -130,14 +173,45 @@ public class FinReceiptPanel {
 		panel.add(btnDel);
 	}
 	public void creatPay(){
+		controller=new FinReceiptController();
+		bankPane=new SubPanel();
+		bankPane.transfer();
 		btnAdd.addActionListener(new AddBank());
 		btnRight.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				//FIXME,数据转换成单据
+				PayVO pay=new PayVO((String)comboBox.getSelectedItem(),
+						textOperator.getText(),total);
+				try {
+					controller.creditPay(pay);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
 			}
 			
 		});
 		btnDel.addActionListener(new DeleteBank());
+		frame.setTitle("付款单");
+		frame.setVisible(true);
+	}
+	public void creatRec(){
+		controller=new FinReceiptController();
+		bankPane=new SubPanel();
+		bankPane.transfer();
+		btnAdd.addActionListener(new AddBank());
+		btnRight.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				RecVO receive=new RecVO((String)comboBox.getSelectedItem(),
+						textOperator.getText(),total);
+				try {
+					controller.creditRec(receive);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+			}
+			
+		});
+		btnDel.addActionListener(new DeleteBank());
+		frame.setTitle("收款单");
 		frame.setVisible(true);
 	}
 	public class DeleteBank implements ActionListener{
@@ -155,9 +229,7 @@ public class FinReceiptPanel {
 	}
 	public class AddBank implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			//FIXME,存疑，bankPane的初始化问题
-			bankPane=new SubPanel();
-			bankPane.transfer();
+			bankPane.visit();
 		}
 		
 	}
@@ -225,10 +297,24 @@ public class FinReceiptPanel {
 				}
 			});
 			panel.add(button_1);
+			
 		}
 		public void transfer(){
+			String[] temp=null;
+//			BankController bankController=new BankController();
+//			try {
+//				BankVO[] vo=bankController.search(null);
+//				temp=new String[vo.length];
+//				for(int i=0;i<temp.length;i++){
+//					temp[i]=vo[i].name;
+//				}
+//			} catch (Exception e1) {
+//				JOptionPane.showMessageDialog(null, e1.getMessage());
+//				return ;
+//			}
+			temp=new String[]{"银行账户1","银行账户2","银行账户3"};
 			//FIXME,获得银行列表
-			comboBox=new JComboBox(new String[]{"银行账户1","银行账户2"});
+			comboBox=new JComboBox(temp);
 			comboBox.setBounds(90,13,100,25);
 			panel.add(comboBox);
 			
@@ -237,12 +323,15 @@ public class FinReceiptPanel {
 					bankTrans=new BkTransPO((String)comboBox.getSelectedItem()
 					,Double.valueOf(balance.getText()),remark.getText());
 					tableModel.addRow(bankTrans);
-					controller.addBank(bankTrans);
-//					balance.setText(null);
+					total=controller.addBank(bankTrans);
+					labelTotal.setText(String.valueOf(total));
+					balance.setText(null);
 //					remark.setText(null);
-					frame.dispose();
+					frame.setVisible(false);
 				}
 			});
+		}
+		public void visit(){
 			frame.setVisible(true);
 		}
 	}

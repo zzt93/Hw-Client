@@ -185,6 +185,7 @@ public class ClientUI extends JPanel {
 
 	}
 	public class Add implements ActionListener{
+		//FIXME,检查生成
 		public void actionPerformed(ActionEvent e){	
 			int temp=typeBox.getSelectedIndex();
 			ClientType type=null;
