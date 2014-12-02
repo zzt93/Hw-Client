@@ -46,14 +46,14 @@ public class AdminUI {
 	 */
 	public AdminUI() {
 		//FIXME
-//		if(ads==null){
-//			try {
-//				ads = (AdminDataService)RMIUtility.getImpl("Admin");
-//			} catch (RemoteException | NotBoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+		if(ads==null){
+			try {
+				ads = (AdminDataService)RMIUtility.getImpl("Admin");
+			} catch (RemoteException | NotBoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		initialize();
 	}
 
@@ -72,13 +72,13 @@ public class AdminUI {
 		
 		
 		//FIXME
-//		try {
-//			users = (ArrayList<UserPO>)ads.show().getObj();
-//		} catch (RemoteException e) {
-//			JOptionPane.showMessageDialog(null, "连接不上服务器");
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			users = (ArrayList<UserPO>)ads.show().getObj();
+		} catch (RemoteException e) {
+			JOptionPane.showMessageDialog(null, "连接不上服务器");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String head[] = new String[]{"id","name","role"};
 		String data[][]= new String[users.size()][3];
 		TableModel tm = new MyTableModel(data,head);

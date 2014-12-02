@@ -19,17 +19,17 @@ public class FinReceipt {
 	            dataService = (FinancialReceiptdataservice) RMIUtility.getImpl("FinancialReceipt");
 	    }
 
-	public ResultMessage makePayMent(PayPO po){
+	public ResultMessage makePayMent(PayPO po) throws RemoteException {
 		ResultMessage result;
 		result=dataService.addPay(po);
 		return result;
 	}
-	public ResultMessage makeReceive(RecPO po){
+	public ResultMessage makeReceive(RecPO po)throws RemoteException {
 		ResultMessage result;
 		result=dataService.addRec(po);
 		return result;
 	}
-	public ResultMessage makeCash(CashPO po){
+	public ResultMessage makeCash(CashPO po)throws RemoteException {
 		ResultMessage result;
 		result=dataService.addCash(po);
 		return result;

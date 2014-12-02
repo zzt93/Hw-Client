@@ -121,6 +121,7 @@ public class LoggingPanel extends JPanel {
 								e1.printStackTrace();
 							}
 						}else if(role.startsWith("库存")){
+							new MainFrame().setVisible(true);
 							 CardLayout card = (CardLayout) MainFrame.frame.getContentPane().getLayout();
 					            card.show(MainFrame.frame.getContentPane(), "main_card");
 					            MainFrame.tab_pane.setSelectedIndex(0);
