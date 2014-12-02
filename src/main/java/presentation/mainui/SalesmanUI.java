@@ -29,6 +29,8 @@ public class SalesmanUI extends JFrame {
      */
     public SalesmanUI() {
         initComponents();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
