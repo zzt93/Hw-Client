@@ -140,16 +140,16 @@ public class GoodsPanel {
 		String[] temp;
 		ArrayList tempList;
 		//FIXME,测试暂时隐掉
-//		if(type==GoodsPaneType.SALE){
-//			tempList=controller.sell_type();
-//		}else{
-//			tempList=controller.stock_type();
-//		}
-//		temp=new String[tempList.size()];
-//		for(int i=0;i<tempList.size();i++){//可能造成巨大的消耗
-//			temp[i]=(String)tempList.get(i);
-//		}
-		temp=new String[]{"0001(商品1)"};
+		if(type==GoodsPaneType.SALE){
+			tempList=controller.sell_type();
+		}else{
+			tempList=controller.stock_type();
+		}
+		temp=new String[tempList.size()];
+		for(int i=0;i<tempList.size();i++){//可能造成巨大的消耗
+			temp[i]=(String)tempList.get(i);
+		}
+		//temp=new String[]{"0001(商品1)"};
 		
 		goodsList=new JList<String>(temp);
 		goodsList.addMouseListener(new MouseClick());
@@ -167,9 +167,9 @@ public class GoodsPanel {
 				//System.out.println(temp);
 				//处理temp,获得商品信息，修改界面信息
 //				FIXME,测试暂时注释掉
-//				String temp2[]=temp.split("(");
-//				goods=controller.eSearch_batch(temp2[0]).get(0);
-				GoodsVO goods=new GoodsVO("0001",20);
+				String temp2[]=temp.split("(");
+				goods=controller.eSearch_batch(temp2[0]).get(0);
+				//GoodsVO goods=new GoodsVO("0001",20);
 				goods.name="商品1";
 				goods.model="类型1";
 				goods.inPrice=15;

@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import businesslogic.BankManagebl.BankController;
 import businesslogic.FinancialReceiptbl.FinReceiptController;
 import po.BkTransPO;
 import presentation.mainui.PublicTableModel;
@@ -29,6 +32,7 @@ public class BankPanel {
 	JPanel panel;
 	JButton button;
 	JButton button_1;
+	BankController controller;
 	public BankPanel(BankVO vo){
 		bank=vo;
 		initialize();
@@ -37,6 +41,12 @@ public class BankPanel {
 		initialize();
 	}
 	public void initialize(){
+		try {
+			controller = new BankController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出问题了");
+		}
+
 		frame=new JFrame();
 		frame.setBounds(100,100,350,250);
 		frame.setLocationRelativeTo(null);
@@ -98,13 +108,13 @@ public class BankPanel {
 				JOptionPane.showMessageDialog(null,"添加成功");
 				frame.dispose();
 //FXIEME,底层
-//				try {
-//					controller.add(bank);
-//					JOptionPane.showMessageDialog(null,"添加成功");
-//					frame.dispose();
-//				} catch (Exception e1) {
-//					JOptionPane.showMessageDialog(null,e1.getMessage());
-//				}
+				try {
+					controller.add(bank);
+					JOptionPane.showMessageDialog(null,"添加成功");
+					frame.dispose();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,e1.getMessage());
+				}
 
 				
 			}
@@ -122,13 +132,13 @@ public class BankPanel {
 				JOptionPane.showMessageDialog(null,"修改成功");
 				frame.dispose();
 				//FIXME,底层
-//				try {
-//					controller.modify(bank);
-//					JOptionPane.showMessageDialog(null,"修改成功");
-//					frame.dispose();
-//				} catch (Exception e1) {
-//					JOptionPane.showMessageDialog(null,e1.getMessage());
-//				}
+				try {
+					controller.modify(bank);
+					JOptionPane.showMessageDialog(null,"修改成功");
+					frame.dispose();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,e1.getMessage());
+				}
 			}
 		});
 

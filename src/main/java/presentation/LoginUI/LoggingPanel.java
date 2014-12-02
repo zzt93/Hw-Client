@@ -30,7 +30,8 @@ public class LoggingPanel extends JPanel {
 	AdminController adminController;
 	ArrayList<UserPO> userList;
 
-	Image image = new ImageIcon("src/main/java/presentation/LoginUI/Log_in.jpg")
+
+	Image image = new ImageIcon("Log_in.jpg")
 			.getImage();
 
 	public LoggingPanel() {
@@ -122,9 +123,6 @@ public class LoggingPanel extends JPanel {
 							}
 						}else if(role.startsWith("库存")){
 							new MainFrame().setVisible(true);
-							 CardLayout card = (CardLayout) MainFrame.frame.getContentPane().getLayout();
-					            card.show(MainFrame.frame.getContentPane(), "main_card");
-					            MainFrame.tab_pane.setSelectedIndex(0);
 						}else if(role.startsWith("财务")){
 							FinancialUI financial=new FinancialUI();
 						}else{

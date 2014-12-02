@@ -241,17 +241,18 @@ public class ClientUI extends JPanel {
 					HashMap<String,Object> map=new HashMap<String,Object>();
 					map.put("name", textField.getText());
 //FIXME,测试注销掉					
-//					try {
-//						list=clientController.queryClient(map);
-//					} catch (Exception e1) {
-//						JOptionPane.showMessageDialog(null, e1.getMessage());
-//					}
+					try {
+						list=clientController.queryClient(map);
+						tableModel.update(list);
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+					}
 					
 					//测试代码
-					{
-						list.add(new ClientPO());
-						tableModel.update(list);
-					}
+//					{
+//						list.add(new ClientPO());
+//						tableModel.update(list);
+//					}
 				}
 			}
 	}

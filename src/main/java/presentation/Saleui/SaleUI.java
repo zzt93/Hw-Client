@@ -412,14 +412,14 @@ public class SaleUI extends JPanel {
     
     private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	//FIXME,注释掉
-    	//setSaleReceipt();
-//    	try {
-//			strategyList=strategyController.queryValidStrategy(saleReceipt);
-//			StrategyPane strategyPane=new StrategyPane();
-//		} catch (Exception e) {
-//			JOptionPane.showMessageDialog(null,e.getMessage());
-//		}
-    	StrategyPane strategyPane=new StrategyPane();
+    	setSaleReceipt();
+    	try {
+			strategyList=strategyController.queryValidStrategy(saleReceipt);
+			StrategyPane strategyPane=new StrategyPane();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,e.getMessage());
+		}
+    	//StrategyPane strategyPane=new StrategyPane();
    }//GEN-LAST:event_jButton1ActionPerformed
     private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	if(saleReceipt==null){
@@ -433,9 +433,9 @@ public class SaleUI extends JPanel {
    }//GEN-LAST:event_jButton1ActionPerformed
     public void setSaleReceipt(){
     	//FIXME,测试注释掉
-    	//int id=clientList.get(boxClient.getSelectedIndex()).getId();
+    	int id=clientList.get(boxClient.getSelectedIndex()).getId();
     	//FIXME,操作员get
-    	int id=123;
+    	//int id=123;
     	saleReceipt=new SaleReceiptPO(id,textRepository.getText(),
     			"操作员",textComment.getText(),new BigDecimal(total));
     	saleReceipt.setProductList(prList);

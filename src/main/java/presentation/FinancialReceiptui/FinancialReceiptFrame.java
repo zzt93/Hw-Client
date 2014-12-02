@@ -34,6 +34,7 @@ public class FinancialReceiptFrame {
 		btnRec.setFont(new Font("宋体", Font.PLAIN, 18));
 		btnRec.setBounds(50, 170, 130, 40);
 		panel.add(btnRec);
+		btnRec.addActionListener(new Receive());
 		
 		JButton btnCash = new JButton("现金费用单");
 		btnCash.setFont(new Font("宋体", Font.PLAIN, 18));
@@ -65,5 +66,12 @@ public class FinancialReceiptFrame {
 			receiptPane.creatPay();
 		}
 		
+	}
+	public class Receive implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			receiptPane.creatRec();
+		}
 	}
 }

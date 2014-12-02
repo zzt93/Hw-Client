@@ -113,15 +113,15 @@ public class BankManageFrame {
 		table.setFont(new Font("宋体", Font.PLAIN, 14));
 		table.addMouseListener(new MouseClick());
 //FIXME,设置表头宽度
-//		TableColumn column=null;
-//		for(int i=0;i<3;i++){
-//			column=table.getColumnModel().getColumn(i);
-//			if(i==2){
-//				column.setPreferredWidth(275);
-//			}else{
-//				column.setPreferredWidth(100);
-//			}
-//		}
+		TableColumn column=null;
+		for(int i=0;i<3;i++){
+			column=table.getColumnModel().getColumn(i);
+			if(i==2){
+				column.setPreferredWidth(275);
+			}else{
+				column.setPreferredWidth(100);
+			}
+		}
 	}
 
 	public void updateTable(){
@@ -177,6 +177,7 @@ public class BankManageFrame {
 				list=controller.search(search.getText());
 				tableModel.update(list);
 			} catch (Exception e1) {
+				e1.printStackTrace();
 				JOptionPane.showMessageDialog(null, e1.getMessage());
 			}
 		}

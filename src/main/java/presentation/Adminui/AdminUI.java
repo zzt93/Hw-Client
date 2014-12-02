@@ -4,10 +4,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import businesslogic.Adminbl.AdminController;
 import businesslogicservice.Adminblservice.AdminBLService;
 import po.UserPO;
 
 import java.awt.*;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -42,14 +45,10 @@ public class AdminUI {
 	 * Create the application.
 	 */
 	public AdminUI() {
-		//FIXME
-		if(ads==null){
-			try {
-				ads = (AdminDataService)RMIUtility.getImpl("Admin");
-			} catch (RemoteException | NotBoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			am = new AdminController();
+		} catch (RemoteException | NotBoundException e) {
+			e.printStackTrace();
 		}
 		initialize();
 	}
@@ -70,8 +69,8 @@ public class AdminUI {
 		
 		//FIXME
 		try {
-			users = (ArrayList<UserPO>)ads.show().getObj();
-		} catch (RemoteException e) {
+			users = am.show();
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "连接不上服务器");
 			// TODO Auto-generated catch block
 			e.printStackTrace();

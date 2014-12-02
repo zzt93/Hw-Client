@@ -307,18 +307,19 @@ public class FinReceiptPanel {
 		}
 		public void transfer(){
 			String[] temp=null;
-//			BankController bankController=new BankController();
-//			try {
-//				BankVO[] vo=bankController.search(null);
-//				temp=new String[vo.length];
-//				for(int i=0;i<temp.length;i++){
-//					temp[i]=vo[i].name;
-//				}
-//			} catch (Exception e1) {
-//				JOptionPane.showMessageDialog(null, e1.getMessage());
-//				return ;
-//			}
-			temp=new String[]{"银行账户1","银行账户2","银行账户3"};
+			BankController bankController;
+			try {
+				bankController=new BankController();
+				BankVO[] vo=bankController.search(null);
+				temp=new String[vo.length];
+				for(int i=0;i<temp.length;i++){
+					temp[i]=vo[i].name;
+				}
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+				return ;
+			}
+			//temp=new String[]{"银行账户1","银行账户2","银行账户3"};
 			//FIXME,获得银行列表
 			comboBox=new JComboBox(temp);
 			comboBox.setBounds(90,13,100,25);
