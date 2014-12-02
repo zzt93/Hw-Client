@@ -22,7 +22,13 @@ public class GoodsModelPO implements Serializable {
 	}
 
 	public GoodsModelPO(GoodsModelVO goodsVO) {
-		// TODO Auto-generated constructor stub
+		this.signal = goodsVO.getSignal();
+		this.amount = goodsVO.getAmount();
+		this.id = goodsVO.getId();
+		this.name = goodsVO.getName();
+		this.model = goodsVO.getModel();
+		this.everHas = goodsVO.isEverHas();
+		this.gift = goodsVO.isGift();
 	}
 
 	int amount;
