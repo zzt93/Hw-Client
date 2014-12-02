@@ -1,5 +1,5 @@
 package presentation.mainui;
 
 public enum ModelType {
-	CLIENT,BANK,PRODUCTS,GIFT
+	CLIENT,BANK,PRODUCTS,GIFT,RECEIPT
 }

@@ -1,10 +1,17 @@
 package businesslogic.BankManagebl;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
 import po.BankPO;
 import po.ResultMessage;
 import vo.BankVO;
 
 public class MockBankManage extends BankManage{
+	public MockBankManage() throws RemoteException, NotBoundException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public ResultMessage add(BankPO po){
 		return new ResultMessage("测试异常抛出",null);
 	}

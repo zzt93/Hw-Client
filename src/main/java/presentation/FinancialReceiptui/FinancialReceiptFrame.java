@@ -3,6 +3,9 @@ package presentation.FinancialReceiptui;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
+import presentation.mainui.ModelType;
+import presentation.mainui.PublicTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +14,7 @@ public class FinancialReceiptFrame {
 	private JPanel panel;
 	private JTable table;
 	private FinReceiptPanel receiptPane;
+	PublicTableModel tableModel;
 	public FinancialReceiptFrame(){
 		initialize();
 		receiptPane=new FinReceiptPanel();
@@ -45,12 +49,12 @@ public class FinancialReceiptFrame {
 		label.setBounds(435, 15, 80, 40);
 		panel.add(label);
 		
-		table = new JTable();
+		tableModel=new PublicTableModel(ModelType.RECEIPT);
+		table = new JTable(tableModel);
 		table.setFillsViewportHeight(true);
 		table.setFont(new Font("宋体",Font.PLAIN,14));
 		table.getTableHeader().setFont(new Font("宋体",Font.PLAIN,14));
 		scrollPane.setViewportView(table);
-		table.setModel(new FinReceiptTableModel());
 	}
 
 	public JPanel getPanel(){
@@ -61,21 +65,5 @@ public class FinancialReceiptFrame {
 			receiptPane.creatPay();
 		}
 		
-	}
-	public class FinReceiptTableModel extends AbstractTableModel{
-		public String[] columnNames={"日期","类型","总额","审批状况","处理状况"};
-		public Object[][] data=new Object[10][5];
-		public int getRowCount() {
-			return data.length;
-		}
-		public int getColumnCount() {
-			return columnNames.length;
-		}
-		public String getColumnName(int i){
-			return columnNames[i];
-		}
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			return data[rowIndex][columnIndex];
-		}
 	}
 }

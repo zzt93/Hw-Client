@@ -52,6 +52,12 @@ public class FinReceiptPanel {
 	
 	public FinReceiptPanel(){
 		initialize();
+		try {
+			controller=new FinReceiptController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现了问题");
+			e.printStackTrace();
+		}
 	}
 	public void initialize(){
 		frame = new JFrame();
@@ -158,6 +164,8 @@ public class FinReceiptPanel {
 		panel.add(btnCancel);
 		btnCancel.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				controller.clearBank();
+				controller.clearItem();
 				frame.dispose();
 			}
 		});
@@ -173,7 +181,6 @@ public class FinReceiptPanel {
 		panel.add(btnDel);
 	}
 	public void creatPay(){
-		controller=new FinReceiptController();
 		bankPane=new SubPanel();
 		bankPane.transfer();
 		btnAdd.addActionListener(new AddBank());
@@ -194,7 +201,6 @@ public class FinReceiptPanel {
 		frame.setVisible(true);
 	}
 	public void creatRec(){
-		controller=new FinReceiptController();
 		bankPane=new SubPanel();
 		bankPane.transfer();
 		btnAdd.addActionListener(new AddBank());

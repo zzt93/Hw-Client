@@ -39,7 +39,12 @@ public class PublicTableModel extends DefaultTableModel {
 			break;
 		case GIFT:
 			name=new String[]{"商品","型号","单价"};
+			break;
+		case RECEIPT:
+			name=new String[]{"日期","类型","总额","审批状况","处理状况"};
+			break;		
 		}
+	
 	}
 	public boolean isCellEditable(int row,int column){
 		return false;

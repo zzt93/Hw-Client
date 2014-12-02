@@ -8,9 +8,15 @@ import po.ResultMessage;
 import vo.CashVO;
 import vo.ReceiptConditionVO;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class MockFinReceiptController extends FinReceiptController{
+	public MockFinReceiptController() throws RemoteException, NotBoundException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception{
 		if(vo.type==ReceiptType.CASH){
 			CashPO cash=new CashPO();

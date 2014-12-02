@@ -10,11 +10,11 @@ import vo.PayVO;
 import static org.junit.Assert.assertTrue;
 
 public class FinReceiptControllerTest {
-
+	FinReceiptController controller;
 	@Before
 	public void setUp() throws Exception {
+		controller=new FinReceiptController();
 	}
-	FinReceiptController controller=new FinReceiptController();
 	@Test
 	public void testAddBank() {
 		BkTransPO[] list=new BkTransPO[3];

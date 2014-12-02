@@ -7,11 +7,22 @@ import vo.PayVO;
 import vo.RecVO;
 import vo.ReceiptConditionVO;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 public class FinReceiptController implements FinancialReceiptblservice{
 	BankList bankList=new BankList();
 	ItemList itemList=new ItemList();
-	MockFinReceipt finReceipt=new MockFinReceipt();
+	FinReceipt finReceipt;
+	public FinReceiptController() throws RemoteException, NotBoundException{
+		finReceipt=new FinReceipt();
+	}
+	public void clearBank(){
+		bankList.clear();
+	}
+	public void clearItem(){
+		bankList.clear();
+	}
 	public double addBank(BkTransPO po){
 		bankList.add(po);
 		return bankList.getTotal();

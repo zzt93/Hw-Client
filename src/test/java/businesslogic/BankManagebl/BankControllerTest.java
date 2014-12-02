@@ -9,10 +9,12 @@ import vo.BankVO;
 import static org.junit.Assert.assertTrue;
 
 public class BankControllerTest {
-	BankController controller=new BankController();
+	BankController controller;
 	BankVO vo=new BankVO();
+	
 	@Before
 	public void setUp() throws Exception {
+		controller=new BankController();
 	}
 
 	@Test

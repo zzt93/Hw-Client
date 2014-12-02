@@ -1,22 +1,37 @@
 package businesslogic.FinancialReceiptbl;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+import dataservice.Clientdataservice.ClientDataService;
+import dataservice.FinancialReceiptdataservice.FinancialReceiptdataservice;
 import po.CashPO;
 import po.PayPO;
 import po.RecPO;
 import po.ResultMessage;
+import util.RMIUtility;
 
 public class FinReceipt {
+	  private static FinancialReceiptdataservice dataService;
+
+	    public FinReceipt() throws RemoteException, NotBoundException {
+	        if (dataService == null)
+	            dataService = (FinancialReceiptdataservice) RMIUtility.getImpl("FinancialReceipt");
+	    }
 
 	public ResultMessage makePayMent(PayPO po){
-		//生成付款单
-		return new ResultMessage(null,null);
+		ResultMessage result;
+		result=dataService.addPay(po);
+		return result;
 	}
 	public ResultMessage makeReceive(RecPO po){
-		//生成收款单
-		return new ResultMessage(null,null);
+		ResultMessage result;
+		result=dataService.addRec(po);
+		return result;
 	}
 	public ResultMessage makeCash(CashPO po){
-		//生成现金费用单
-		return new ResultMessage(null,null);
+		ResultMessage result;
+		result=dataService.addCash(po);
+		return result;
 	}
 }

@@ -411,6 +411,7 @@ public class SaleUI extends JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	//FIXME,注释掉
     	//setSaleReceipt();
 //    	try {
 //			strategyList=strategyController.queryValidStrategy(saleReceipt);
@@ -419,7 +420,6 @@ public class SaleUI extends JPanel {
 //			JOptionPane.showMessageDialog(null,e.getMessage());
 //		}
     	StrategyPane strategyPane=new StrategyPane();
-    	System.out.println("?");
    }//GEN-LAST:event_jButton1ActionPerformed
     private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	if(saleReceipt==null){
