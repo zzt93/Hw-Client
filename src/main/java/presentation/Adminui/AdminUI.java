@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import businesslogic.Adminbl.AdminController;
 import po.UserPO;
 import util.RMIUtility;
 import dataservice.Admindataservice.AdminDataService;
@@ -101,7 +102,6 @@ public class AdminUI {
 			public void actionPerformed(ActionEvent e) {
 				users.remove(table.getSelectedRow());
 				AdminNewUI admin = new AdminNewUI(users.get(table.getSelectedRow()));
-				
 			}
 		});
 		button_1.setBounds(491, 142, 93, 23);

@@ -5,16 +5,20 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
+import businesslogic.Adminbl.AdminController;
 import po.UserPO;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 public class AdminNewUI extends JDialog {
 
@@ -28,7 +32,7 @@ public class AdminNewUI extends JDialog {
 	private UserPO userpo;
 	private UserPO tempUserPO;
 	JComboBox<String> comboBox;
-
+	private AdminController adminController;
 	/**
 	 * Launch the application.
 	 */
@@ -47,10 +51,22 @@ public class AdminNewUI extends JDialog {
 	 * Create the dialog.
 	 */
 	public AdminNewUI() {
+		try {
+			adminController=new AdminController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现了问题");
+			e.printStackTrace();
+		}
 		initialize();
 	}
 
 	public AdminNewUI(UserPO po) {
+		try {
+			adminController=new AdminController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现了问题");
+			e.printStackTrace();
+		}
 		textFieldName.setText(po.getName());
 		textFieldPassword.setText(po.getPassword());
 		tempUserPO = po;
@@ -114,6 +130,12 @@ public class AdminNewUI extends JDialog {
 						userpo = new UserPO(0, textFieldName.getText(),
 								textFieldPassword.getText(), (String) comboBox
 										.getSelectedItem());
+						try {
+							adminController.confirm(userpo);
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						AdminNewUI.this.dispose();
 					}
 				});
@@ -126,8 +148,9 @@ public class AdminNewUI extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (tempUserPO != null) {
-
+							
 						}
+						dispose();
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

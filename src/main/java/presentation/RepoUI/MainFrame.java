@@ -868,7 +868,7 @@ public class MainFrame extends javax.swing.JFrame {
 	 * @param args
 	 *            the command line arguments
 	 */
-	static JFrame frame;
+	public static JFrame frame;
 
 	public static void main(String args[]) {
 		/* Set the Nimbus look and feel */
