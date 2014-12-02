@@ -20,7 +20,7 @@ public class AdminUI {
 	private JFrame frame;
 	private JTable table;
 	private AdminDataService ads;
-	ArrayList<UserPO> users = null;
+	static ArrayList<UserPO> users = null;
 
 
 	/**

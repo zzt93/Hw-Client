@@ -26,6 +26,7 @@ public class AdminNewUI extends JDialog {
 	private JTextField textFieldName;
 	private JTextField textFieldPassword;
 	private UserPO userpo;
+	private UserPO tempUserPO;
 	JComboBox<String> comboBox;
 
 	/**
@@ -48,47 +49,48 @@ public class AdminNewUI extends JDialog {
 	public AdminNewUI() {
 		initialize();
 	}
-	public AdminNewUI(UserPO po){
+
+	public AdminNewUI(UserPO po) {
 		textFieldName.setText(po.getName());
 		textFieldPassword.setText(po.getPassword());
+		tempUserPO = po;
 		initialize();
 		this.setVisible(true);
 	}
-	
-	public void initialize(){
+
+	public void initialize() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		JLabel labelName = new JLabel("用户名");
 		labelName.setBounds(52, 34, 66, 15);
 		contentPanel.add(labelName);
-		
+
 		textFieldName = new JTextField();
 		textFieldName.setBounds(233, 31, 143, 21);
 		contentPanel.add(textFieldName);
 		textFieldName.setColumns(10);
-		
+
 		JLabel labelPassWord = new JLabel("密码");
 		labelPassWord.setBounds(52, 95, 54, 15);
 		contentPanel.add(labelPassWord);
-		
+
 		textFieldPassword = new JTextField();
 		textFieldPassword.setBounds(233, 92, 143, 21);
 		contentPanel.add(textFieldPassword);
 		textFieldPassword.setColumns(10);
-		
+
 		JLabel labelRole = new JLabel("身份");
 		labelRole.setBounds(52, 159, 54, 15);
 		contentPanel.add(labelRole);
-		
+
 		comboBox = new JComboBox<String>();
 		comboBox.setBounds(232, 156, 144, 21);
 		contentPanel.add(comboBox);
-		
-		
+
 		/**
 		 * This name method is on purpose
 		 */
@@ -100,8 +102,7 @@ public class AdminNewUI extends JDialog {
 		comboBox.addItem(zafafa);
 		comboBox.addItem(caonima);
 		comboBox.addItem(haosha);
-		
-		
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -110,7 +111,10 @@ public class AdminNewUI extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						userpo = new UserPO(0,textFieldName.getText(),textFieldPassword.getText(),(String)comboBox.getSelectedItem());
+						userpo = new UserPO(0, textFieldName.getText(),
+								textFieldPassword.getText(), (String) comboBox
+										.getSelectedItem());
+						AdminNewUI.this.dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -119,10 +123,16 @@ public class AdminNewUI extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (tempUserPO != null) {
+
+						}
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
 }
-
