@@ -205,8 +205,7 @@ public class ApproveUI {
 		switch (po.type) {
 		case CASH:
 			CashPO cPO = (CashPO) po;
-			String[] headers1 = new String[] { "type", "number", "time",
-					"operator", "total", "ItemList", "State" };
+			String[] headers1 = new String[] { "type", "number", "time","operator", "total", "ItemList", "State" };
 			tm = new DefaultTableModel(headers1, 1);
 			detailTable.setModel(tm);
 			tm.addRow(new String[] { cPO.type.toString(), cPO.number, cPO.time,

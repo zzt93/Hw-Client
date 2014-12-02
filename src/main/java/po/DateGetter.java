@@ -12,6 +12,7 @@ public class DateGetter {
 	
 	public String toString(){
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		cal = Calendar.getInstance();
 		date = cal.getTime();
 		return df.format(date);
 	}

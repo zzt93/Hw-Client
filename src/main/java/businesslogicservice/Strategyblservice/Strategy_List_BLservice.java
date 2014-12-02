@@ -1,6 +1,7 @@
 package businesslogicservice.Strategyblservice;
 
 import po.GoodsPO;
+import po.SaleReceiptPO;
 import po.StrategyPO;
 
 import java.util.ArrayList;
@@ -11,4 +12,5 @@ public interface Strategy_List_BLservice {
 	public ArrayList<StrategyPO> returnStrategy
 		(int cusLevel,ArrayList<GoodsPO> goods) throws Exception;
 	public ArrayList<StrategyPO> queryValidStrategy(String fliters);
+	public SaleReceiptPO setTreatment(StrategyPO spo, SaleReceiptPO po) throws Exception;
 }
