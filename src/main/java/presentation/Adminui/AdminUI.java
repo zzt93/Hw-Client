@@ -4,14 +4,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import businesslogic.Adminbl.AdminController;
+import businesslogicservice.Adminblservice.AdminBLService;
 import po.UserPO;
-import util.RMIUtility;
-import dataservice.Admindataservice.AdminDataService;
 
 import java.awt.*;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -21,8 +17,9 @@ public class AdminUI {
 	private JFrame frame;
 	private JTable table;
 	public JPanel panel;
-	private AdminDataService ads;
+	private AdminBLService am; 
 	static ArrayList<UserPO> users = null;
+	
 
 
 	/**
@@ -105,6 +102,12 @@ public class AdminUI {
 		JButton button_1 = new JButton("修改用户");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					am.delete(users.get(table.getSelectedRow()));
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				users.remove(table.getSelectedRow());
 				AdminNewUI admin = new AdminNewUI(users.get(table.getSelectedRow()));
 			}
@@ -116,7 +119,14 @@ public class AdminUI {
 		JButton button_2 = new JButton("删除用户");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					am.delete(users.get(table.getSelectedRow()));
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				users.remove(table.getSelectedRow());
+				
 			}
 		});
 		button_2.setBounds(491, 207, 93, 23);

@@ -33,6 +33,7 @@ public class AdminNewUI extends JDialog {
 	private UserPO tempUserPO;
 	JComboBox<String> comboBox;
 	private AdminController adminController;
+	
 	/**
 	 * Launch the application.
 	 */
