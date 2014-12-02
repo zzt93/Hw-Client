@@ -1,4 +1,4 @@
-package presentation.Saleui;
+package presentation.Clientui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,8 +36,8 @@ public class ClientPanel {
 		this.client=client;
 		frame=new JFrame();
 		frame.setBounds(0,0,450,500);
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setVisible(true);
 	}
 	public void show(){
 		panel=new JPanel();
@@ -94,7 +94,7 @@ public class ClientPanel {
 		panel.add(label12);
 		
 		frame.add(panel);
-		frame.repaint();
+		frame.setVisible(true);
 	}
 	public void modify(){
 		
@@ -196,7 +196,7 @@ public class ClientPanel {
 		panel.add(label12);
 		
 		frame.add(panel);
-		frame.repaint();
+		frame.setVisible(true);
 	}
 	public static void main(String[] args){
 		ClientPO po=new ClientPO(ClientType.SELLER,ClientLevel.LEVEL1,"茶农","20050505050"

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentation.Saleui;
+package presentation.mainui;
 
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
@@ -13,17 +13,21 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
+import presentation.Clientui.ClientUI;
+import presentation.Saleui.SaleUI;
+import presentation.Stockui.StockUI;
+
 
 /**
  *
  * @author zzt
  */
-public class Main extends JFrame {
+public class SalesmanUI extends JFrame {
 
     /**
      * Creates new form main
      */
-    public Main() {
+    public SalesmanUI() {
         initComponents();
     }
 
@@ -37,13 +41,10 @@ public class Main extends JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new JTabbedPane();
-        sale11 = new Sale1();
-        stock11 = new Stock1();
+        sale11 = new SaleUI();
+        stock11 = new StockUI();
         jScrollPane1 = new JScrollPane();
         clientUI2 = new ClientUI();
-        query = new JScrollPane();
-        query1 = new Query();
-
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(750, 500));
@@ -57,24 +58,24 @@ public class Main extends JFrame {
 
         jTabbedPane1.addTab("客户管理", jScrollPane1);
 
-        query.setPreferredSize(new java.awt.Dimension(750, 500));
-
-        query1.setPreferredSize(new java.awt.Dimension(800, 600));
-
-        GroupLayout query1Layout = new GroupLayout(query1);
-        query1.setLayout(query1Layout);
-        query1Layout.setHorizontalGroup(
-            query1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        query1Layout.setVerticalGroup(
-            query1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-
-        query.setViewportView(query1);
-
-        jTabbedPane1.addTab("tab4", query);
+//        query.setPreferredSize(new java.awt.Dimension(750, 500));
+//
+//        query1.setPreferredSize(new java.awt.Dimension(800, 600));
+//
+//        GroupLayout query1Layout = new GroupLayout(query1);
+//        query1.setLayout(query1Layout);
+//        query1Layout.setHorizontalGroup(
+//            query1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+//            .addGap(0, 800, Short.MAX_VALUE)
+//        );
+//        query1Layout.setVerticalGroup(
+//            query1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+//            .addGap(0, 600, Short.MAX_VALUE)
+//        );
+//
+//        query.setViewportView(query1);
+//
+//        jTabbedPane1.addTab("tab4", query);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +93,6 @@ public class Main extends JFrame {
                 .addComponent(jTabbedPane1, GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,13 +113,13 @@ public class Main extends JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalesmanUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalesmanUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalesmanUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalesmanUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -127,7 +127,9 @@ public class Main extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+            	SalesmanUI a=new SalesmanUI();
+                a.setLocationRelativeTo(null);
+                a.setVisible(true);
             }
         });
     }
@@ -136,9 +138,7 @@ public class Main extends JFrame {
     private ClientUI clientUI2;
     private JScrollPane jScrollPane1;
     private JTabbedPane jTabbedPane1;
-    private JScrollPane query;
-    private Query query1;
-    private Sale1 sale11;
-    private Stock1 stock11;
+    private SaleUI sale11;
+    private StockUI stock11;
     // End of variables declaration//GEN-END:variables
 }

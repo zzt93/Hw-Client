@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 
 import businesslogic.GoodsListbl.GL_controller;
 import po.ProductsReceipt;
+import presentation.Stockui.StockUI;
+import presentation.mainui.PublicTableModel;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 
@@ -50,6 +52,7 @@ public class GoodsPanel {
 		frame=new JFrame();
 		frame.setBounds(0,0,300,400);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		
 		panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -133,6 +136,7 @@ public class GoodsPanel {
 		listFrame=new JFrame();
 		listFrame.setBounds(0,0,200,400);
 		listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		listFrame.setLocationRelativeTo(null);
 		String[] temp;
 		ArrayList tempList;
 		//FIXME,测试暂时隐掉
@@ -196,13 +200,13 @@ public class GoodsPanel {
 			tableModel.addRow(pr);
 			list.add(pr);
 			if(type==GoodsPaneType.SALE){
-				Sale1.total+=(Double.valueOf(textPrice.getText())*Integer.valueOf(textNum.getText()));
-				Sale1.labelTotal.setText(String.valueOf(Sale1.total));
-				Sale1.labelTotal.repaint();
+				SaleUI.total+=(Double.valueOf(textPrice.getText())*Integer.valueOf(textNum.getText()));
+				SaleUI.labelTotal.setText(String.valueOf(SaleUI.total));
+				SaleUI.labelTotal.repaint();
 			}else{
-				Stock1.total+=(Double.valueOf(textPrice.getText())*Integer.valueOf(textNum.getText()));
-				Stock1.labelTotal.setText(String.valueOf(Stock1.total));
-				Stock1.labelTotal.repaint();
+				StockUI.total+=(Double.valueOf(textPrice.getText())*Integer.valueOf(textNum.getText()));
+				StockUI.labelTotal.setText(String.valueOf(StockUI.total));
+				StockUI.labelTotal.repaint();
 			}
 			frame.dispose();		
 		}

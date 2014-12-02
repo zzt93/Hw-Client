@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentation.Saleui;
+package presentation.Clientui;
 
 /**
  *
@@ -35,6 +35,8 @@ import javax.swing.JLabel;
 import po.ClientLevel;
 import po.ClientPO;
 import po.ClientType;
+import presentation.mainui.ModelType;
+import presentation.mainui.PublicTableModel;
 import businesslogic.Clientbl.ClientUtilityImpl;
 
 public class ClientUI extends JPanel {
@@ -164,17 +166,17 @@ public class ClientUI extends JPanel {
 		buttonConfirm.addActionListener(new Add());
 		panel_1.add(buttonConfirm);
 		
-		JButton buttonCancel = new JButton("取消");
-		buttonCancel.setBounds(329, 396, 93, 23);
-		panel_1.add(buttonCancel);
+//		JButton buttonCancel = new JButton("取消");
+//		buttonCancel.setBounds(329, 396, 93, 23);
+//		panel_1.add(buttonCancel);
 		
 		JLabel label = new JLabel("客户管理");
 		label.setBounds(32, 22, 54, 15);
 		add(label);
 		
-		JLabel label_1 = new JLabel("我是卖萌的状态栏");
-		label_1.setBounds(32, 570, 224, 15);
-		add(label_1);
+//		JLabel label_1 = new JLabel("我是卖萌的状态栏");
+//		label_1.setBounds(32, 570, 224, 15);
+//		add(label_1);
 		
 		JButton button_4 = new JButton("返回");
 		button_4.setBounds(548, 566, 93, 23);

@@ -1,12 +1,14 @@
-package presentation.Stockui;
+package presentation.RunningTableui;
 
 import po.ReceiptPO;
 import po.ReceiptType;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
-import presentation.Saleui.GoodsTableModel;
+import presentation.mainui.ModelType;
+import presentation.mainui.PublicTableModel;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class SaleAndStockReceipt {
@@ -15,6 +17,7 @@ public class SaleAndStockReceipt {
 	JTable table;
 	StockReceiptPO stock;
 	SaleReceiptPO sale;
+	PublicTableModel tableModel;
 	
 	public void SaleAndStockReceipt(ReceiptPO PO){
 		if(PO.type==ReceiptType.SALE_ACCEPT||PO.type==ReceiptType.SALE_REJECTION){
@@ -25,12 +28,12 @@ public class SaleAndStockReceipt {
 		}else{
 			System.out.println("传的单据不太对呀");
 		}
-		salePanel();
 		iniFrame();
+		salePanel();
 	}
 	public  SaleAndStockReceipt(){
-		salePanel();
 		iniFrame();
+		salePanel();
 	}
 	public void salePanel(){
 		panel = new JPanel();
@@ -81,11 +84,14 @@ public class SaleAndStockReceipt {
 		scrollPane.setBounds(40, 210, 650, 220);
 		panel.add(scrollPane);
 		
+		
 		table = new JTable();
-		table.setModel(new GoodsTableModel());
+		table.setModel(tableModel);
 		table.setFillsViewportHeight(true);
 		scrollPane.setViewportView(table);
 		
+		frame.add(panel);
+		frame.setVisible(true);
 	}
 	public void stockPanel(){
 		panel = new JPanel();
@@ -126,16 +132,18 @@ public class SaleAndStockReceipt {
 		panel.add(scrollPane);
 		
 		table = new JTable();
-		table.setModel(new GoodsTableModel());
+		table.setModel(tableModel);
 		table.setFillsViewportHeight(true);
 		scrollPane.setViewportView(table);
+		
+		frame.add(panel);
+		frame.setVisible(true);
 	}
 	public void iniFrame(){
 		frame=new JFrame();
 		frame.setBounds(0,0,750,500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(panel);
-		frame.setVisible(true);
+		tableModel=new PublicTableModel(ModelType.PRODUCTS);
 	}
 	public static void main(String[] args){
 		SaleAndStockReceipt a=new SaleAndStockReceipt();

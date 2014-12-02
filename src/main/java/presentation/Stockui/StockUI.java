@@ -1,4 +1,4 @@
-package presentation.Saleui;
+package presentation.Stockui;
 
 import java.math.BigDecimal;
 import java.rmi.NotBoundException;
@@ -26,6 +26,10 @@ import po.ClientPO;
 import po.ClientType;
 import po.ProductsReceipt;
 import po.StockReceiptPO;
+import presentation.Saleui.GoodsPaneType;
+import presentation.Saleui.GoodsPanel;
+import presentation.mainui.ModelType;
+import presentation.mainui.PublicTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,7 +40,7 @@ import po.StockReceiptPO;
  *
  * @author zzt
  */
-public class Stock1 extends JPanel {
+public class StockUI extends JPanel {
 	 // Variables declaration - do not modify//GEN-BEGIN:variables
     private JLabel custom_label;
     private JButton jButton1;
@@ -72,7 +76,7 @@ public class Stock1 extends JPanel {
     /**
      * Creates new form Stock1
      */
-    public Stock1() {
+    public StockUI() {
         initComponents();
     }
 

@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import businesslogic.FinancialReceiptbl.FinReceiptController;
 import po.BkTransPO;
-import presentation.Saleui.PublicTableModel;
+import presentation.mainui.PublicTableModel;
 import vo.BankVO;
 
 public class BankPanel {

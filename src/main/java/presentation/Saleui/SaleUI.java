@@ -37,6 +37,8 @@ import po.ProductsReceipt;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
 import po.StrategyPO;
+import presentation.mainui.ModelType;
+import presentation.mainui.PublicTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -49,7 +51,7 @@ import po.StrategyPO;
  *
  * @author zzt
  */
-public class Sale1 extends JPanel {
+public class SaleUI extends JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JLabel custom_label;
     private JButton jButton1;
@@ -96,7 +98,7 @@ public class Sale1 extends JPanel {
     /**
      * Creates new form sale1
      */
-    public Sale1() {
+    public SaleUI() {
         initComponents();
     }
 
@@ -491,7 +493,7 @@ public class Sale1 extends JPanel {
     		textCoupon.setBounds(84, 108, 80, 21);
     		panel.add(textCoupon);
     		textCoupon.setColumns(10);
-    		textDiscount.setEditable(false);
+    		textCoupon.setEditable(false);
     		
     		JScrollPane scrollPane = new JScrollPane();
     		scrollPane.setBounds(203, 63, 357, 189);

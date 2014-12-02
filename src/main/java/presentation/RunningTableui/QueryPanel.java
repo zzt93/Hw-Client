@@ -1,7 +1,8 @@
-package presentation.Stockui;
+package presentation.RunningTableui;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
