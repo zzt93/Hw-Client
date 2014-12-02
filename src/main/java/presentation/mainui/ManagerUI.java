@@ -37,6 +37,7 @@ public class ManagerUI {
 	 */
 	public ManagerUI() throws Exception {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**
