@@ -111,8 +111,8 @@ public class ClientPanel {
 		label3.setBounds(40,80,180,20);
 		
 		typeBox=new JComboBox(new String[]{"1","2","3","4","5"});
-		System.out.println(client.getLevel());
-		System.out.println(client.getLevel().ordinal());
+//		System.out.println(client.getLevel());
+//		System.out.println(client.getLevel().ordinal());
 		typeBox.setSelectedIndex(client.getLevel().ordinal());
 		typeBox.setBounds(80,80,140,20);
 		panel.add(typeBox);

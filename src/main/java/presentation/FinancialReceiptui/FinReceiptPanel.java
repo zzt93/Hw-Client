@@ -108,11 +108,11 @@ public class FinReceiptPanel {
 		} catch (RemoteException e1) {
 			JOptionPane.showMessageDialog(null, "服务器出问题啦");
 			e1.printStackTrace();
-			System.exit(0);
+//			System.exit(0);
 		} catch (NotBoundException e1) {
 			JOptionPane.showMessageDialog(null, "服务器出问题啦");
 			e1.printStackTrace();
-			System.exit(0);
+//			System.exit(0);
 		}
 
 		JLabel label3 = new JLabel("客户");
