@@ -6,7 +6,7 @@ import java.util.Date;
 public class TimePeriod implements Serializable {
 	private Date start;
 	private Date end;
-	
+	private static final long serialVersionUID = 1L;
 	public TimePeriod(Date start, Date end) {
 		super();
 		this.start = start;

@@ -11,7 +11,7 @@ import java.util.Random;
 public class RepoPO implements Serializable {
 	static Random random = new Random();
 	static int count = 0;
-	
+	private static final long serialVersionUID = 1L;
 	
 	
 	public RepoPO(GoodsListPO tem) {

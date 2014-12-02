@@ -11,6 +11,7 @@ public class RecVO extends ReceiptPO implements Serializable {
 	public String client,operator;
 	public BkTransPO[] bankList;
 	public double total=0;
+	private static final long serialVersionUID = 1L;
 	public RecVO(String client,String operator,double total){
 		this.client=client;
 		this.operator=operator;

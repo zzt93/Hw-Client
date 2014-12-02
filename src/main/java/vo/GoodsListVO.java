@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class GoodsListVO implements Serializable {
 
-	
+	private static final long serialVersionUID = 1L;
 	HashMap<String, GoodsModelVO> goodsModels;
 	HashMap<String, GoodsVO> goods;
 	public GoodsListVO(GoodsListPO goodsListPO) {

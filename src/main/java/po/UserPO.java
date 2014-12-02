@@ -8,6 +8,7 @@ public class UserPO implements Serializable {
 	String name;
 	String password;
 	String role;
+	private static final long serialVersionUID = 1L;
 	
 	public UserPO(int i ,String n,String p,String r){
 		id = i;

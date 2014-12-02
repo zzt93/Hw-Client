@@ -12,7 +12,7 @@ public class GoodsModelVO implements Serializable {
 	String id;
 	String name;
 	String model;
-	
+	private static final long serialVersionUID = 1L;
 
 	boolean everHas;
 	boolean gift;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GoodsTypePO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	ArrayList<TreeNodePO> goodsType;
 	//record the node that has goods -- show the goods at the ui of a node
 	HashMap<TreeNodePO, GoodsModelPO> type_goodsMap;

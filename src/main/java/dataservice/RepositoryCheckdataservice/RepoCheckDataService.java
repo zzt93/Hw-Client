@@ -4,10 +4,11 @@ import po.RepoFilterPO;
 import po.RepoPO;
 import po.ResultMessage;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface RepoCheckDataService {
+public interface RepoCheckDataService extends Remote {
 	ResultMessage<ArrayList<RepoPO>> getRepo() throws RemoteException;
 	ResultMessage<Boolean> initialize(ArrayList<RepoPO> repoPOs) throws RemoteException;
 	

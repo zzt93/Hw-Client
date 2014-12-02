@@ -10,7 +10,7 @@ import java.util.Date;
  *
  */
 public class RepoReceiptPO extends ReceiptPO implements Serializable {
-	
+	private static final long serialVersionUID = 1L;
 	public String getId() {
 		return id;
 	}

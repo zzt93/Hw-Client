@@ -5,6 +5,7 @@ import vo.GoodsModelVO;
 import java.io.Serializable;
 
 public class GoodsModelPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	public String getName() {
 		return name;

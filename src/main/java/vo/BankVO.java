@@ -8,6 +8,7 @@ public class BankVO implements Serializable {
 	public String name;
 	public double balance;
 	public String remark;
+	private static final long serialVersionUID = 1L;
 	public BankVO(){
 		this("测试账目",3000);
 	}

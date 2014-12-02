@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GoodsListPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	HashMap<String, GoodsModelPO> goodsModels = new HashMap<String, GoodsModelPO>();
 	
 	/* Every GoodsPO in the list is a batch of goods

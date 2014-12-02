@@ -80,7 +80,6 @@ public class StrategyList implements Strategy_List_BLservice {
 					&& spo.getCondition().getCustomerLevel() <= cl.getLevel()
 							.ordinal() + 1) {
 
-
 				pos.add(spo);
 
 

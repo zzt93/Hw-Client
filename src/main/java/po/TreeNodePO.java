@@ -11,7 +11,7 @@ public class TreeNodePO implements Serializable {
 		return "TreeNodePO [type=" + type + "\n type_so_far=" + type_so_far
 				+ "\n fa=" + fa.type + "\n sons=" + sons + "]\n";
 	}
-
+	private static final long serialVersionUID = 1L;
 
 	String type;
 	

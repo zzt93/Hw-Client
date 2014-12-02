@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class RepoGoods implements Serializable {
+	private static final long serialVersionUID = 1L;
 	public RepoGoods(String id, GoodsModelPO goodsModelPO, ArrayList<GoodsPO> arrayList) {
 		this.id = id;
 		amount = goodsModelPO.getAmount();

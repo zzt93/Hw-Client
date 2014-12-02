@@ -11,7 +11,8 @@ public class InOutRepoVO implements Serializable {
 	BigDecimal sumOfOut;
 	int sumOfIn_num;
 	int sumOfOut_num;
-	
+	private static final long serialVersionUID = 1L;
+
 	public InOutRepoVO(BigDecimal in, BigDecimal out, int inn, int outn, String s, String e) {
 		produce_date = new Date().toString();
 		sumOfOut = out;

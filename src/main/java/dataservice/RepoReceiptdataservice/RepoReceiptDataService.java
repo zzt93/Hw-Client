@@ -5,10 +5,11 @@ import po.RepoFilterPO;
 import po.RepoReceiptPO;
 import po.ResultMessage;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface RepoReceiptDataService {
+public interface RepoReceiptDataService extends Remote {
 	ResultMessage<ArrayList<RepoReceiptPO>> getRepoReceipts() throws RemoteException;
 	ResultMessage<ArrayList<GoodsReceiptPO>> getGoodsReceipts() throws RemoteException;
 	ResultMessage<Boolean> initialize(ArrayList<RepoReceiptPO> receipt) throws RemoteException;

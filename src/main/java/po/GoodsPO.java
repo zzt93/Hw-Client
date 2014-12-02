@@ -5,6 +5,7 @@ import vo.GoodsVO;
 import java.io.Serializable;
 
 public class GoodsPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	int amount;
 	String name;
 	String id;

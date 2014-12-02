@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	ArrayList<GoodsVO> goodsPOs;
 	double sumOfGifts;
-	
+	private static final long serialVersionUID = 1L;
+
 	public GoodsReceiptVO(GoodsReceiptPO goodsReceiptPO) {
 		// TODO Auto-generated constructor stub
 	}

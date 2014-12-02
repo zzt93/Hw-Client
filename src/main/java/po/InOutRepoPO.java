@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class InOutRepoPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	String produce_date;
 	String[] date = new String[2];
 	BigDecimal sumOfIn;

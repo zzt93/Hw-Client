@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TreeNodeVO implements Serializable {
-	
+	private static final long serialVersionUID = 1L;
 	public TreeNodeVO(TreeNodePO temNodePO) {
 		// TODO Auto-generated constructor stub
 	}

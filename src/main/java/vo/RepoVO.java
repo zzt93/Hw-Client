@@ -10,4 +10,5 @@ public class RepoVO implements Serializable {
 	long batch;
 	String batchNum;
 	HashMap<String, ArrayList<GoodsVO>> goodsListMap;
+	private static final long serialVersionUID = 1L;
 }

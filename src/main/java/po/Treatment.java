@@ -9,7 +9,7 @@ public class Treatment implements Serializable {
 	public ArrayList<GoodsPO> give;
 	public double discount;
 	double coupon;
-	
+	private static final long serialVersionUID = 1L;
 	
 
 

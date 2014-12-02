@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class ReceiptConditionVO extends TimeConditionVO implements Serializable {
     public String startTime, endTime, client, operator, storage;
     public ReceiptType type;
-
+    private static final long serialVersionUID = 1L;
     public ReceiptConditionVO(String startTime, String endTime, ReceiptType type, String client
             , String operator, String storage) {
         this.startTime = startTime;

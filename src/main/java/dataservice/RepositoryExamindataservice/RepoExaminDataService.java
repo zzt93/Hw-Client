@@ -4,10 +4,11 @@ import po.RepoFilterPO;
 import po.ResultMessage;
 import vo.InOutRepoVO;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface RepoExaminDataService {
+public interface RepoExaminDataService extends Remote {
 	ResultMessage<ArrayList<InOutRepoVO>> getRepoReceipt() throws RemoteException;
 	ResultMessage<Boolean> initialize(ArrayList<InOutRepoVO> receipts) throws RemoteException;
 	

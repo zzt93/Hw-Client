@@ -7,6 +7,7 @@ import java.util.ArrayList;
  *
  */
 public class Condition implements Serializable {
+	private static final long serialVersionUID = 1L;
 	public CatOfCondition type;
 	public int customerLevel;
 	public ArrayList<GoodsPO> composition;

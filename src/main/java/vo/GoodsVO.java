@@ -10,6 +10,7 @@ import java.io.Serializable;
  *
  */
 public class GoodsVO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	public GoodsVO(GoodsPO goodsPO) {
 		// TODO Auto-generated constructor stub
 	}

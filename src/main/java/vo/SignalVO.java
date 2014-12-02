@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class SignalVO implements Serializable {
-	
+	private static final long serialVersionUID = 1L;
 	public SignalVO(int a, int s, String string) {
 		amount = a;
 		sAmount = s;

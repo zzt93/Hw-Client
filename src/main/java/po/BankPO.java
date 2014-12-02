@@ -9,6 +9,7 @@ import vo.BankVO;
 import java.io.Serializable;
 
 public class BankPO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	String name;
 	double balance;
 	String remark;

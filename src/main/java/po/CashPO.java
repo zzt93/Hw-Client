@@ -8,6 +8,7 @@ import java.io.Serializable;
  * Created by MethyleneBlue on 2014/10/??.
  */
 public class CashPO extends ReceiptPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	public String operator;
 	public double total=0;
 	public ItemPO[] itemList;

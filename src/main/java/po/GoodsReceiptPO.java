@@ -9,6 +9,7 @@ import java.util.ArrayList;
  *
  */
 public class GoodsReceiptPO extends ReceiptPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	ArrayList<GoodsPO> goodsPOs;
 	double sumOfGifts;
 	

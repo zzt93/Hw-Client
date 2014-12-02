@@ -4,10 +4,11 @@ import po.RepoFilterPO;
 import po.ResultMessage;
 import po.TreeNodePO;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface GoodsTypeDateService {
+public interface GoodsTypeDateService extends Remote {
 	ResultMessage<ArrayList<TreeNodePO>> getGoodsTypde() throws RemoteException;
 	ResultMessage<Boolean> initialize(ArrayList<TreeNodePO> treeNodePOs) throws RemoteException;
 	ResultMessage<String> getDatabse(String account) throws RemoteException;

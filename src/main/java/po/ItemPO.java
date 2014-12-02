@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 
 public class ItemPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	String item,remark;
 	double amount;
 	public ItemPO(String item,double amount,String remark){
