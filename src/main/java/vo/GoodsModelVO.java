@@ -21,10 +21,19 @@ public class GoodsModelVO implements Serializable {
 	double lastOutPrice;
 
 	public GoodsModelVO(GoodsModelPO goodsModelPO) {
-		// TODO Auto-generated constructor stub
+		this.signal = goodsModelPO.getSignal();
+		this.amount = goodsModelPO.getAmount();
+		this.id = goodsModelPO.getId();
+		this.name = goodsModelPO.getName();
+		this.model = goodsModelPO.getModel();
+		this.everHas = goodsModelPO.isEverHas();
+		this.gift = goodsModelPO.isGift();
 	}
 	public GoodsModelVO(String id, String name, String model) {
-		// TODO Auto-generated constructor stub
+		this.id = id;
+		this.name = name;
+		this.model = model;
+		
 	}
 	
 	public String getModel() {
