@@ -131,13 +131,21 @@ public class AdminNewUI extends JDialog {
 						userpo = new UserPO(0, textFieldName.getText(),
 								textFieldPassword.getText(), (String) comboBox
 										.getSelectedItem());
+						boolean judge = false;
 						try {
-							adminController.confirm(userpo);
+							judge = adminController.confirm(userpo);
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(null, "连接失败");
 							e1.printStackTrace();
 						}
-						AdminNewUI.this.dispose();
+						if(judge){
+							JOptionPane.showMessageDialog(null, "成功");
+							AdminNewUI.this.dispose();
+						}else{
+							JOptionPane.showMessageDialog(null, "添加失败");
+						}
+						
 					}
 				});
 				okButton.setActionCommand("OK");

@@ -98,6 +98,11 @@ public class AdminUI {
 //		frame.getContentPane().add(button);
 		panel.add(button);
 		
+		final JLabel lblHint = new JLabel("负责卖萌的状态栏");
+		lblHint.setBounds(25, 358, 271, 15);
+//		frame.getContentPane().add(lblNewLabel);
+		panel.add(lblHint);
+		
 		JButton button_1 = new JButton("修改用户");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -118,13 +123,20 @@ public class AdminUI {
 		JButton button_2 = new JButton("删除用户");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean judge = false;
 				try {
-					am.delete(users.get(table.getSelectedRow()));
+					judge = am.delete(users.get(table.getSelectedRow()));
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				users.remove(table.getSelectedRow());
+				if(judge){
+					lblHint.setText("删除成功");
+					users.remove(table.getSelectedRow());
+				}else{
+					lblHint.setText("删除失败");
+				}
+				
 				
 			}
 		});
@@ -132,21 +144,16 @@ public class AdminUI {
 //		frame.getContentPane().add(button_2);
 		panel.add(button_2);
 		
-		JButton button_3 = new JButton("返回");
-		button_3.setBounds(491, 271, 93, 23);
+		JButton buttonReturn = new JButton("注销");
+		buttonReturn.setBounds(491, 271, 93, 23);
 //		frame.getContentPane().add(button_3);
-		panel.add(button_3);
+		panel.add(buttonReturn);
 		
 		JLabel label = new JLabel("用户列表");
 		label.setBounds(25, 54, 54, 15);
 //		frame.getContentPane().add(label);
 		panel.add(label);
-		
-		JLabel lblNewLabel = new JLabel("负责卖萌的状态栏");
-		lblNewLabel.setBounds(25, 358, 271, 15);
-//		frame.getContentPane().add(lblNewLabel);
-		panel.add(lblNewLabel);
-		
+
 		JLabel label_1 = new JLabel("管理员界面");
 		label_1.setBounds(25, 29, 93, 15);
 //		frame.getContentPane().add(label_1);
