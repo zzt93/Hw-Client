@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Treatment implements Serializable {
 	public CatOfTreatment type;
-	public ArrayList<GoodsPO> give;
+	public ArrayList<GoodsModelPO> give;
 	public double discount;
 	double coupon;
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,7 @@ public class Treatment implements Serializable {
 			this.discount = (Double)E;
 			break;
 		case GIVE:
-			this.give = (ArrayList<GoodsPO>)E;
+			this.give = (ArrayList<GoodsModelPO>)E;
 			break;
 		default:
 			break;
@@ -43,10 +43,10 @@ public class Treatment implements Serializable {
 	public void setType(CatOfTreatment type) {
 		this.type = type;
 	}
-	public ArrayList<GoodsPO> getGive() {
+	public ArrayList<GoodsModelPO> getGive() {
 		return give;
 	}
-	public void setGive(ArrayList<GoodsPO> give) {
+	public void setGive(ArrayList<GoodsModelPO> give) {
 		this.give = give;
 	}
 	public double getDiscount() {

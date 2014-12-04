@@ -7,7 +7,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import businesslogic.GoodsListbl.GL_manager_repo_Impl;
+import businesslogic.Strategybl.StrategyController;
 import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
+import businesslogicservice.Strategyblservice.Strategy_New_BLservice;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,7 +33,7 @@ public class StrategyNewUI {
 	private ArrayList<GoodsModelPO> tempGoodsPO;
 	private ArrayList<GoodsModelPO> goodsPOGive;
 
-	// Strategy_New_BLservice snb = new StrategyController();
+	 Strategy_New_BLservice snb = new StrategyController();
 
 	/**
 	 * Launch the application.
@@ -178,12 +180,12 @@ public class StrategyNewUI {
 					t = new Treatment(CatOfTreatment.COUPON, Double
 							.parseDouble(textFieldTreatment.getText()));
 				}
-				/*
-				 * snb.newStrategy(c, t, tp); if(!snb.examine()){
-				 * lblHint.setText("输入折扣价格或时间有误，请检查"); }else{
-				 * 
-				 * }
-				 */
+				
+				 snb.newStrategy(c, t, tp); if(!snb.examine()){
+				  lblHint.setText("输入折扣价格或时间有误，请检查"); }else{
+				 
+				 }
+				 
 			}
 		});
 		buttonConfirm.setBounds(126, 297, 93, 23);

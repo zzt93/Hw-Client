@@ -90,11 +90,11 @@ public class StrategyList implements Strategy_List_BLservice {
 				pos.add(spo);
 
 			} else if(spo.getCondition().type == CatOfCondition.COMPOSITION){
-				ArrayList<GoodsPO> goodsPO = spo.getCondition().composition;
+				ArrayList<GoodsModelPO> goodsPO = spo.getCondition().composition;
 				List<ProductsReceipt> products = po.getProductList();
 				int temp = 0;
 				for(ProductsReceipt pr:products){
-					for(GoodsPO tempPO:goodsPO){
+					for(GoodsModelPO tempPO:goodsPO){
 						if(String.valueOf(pr.getCommodity_id()).equals(tempPO.getId())){
 							temp++;
 							break;

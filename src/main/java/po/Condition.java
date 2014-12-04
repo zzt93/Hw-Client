@@ -10,7 +10,7 @@ public class Condition implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public CatOfCondition type;
 	public int customerLevel;
-	public ArrayList<GoodsPO> composition;
+	public ArrayList<GoodsModelPO> composition;
 	public double totalPrice;
 	
 	
@@ -44,7 +44,7 @@ public class Condition implements Serializable {
 			this.customerLevel = (Integer)E;
 			break;
 		case COMPOSITION:
-			this.composition = (ArrayList<GoodsPO>)E;
+			this.composition = (ArrayList<GoodsModelPO>)E;
 			break;
 		default:
 			break;
@@ -66,10 +66,10 @@ public class Condition implements Serializable {
 	public void setCustomerLevel(int customerLevel) {
 		this.customerLevel = customerLevel;
 	}
-	public ArrayList<GoodsPO> getComposition() {
+	public ArrayList<GoodsModelPO> getComposition() {
 		return composition;
 	}
-	public void setComposition(ArrayList<GoodsPO> composition) {
+	public void setComposition(ArrayList<GoodsModelPO> composition) {
 		this.composition = composition;
 	}
 	public double getTotalPrice() {
