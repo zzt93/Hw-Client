@@ -17,7 +17,7 @@ public class StrategyListUI {
 
 	private JFrame frame;
 	public JPanel panel;
-	Strategy_List_BLservice slb = new StrategyController();
+	Strategy_List_BLservice strategyList = new StrategyController();
 
 
 	/**
@@ -31,6 +31,7 @@ public class StrategyListUI {
 					window.frame.setVisible(true);
 
 				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "服务器出错啦");
 					e.printStackTrace();
 				}
 			}
@@ -126,6 +127,7 @@ public class StrategyListUI {
 						try {
 							StrategyNewUI.main(null);
 						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null, "服务器出错了ToT");
 							e.printStackTrace();
 						}
 					}

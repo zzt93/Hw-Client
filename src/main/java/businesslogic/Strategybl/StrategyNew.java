@@ -14,14 +14,14 @@ import java.util.Iterator;
 
 public class StrategyNew implements Strategy_New_BLservice {
 	
-	private static StrategyDataService sds = null; 
+	private static StrategyDataService strategyData = null; 
 	
 	StrategyPO po;
 
 	public StrategyNew() throws RemoteException, NotBoundException{
 		super();
-		if(sds == null){
-			sds = (StrategyDataService)RMIUtility.getImpl("Strategy");
+		if(strategyData == null){
+			strategyData = (StrategyDataService)RMIUtility.getImpl("Strategy");
 		}
 	}
 	@Override
@@ -72,7 +72,7 @@ public class StrategyNew implements Strategy_New_BLservice {
 	public boolean confirm(){
 		ResultMessage<StrategyPO> rm = null;
 		try {
-			rm = sds.confirm(po);
+			rm = strategyData.confirm(po);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

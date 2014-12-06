@@ -57,7 +57,7 @@ public class StrategyController implements Strategy_New_BLservice,Strategy_List_
 		return sn.examine();
 	}
 
-	boolean confirm(){
+	public boolean confirm(){
 		return sn.confirm();
 	}
 	@Override
