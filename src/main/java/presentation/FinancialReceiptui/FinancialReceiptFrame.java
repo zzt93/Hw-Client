@@ -55,7 +55,7 @@ public class FinancialReceiptFrame {
 		scrollPane.setBounds(240, 60, 475, 320);
 		panel.add(scrollPane);
 		
-		tableModel=new PublicTableModel(ModelType.RECEIPT);
+		tableModel=new PublicTableModel(ModelType.FINRECEIPT);
 		table=new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		table.setFillsViewportHeight(true);

@@ -22,4 +22,5 @@ public class ReceiptPO implements Serializable {
 	public ReceiptPO(ReceiptType type) {
 		this.type = type;
 	}
+	
 }

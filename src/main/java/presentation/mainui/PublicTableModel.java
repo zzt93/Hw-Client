@@ -5,10 +5,18 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import po.BkTransPO;
+import po.CashPO;
 import po.ClientPO;
 import po.GoodsPO;
+import po.GoodsReceiptPO;
 import po.ItemPO;
+import po.PayPO;
 import po.ProductsReceipt;
+import po.RecPO;
+import po.ReceiptPO;
+import po.RepoReceiptPO;
+import po.SaleReceiptPO;
+import po.StockReceiptPO;
 import vo.BankVO;
 
 public class PublicTableModel extends DefaultTableModel {
@@ -27,30 +35,30 @@ public class PublicTableModel extends DefaultTableModel {
 		switch(type){
 		case BANK:	
 			name=new String[]{"银行账户","余额","备注"};
-			setDataVector(data,name);
 			break;
 		case CLIENT:
 			name=new String[]{"姓名","编号","分类",
 					"级别","应收","应付","业务员"};
-			setDataVector(data,name);
 			break;		
 		case PRODUCTS:
 			name=new String[]{"商品编号","商品名称","型号","数量","单价","金额","备注"};
-			setDataVector(data,name);
 			break;
 		case GIFT:
 			name=new String[]{"商品","型号","单价"};
-			setDataVector(data,name);
 			break;
-		case RECEIPT:
+		case FINRECEIPT:
 			name=new String[]{"日期","类型","总额","审批状况","处理状况"};
-			setDataVector(data,name);
 			break;
 		case ITEM:
 			name=new String[]{"条目","金额","备注"};
-			setDataVector(data,name);
 			break;
+		case RECEIPT:
+			name=new String[]{"单据类型","日期","操作员","总额","审批情况"};
+			break;
+		default:
+			return;
 		}
+		setDataVector(data,name);
 	
 	}
 	public boolean isCellEditable(int row,int column){
@@ -89,7 +97,92 @@ public class PublicTableModel extends DefaultTableModel {
 			update(data);
 			break;
 		}
-
+		case RECEIPT:{
+			data=new Object[list.size()][5];
+			ReceiptPO temp;
+			for(int i=0;i<list.size();i++){
+				temp=(ReceiptPO)list.get(0);
+				data[i][1]=temp.time;
+				switch(temp.type){
+				case SALE_ACCEPT:{
+					SaleReceiptPO temp1=(SaleReceiptPO)list.get(i);
+					data[i][0]="销售单";
+					data[i][2]=temp1.getOperator();	
+					data[i][3]=temp1.getActualValue();
+					break;
+				}
+				case SALE_REJECTION:{
+					SaleReceiptPO temp1=(SaleReceiptPO)temp;
+					data[i][0]="销售退货单";
+					data[i][2]=temp1.getOperator();
+					data[i][3]=temp1.getActualValue();
+					break;
+				}
+				case STOCK_ACCEPT:{
+					StockReceiptPO temp1=(StockReceiptPO)temp;
+					data[i][0]="进货单";
+					data[i][2]=temp1.getOperator();
+					data[i][3]=temp1.getTotalValue();
+					break;
+				}
+				case STOCK_REJECTION:{
+					StockReceiptPO temp1=(StockReceiptPO)temp;
+					data[i][0]="进货退货单";
+					data[i][2]=temp1.getOperator();
+					data[i][3]=temp1.getTotalValue();
+					break;
+				}
+				case CASH:{
+					CashPO temp1=(CashPO)temp;
+					data[i][0]="现金费用单";
+					data[i][2]=temp1.operator;
+					data[i][3]=temp1.total;
+					break;
+				}
+				case PAYMENT:{
+					PayPO temp1=(PayPO)temp;
+					data[i][0]="付款单";
+					data[i][2]=temp1.operator;
+					data[i][3]=temp1.total;
+					break;
+				}
+				case RECEIVE:{
+					RecPO temp1=(RecPO)temp;
+					data[i][0]="收款单";
+					data[i][2]=temp1.operator;
+					data[i][3]=temp1.total;
+					break;
+				}
+				case REPORECEIPT:{
+					//FIXME
+					RepoReceiptPO temp1=(RepoReceiptPO)temp;
+					data[i][0]="报溢报损单";
+//					data[i][2]=temp1.get
+					break;
+				}
+				case GOODSRECEIPT:{
+					//FIXME
+					GoodsReceiptPO temp1=(GoodsReceiptPO)temp;
+					data[i][0]="库存赠送单";
+//					data[i][2]
+					break;
+				}
+				}
+				switch(temp.statement){
+				case approve:
+					data[i][4]="通过审批";
+					break;
+				case disapprove:
+					data[i][4]="未通过审批";
+					break;
+				case wait:
+					data[i][4]="待审批";
+					break;
+				}
+			}
+			update(data);
+					
+		}
 		}
 	}
 	public void update(BankVO[] list){

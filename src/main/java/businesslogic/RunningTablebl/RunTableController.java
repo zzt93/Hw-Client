@@ -1,40 +1,66 @@
 package businesslogic.RunningTablebl;
 
+import businesslogic.Adminbl.AdminController;
+import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogicservice.RunningTableblservice.RunningTableblservice;
+import po.ClientPO;
 import po.ReceiptPO;
+import po.UserPO;
 import vo.*;
 
+import java.util.List;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class RunTableController implements RunningTableblservice {
 	CheckReceipt checkReceipt=new CheckReceipt();
 	SaleRecord record=new SaleRecord();
 	CheckProfit profit=new CheckProfit();
-	@Override
+	ClientUtilityImpl clientController;
+	AdminController adminController;
+	
+	public RunTableController() throws RemoteException, NotBoundException{
+		clientController=new ClientUtilityImpl();
+		adminController=new AdminController();
+	}
+	
 	public GoodsRecordVO[] getSaleTable(SaleConditionVO vo) throws Exception {
 		System.out.println("进入controller");
 		return record.getSaleTable(vo);
 	}
 
-	@Override
-	public ReceiptPO[] getReceipt(ReceiptConditionVO vo) throws Exception {
+	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo) throws Exception {
 		ArrayList<ReceiptPO> list=checkReceipt.getReceipt(vo);
-		ReceiptPO[] receipt=new ReceiptPO[list.size()];
-		for(int i=0;i<list.size();i++){
-			receipt[i]=list.get(i);
-		}
-		return receipt;
+		
+		return list;
 	}
 
-	@Override
 	public ProfitVO getProfit(TimeConditionVO vo) throws Exception {
 		
 		return profit.getProfit(vo);
 	}
 
-	@Override
 	public void CreditNote(ReceiptPO po) throws Exception {
 		checkReceipt.CreditNote(po);
 	}
+	
+	public String[] getClient() throws Exception{
+		List<ClientPO> list=clientController.queryClient(null);
+		String[] result=new String[list.size()];
+		for(int i=0;i<list.size();i++){
+			result[i]=list.get(i).getName();
+		}
+		return result;
+	}
+	public String[] getOperator() throws Exception{
+		ArrayList<UserPO> list=adminController.show();
+		String[] result=new String[list.size()];
+		for(int i=0;i<list.size();i++){
+			result[i]=list.get(i).getName();
+		}
+		return result;
+	}
+	
 
 }

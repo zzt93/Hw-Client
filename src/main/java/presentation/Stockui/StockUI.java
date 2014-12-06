@@ -358,8 +358,13 @@ public class StockUI extends JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	int id=clientList.get(boxClient.getSelectedIndex()).getId();
     	//FIXME,操作员get
-    	stockReceipt=new StockReceiptPO(id,textRepository.getText(),
-    			"操作员",textComment.getText(),new BigDecimal(total));
+    	stockReceipt=new StockReceiptPO(
+    			id,
+    			textRepository.getText(),
+    			"操作员",
+    			textComment.getText(),
+    			new BigDecimal(total));
+    	
     	try {
 			stockController.makeReceipt(stockReceipt);
 		} catch (Exception e) {
