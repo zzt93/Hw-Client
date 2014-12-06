@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import businesslogicservice.Approveblservice.Approve_Detail_BLservice;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
 
 import java.awt.*;
@@ -68,7 +67,7 @@ public class ApproveUI {
 		frame.getContentPane().add(totalPanel);
 
 		// /Read Receipts
-		 listOfReceipts = approveBL.showList();
+		 //listOfReceipts = approveBL.showList();
 
 		final JLabel labelHint = new JLabel("状态栏");
 		labelHint.setBounds(39, 473, 211, 15);
@@ -105,9 +104,11 @@ public class ApproveUI {
 
 			}
 		});
+		
 		table.setBounds(10, 10, 507, 249);
 
 		JScrollPane scrollPane = new JScrollPane();
+
 		scrollPane.setBounds(10, 10, 507, 249);
 		scrollPane.setViewportView(table);
 		totalPanel.add(scrollPane);
@@ -144,7 +145,7 @@ public class ApproveUI {
 		JButton buttonScreen = new JButton("筛选");
 		buttonScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				approveBL.screen(null);
 			}
 		});
 		buttonScreen.setBounds(572, 192, 93, 23);
@@ -202,7 +203,7 @@ public class ApproveUI {
 
 	void insert(String[] item, ReceiptPO po) {
 		item[0] = po.number;
-		item[1] = po.type.toString();
+		//item[1] = po.type.toString();
 		item[2] = po.time;
 		item[3] = po.statement.toString();
 
@@ -261,7 +262,7 @@ public class ApproveUI {
 			tm = new DefaultTableModel(header5, 1);
 			tm.addRow(new String[] { rrpo.time.toString(), rrpo.number,
 					rrpo.time, Integer.toString(rrpo.getaNum()),
-					Integer.toString(rrpo.getcNum()), null, rrpo.getId(),
+					Integer.toString(rrpo.getcNum()), null, rrpo.getReceipt_id(),
 					rrpo.statement.toString() });
 			break;
 		case SALE_ACCEPT:
