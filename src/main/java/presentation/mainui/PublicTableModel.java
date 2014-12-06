@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import po.BkTransPO;
 import po.ClientPO;
 import po.GoodsPO;
+import po.ItemPO;
 import po.ProductsReceipt;
 import vo.BankVO;
 
@@ -39,10 +40,16 @@ public class PublicTableModel extends DefaultTableModel {
 			break;
 		case GIFT:
 			name=new String[]{"商品","型号","单价"};
+			setDataVector(data,name);
 			break;
 		case RECEIPT:
 			name=new String[]{"日期","类型","总额","审批状况","处理状况"};
-			break;		
+			setDataVector(data,name);
+			break;
+		case ITEM:
+			name=new String[]{"条目","金额","备注"};
+			setDataVector(data,name);
+			break;
 		}
 	
 	}
@@ -108,6 +115,13 @@ public class PublicTableModel extends DefaultTableModel {
 		addRow(data);
 	}
 	public void addRow(BkTransPO po ){
+		Object[] data=new Object[3];
+		data[0]=po.getName();
+		data[1]=po.getAmount();
+		data[2]=po.getRemark();
+		addRow(data);
+	}
+	public void addRow(ItemPO po){
 		Object[] data=new Object[3];
 		data[0]=po.getName();
 		data[1]=po.getAmount();

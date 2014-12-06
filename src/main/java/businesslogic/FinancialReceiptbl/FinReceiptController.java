@@ -1,7 +1,10 @@
 package businesslogic.FinancialReceiptbl;
 
+import businesslogic.BankManagebl.BankController;
+import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
 import po.*;
+import vo.BankVO;
 import vo.CashVO;
 import vo.PayVO;
 import vo.RecVO;
@@ -10,12 +13,18 @@ import vo.ReceiptConditionVO;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
 public class FinReceiptController implements FinancialReceiptblservice{
 	BankList bankList=new BankList();
 	ItemList itemList=new ItemList();
 	FinReceipt finReceipt;
+	ClientUtilityImpl clientController;
+	BankController bankController;
 	public FinReceiptController() throws RemoteException, NotBoundException{
 		finReceipt=new FinReceipt();
+		clientController=new ClientUtilityImpl();
 	}
 	public void clearBank(){
 		bankList.clear();
@@ -61,18 +70,30 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		ResultMessage result=finReceipt.makeCash(po);
 		result.throwIfFailed();
 	}		
-	/*public String[] getBank(){
-		//通过BankManageBl获得
-		return null;
+	public String[] getBank() throws Exception{
+		BankController bankController;
+		bankController=new BankController();
+		BankVO[] vo=bankController.search(null);
+		String result[];
+		result=new String[vo.length];
+		for(int i=0;i<result.length;i++){
+			result[i]=vo[i].name;
+			}
+		return result;
 	}
-	public String[] getClient(){
-		//通过ClientBL获得
-		return null;
+	public String[] getClient() throws Exception{
+		List<ClientPO> clientList;
+		clientList=clientController.queryClient(null);
+		String[] result=new String[clientList.size()];
+		for(int i=0;i<result.length;i++){
+			result[i]=clientList.get(i).getName();
+		}
+		return result;
 	}
 	public String[] getOperator(){
-		//通过Admin获得
+		//TODO,通过Admin获得
 		return null;
-	}*/
+	}
 	public ReceiptPO[] getReceipt()throws Exception{
 		return new ReceiptPO[1];
 	}

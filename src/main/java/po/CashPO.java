@@ -12,17 +12,20 @@ public class CashPO extends ReceiptPO implements Serializable {
 	public String operator;
 	public double total=0;
 	public ItemPO[] itemList;
+	public String bank;
 	public CashPO(CashVO vo,ItemPO[] list){
 		operator=vo.operator;
 		itemList=list;
 		total=vo.total;
 		type=ReceiptType.CASH;
+		bank=vo.bank;
 	}
 	public CashPO(CashVO vo){
 		operator=vo.operator;
 		itemList=vo.itemList;
 		total=vo.total;
 		type=ReceiptType.CASH;
+		bank=vo.bank;
 	}
 	public CashPO(){
 		

@@ -10,10 +10,11 @@ import java.io.Serializable;
 public class CashVO extends ReceiptPO implements Serializable {
 	public String operator;
 	public double total=0;
+	public String bank;
 	public ItemPO[] itemList;
 	private static final long serialVersionUID = 1L;
-	public CashVO(String num,String operator,double total){
-		number=num;
+	public CashVO(String bank,String operator,double total){
+		this.bank=bank;
 		this.operator=operator;
 		this.total=total;
 		type=ReceiptType.CASH;

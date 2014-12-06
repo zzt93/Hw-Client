@@ -33,6 +33,8 @@ public class BankPanel {
 	JButton button;
 	JButton button_1;
 	BankController controller;
+	private Font font=new Font("宋体",Font.PLAIN,18);
+//	private Font font2=new Font("宋体",Font.PLAIN,14);
 	public BankPanel(BankVO vo){
 		bank=vo;
 		initialize();
@@ -56,17 +58,17 @@ public class BankPanel {
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("账户名称");
-		label.setFont(new Font("宋体", Font.PLAIN, 18));
+		label.setFont(font);
 		label.setBounds(10, 10, 72, 26);
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("金额");
-		label_1.setFont(new Font("宋体", Font.PLAIN, 18));
+		label_1.setFont(font);
 		label_1.setBounds(10, 51, 72, 26);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("备注");
-		label_2.setFont(new Font("宋体", Font.PLAIN, 18));
+		label_2.setFont(font);
 		label_2.setBounds(144, 97, 72, 26);
 		panel.add(label_2);
 		
@@ -86,12 +88,12 @@ public class BankPanel {
 		panel.add(remark);
 		
 		button = new JButton("确定");
-		button.setFont(new Font("宋体", Font.PLAIN, 18));
+		button.setFont(font);
 		button.setBounds(144, 169, 72, 33);
 		panel.add(button);
 		
 		button_1 = new JButton("取消");
-		button_1.setFont(new Font("宋体", Font.PLAIN, 18));
+		button_1.setFont(font);
 		button_1.setBounds(237, 169, 72, 33);
 		button_1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -105,8 +107,6 @@ public class BankPanel {
 			public void actionPerformed(ActionEvent e){
 				BankVO bank=new BankVO(name.getText(),
 						Double.valueOf(balance.getText()),remark.getText());
-				JOptionPane.showMessageDialog(null,"添加成功");
-				frame.dispose();
 //FXIEME,底层
 				try {
 					controller.add(bank);
