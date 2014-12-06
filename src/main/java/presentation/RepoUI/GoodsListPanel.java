@@ -17,6 +17,7 @@ import org.apache.xmlbeans.StringEnumAbstractBase.Table;
 
 import po.GoodsModelPO;
 import vo.GoodsModelVO;
+import vo.GoodsVO;
 import businesslogic.GoodsListbl.GL_controller;
 import businesslogic.GoodsTypebl.GT_GL_BLImpl;
 import businesslogic.GoodsTypebl.GT_controller;
@@ -53,11 +54,16 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 			goodsModels = gl_controller.getGoodsModelPOs();
 		} catch (RemoteException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(MainFrame.frame, e
 					+ ": Fail to connect to get goods list");
 		} catch (NullPointerException e2) {
-			JOptionPane.showMessageDialog(MainFrame.frame, e2
-					+ ": Fail to connect to get goods list");
+			if (MainFrame.DEBUG) {
+				e2.printStackTrace();
+			} else {
+				JOptionPane.showMessageDialog(MainFrame.frame, e2
+						+ ": Fail to connect to get goods list");
+			}
 		}
 		initComponents();
 	}
@@ -163,7 +169,34 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			general_table.getColumnModel().getColumn(3).setResizable(false);
 			general_table.getColumnModel().getColumn(3).setHeaderValue("警戒值");
 		}
-
+		general_table.getModel().addTableModelListener(new TableModelListener() {
+			
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				int row = e.getFirstRow();
+				int column = e.getColumn();
+				TableModel model = (TableModel) e.getSource();
+				Integer data = (Integer)model.getValueAt(row, column);
+				String id = (String)model.getValueAt(row, 2);
+				GoodsVO temp = new GoodsVO(id, data);
+				System.out.println("-----------------------------------------------");
+				if (column == 0 && data != null) {// name is vaild
+					//gl_controller.
+				} else if (column == 3 && data != null && (Integer) data >= 0) {// signal
+																				// is
+																				// valid
+					try {
+						gl_controller.setSignal_name(temp);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(MainFrame.frame, "Invalid change");
+				}
+			}
+		});
+		
 		GL_navigator.setBackground(java.awt.Color.red);
 		GL_navigator.setRollover(true);
 		GL_navigator.add(filler1);
@@ -1024,6 +1057,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	private void detailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_detailActionPerformed
 		CardLayout card = (CardLayout) this.getLayout();
 		card.show(this, "detailed_list");
+		set_detail_data(goodsModels);
 	}// GEN-LAST:event_detailActionPerformed
 
 	private void searchActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchActionPerformed
@@ -1037,7 +1071,14 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			}
 			search_result.setModel(new GL_general_TableModel(goodsModel_search));
 		} else {
-			GoodsModelVO temp = gl_controller.eSearch_total(goods_info_search.getText());
+			GoodsModelVO temp;
+			if (MainFrame.DEBUG) {
+				temp = new GoodsModelVO("a1", "Light", "A");
+			} else {
+				temp = gl_controller.eSearch_total(goods_info_search.getText());
+			}
+			((DefaultTableModel)search_result.getModel()).setRowCount(0);
+			goodsModel_add.clear();
 			goodsModel_search.add(temp);
 			add_add_del_search_data(search_result, temp);
 		}
@@ -1076,11 +1117,13 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	}// GEN-LAST:event_findActionPerformed
 
 	private void back_addActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_addActionPerformed
+		updateActionPerformed(evt);
 		CardLayout card = (CardLayout) this.getLayout();
 		card.show(this, "GL_main");
 	}// GEN-LAST:event_back_addActionPerformed
 
 	private void back_delActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_delActionPerformed
+		updateActionPerformed(evt);
 		CardLayout card = (CardLayout) this.getLayout();
 		card.show(this, "GL_main");
 	}// GEN-LAST:event_back_delActionPerformed
@@ -1110,7 +1153,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			gl_controller.add(goodsModel_add);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(MainFrame.frame,
-					"Fail to add for network");
+					e+": Fail to add for network");
 		}
 		// clear all data
 		((DefaultTableModel) add_table.getModel()).setRowCount(0);
@@ -1141,7 +1184,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(MainFrame.frame,
-					"Fail to add for network");
+					e+": Fail to delete for network");
 		}
 		// clear all data
 		((DefaultTableModel) del_table.getModel()).setRowCount(0);
@@ -1151,8 +1194,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JToolBar GL_navigator;
 	private javax.swing.JButton add;
-	private javax.swing.JComboBox addable_type;
-	private javax.swing.JComboBox type_del;
+	private javax.swing.JComboBox<String> addable_type;
+	private javax.swing.JComboBox<String> type_del;
 	private javax.swing.JCheckBox ambiguous;
 	private javax.swing.JButton back;
 	private javax.swing.JButton back_add;

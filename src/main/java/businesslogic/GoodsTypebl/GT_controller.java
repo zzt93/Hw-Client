@@ -35,7 +35,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		}
 
 		if (treeNodePOs == null || treeNodePOs.size()==0) {
-			treeNodePOs.add(new TreeNodePO(new TreeNodeVO("Light/灯")));
+			treeNodePOs.add(new TreeNodePO(new TreeNodePO("Light/灯")));
 		}
 		gtbLservice = new GTBLImpl(treeNodePOs);
 		gt_gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
@@ -51,7 +51,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 	 */
 	GL_controller gl_controller;
 
-	public boolean add(TreeNodeVO fa, String son_type) throws Exception {
+	public boolean add(TreeNodePO fa, String son_type) throws Exception {
 		if (gl_controller.checkEverHas(fa.getType_so_far())) {
 			return false;
 		}
@@ -62,7 +62,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		return res;
 	}
 
-	public boolean update(TreeNodeVO tNode) throws Exception {
+	public boolean update(TreeNodePO tNode) throws Exception {
 		boolean res = gtbLservice.update(tNode);
 		if (res) {
 			goodsTypeDateService.update(new TreeNodePO(tNode));
@@ -70,7 +70,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		return res;
 	}
 
-	public boolean delete(TreeNodeVO tNode) throws Exception {
+	public boolean delete(TreeNodePO tNode) throws Exception {
 		boolean res = gtbLservice.delete(tNode);
 		if (res) {
 			goodsTypeDateService.delete(new TreeNodePO(tNode));
@@ -82,7 +82,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		return gtbLservice.eSearch(id);
 	}
 
-	public ArrayList<TreeNodeVO> show() throws Exception {
+	public ArrayList<TreeNodePO> show() throws Exception {
 		return gtbLservice.show();
 	}
 

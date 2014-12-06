@@ -18,12 +18,16 @@ public class Repo_examin_dialog extends javax.swing.JDialog {
     String end_date_data;
     String all_in;
     String all_out;
+    String all_in_amount;
+    String all_out_amount;
     public Repo_examin_dialog(java.awt.Frame parent, boolean modal, String[] data) {
         super(parent, modal);
         start_date_data = data[0];
         end_date_data = data[1];
         all_in = data[2];
         all_out = data[3];
+        all_in_amount = data[4];
+        all_out_amount = data[5];
         initComponents();
     }
 
@@ -38,7 +42,7 @@ public class Repo_examin_dialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        start_date = new javax.swing.JLabel();
+    	start_date = new javax.swing.JLabel();
         end_date = new javax.swing.JLabel();
         sdate = new javax.swing.JLabel();
         edate = new javax.swing.JLabel();
@@ -46,6 +50,10 @@ public class Repo_examin_dialog extends javax.swing.JDialog {
         in_all = new javax.swing.JLabel();
         i_all = new javax.swing.JLabel();
         o_all = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        out_amount = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        in_amount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,30 +72,39 @@ public class Repo_examin_dialog extends javax.swing.JDialog {
         i_all.setText(all_in);
 
         o_all.setText(all_out);
+        
+        jLabel1.setText("出库数量：");
+        jLabel3.setText("入库数量：");
+        in_amount.setText(all_in_amount);
+        out_amount.setText(all_out_amount);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(129, 129, 129)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(start_date)
                     .addComponent(end_date)
                     .addComponent(out_all)
-                    .addComponent(in_all))
-                .addGap(48, 48, 48)
+                    .addComponent(in_all)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(in_amount)
+                    .addComponent(out_amount)
                     .addComponent(o_all)
                     .addComponent(i_all)
                     .addComponent(edate)
                     .addComponent(sdate))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(start_date)
                     .addComponent(sdate))
@@ -103,7 +120,15 @@ public class Repo_examin_dialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(in_all)
                     .addComponent(o_all))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(out_amount))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(in_amount))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,8 +171,12 @@ public class Repo_examin_dialog extends javax.swing.JDialog {
     private javax.swing.JLabel end_date;
     private javax.swing.JLabel i_all;
     private javax.swing.JLabel in_all;
+    private javax.swing.JLabel in_amount;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel o_all;
     private javax.swing.JLabel out_all;
+    private javax.swing.JLabel out_amount;
     private javax.swing.JLabel sdate;
     private javax.swing.JLabel start_date;
     // End of variables declaration//GEN-END:variables

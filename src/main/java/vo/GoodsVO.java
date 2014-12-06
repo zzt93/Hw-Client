@@ -12,13 +12,22 @@ import java.io.Serializable;
 public class GoodsVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public GoodsVO(GoodsPO goodsPO) {
-		// TODO Auto-generated constructor stub
+		this.amount = goodsPO.getAmount();
+		this.id = goodsPO.getId();
+		this.name = goodsPO.getName();
+		this.model = goodsPO.getModel();
 	}
 	public GoodsVO(String id, int amount) {
 		this.id = id;
 		this.amount = amount;
 	}
 	
+	public GoodsVO(Object name, Object id, Object amount) {
+		this.name = (String)name;
+		this.id = (String)id;
+		this.amount = Integer.parseInt((String)amount);
+	}
+
 	public int amount;
 	public String name;
 	public String id;

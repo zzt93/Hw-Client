@@ -9,7 +9,7 @@ public class TreeNodePO implements Serializable {
 	@Override
 	public String toString() {
 		return "TreeNodePO [type=" + type + "\n type_so_far=" + type_so_far
-				+ "\n fa=" + fa.type + "\n sons=" + sons + "]\n";
+				+ "\n fa=" + fatherNode.type + "\n sons=" + sons + "]\n";
 	}
 	private static final long serialVersionUID = 1L;
 
@@ -18,27 +18,32 @@ public class TreeNodePO implements Serializable {
 	/*
 	 * this member is to record the type info up to now
 	 */
-	String type_so_far;
+	String type_so_far = "";
 	
-	TreeNodePO fa;
+	TreeNodePO fatherNode;
 	ArrayList<TreeNodePO> sons = new ArrayList<TreeNodePO>();
 	
 	ArrayList<GoodsModelPO> goodsModels = new ArrayList<GoodsModelPO>();
 
-	public TreeNodePO(TreeNodeVO fa) {
-		type = "" + fa.getSons().size();
-		type_so_far += type;
+	public TreeNodePO(TreeNodePO fa) {
+		this(fa, "");
+		type = ""+(char)('A' + fa.getSons().size()-1);
+		
 	}
 	
 	
-	public TreeNodePO(TreeNodeVO fa2, String son_type) {
+	public TreeNodePO(TreeNodePO fa2, String son_type) {
 		type = son_type;
-		type_so_far += type;
+		type_so_far = fa2.getType_so_far() + type;
+		fa2.getSons().add(this);
+		this.fatherNode = fa2;
 	}
 
 
 	public TreeNodePO(String type) {
 		this.type = type;
+		this.type_so_far = type;
+		fatherNode = null;
 	}
 
 
@@ -69,11 +74,11 @@ public class TreeNodePO implements Serializable {
 	}
 
 	public TreeNodePO getFa() {
-		return fa;
+		return fatherNode;
 	}
 
 	public void setFa(TreeNodePO fa) {
-		this.fa = fa;
+		this.fatherNode = fa;
 	}
 
 	public ArrayList<TreeNodePO> getSons() {

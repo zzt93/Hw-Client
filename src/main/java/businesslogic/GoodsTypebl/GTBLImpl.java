@@ -20,7 +20,7 @@ public class GTBLImpl implements GTBLservice{
 		this.treeNodePOs = treeNodePOs;
 	}
 
-	public boolean add(TreeNodeVO fa, String son_type) throws Exception {
+	public boolean add(TreeNodePO fa, String son_type) throws Exception {
 		if (son_type == null) {
 			treeNodePOs.add(new TreeNodePO(fa));
 		} 
@@ -28,7 +28,7 @@ public class GTBLImpl implements GTBLservice{
 		return true;
 	}
 
-	public boolean update(TreeNodeVO tNode) throws Exception {
+	public boolean update(TreeNodePO tNode) throws Exception {
 		for (Iterator<TreeNodePO> iterator = treeNodePOs.iterator(); iterator.hasNext();) {
 			TreeNodePO treeNodePO = iterator.next();
 			if (treeNodePO.getType_so_far().equals(tNode.getType_so_far())
@@ -40,7 +40,7 @@ public class GTBLImpl implements GTBLservice{
 		return false;
 	}
 
-	public boolean delete(TreeNodeVO tNode) throws Exception {
+	public boolean delete(TreeNodePO tNode) throws Exception {
 		for (Iterator<TreeNodePO> iterator = treeNodePOs.iterator(); iterator.hasNext();) {
 			TreeNodePO treeNodePO = iterator.next();
 			if (treeNodePO.getType_so_far().equals(tNode.getType_so_far())
@@ -62,14 +62,11 @@ public class GTBLImpl implements GTBLservice{
 		return null;
 	}
 
-	public ArrayList<TreeNodeVO> show() throws Exception {
-		ArrayList<TreeNodeVO> res = new ArrayList<TreeNodeVO>();
-		for (TreeNodePO treeNodePO : treeNodePOs) {
-			res.add(new TreeNodeVO(treeNodePO));
-		}
-		return res;
+	public ArrayList<TreeNodePO> show() throws Exception {
+		return treeNodePOs;
 	}
 
+	
 	
 
 }

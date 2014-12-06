@@ -37,7 +37,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		try {
 			gl_GT_BLservice = new GL_GT_Impl(goodsListPO);
 		} catch (NullPointerException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 
@@ -156,8 +156,8 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		return res;
 	}
 
-	public boolean setSignal(GoodsVO goods) throws Exception {
-		boolean res = gl_signal_BLservice.setSignal(goods);
+	public boolean setSignal_name(GoodsVO goods) throws Exception {
+		boolean res = gl_signal_BLservice.setSignal_name(goods);
 		save();
 		return res; 
 	}

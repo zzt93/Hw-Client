@@ -1,6 +1,7 @@
 package po;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -11,17 +12,15 @@ import java.util.Date;
  */
 public class RepoReceiptPO extends ReceiptPO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	static long count = 0;
+
 	public RepoReceiptPO(String id, int a, int c) {
-		this.id = id;
+		receipt_id = " "+ count++;
+		this.goods_id = id;
 		actualNum = a;
 		statisticNum = c;
-		date = new Date().toString();
+		SimpleDateFormat format = new SimpleDateFormat();
+		date = format.format(new Date());
 		type = ReceiptType.REPORECEIPT;
 		super.type = ReceiptType.REPORECEIPT;
 		super.time=new DateGetter().toString();
@@ -31,8 +30,18 @@ public class RepoReceiptPO extends ReceiptPO implements Serializable {
 	int statisticNum;
 	ReceiptType type;
 	String date;
-	String id;
+	public String getDate() {
+		return date;
+	}
+	String goods_id;
+	public String getGoods_id() {
+		return goods_id;
+	}
+	String receipt_id;
 	
+	public String getReceipt_id() {
+		return receipt_id;
+	}
 	public int getaNum() {
 		return actualNum;
 	}

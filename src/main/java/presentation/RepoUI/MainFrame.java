@@ -76,7 +76,7 @@ public class MainFrame extends javax.swing.JFrame {
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		log_in1 = new Log_in();
+//		log_in1 = new Log_in();
 		first = new javax.swing.JPanel();
 		tab_pane = new javax.swing.JTabbedPane();
 		goods_panel = new javax.swing.JPanel();
@@ -122,7 +122,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new java.awt.CardLayout());
-		getContentPane().add(log_in1, "log_card");
+//		getContentPane().add(log_in1, "log_card");
 
 		first.setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -697,7 +697,7 @@ public class MainFrame extends javax.swing.JFrame {
 	private void repo_examinActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_repo_examinActionPerformed
 
 		
-		String[] data = new String[4];
+		String[] data = new String[6];
 
 		data[0] = (String) s_year.getSelectedItem() + "-"
 				+ s_mon.getSelectedItem() + "-" + s_day.getSelectedItem();
@@ -708,7 +708,9 @@ public class MainFrame extends javax.swing.JFrame {
 		
 		if (DEBUG) {
 			data[2] = "20";
-			data[3] = "20";
+			data[3] = "200";
+			data[4] = "5";
+			data[5] = "10";
 		} else {
 			try {
 				inout = repoExaminBLservice.countInOut(data[0], data[1]);
@@ -718,6 +720,8 @@ public class MainFrame extends javax.swing.JFrame {
 			}
 			data[2] = inout.getSumOfIn().toString();
 			data[3] = inout.getSumOfOut().toString();
+			data[4] = ""+inout.getSumOfIn_num();
+			data[5] = ""+inout.getSumOfOut_num();
 		}
 		// show a dialog
 		final Repo_examin_dialog dialog = new Repo_examin_dialog(frame, true,
@@ -738,7 +742,12 @@ public class MainFrame extends javax.swing.JFrame {
 	}// GEN-LAST:event_repo_receActionPerformed
 
 	private void exportActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exportActionPerformed
-		ArrayList<RepoPO> temp = repoCheckBLservice.getCheckRes();
+		ArrayList<RepoPO> temp ;
+		if (MainFrame.DEBUG) {
+			temp = new ArrayList<RepoPO>();
+		} else {
+			temp = repoCheckBLservice.getCheckRes();
+		}
 		int size = temp.size();
 		String[] dates = new String[size];
 		int i = 0;
@@ -903,6 +912,8 @@ public class MainFrame extends javax.swing.JFrame {
 		}
 		// </editor-fold>
 
+		
+		
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -930,7 +941,6 @@ public class MainFrame extends javax.swing.JFrame {
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel3;
 	private javax.swing.JPanel jPanel4;
-	private Log_in log_in1;
 	private javax.swing.JButton log_out;
 	private javax.swing.JLayeredPane others;
 	private javax.swing.JPanel rece_panel;
