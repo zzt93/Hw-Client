@@ -30,8 +30,7 @@ public class LoggingPanel extends JPanel {
 	AdminController adminController;
 	ArrayList<UserPO> userList;
 
-
-	Image image = new ImageIcon("Log_in.jpg")
+	Image image = new ImageIcon(getClass().getResource("/Log_in.jpg"))
 			.getImage();
 
 	public LoggingPanel() {
