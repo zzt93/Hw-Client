@@ -131,8 +131,11 @@ public class DateChooser extends JPanel {
 			}
 		});
 		this.setBackground(Color.WHITE);
+		
 		this.add(showDate, BorderLayout.CENTER);
-		this.setPreferredSize(new Dimension(90, 25));
+		
+		this.setPreferredSize(new Dimension(showDate.getHeight(), showDate.getWidth()));
+		//this.setPreferredSize(null);
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		showDate.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent me) {
