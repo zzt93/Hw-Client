@@ -65,4 +65,6 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
     public int getId() {
         return id;
     }
+
+
 }
