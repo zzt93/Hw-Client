@@ -596,7 +596,11 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 
 			JOptionPane.showMessageDialog(MainFrame.frame, e
 					+ ": fail to produce repo receipt");
-			vaild = false;
+			if (MainFrame.DEBUG) {
+				
+			} else {
+				vaild = false;
+			}
 		}
 		//not vaild input 
 		if (!vaild){
