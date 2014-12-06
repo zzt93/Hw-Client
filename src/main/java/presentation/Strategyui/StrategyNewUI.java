@@ -16,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -125,8 +124,9 @@ public class StrategyNewUI {
 		lblHint.setBounds(10, 366, 386, 15);
 		newFrame.getContentPane().add(lblHint);
 
+		//FIXME日期的大小不好调整
 		startTimeText = new JTextField("单击选择日期");
-		startTimeText.setBounds(184, 191, 109, 21);
+		startTimeText.setBounds(184, 191, 109, 11);
 		// newFrame.getContentPane().add(startTimeText);
 		// startTimeText.setColumns(10);
 
@@ -135,14 +135,14 @@ public class StrategyNewUI {
 		newFrame.getContentPane().add(labelTo);
 
 		endTimeText = new JTextField("单击选择日期");
-		endTimeText.setBounds(357, 191, 128, 21);
+		endTimeText.setBounds(357, 191, 128, 11);
 		// newFrame.getContentPane().add(endTimeText);
 		// endTimeText.setColumns(10);
 
 		final DateChooser startTimeDate = DateChooser.getInstance("yyyy-MM-dd");
 		final DateChooser endTimeDate = DateChooser.getInstance("yyyy-MM-dd");
-		startTimeDate.setBounds(184, 191, 109, 21);
-		endTimeDate.setBounds(357, 191, 128, 21);
+		startTimeDate.setBounds(184, 191, 89, 31);
+		endTimeDate.setBounds(357, 191, 88, 31);
 
 		startTimeDate.register(startTimeText);
 		endTimeDate.register(endTimeText);
@@ -183,7 +183,11 @@ public class StrategyNewUI {
 				
 				 snb.newStrategy(c, t, tp); if(!snb.examine()){
 				  lblHint.setText("输入折扣价格或时间有误，请检查"); }else{
-				 
+					  if(snb.confirm()){
+						  JOptionPane.showMessageDialog(null, "成功");
+					  }else{
+						  JOptionPane.showMessageDialog(null, "失败了>o<");
+					  }
 				 }
 				 
 			}
@@ -224,7 +228,7 @@ public class StrategyNewUI {
 	void insert(String[] item, GoodsModelPO po) {
 		item[0] = po.getId();
 		item[1] = po.getName();
-		// item[2] = po.getModel();
+		 item[2] = po.getModel();
 
 	}
 
