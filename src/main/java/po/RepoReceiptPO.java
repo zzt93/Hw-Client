@@ -19,7 +19,7 @@ public class RepoReceiptPO extends ReceiptPO implements Serializable {
 		this.goods_id = id;
 		actualNum = a;
 		statisticNum = c;
-		SimpleDateFormat format = new SimpleDateFormat();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		date = format.format(new Date());
 		type = ReceiptType.REPORECEIPT;
 		super.type = ReceiptType.REPORECEIPT;

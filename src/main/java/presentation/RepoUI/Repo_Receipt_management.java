@@ -7,8 +7,10 @@ import java.rmi.RemoteException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import vo.GoodsVO;
+import vo.RepoReceiptVO;
 import businesslogic.RepoReceiptbl.RepoReceiptBLImpl;
 
 /*
@@ -27,6 +29,8 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 	 */
 
 	RepoReceiptBLImpl repoReceiptBLImpl = null;
+	private JPanel show_buttons_panel;
+	private Repo_rece repo_rece1;
 
 	public Repo_Receipt_management() {
 		try {
@@ -89,7 +93,18 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 		rece_name = new javax.swing.JComboBox<String>();
 		back = new javax.swing.JButton();
 		rece_panel = new javax.swing.JPanel();
-
+		show_buttons_panel = new javax.swing.JPanel();
+		RepoReceiptVO template = null;
+		if (MainFrame.DEBUG) {
+			template = new RepoReceiptVO();
+			template.actualNum = 10;
+			template.statisticNum = 20;
+			template.number = "a1";
+			template.receipt_id = "repo1";
+			template.time = "2014-12-3";
+		}
+		repo_rece1 = new Repo_rece(template);//TODO
+		
 		setPreferredSize(new java.awt.Dimension(800, 600));
 
 		Repo_navigator.setFloatable(false);
@@ -415,7 +430,10 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 		change.add(make_repo_rece, "make");
 
 		repo_rece_list.setPreferredSize(new java.awt.Dimension(524, 367));
-
+		
+		rece_panel.setLayout(new javax.swing.BoxLayout(rece_panel, javax.swing.BoxLayout.LINE_AXIS));
+        rece_panel.add(repo_rece1);
+        
 		if (MainFrame.DEBUG) {
 			rece_name.setModel(new javax.swing.DefaultComboBoxModel<String>(
 					new String[] { "repo1", "repo2", "repo3" }));
@@ -427,7 +445,23 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				// TODO
+				int index = rece_name.getSelectedIndex();
+				RepoReceiptVO template;
+				if (MainFrame.DEBUG) {
+					template = new RepoReceiptVO();
+					template.actualNum = 100;
+					template.statisticNum = 20;
+					template.number = "a1";
+					template.receipt_id = "repo3";
+					template.time = "2014-12-3";
+				} else {
+					template = repoReceiptBLImpl.show_a_RepoReceiptVO(index);
+				}
+				rece_panel.removeAll();
+				rece_panel.add(new Repo_rece(template));
+				rece_panel.repaint();
+				rece_panel.revalidate();
 			}
 		});
 
@@ -438,35 +472,19 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			}
 		});
 
-		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(
-				rece_panel);
-		rece_panel.setLayout(jPanel4Layout);
-		jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 492,
-				Short.MAX_VALUE));
-		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 0,
-				Short.MAX_VALUE));
-
-		javax.swing.GroupLayout repo_rece_listLayout = new javax.swing.GroupLayout(
-				repo_rece_list);
-		repo_rece_list.setLayout(repo_rece_listLayout);
-		repo_rece_listLayout
-				.setHorizontalGroup(repo_rece_listLayout
+		javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(
+				show_buttons_panel);
+		show_buttons_panel.setLayout(jPanel5Layout);
+		jPanel5Layout
+				.setHorizontalGroup(jPanel5Layout
 						.createParallelGroup(
 								javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
-								repo_rece_listLayout
+								jPanel5Layout
 										.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(
-												rece_panel,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(59, 59, 59)
 										.addGroup(
-												repo_rece_listLayout
+												jPanel5Layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
 														.addComponent(
@@ -475,20 +493,41 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(back))
-										.addContainerGap(161, Short.MAX_VALUE)));
-		repo_rece_listLayout.setVerticalGroup(repo_rece_listLayout
+										.addContainerGap()));
+		jPanel5Layout.setVerticalGroup(jPanel5Layout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanel5Layout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(back)
+						.addGap(38, 38, 38)
+						.addComponent(rece_name,
+								javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
+
+		javax.swing.GroupLayout repo_rece_listLayout = new javax.swing.GroupLayout(
+				repo_rece_list);
+		repo_rece_list.setLayout(repo_rece_listLayout);
+		repo_rece_listLayout.setHorizontalGroup(repo_rece_listLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
 						repo_rece_listLayout
 								.createSequentialGroup()
-								.addGap(141, 141, 141)
-								.addComponent(back)
-								.addGap(38, 38, 38)
-								.addComponent(rece_name,
+								.addContainerGap()
+								.addComponent(rece_panel,
 										javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(237, Short.MAX_VALUE))
+								.addGap(52, 52, 52)
+								.addComponent(show_buttons_panel,
+										javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(137, Short.MAX_VALUE)));
+		repo_rece_listLayout.setVerticalGroup(repo_rece_listLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
 						repo_rece_listLayout
 								.createSequentialGroup()
@@ -496,7 +535,18 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 								.addComponent(rece_panel,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE).addContainerGap()));
+										Short.MAX_VALUE).addContainerGap())
+				.addGroup(
+						repo_rece_listLayout
+								.createSequentialGroup()
+								.addGap(141, 141, 141)
+								.addComponent(show_buttons_panel,
+										javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
 
 		change.add(repo_rece_list, "show");
 
@@ -569,9 +619,16 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 	}// GEN-LAST:event_log_outActionPerformed
 
 	private void show_receActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_show_receActionPerformed
-
+		if (MainFrame.DEBUG) {
+			rece_name.setModel(new javax.swing.DefaultComboBoxModel<String>(
+					new String[] { "repo1", "repo2", "repo3", "test" }));
+		} else {
+			rece_name.setModel(new javax.swing.DefaultComboBoxModel<String>(
+					repoReceiptBLImpl.receipt_ids()));
+		}
 		CardLayout card = (CardLayout) change.getLayout();
 		card.show(change, "show");
+
 	}// GEN-LAST:event_show_receActionPerformed
 
 	private void backActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backActionPerformed
@@ -597,13 +654,13 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			JOptionPane.showMessageDialog(MainFrame.frame, e
 					+ ": fail to produce repo receipt");
 			if (MainFrame.DEBUG) {
-				
+
 			} else {
 				vaild = false;
 			}
 		}
-		//not vaild input 
-		if (!vaild){
+		// not vaild input
+		if (!vaild) {
 			title.setText(" ");
 			c_amount.setText(" ");
 			id.setText(" ");

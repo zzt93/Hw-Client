@@ -104,7 +104,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 		GoodsReceiptVO template = new GoodsReceiptVO(tempGoodsVOs, "repo user");
 		show_table_model = new Goods_receipt_table_model(new Object[0][], gift_table_col);
 		
-		goods_rece2 = new Goods_rece(template, show_table_model);
+		goods_rece = new Goods_rece(template, show_table_model);
 
 		rece_buttons = new javax.swing.JPanel();
 
@@ -113,7 +113,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 			goods_rece_List = new javax.swing.JComboBox<String>(new String[] {
 					"Light1 a1 10", "Light2 a2 10", "Light3 a3 10" });
 		} else {
-			goods_receipt_list = receiptBLImpl.receipt_ids();
+			goods_receipt_list = receiptBLImpl.show_goods_rece_id();
 			if (goods_receipt_list == null) {
 				JOptionPane.showMessageDialog(MainFrame.frame, "No goods receipt now");
 			} else {
@@ -127,13 +127,19 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = goods_rece_List.getSelectedIndex();
-		//		back.removeAll();
+				
 				GoodsReceiptVO temp ;
 				if (MainFrame.DEBUG) {
 					temp = goodsReceiptVO;
+					temp.user = "....";
 				} else {
 					temp = receiptBLImpl.show_a_GoodsReceiptVO(index);
 				}
+				if (temp == null) {
+					JOptionPane.showMessageDialog(MainFrame.frame, "no repo receipt");
+					return;
+				} 
+				back.removeAll();
 				back.add(new Goods_rece(temp, show_table_model));
 				back.repaint();
 				back.revalidate();
@@ -419,29 +425,9 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGap(0, 98, Short.MAX_VALUE));
 
-		javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
-		back.setLayout(backLayout);
-		backLayout.setHorizontalGroup(backLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				javax.swing.GroupLayout.Alignment.TRAILING,
-				backLayout
-						.createSequentialGroup()
-						.addContainerGap(41, Short.MAX_VALUE)
-						.addComponent(goods_rece2,
-								javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(23, 23, 23)));
-		backLayout.setVerticalGroup(backLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				javax.swing.GroupLayout.Alignment.TRAILING,
-				backLayout
-						.createSequentialGroup()
-						.addGap(0, 38, Short.MAX_VALUE)
-						.addComponent(goods_rece2,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 378,
-								javax.swing.GroupLayout.PREFERRED_SIZE)));
-
+		back.setLayout(new javax.swing.BoxLayout(back, javax.swing.BoxLayout.LINE_AXIS));
+        back.add(goods_rece);
+        
 //		goods_rece_List.setSelectedIndex(0);
 
 		back_make.setText("返回");
@@ -674,7 +660,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 		//data for show goods receipt
 		Vector<String> col = new Vector<String>(Arrays.asList(gift_table_col));
 		show_table_model = new Goods_receipt_table_model(dataVector, col);
-		goods_rece2.set_table_model(show_table_model);
+		goods_rece.set_table_model(show_table_model);
 		// clear the data in table
 		((DefaultTableModel) gift_table.getModel()).setRowCount(0);
 	}// GEN-LAST:event_produceActionPerformed
@@ -694,7 +680,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 	private javax.swing.JTable gift_table;
 	private javax.swing.JComboBox<String> goods_id;
 	private javax.swing.JButton goods_navi;
-	private Goods_rece goods_rece2;
+	private Goods_rece goods_rece;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JScrollPane jScrollPane1;

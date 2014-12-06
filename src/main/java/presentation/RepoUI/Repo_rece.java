@@ -1,5 +1,7 @@
 package presentation.RepoUI;
 
+import vo.RepoReceiptVO;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,7 +20,9 @@ public class Repo_rece extends javax.swing.JPanel {
 	/**
      * Creates new form recePanel
      */
-    public Repo_rece() {
+	RepoReceiptVO receiptVO;
+    public Repo_rece(RepoReceiptVO receiptVO) {
+    	this.receiptVO = receiptVO;
         initComponents();
     }
 
@@ -51,19 +55,19 @@ public class Repo_rece extends javax.swing.JPanel {
 
         jLabel6.setText("统计数量：");
 
-        goods_id.setText("xxx");
+        goods_id.setText(receiptVO.number);
 
-        c_amount.setText("xxx");
+        c_amount.setText(""+receiptVO.actualNum);
 
-        s_amount.setText("xxx");
+        s_amount.setText(""+receiptVO.statisticNum);
 
         jLabel1.setText("库单据id：");
 
-        jLabel2.setText("xxx");
+        jLabel2.setText(receiptVO.receipt_id);
 
         jLabel7.setText("日期：");
 
-        jLabel8.setText("xxx");
+        jLabel8.setText(receiptVO.time);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

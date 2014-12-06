@@ -12,9 +12,9 @@ import java.util.Vector;
 public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	static long count = 0;
 	
-	String id;
-	String date;
-	String user;
+	public String id;
+	public String date;
+	public String user;
 	
 	Vector<GoodsVO> goodsVOs;
 	double sumOfGifts;

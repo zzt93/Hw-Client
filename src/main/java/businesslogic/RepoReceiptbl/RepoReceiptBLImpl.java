@@ -55,15 +55,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	 * businesslogicservice.RepoReceiptblservice.RepoReceBLservice#showRepoReceipt
 	 * ()
 	 */
-	public ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception {//TODO
-		ArrayList<RepoReceiptPO> temp = repoReceiptDataService.getRepoReceipts()
-				.getObj();
-		ArrayList<RepoReceiptVO> res = new ArrayList<RepoReceiptVO>();
-		for (RepoReceiptPO repoReceiptPO : temp) {
-			res.add(new RepoReceiptVO(repoReceiptPO));
-		}
-		return res;
-	}
+	
 
 	public String[] receipt_ids(){
 		String[] res = new String[repoReceiptPOs.size()];
@@ -73,17 +65,13 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		}
 		return  res;
 	}
-	@Override
-	public ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception {
-		ArrayList<GoodsReceiptVO> res = new ArrayList<GoodsReceiptVO>();
-		for (GoodsReceiptPO goodsReceiptPO : goodsReceiptPOs) {
-			res.add(goodsReceiptPO.getGoodsReceiptVO());//TODO
-		}
-		return res;
-	}
-
+	
 	public GoodsReceiptVO show_a_GoodsReceiptVO(int i){
 		GoodsReceiptVO res = new GoodsReceiptVO(goodsReceiptPOs.get(i));
+		return res;
+	}
+	public RepoReceiptVO show_a_RepoReceiptVO(int i){
+		RepoReceiptVO res = new RepoReceiptVO(repoReceiptPOs.get(i));
 		return res;
 	}
 	public String[] show_goods_rece_id(){
@@ -91,6 +79,91 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		int i = 0;
 		for (GoodsReceiptPO goodsReceiptVO : goodsReceiptPOs) {
 			res[i++] = goodsReceiptVO.getId();
+		}
+		return res;
+	}
+		
+	
+
+	/*
+	 * for account and ui(non-Javadoc)
+	 * 
+	 * @see businesslogicservice.RepoReceiptblservice.RepoReceBLservice#
+	 * produceRepoReceipt(java.util.ArrayList)
+	 */
+	public String produceRepoReceipt(GoodsVO goods)
+			throws Exception {
+		int amount = gl_controller.amount(new GoodsPO(goods));
+		if (amount == goods.amount) {
+			return " ";
+		} 
+		repoReceiptDataService.insert(new RepoReceiptPO(goods.id, goods.amount,
+				amount));
+		String type = "";
+		if (amount > goods.amount) {
+			type = "报溢单 "+ amount ;
+		} else {
+			type = "报损单 "+ amount ;
+		}
+		return type;
+	}
+
+	@Override
+	public boolean produceGoodsReceipt(GoodsReceiptVO goodsVOs)
+			throws Exception {
+		repoReceiptDataService.insert(new GoodsReceiptPO(goodsVOs));
+		return true;
+	}
+
+	
+
+	
+	//TODO
+	public ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception {//TODO
+		ArrayList<RepoReceiptPO> temp = repoReceiptDataService.getRepoReceipts()
+				.getObj();
+		ArrayList<RepoReceiptVO> res = new ArrayList<RepoReceiptVO>();
+		for (RepoReceiptPO repoReceiptPO : temp) {
+			res.add(new RepoReceiptVO(repoReceiptPO));
+		}
+		return res;
+	}
+	
+	@Override
+	public ArrayList<GoodsModelVO> showGoodsList() throws Exception {
+		ArrayList<GoodsModelVO> res = new ArrayList<GoodsModelVO>();
+
+		HashMap<String, GoodsModelPO> goodsModels = gl_controller
+				.getGoodsModelPOs();
+		for (GoodsModelPO goodsModelPO : goodsModels.values()) {
+			if (goodsModelPO.getAmount() > 0) {
+				res.add(new GoodsModelVO(goodsModelPO));
+			}
+		}
+
+		return res;
+	}
+	
+	@Override
+	public ArrayList<GoodsModelVO> showGiftList() throws Exception {
+		ArrayList<GoodsModelVO> res = new ArrayList<GoodsModelVO>();
+
+		HashMap<String, GoodsModelPO> goodsModels = gl_controller
+				.getGoodsModelPOs();
+		for (GoodsModelPO goodsModelPO : goodsModels.values()) {
+			if (goodsModelPO.isGift()) {
+				res.add(new GoodsModelVO(goodsModelPO));
+			}
+		}
+
+		return res;
+	}
+
+	@Override
+	public ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception {
+		ArrayList<GoodsReceiptVO> res = new ArrayList<GoodsReceiptVO>();
+		for (GoodsReceiptPO goodsReceiptPO : goodsReceiptPOs) {
+			res.add(goodsReceiptPO.getGoodsReceiptVO());//TODO
 		}
 		return res;
 	}
@@ -109,73 +182,5 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		return res;
 	}
 
-	/*
-	 * update the goodslist etcetera (non-Javadoc)
-	 * 
-	 * @see
-	 * businesslogicservice.RepoReceiptblservice.RepoReceBLservice#receive_receipt
-	 * (po.ReceiptPO)
-	 */
-	
-
-	/*
-	 * for account and ui(non-Javadoc)
-	 * 
-	 * @see businesslogicservice.RepoReceiptblservice.RepoReceBLservice#
-	 * produceRepoReceipt(java.util.ArrayList)
-	 */
-	public String produceRepoReceipt(GoodsVO goods)
-			throws Exception {
-		int amount = gl_controller.amount(new GoodsPO(goods));
-		if (amount == goods.amount) {
-			return " ";
-		} 
-		repoReceiptDataService.insert(new RepoReceiptPO(goods.id, goods.amount,
-				0));
-		String type = "";
-		if (amount > goods.amount) {
-			type = "报溢单 "+ amount ;
-		} else {
-			type = "报损单 "+ amount ;
-		}
-		return type;
-	}
-
-	@Override
-	public boolean produceGoodsReceipt(GoodsReceiptVO goodsVOs)
-			throws Exception {
-		repoReceiptDataService.insert(new GoodsReceiptPO(goodsVOs));
-		return true;
-	}
-
-	@Override
-	public ArrayList<GoodsModelVO> showGiftList() throws Exception {
-		ArrayList<GoodsModelVO> res = new ArrayList<GoodsModelVO>();
-
-		HashMap<String, GoodsModelPO> goodsModels = gl_controller
-				.getGoodsModelPOs();
-		for (GoodsModelPO goodsModelPO : goodsModels.values()) {
-			if (goodsModelPO.isGift()) {
-				res.add(new GoodsModelVO(goodsModelPO));
-			}
-		}
-
-		return res;
-	}
-
-	@Override
-	public ArrayList<GoodsModelVO> showGoodsList() throws Exception {
-		ArrayList<GoodsModelVO> res = new ArrayList<GoodsModelVO>();
-
-		HashMap<String, GoodsModelPO> goodsModels = gl_controller
-				.getGoodsModelPOs();
-		for (GoodsModelPO goodsModelPO : goodsModels.values()) {
-			if (goodsModelPO.getAmount() > 0) {
-				res.add(new GoodsModelVO(goodsModelPO));
-			}
-		}
-
-		return res;
-	}
 
 }
