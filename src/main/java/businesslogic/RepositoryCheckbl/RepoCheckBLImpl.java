@@ -49,7 +49,5 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 		checkRes = new RepoCheckDataImpl().getRepo().getObj();
 	}
 
-	public void synchronize() throws Exception {
-		repoCheckDataService.initialize(checkRes);
-	}
+	
 }

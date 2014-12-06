@@ -56,7 +56,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	 * ()
 	 */
 	public ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception {//TODO
-		ArrayList<RepoReceiptPO> temp = repoReceiptDataService.ifind(null)
+		ArrayList<RepoReceiptPO> temp = repoReceiptDataService.getRepoReceipts()
 				.getObj();
 		ArrayList<RepoReceiptVO> res = new ArrayList<RepoReceiptVO>();
 		for (RepoReceiptPO repoReceiptPO : temp) {
@@ -116,30 +116,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	 * businesslogicservice.RepoReceiptblservice.RepoReceBLservice#receive_receipt
 	 * (po.ReceiptPO)
 	 */
-	public void receive_receipt(ReceiptPO po) throws Exception {
-		if (po.statement == ReceiptState.disapprove
-				|| po.type != ReceiptType.GOODSRECEIPT
-				|| po.type != ReceiptType.REPORECEIPT) {
-			return;
-		}
-		if (po.type == ReceiptType.GOODSRECEIPT) {
-			GoodsReceiptPO temp = (GoodsReceiptPO) po;
-			for (GoodsPO goodsPO : temp.getGoodsPOs()) {
-				gl_controller.reduAmount(new GoodsVO(goodsPO));
-			}
-		} else {
-			RepoReceiptPO temp = (RepoReceiptPO) po;
-			int num = temp.getaNum() - temp.getcNum();
-			if (num > 0) {
-				gl_controller.addAmount(new GoodsVO(temp.getGoods_id(), num));
-			} else if (temp.getaNum() - temp.getcNum() < 0) {
-				gl_controller.reduAmount(new GoodsVO(temp.getGoods_id(), num));
-			} else {
-				System.err.println("Something wrong in the repo receipt");
-				assert (false);
-			}
-		}
-	}
+	
 
 	/*
 	 * for account and ui(non-Javadoc)

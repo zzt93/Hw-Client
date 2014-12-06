@@ -9,17 +9,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import org.apache.xmlbeans.StringEnumAbstractBase.Table;
 
 import po.GoodsModelPO;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 import businesslogic.GoodsListbl.GL_controller;
-import businesslogic.GoodsTypebl.GT_GL_BLImpl;
 import businesslogic.GoodsTypebl.GT_controller;
 import businesslogicservice.GoodsTypeblservice.GT_GL_BLservice;
 
@@ -186,7 +183,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 																				// is
 																				// valid
 					try {
-						gl_controller.setSignal_name(temp);
+						gl_controller.set_signal_name(temp);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

@@ -6,17 +6,13 @@ import dataservice.GoodsListdataservice.GoodsListDataService;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
-import po.RepoReceiptPO;
-import presentation.RepoUI.MainFrame;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
-import vo.SignalVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JOptionPane;
 
 public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		 GL_receipt_BLservice, GL_signal_BLservice, GL_stock_BLservice, GLBLservice {
@@ -68,9 +64,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		this.gt_controller = gt_controller;
 	}
 
-	public boolean save() throws RemoteException {
-		return goodsListDataService.saveGoodsList(goodsListPO).getObj();
-	}
+	
 	
 	public void refresh() throws RemoteException {
 		goodsListPO = new GoodsListDataImpl(null).getGoodsList().getObj();
@@ -79,7 +73,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	// for glblservice
 	public boolean delete(GoodsModelVO goods) throws Exception {
 		boolean res = glbLservice.delete(goods);
-		save();
+		goodsListDataService.delete(new GoodsModelPO(goods));
 		return res;
 	}
 
@@ -108,83 +102,39 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 
 	public HashMap<String, ArrayList<GoodsVO>> batch_statistic() throws Exception {
 		HashMap<String, ArrayList<GoodsVO>> res = glbLservice.batch_statistic();
-		save();
 		return res;
 	}
 
 	//for sale and stock
 	public boolean checkGoodsExists(GoodsVO goodsVO) throws Exception {
 		boolean res = gl_stock_BLservice.checkGoodsExists(goodsVO);
-		save();
 		return res;
 	}
 
-	public boolean addAmount(GoodsVO goods) throws Exception {
-		boolean res = gl_stock_BLservice.addAmount(goods);
-		save();
-		return res;
-	}
-
-	public boolean addAmount(ArrayList<GoodsVO> goodsArrayList)
-			throws Exception {
-		boolean res = gl_stock_BLservice.addAmount(goodsArrayList);
-		save();
-		return res;
-	}
-
-	public boolean reduAmount(GoodsVO goods) throws Exception {
-		boolean res = gl_stock_BLservice.reduAmount(goods);
-		save();
-		return res;
-	}
-
-	public boolean reduAmount(ArrayList<GoodsVO> goodsArrayList)
-			throws Exception {
-		boolean res = gl_stock_BLservice.reduAmount(goodsArrayList);
-		save();
-		return res;
-	}
-
-	
+		
 	/*
 	 * for signal(non-Javadoc)
 	 * @see businesslogicservice.GoodsListblservice.GL_signal_BLservice#checkSignalModifiable(vo.GoodsVO)
 	 */
 	public boolean checkSignalModifiable(GoodsVO goodsVO) throws Exception {
 		boolean res = gl_signal_BLservice.checkSignalModifiable(goodsVO);
-		save();
 		return res;
 	}
 
-	public boolean setSignal_name(GoodsVO goods) throws Exception {
-		boolean res = gl_signal_BLservice.setSignal_name(goods);
-		save();
+	public GoodsModelPO set_signal_name(GoodsVO goods) throws Exception {
+		GoodsModelPO res = gl_signal_BLservice.set_signal_name(goods);
+		goodsListDataService.update(res);
 		return res; 
 	}
 
 	public int getSignal(GoodsVO goods) throws Exception {
 		int res = gl_signal_BLservice.getSignal(goods);
-		save();
 		return res;
 	}
 
-	public SignalVO sendSignal(int amount, int signal, String id) throws Exception {
-		SignalVO res = gl_signal_BLservice.sendSignal(amount, signal, id);
-		save();
-		return res;
-	}
-
-	//update is to check whether is lower than signal value
-	//when stock or sales happen
-	public boolean update_when_sale(GoodsVO goodsVO) throws Exception {
-		boolean res = gl_signal_BLservice.update_when_sale(null);
-		save();
-		return res;
-	}
-
+	
 	public boolean check_signal(GoodsVO goods) throws Exception {
 		boolean res = gl_stock_BLservice.checkGoodsExists(goods);
-		save();
 		return res;
 	}
 	
@@ -194,24 +144,18 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	 */
 	public boolean check_rece(GoodsPO goods) throws Exception {
 		boolean res = gl_stock_BLservice.checkGoodsExists(new GoodsVO(goods));
-		save();
 		return res;
 	}
 
 	public int amount(GoodsPO goods) throws Exception {
 		int res = gl_receipt_BLservice.amount(goods);
-		save();
 		return res;
 	}
 
-	public void receiveRece(RepoReceiptPO receiptPO) throws Exception {
-		gl_receipt_BLservice.receiveRece(receiptPO);
-		save();
-	}
+
 
 	public GoodsModelPO getGoodsModelPO(String id) throws Exception {
 		GoodsModelPO res = gl_receipt_BLservice.getGoodsModelPO(id);
-		save();
 		return res;
 	}
 	
@@ -219,7 +163,6 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	
 	public boolean checkEverHas(String info) throws Exception {
 		boolean res = gl_GT_BLservice.checkEverHas(info);
-		save();
 		return res;
 	}
 
@@ -228,12 +171,6 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	}
 
 	
-	// for account
-	public GoodsListPO initialize(String account) throws Exception {
-		goodsListPO = gl_account_BLservice.initialize(account);
-		save();
-		return goodsListPO;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -255,15 +192,8 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		return res;
 	}
 
-	public String getDatabase(String account) throws Exception {
-		String res = gl_account_BLservice.getDatabase(account);
-		save();
-		return res;
-	}
-
 	public HashMap<String, GoodsModelVO> getGoodsModelVOs() throws Exception {
 		HashMap<String, GoodsModelVO> res = glbLservice.getGoodsModelVOs();
-		save();
 		return res;
 	}
 

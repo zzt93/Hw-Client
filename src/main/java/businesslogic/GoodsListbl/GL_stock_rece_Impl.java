@@ -5,7 +5,6 @@ import businesslogicservice.GoodsListblservice.GL_stock_BLservice;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
-import po.RepoReceiptPO;
 import vo.GoodsVO;
 
 import java.util.ArrayList;
@@ -44,105 +43,100 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice,
 		return !(temp.get(goodsVO.id) == null);
 	}
 
-	public boolean addAmount(GoodsVO goods) throws Exception {
-		if (!checkGoodsExists(goods)) {
-			return false;
-		}
-		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO
-				.getGoodsModels();
-		HashMap<String, ArrayList<GoodsPO>> tempGoods = goodsListPO.getGoods();
-		// update the records of stock and sale
-		ArrayList<GoodsPO> batchGoods = new ArrayList<GoodsPO>();
-		batchGoods.add(new GoodsPO(goods));
-		tempGoods.put(goods.id, batchGoods);
-		// update the goods model: amount, everHas, lastInPrice
-		GoodsModelPO tempGoodsModelPO = tempGoodsModelPOs.get(goods.id);
-		tempGoodsModelPO.setAmount(tempGoodsModelPO.getAmount() + goods.amount);
-		tempGoodsModelPO.setEverHas(true);
-		tempGoodsModelPO.setLastInPrice(goods.inPrice);
-		return true;
+//	public boolean addAmount(GoodsVO goods) throws Exception {
+//		if (!checkGoodsExists(goods)) {
+//			return false;
+//		}
+//		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO
+//				.getGoodsModels();
+//		HashMap<String, ArrayList<GoodsPO>> tempGoods = goodsListPO.getGoods();
+//		// update the records of stock and sale
+//		ArrayList<GoodsPO> batchGoods = new ArrayList<GoodsPO>();
+//		batchGoods.add(new GoodsPO(goods));
+//		tempGoods.put(goods.id, batchGoods);
+//		// update the goods model: amount, everHas, lastInPrice
+//		GoodsModelPO tempGoodsModelPO = tempGoodsModelPOs.get(goods.id);
+//		tempGoodsModelPO.setAmount(tempGoodsModelPO.getAmount() + goods.amount);
+//		tempGoodsModelPO.setEverHas(true);
+//		tempGoodsModelPO.setLastInPrice(goods.inPrice);
+//		return true;
+//
+//	}
+//
+//	public boolean addAmount(ArrayList<GoodsVO> goodsArrayList)
+//			throws Exception {
+//		boolean testAdd = false;
+//		for (GoodsVO goodsVO : goodsArrayList) {
+//			testAdd = addAmount(goodsVO);
+//			if (!testAdd) {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
+//
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see
+//	 * businesslogicservice.GoodsListblservice.GL_stock_BLservice#reduAmount
+//	 * (vo.GoodsVO) return false : no such goods or no enough goods to sell
+//	 */
+//	public boolean reduAmount(GoodsVO goods) throws Exception {
+//		if (!checkGoodsExists(goods)) {
+//			return false;
+//		}
+//		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO
+//				.getGoodsModels();
+//		HashMap<String, ArrayList<GoodsPO>> tempGoods = goodsListPO.getGoods();
+//
+//		GoodsModelPO tempGoodsModelPO = tempGoodsModelPOs.get(goods.id);
+//		ArrayList<GoodsPO> goodsPOs = tempGoods.get(goods.id);
+//		if (tempGoodsModelPO.getAmount() < goods.amount) {
+//			return false;
+//		}
+//		// update the records of stock and sale
+//		for (GoodsPO goodsPO : goodsPOs) {
+//			int temAmout = goodsPO.getAmount();
+//			if (temAmout >= goods.amount) {
+//				goodsPO.setAmount(temAmout - goods.amount);
+//			} else {
+//				goodsPO.setAmount(0);
+//				goods.amount -= temAmout;
+//			}
+//		}
+//
+//		// update the goods model: amount, lastInPrice
+//		tempGoodsModelPO.setAmount(tempGoodsModelPO.getAmount() - goods.amount);
+//		tempGoodsModelPO.setLastOutPrice(goods.outPrice);
+//
+//		// notify the bl_signal
+//		new GL_signal_Impl(goodsListPO).update_when_sale(goods);
+//		return true;
+//	}
+//
+//	public boolean reduAmount(ArrayList<GoodsVO> goodsArrayList)
+//			throws Exception {
+//		boolean testRedu = false;
+//		for (GoodsVO goodsVO : goodsArrayList) {
+//			testRedu = reduAmount(goodsVO);
+//			if (!testRedu) {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
 
-	}
-
-	public boolean addAmount(ArrayList<GoodsVO> goodsArrayList)
-			throws Exception {
-		boolean testAdd = false;
-		for (GoodsVO goodsVO : goodsArrayList) {
-			testAdd = addAmount(goodsVO);
-			if (!testAdd) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * businesslogicservice.GoodsListblservice.GL_stock_BLservice#reduAmount
-	 * (vo.GoodsVO) return false : no such goods or no enough goods to sell
-	 */
-	public boolean reduAmount(GoodsVO goods) throws Exception {
-		if (!checkGoodsExists(goods)) {
-			return false;
-		}
-		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO
-				.getGoodsModels();
-		HashMap<String, ArrayList<GoodsPO>> tempGoods = goodsListPO.getGoods();
-
-		GoodsModelPO tempGoodsModelPO = tempGoodsModelPOs.get(goods.id);
-		ArrayList<GoodsPO> goodsPOs = tempGoods.get(goods.id);
-		if (tempGoodsModelPO.getAmount() < goods.amount) {
-			return false;
-		}
-		// update the records of stock and sale
-		for (GoodsPO goodsPO : goodsPOs) {
-			int temAmout = goodsPO.getAmount();
-			if (temAmout >= goods.amount) {
-				goodsPO.setAmount(temAmout - goods.amount);
-			} else {
-				goodsPO.setAmount(0);
-				goods.amount -= temAmout;
-			}
-		}
-
-		// update the goods model: amount, lastInPrice
-		tempGoodsModelPO.setAmount(tempGoodsModelPO.getAmount() - goods.amount);
-		tempGoodsModelPO.setLastOutPrice(goods.outPrice);
-
-		// notify the bl_signal
-		new GL_signal_Impl(goodsListPO).update_when_sale(goods);
-		return true;
-	}
-
-	public boolean reduAmount(ArrayList<GoodsVO> goodsArrayList)
-			throws Exception {
-		boolean testRedu = false;
-		for (GoodsVO goodsVO : goodsArrayList) {
-			testRedu = reduAmount(goodsVO);
-			if (!testRedu) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public void receiveRece(RepoReceiptPO receiptPO) throws Exception {
-
-	}
-
+	
 	@Override
 	public ArrayList<String> sell_type() {
 		ArrayList<String> sell = new ArrayList<String>();
 		HashMap<String, GoodsModelPO> goodsModels = goodsListPO.getGoodsModels();
-		HashMap<String, ArrayList<GoodsPO>> goods = goodsListPO.getGoods();
 		for (String temp : goodsModels.keySet()) {
 			GoodsModelPO gm = goodsModels.get(temp);
-			//TODO whose name???
-			GoodsPO goodsPO = goods.get(temp).get(0);
+			
 			if (gm.getAmount() > 0) {
-				sell.add(temp+"("+goodsPO.getName()+")");
+				sell.add(temp+"("+gm.getName()+")");
 			} 
 		}
 		return sell;

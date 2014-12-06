@@ -7,14 +7,7 @@ import java.io.Serializable;
 public class GoodsModelPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 	public GoodsModelPO(String id, String name, String model) {
 		this.id = id;
 		this.name = name;
@@ -29,6 +22,8 @@ public class GoodsModelPO implements Serializable {
 		this.model = goodsVO.getModel();
 		this.everHas = goodsVO.isEverHas();
 		this.gift = goodsVO.isGift();
+		this.lastInPrice = goodsVO.getLastInPrice();
+		this.lastOutPrice = goodsVO.getLastOutPrice();
 	}
 
 	int amount;
@@ -36,9 +31,7 @@ public class GoodsModelPO implements Serializable {
 	String id;//id = type + model
 	String name;
 	String model;
-	public String getModel() {
-		return model;
-	}
+	
 
 	boolean everHas;
 	boolean gift;
@@ -51,7 +44,9 @@ public class GoodsModelPO implements Serializable {
 	public String toString() {
 		return id+" "+amount+" "+signal;
 	}
-	
+	public String getModel() {
+		return model;
+	}
 	public int getSignal() {
 		return signal;
 	}
@@ -67,7 +62,14 @@ public class GoodsModelPO implements Serializable {
 	public String getId() {
 		return id;
 	}
-	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public boolean isEverHas() {
 		return everHas;
 	}

@@ -13,5 +13,4 @@ public interface GL_receipt_BLservice {
 	GoodsModelPO getGoodsModelPO(String id) throws Exception;
 	int amount(GoodsPO goods) throws Exception;
 	//update the amount if repo_receipt is approved
-	void receiveRece(RepoReceiptPO receiptPO) throws Exception;
 }
