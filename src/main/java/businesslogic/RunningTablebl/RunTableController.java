@@ -2,6 +2,7 @@ package businesslogic.RunningTablebl;
 
 import businesslogic.Adminbl.AdminController;
 import businesslogic.Clientbl.ClientUtilityImpl;
+import businesslogic.GoodsListbl.GL_controller;
 import businesslogicservice.RunningTableblservice.RunningTableblservice;
 import po.ClientPO;
 import po.ReceiptPO;
@@ -19,10 +20,12 @@ public class RunTableController implements RunningTableblservice {
 	CheckProfit profit=new CheckProfit();
 	ClientUtilityImpl clientController;
 	AdminController adminController;
+	GL_controller goodsController;
 	
 	public RunTableController() throws RemoteException, NotBoundException{
 		clientController=new ClientUtilityImpl();
 		adminController=new AdminController();
+		goodsController=new GL_controller();
 	}
 	
 	public GoodsRecordVO[] getSaleTable(SaleConditionVO vo) throws Exception {
@@ -61,6 +64,16 @@ public class RunTableController implements RunningTableblservice {
 		}
 		return result;
 	}
+	public String[] getGoodsList() {
+		String[] result;
+		ArrayList tempList;
 	
+		tempList=goodsController.stock_type();
+		result=new String[tempList.size()];
+		for(int i=0;i<tempList.size();i++){//可能造成巨大的消耗
+			result[i]=(String)tempList.get(i);
+		}
+		return result;
+	}
 
 }

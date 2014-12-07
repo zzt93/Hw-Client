@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -19,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import po.RecPO;
 import po.ReceiptPO;
 import po.ReceiptType;
 import presentation.mainui.ModelType;
@@ -40,20 +42,22 @@ public class CheckReceiptFrame {
 	private List<ReceiptPO> receiptList;
 	
 	public CheckReceiptFrame(){
-		try {
-			controller=new RunTableController();
-		} catch (RemoteException | NotBoundException e) {
-			JOptionPane.showMessageDialog(null, "服务器出现问题");
-			e.printStackTrace();
-		}
+//		try {
+//			controller=new RunTableController();
+//		} catch (RemoteException | NotBoundException e) {
+//			JOptionPane.showMessageDialog(null, "服务器出现问题");
+//			e.printStackTrace();
+//		}
+		initialize();
+		frame.setVisible(true);
 	} 
 	private void initialize() {
-//		frame = new JFrame();
-//		frame.setBounds(100, 100, 800, 500);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame = new JFrame();
+		frame.setBounds(100, 100, 800, 500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-//		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("单据类型:");
@@ -112,9 +116,17 @@ public class CheckReceiptFrame {
 		label_6.setBounds(431, 57, 54, 15);
 		panel.add(label_6);
 		
-		JButton button = new JButton("清空");
-		button.setBounds(612, 379, 60, 23);
-		panel.add(button);
+		JButton btnClear = new JButton("清空");
+		btnClear.setBounds(612, 379, 60, 23);
+		panel.add(btnClear);
+		btnClear.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				for(int i=0;i<=table.getRowCount();i++){
+					tableModel.removeRow(0);
+				}
+			}
+			
+		});
 		
 		textStartTime = new JTextField();
 		textStartTime.setBounds(115, 97, 100, 21);
@@ -126,17 +138,18 @@ public class CheckReceiptFrame {
 		panel.add(textEndTime);
 		textEndTime.setColumns(10);
 		
-		JButton button_1 = new JButton("查询");
-		button_1.setBounds(60, 300, 60, 23);
-		panel.add(button_1);
+		JButton btnQuery = new JButton("查询");
+		btnQuery.setBounds(60, 300, 60, 23);
+		panel.add(btnQuery);
+		btnQuery.addActionListener(new Query());
 		
-		JButton button_2 = new JButton("红冲");
-		button_2.setBounds(60, 350, 60, 23);
-		panel.add(button_2);
+		JButton btnCredit = new JButton("红冲");
+		btnCredit.setBounds(60, 350, 60, 23);
+		panel.add(btnCredit);
 		
-		JButton button_3 = new JButton("红冲复制");
-		button_3.setBounds(60, 400, 80, 23);
-		panel.add(button_3);
+		JButton btnCreditCopy = new JButton("红冲复制");
+		btnCreditCopy.setBounds(60, 400, 80, 23);
+		panel.add(btnCreditCopy);
 		
 	}
 	public class Query implements ActionListener{
@@ -152,8 +165,21 @@ public class CheckReceiptFrame {
 					(String)boxOperator.getSelectedItem(),
 					textRepository.getText());
 			//FIXME，进行查询操作，更新列表
-			
+					//测试代码
+			{
+				RecPO rec=new RecPO();
+				RecPO rec1=new RecPO();
+				List<ReceiptPO> tempList=new ArrayList<ReceiptPO>();
+				tempList.add(rec);
+				tempList.add(rec1);
+				tableModel.update(tempList);
+			}
+				
+						
 		}
 		
+	}
+	public static void main(String[] args){
+		CheckReceiptFrame a=new CheckReceiptFrame();
 	}
 }

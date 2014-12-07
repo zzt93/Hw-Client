@@ -21,6 +21,7 @@ import po.RepoReceiptPO;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
 import vo.BankVO;
+import vo.GoodsRecordVO;
 
 public class PublicTableModel extends DefaultTableModel {
 	String[] name;
@@ -57,6 +58,9 @@ public class PublicTableModel extends DefaultTableModel {
 			break;
 		case RECEIPT:
 			name=new String[]{"单据类型","日期","操作员","总额","审批情况"};
+			break;
+		case SALERECORD:
+			name=new String[]{"时间","商品名","型号","数量","单价","总额"};
 			break;
 		default:
 			return;
@@ -203,7 +207,7 @@ public class PublicTableModel extends DefaultTableModel {
 		}
 	}
 	public void update(BankVO[] list){
-		Object[][] data=new Object[list.length][3];
+		data=new Object[list.length][3];
 		BankVO temp;
 		for(int i=0;i<list.length;i++){
 			temp=list[i];
@@ -222,6 +226,18 @@ public class PublicTableModel extends DefaultTableModel {
 		for(int i=0;i<list.length;i++){
 			addRow(list[i]);
 		}
+	}
+	public void update(GoodsRecordVO[] list){
+		data=new Object[list.length][6];
+		for(int i=0;i<list.length;i++){
+			data[i][0]=list[i].time;
+			data[i][1]=list[i].goods;
+			data[i][2]=list[i].goodsType;
+			data[i][3]=list[i].number;
+			data[i][4]=list[i].price;
+			data[i][5]=list[i].total;
+		}
+		update(data);
 	}
 	public void addRow(ProductsReceipt pr){
 		Object[] data=new Object[7];
