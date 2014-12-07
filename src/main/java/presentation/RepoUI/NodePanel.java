@@ -41,6 +41,7 @@ public class NodePanel extends javax.swing.JPanel {
         del.setVisible(false);
         check = new javax.swing.JButton();
         check.setVisible(false);
+        update = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         type = new javax.swing.JLabel();
 
@@ -113,6 +114,14 @@ public class NodePanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        update.setText(":");
+        update.setToolTipText("修改该分类信息");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,7 +132,9 @@ public class NodePanel extends javax.swing.JPanel {
                 .addContainerGap(74, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(del)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(del)
+                    .addComponent(update))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(check)
@@ -140,7 +151,9 @@ public class NodePanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(check)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(check)
+                    .addComponent(update))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -188,6 +201,9 @@ public class NodePanel extends javax.swing.JPanel {
         formMouseEntered(evt);
     }//GEN-LAST:event_delMouseEntered
 
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }  
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Do the original draw
@@ -227,5 +243,7 @@ public class NodePanel extends javax.swing.JPanel {
     private javax.swing.JButton del;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel type;
+    
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

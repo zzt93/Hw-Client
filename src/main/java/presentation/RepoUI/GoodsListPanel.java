@@ -12,7 +12,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
 import po.GoodsModelPO;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
@@ -166,34 +165,44 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			general_table.getColumnModel().getColumn(3).setResizable(false);
 			general_table.getColumnModel().getColumn(3).setHeaderValue("警戒值");
 		}
-		general_table.getModel().addTableModelListener(new TableModelListener() {
-			
-			@Override
-			public void tableChanged(TableModelEvent e) {
-				int row = e.getFirstRow();
-				int column = e.getColumn();
-				TableModel model = (TableModel) e.getSource();
-				Integer data = (Integer)model.getValueAt(row, column);
-				String id = (String)model.getValueAt(row, 2);
-				GoodsVO temp = new GoodsVO(id, data);
-				System.out.println("-----------------------------------------------");
-				if (column == 0 && data != null) {// name is vaild
-					//gl_controller.
-				} else if (column == 3 && data != null && (Integer) data >= 0) {// signal
-																				// is
-																				// valid
-					try {
-						gl_controller.set_signal_name(temp);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+		general_table.getModel().addTableModelListener(
+				new TableModelListener() {
+
+					@Override
+					public void tableChanged(TableModelEvent e) {
+						int row = e.getFirstRow();
+						int column = e.getColumn();
+						TableModel model = (TableModel) e.getSource();
+						Integer data = (Integer) model.getValueAt(row, column);
+						String id = (String) model.getValueAt(row, 2);
+						GoodsVO temp = new GoodsVO(id, data);
+						System.out
+								.println("-----------------------------------------------");
+						if (column == 0 && data != null) {// name is vaild
+							try {
+								gl_controller.set_signal_name(temp);
+							} catch (Exception e1) {
+								JOptionPane.showMessageDialog(MainFrame.frame,
+										e + " : Fail to update information");
+								e1.printStackTrace();
+							}
+						} else if (column == 3 && data != null
+								&& (Integer) data >= 0) {// signal
+															// is
+															// valid
+							try {
+								gl_controller.set_signal_name(temp);
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						} else {
+							JOptionPane.showMessageDialog(MainFrame.frame,
+									"Invalid change");
+						}
 					}
-				} else {
-					JOptionPane.showMessageDialog(MainFrame.frame, "Invalid change");
-				}
-			}
-		});
-		
+				});
+
 		GL_navigator.setBackground(java.awt.Color.red);
 		GL_navigator.setRollover(true);
 		GL_navigator.add(filler1);
@@ -234,7 +243,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		GL_navigator.add(log_out);
 		GL_navigator.add(filler3);
 
-		update.setText("确认修改");
+		update.setText("刷新数据");
 		update.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				updateActionPerformed(evt);
@@ -600,31 +609,29 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 		add(gl_add, "gl_add_del");
 
-		detailed_table
-				.setModel(new javax.swing.table.DefaultTableModel(
-						new Object[][] {}, new String[] { "商品名称",
-								"商品id", "数量", "警戒值", "最近进价", "最近售价", "平均进价",
-								"历史记录", "可否赠送" }) {
-					/**
+		detailed_table.setModel(new javax.swing.table.DefaultTableModel(
+				new Object[][] {}, new String[] { "商品名称", "商品id", "数量", "警戒值",
+						"最近进价", "最近售价", "平均进价", "历史记录", "可否赠送" }) {
+			/**
 							 * 
 							 */
-					private static final long serialVersionUID = 1L;
-					Class[] types = new Class[] { java.lang.String.class,
-							java.lang.String.class, java.lang.Integer.class,
-							java.lang.Integer.class, java.lang.Object.class,
-							java.lang.Object.class, java.lang.Object.class,
-							java.lang.Boolean.class, java.lang.Boolean.class };
-					boolean[] canEdit = new boolean[] { false, false, false,
-							false, false, false, false, false, false };
+			private static final long serialVersionUID = 1L;
+			Class[] types = new Class[] { java.lang.String.class,
+					java.lang.String.class, java.lang.Integer.class,
+					java.lang.Integer.class, java.lang.Object.class,
+					java.lang.Object.class, java.lang.Object.class,
+					java.lang.Boolean.class, java.lang.Boolean.class };
+			boolean[] canEdit = new boolean[] { false, false, false, false,
+					false, false, false, false, false };
 
-					public Class getColumnClass(int columnIndex) {
-						return types[columnIndex];
-					}
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}
 
-					public boolean isCellEditable(int rowIndex, int columnIndex) {
-						return canEdit[columnIndex];
-					}
-				});
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
 		set_detail_data(goodsModels);
 
 		detailed_table.getTableHeader().setReorderingAllowed(false);
@@ -1005,20 +1012,16 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void set_detail_data(HashMap<String, GoodsModelPO> goods) {
-		TableModel detail_model = detailed_table.getModel();
-		int i = 0;
+		DefaultTableModel detail_model = (DefaultTableModel) detailed_table
+				.getModel();
+
 		for (String string : goods.keySet()) {
 			GoodsModelPO temp = goods.get(string);
-			detail_model.setValueAt(temp.getName(), i, 0);
-			detail_model.setValueAt(temp.getId(), i, 1);
-			detail_model.setValueAt(temp.getAmount(), i, 2);
-			detail_model.setValueAt(temp.getSignal(), i, 3);
-			detail_model.setValueAt(temp.getLastInPrice(), i, 4);
-			detail_model.setValueAt(temp.getLastOutPrice(), i, 5);
-			detail_model.setValueAt(temp.getAver_in(), i, 6);
-			detail_model.setValueAt(temp.isEverHas(), i, 7);
-			detail_model.setValueAt(temp.isGift(), i, 8);
-			++i;
+			Object[] row = new Object[] { temp.getName(), temp.getId(),
+					temp.getAmount(), temp.getSignal(), temp.getLastInPrice(),
+					temp.getLastOutPrice(), temp.getAver_in(),
+					temp.isEverHas(), temp.isGift(), };
+			detail_model.addRow(row);
 		}
 	}
 
@@ -1047,6 +1050,14 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			JOptionPane
 					.showMessageDialog(MainFrame.frame, "Fail to fetch data");
 		}
+		if (MainFrame.DEBUG) {
+			GoodsModelPO temp = new GoodsModelPO("a1", "light", "A");
+			temp.setSignal(20);
+			temp.setAmount(30);
+			goodsModels.put("a1", temp);
+		} else {
+
+		}
 		general_table.setModel(new GL_general_TableModel(goodsModels));
 		set_detail_data(goodsModels);
 	}// GEN-LAST:event_updateActionPerformed
@@ -1066,7 +1077,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			} else {
 				goodsModel_search = gl_controller.iSearch(info);
 			}
-			search_result.setModel(new GL_general_TableModel(goodsModel_search));
+			search_result
+					.setModel(new GL_general_TableModel(goodsModel_search));
 		} else {
 			GoodsModelVO temp;
 			if (MainFrame.DEBUG) {
@@ -1074,7 +1086,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			} else {
 				temp = gl_controller.eSearch_total(goods_info_search.getText());
 			}
-			((DefaultTableModel)search_result.getModel()).setRowCount(0);
+			((DefaultTableModel) search_result.getModel()).setRowCount(0);
 			goodsModel_add.clear();
 			goodsModel_search.add(temp);
 			add_add_del_search_data(search_result, temp);
@@ -1149,8 +1161,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		try {
 			gl_controller.add(goodsModel_add);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(MainFrame.frame,
-					e+": Fail to add for network");
+			JOptionPane.showMessageDialog(MainFrame.frame, e
+					+ ": Fail to add for network");
 		}
 		// clear all data
 		((DefaultTableModel) add_table.getModel()).setRowCount(0);
@@ -1162,7 +1174,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		String del_type = "ab";
 		String mo = "cd";
 		if (MainFrame.DEBUG) {
-			
+
 		} else {
 			all = (String) type_del.getSelectedItem();
 			del_type = all.split(" ")[0];
@@ -1180,8 +1192,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 				gl_controller.delete(goodsModelVO);
 			}
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(MainFrame.frame,
-					e+": Fail to delete for network");
+			JOptionPane.showMessageDialog(MainFrame.frame, e
+					+ ": Fail to delete for network");
 		}
 		// clear all data
 		((DefaultTableModel) del_table.getModel()).setRowCount(0);
