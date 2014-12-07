@@ -73,7 +73,7 @@ public class ApproveUI {
 		labelHint.setBounds(39, 473, 211, 15);
 		totalPanel.add(labelHint);
 
-		String[] name = { "编号", "种类", "时间", "审批状态" };
+		final String[] name = { "编号", "种类", "时间", "审批状态" };
 
 		/**
 		 * Details
@@ -105,8 +105,15 @@ public class ApproveUI {
 			}
 		});
 		
+		
 		table.setBounds(10, 10, 507, 249);
-
+		//FIXME 排序
+		table.getTableHeader().addMouseListener(new MouseAdapter(){
+			public void mouseReleased(MouseEvent e){
+				int pick = table.getTableHeader().columnAtPoint(e.getPoint());
+				approveBL.order(name[pick]);
+			}
+		});
 		JScrollPane scrollPane = new JScrollPane();
 
 		scrollPane.setBounds(10, 10, 507, 249);
@@ -145,7 +152,8 @@ public class ApproveUI {
 		JButton buttonScreen = new JButton("筛选");
 		buttonScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				approveBL.screen(null);
+				listOfReceipts = approveBL.screen(null);
+				refreshTable();
 			}
 		});
 		buttonScreen.setBounds(572, 192, 93, 23);

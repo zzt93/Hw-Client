@@ -170,22 +170,25 @@ public class Approve_List implements Approve_List_BLservice{
 		return screenReceipts;
 	}
 	public ArrayList<ReceiptPO> order(String item){
-		if(item.equals("Time")){
-			
+		if(item.equals("时间")){			
 			Collections.sort(receipts, new TimeComparator());
+		}else if(item.equals("编号")){
+			Collections.sort(receipts,new IdComparator());
 		}
 		return receipts;
 	}
 	
 	class TimeComparator implements Comparator<ReceiptPO>{
-
 		@Override
 		public int compare(ReceiptPO o1, ReceiptPO o2) {
 			return o1.time.compareTo(o2.time);
+		}		
+	}
+	class IdComparator implements Comparator<ReceiptPO>{
+		@Override
+		public int compare(ReceiptPO o1,ReceiptPO o2){
+			return o1.id-o2.id;
 		}
-
-		
-		
 	}
 	
 }
