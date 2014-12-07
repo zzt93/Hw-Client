@@ -41,6 +41,12 @@ public class AdminController implements AdminBLService{
 		result.throwIfFailed();
 		return false;
 	}
+	@Override
+	public String getUser() throws Exception {
+		return new Adminbl().getUser();
+		// TODO Auto-generated method stub
+		
+	}
 	
 		
 }

@@ -8,10 +8,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 
 public class Admin_test {
-	Admin_mock am;
+	Adminbl am;
 	@Before
 	public void setUp() throws Exception {
-		am = new Admin_mock();
+		am = new Adminbl();
 	}
 
 	@Test

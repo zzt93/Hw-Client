@@ -10,10 +10,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class Admin_mock implements AdminBLService{
+public class Adminbl implements AdminBLService{
 	private static AdminDataService ads;
 	private static ArrayList<UserPO> arrUser;
-	Admin_mock(){
+	private static String currentUser;
+	Adminbl(){
 		if(ads==null){
 			try {
 				ads = (AdminDataService)RMIUtility.getImpl("Admin");
@@ -63,9 +64,14 @@ public class Admin_mock implements AdminBLService{
 		return false;
 	}
 
-	UserPO getCurrentUsers(){
-		return null;
-		//?
+
+	@Override
+	public String getUser() throws Exception {
+		// TODO Auto-generated method stub
+		return currentUser;
+	}
+	public static void saveUser(String str) {
+		currentUser = str;
 	}
 
 }

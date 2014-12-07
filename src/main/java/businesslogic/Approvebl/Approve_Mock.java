@@ -57,4 +57,10 @@ public class Approve_Mock implements Approve_Detail_BLservice,Approve_List_BLser
 		return null;
 	}
 
+	@Override
+	public ArrayList<ReceiptPO> order(String item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

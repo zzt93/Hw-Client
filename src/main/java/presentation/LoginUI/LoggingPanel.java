@@ -8,6 +8,7 @@ import presentation.mainui.FinancialUI;
 import presentation.mainui.ManagerUI;
 import presentation.mainui.SalesmanUI;
 import businesslogic.Adminbl.AdminController;
+import businesslogic.Adminbl.Adminbl;
 import presentation.RepoUI.MainFrame;
 
 import java.awt.*;
@@ -113,6 +114,7 @@ public class LoggingPanel extends JPanel {
 							}
 						}
 						String role=temp.getRole();
+						Adminbl.saveUser(temp.getName());
 						if(role.equals("总经理")){
 							try {
 								ManagerUI manager=new ManagerUI();

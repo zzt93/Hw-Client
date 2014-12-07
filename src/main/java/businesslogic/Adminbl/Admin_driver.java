@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 
 public class Admin_driver {
 	
-	public void drive(Admin_mock stub){
+	public void drive(Adminbl stub){
 		
 		try {
 			stub.confirm(null);
@@ -21,7 +21,7 @@ public class Admin_driver {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Admin_driver().drive(new Admin_mock());
+		new Admin_driver().drive(new Adminbl());
 	}
 
 }

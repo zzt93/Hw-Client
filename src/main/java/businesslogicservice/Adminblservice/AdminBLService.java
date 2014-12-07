@@ -9,5 +9,5 @@ public interface AdminBLService {
 	public UserPO newUser() throws Exception;
 	public boolean delete(UserPO po) throws Exception;
 	public boolean confirm(UserPO po) throws Exception;
-	
+	public String getUser() throws Exception;
 }
