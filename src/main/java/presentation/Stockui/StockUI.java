@@ -63,7 +63,7 @@ public class StockUI extends JPanel {
     private JTextField textRepository;
     private JTextPane textComment;
 //    private JLabel operator_label;
-    private JPanel sale;
+    private JPanel stock;
     List<ClientPO> clientList;
     public static double total;
     private StockUtilityImpl stockController;
@@ -90,7 +90,7 @@ public class StockUI extends JPanel {
     private void initComponents() {
 
         jScrollPane3 = new JScrollPane();
-        sale = new JPanel();
+        stock = new JPanel();
         custom_label = new JLabel();
 //        operator_label = new JLabel();
         jLabel3 = new JLabel();
@@ -140,7 +140,7 @@ public class StockUI extends JPanel {
         
         jScrollPane3.setPreferredSize(new java.awt.Dimension(750, 500));
 
-        sale.setPreferredSize(new java.awt.Dimension(850, 650));
+        stock.setPreferredSize(new java.awt.Dimension(850, 650));
 
         custom_label.setText("供应商");
 
@@ -266,8 +266,8 @@ public class StockUI extends JPanel {
                 .addContainerGap())
         );
 
-        GroupLayout saleLayout = new GroupLayout(sale);
-        sale.setLayout(saleLayout);
+        GroupLayout saleLayout = new GroupLayout(stock);
+        stock.setLayout(saleLayout);
         saleLayout.setHorizontalGroup(
             saleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(saleLayout.createSequentialGroup()
@@ -326,7 +326,7 @@ public class StockUI extends JPanel {
                 .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        jScrollPane3.setViewportView(sale);
+        jScrollPane3.setViewportView(stock);
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -356,10 +356,7 @@ public class StockUI extends JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	int id=clientList.get(boxClient.getSelectedIndex()).getId();
-    	//FIXME,操作员get
-    	stockReceipt=new StockReceiptPO(id,textRepository.getText(),
-    			"操作员",textComment.getText(),new BigDecimal(total));
+    	
     	try {
 			stockController.makeReceipt(stockReceipt);
 		} catch (Exception e) {
@@ -367,6 +364,18 @@ public class StockUI extends JPanel {
 		}
     	
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    private void setStockReceipt(){
+    	ClientPO client=clientList.get(boxClient.getSelectedIndex());
+    	//FIXME,操作员get
+    	stockReceipt=new StockReceiptPO(
+    			client.getId(),
+    			textRepository.getText(),
+    			"操作员",
+    			textComment.getText(),
+    			new BigDecimal(total));
+    	stockReceipt.setProductList(list);
+    	stockReceipt.setClient(client.getName());
+    }
 
 }

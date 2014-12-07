@@ -1,6 +1,7 @@
 package businesslogic.Approvebl;
 
 import businesslogic.FinancialReceiptbl.FinReceiptController;
+import businesslogic.RepoReceiptbl.RepoReceiptBLImpl;
 import businesslogic.RepoReceiptbl.RepoReceiptDataImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
@@ -9,6 +10,7 @@ import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
 import businesslogicservice.Saleblservice.SaleUtility;
 import businesslogicservice.Stockblservice.StockUtility;
 import dataservice.ApproveDataService.ApproveDataService;
+import dataservice.GoodsListdataservice.GoodsListDataService;
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
 import po.*;
 import util.RMIUtility;
@@ -16,6 +18,9 @@ import util.RMIUtility;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -26,6 +31,7 @@ import java.util.Vector;
 public class Approve_List implements Approve_List_BLservice{
 	ArrayList<ReceiptPO> receipts = new ArrayList<ReceiptPO>();
 	ApproveDataService ads;
+	ArrayList<ReceiptPO> screenReceipts = new ArrayList<ReceiptPO>();
 	
 	public Approve_List() throws RemoteException, NotBoundException{
 		if(ads==null){
@@ -40,23 +46,32 @@ public class Approve_List implements Approve_List_BLservice{
 	}
 	@Override
 	public ArrayList<ReceiptPO> showList() throws Exception {
-		SaleUtility su = new SaleUtilityImpl();
-		Vector<SaleReceiptPO> verSale = su.queryReceipt(null);
+		//<yus>
+		SaleUtility saleUtility = new SaleUtilityImpl();
+		Vector<SaleReceiptPO> verSale = saleUtility.queryReceipt(null);
 		addOneByOne(verSale);
-		StockUtility stu = new StockUtilityImpl();
-		Vector<StockReceiptPO> verStock = stu.queryReceipt(null);
+		StockUtility stockUtility = new StockUtilityImpl();
+		Vector<StockReceiptPO> verStock = stockUtility.queryReceipt(null);
 		addOneByOne(verStock);
-		RepoReceiptDataService rrb = new RepoReceiptDataImpl();
-		ArrayList<RepoReceiptPO> arrRepo =rrb.getRepoReceipts().getObj();
+		//</yus>
+		//<zzt>
+		RepoReceiptDataService repository = new RepoReceiptDataImpl();
+		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts().getObj();
 		receipts.addAll(arrRepo);
-		FinancialReceiptblservice frb = new FinReceiptController();
+		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts().getObj();
+		receipts.addAll(arrGoods);
+		//</zzt>
 		
-		//Interface not provided;
+		//<gda>
+		FinReceiptController finreceipt = new FinReceiptController();
+		ArrayList<ReceiptPO> arrfin = finreceipt.getReceipt(null);
+		for(ReceiptPO po :arrfin){
+			receipts.add(po);
+		}
+		//</gda>
 		
 		
-		/*
-		 * Another ?
-		 */
+
 		return this.receipts;
 	}
 
@@ -83,7 +98,7 @@ public class Approve_List implements Approve_List_BLservice{
 
 	@Override
 	public ArrayList<ReceiptPO> upload() throws Exception {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 这个借口不用了。。
 		ArrayList<GoodsReceiptPO> goods = new ArrayList<GoodsReceiptPO>();
 		ArrayList<RepoReceiptPO> repo = new ArrayList<RepoReceiptPO>();
 		ArrayList<SaleReceiptPO> sale = new ArrayList<SaleReceiptPO>();
@@ -143,16 +158,37 @@ public class Approve_List implements Approve_List_BLservice{
 	}
 	@Override
 	public String message(String userName) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public ArrayList<ReceiptPO> screen(String item){//ReceiptFilter[] filter
-		return null;
+		for(ReceiptPO rpo:receipts){
+			if(rpo.statement == ReceiptState.wait||rpo.statement == ReceiptState.disapprove){
+				screenReceipts.add(rpo);
+			}
+		}
+		return screenReceipts;
 	}
 	public ArrayList<ReceiptPO> order(String item){
-		return null;
+		if(item.equals("时间")){			
+			Collections.sort(receipts, new TimeComparator());
+		}else if(item.equals("编号")){
+			Collections.sort(receipts,new IdComparator());
+		}
+		return receipts;
 	}
-
+	
+	class TimeComparator implements Comparator<ReceiptPO>{
+		@Override
+		public int compare(ReceiptPO o1, ReceiptPO o2) {
+			return o1.time.compareTo(o2.time);
+		}		
+	}
+	class IdComparator implements Comparator<ReceiptPO>{
+		@Override
+		public int compare(ReceiptPO o1,ReceiptPO o2){
+			return o1.id-o2.id;
+		}
+	}
 	
 }

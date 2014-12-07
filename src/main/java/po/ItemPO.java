@@ -21,11 +21,14 @@ public class ItemPO implements Serializable {
 	public ItemPO(String item,double amount){
 		this(item,amount,null);
 	}
-	public double getAccount(){
+	public double getAmount(){
 		return amount;
 	}
 	public boolean equals(ItemPO po){
 		return item.equals(po.getName());
+	}
+	public String getRemark(){
+		return remark;
 	}
 	public String getName(){
 		return item;

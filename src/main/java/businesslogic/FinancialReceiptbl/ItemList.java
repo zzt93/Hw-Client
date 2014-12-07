@@ -8,7 +8,7 @@ public class ItemList {
 	ArrayList<ItemPO> list=new ArrayList<ItemPO>();
 	double total=0;
 	public void add(ItemPO po){
-		total+=po.getAccount();
+		total+=po.getAmount();
 		list.add(po);
 	}
 	public void delete(ItemPO po){
@@ -16,7 +16,7 @@ public class ItemList {
 		for(int i=0;i<list.size();i++){
 			temp=list.get(i);
 			if(temp.equals(po)){
-				total-=temp.getAccount();
+				total-=temp.getAmount();
 				list.remove(i);
 				return;
 			}

@@ -433,12 +433,17 @@ public class SaleUI extends JPanel {
    }//GEN-LAST:event_jButton1ActionPerformed
     public void setSaleReceipt(){
     	//FIXME,测试注释掉
-    	int id=clientList.get(boxClient.getSelectedIndex()).getId();
+    	ClientPO client=clientList.get(boxClient.getSelectedIndex());
     	//FIXME,操作员get
     	//int id=123;
-    	saleReceipt=new SaleReceiptPO(id,textRepository.getText(),
-    			"操作员",textComment.getText(),new BigDecimal(total));
+    	saleReceipt=new SaleReceiptPO(
+    			client.getId(),
+    			textRepository.getText(),
+    			"操作员",
+    			textComment.getText(),
+    			new BigDecimal(total));
     	saleReceipt.setProductList(prList);
+    	saleReceipt.setClient(client.getName());
     }
     public class StrategyPane{
     	private JFrame frame;
