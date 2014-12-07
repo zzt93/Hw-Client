@@ -8,6 +8,7 @@ import dataservice.FinancialReceiptdataservice.FinancialReceiptdataservice;
 import po.CashPO;
 import po.PayPO;
 import po.RecPO;
+import po.ReceiptPO;
 import po.ResultMessage;
 import util.RMIUtility;
 
@@ -32,6 +33,11 @@ public class FinReceipt {
 	public ResultMessage makeCash(CashPO po)throws RemoteException {
 		ResultMessage result;
 		result=dataService.addCash(po);
+		return result;
+	}
+	public ResultMessage update(ReceiptPO [] receipt) throws RemoteException{
+		ResultMessage result;
+		result=dataService.update(receipt);
 		return result;
 	}
 }

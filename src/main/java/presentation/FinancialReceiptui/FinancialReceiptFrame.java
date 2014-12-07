@@ -3,6 +3,9 @@ package presentation.FinancialReceiptui;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
+import po.RecPO;
+import po.ReceiptPO;
+import presentation.RunningTableui.PayReceiptPane;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
 import vo.BankVO;
@@ -10,7 +13,11 @@ import vo.BankVO;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Vector;
+import java.util.List;
 
 public class FinancialReceiptFrame {
 	private JPanel panel;
@@ -19,9 +26,18 @@ public class FinancialReceiptFrame {
 	PublicTableModel tableModel;
 	private Font font=new Font("宋体",Font.PLAIN,18);
 	private Font font2=new Font("宋体",Font.PLAIN,14);
+	private List<ReceiptPO> list;
 	public FinancialReceiptFrame(){
 		initialize();
 		receiptPane=new FinReceiptPane();
+		//TODO,获得list
+		//测试代码
+		{
+			RecPO rec=new RecPO();
+			list=new ArrayList<ReceiptPO>();
+			list.add(rec);
+			tableModel.update(list);
+		}
 	}
 	public void initialize(){
 		panel = new JPanel();
@@ -61,11 +77,34 @@ public class FinancialReceiptFrame {
 		table.setFillsViewportHeight(true);
 		table.getTableHeader().setFont(font2);
 		table.setFont(font2);
-
+		table.addMouseListener(new MouseClick());
 	}
 
 	public JPanel getPanel(){
 		return panel;
+	}
+	public class MouseClick extends MouseAdapter{
+		public void mouseClicked(MouseEvent e){
+			if(table.getSelectedRow()<0){
+				JOptionPane.showMessageDialog(null,"未选中");
+				return;
+			}
+			if(e.getClickCount()>=2){
+				switch(list.get(table.getSelectedRow()).type){
+				case CASH:{
+					//TODO
+					break;
+				}
+				case PAYMENT:
+				case RECEIVE:{
+					PayReceiptPane payReceiptPane=new PayReceiptPane(table.getSelectedRow(),tableModel);
+					payReceiptPane.set((RecPO)list.get(table.getSelectedRow()));
+					payReceiptPane.deal();
+					payReceiptPane.visit(true);
+				}
+				}
+			}
+		}
 	}
 	public class Payment implements ActionListener{
 		public void actionPerformed(ActionEvent e) {

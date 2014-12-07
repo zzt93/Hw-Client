@@ -11,6 +11,7 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int clientId;
+    private String client;
     private String repository;
     private String operator;
     private List<ProductsReceipt> productList;
@@ -64,6 +65,12 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
 
     public int getId() {
         return id;
+    }
+    public void setClient(String name ){
+    	client=name;
+    }
+    public String getClient(){
+    	return client;
     }
 
 

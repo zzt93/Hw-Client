@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import po.BkTransPO;
 import po.CashPO;
 import po.ClientPO;
+import po.DealState;
 import po.GoodsPO;
 import po.GoodsReceiptPO;
 import po.ItemPO;
@@ -15,6 +16,7 @@ import po.ProductsReceipt;
 import po.RecPO;
 import po.ReceiptPO;
 import po.ReceiptState;
+import po.ReceiptType;
 import po.RepoReceiptPO;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
@@ -104,6 +106,7 @@ public class PublicTableModel extends DefaultTableModel {
 			for(int i=0;i<list.size();i++){
 				temp=(ReceiptPO)list.get(0);
 				data[i][1]=temp.time;
+				data[i][4]=ReceiptState.getName(temp.statement);
 				switch(temp.type){
 				case SALE_ACCEPT:{
 					SaleReceiptPO temp1=(SaleReceiptPO)list.get(i);
@@ -169,10 +172,33 @@ public class PublicTableModel extends DefaultTableModel {
 					break;
 				}
 				}
-				data[i][4]=ReceiptState.getName(temp.statement);
+				
 			}
 			update(data);
-					
+		}
+		case FINRECEIPT:{
+			data=new Object[list.size()][5];
+			ReceiptPO temp;
+			for(int i=0;i<list.size();i++){
+				temp=(ReceiptPO)list.get(i);
+				data[i][0]=temp.time;
+				data[i][1]=ReceiptType.getName(temp.type);
+				data[i][3]=ReceiptState.getName(temp.statement);
+				switch(temp.type){
+				case CASH:{
+					CashPO temp1=(CashPO)temp;
+					data[i][2]=temp1.total;
+					break;
+				}
+				case RECEIVE:
+				case PAYMENT:{
+					RecPO temp1=(RecPO)temp;
+					data[i][2]=temp1.total;
+					data[i][4]=DealState.getName(temp1.dealState);
+				}
+				}
+			}
+			update(data);
 		}
 		}
 	}
@@ -188,6 +214,11 @@ public class PublicTableModel extends DefaultTableModel {
 		update(data);
 	}
 	public void update(BkTransPO[] list){
+		for(int i=0;i<list.length;i++){
+			addRow(list[i]);
+		}
+	}
+	public void update(ItemPO[] list){
 		for(int i=0;i<list.length;i++){
 			addRow(list[i]);
 		}
@@ -217,5 +248,14 @@ public class PublicTableModel extends DefaultTableModel {
 		data[2]=po.getRemark();
 		addRow(data);
 	}
-	
+	public void insteadRow(int row,RecPO po){
+		removeRow(row);
+		Object[] data=new Object[5];
+		data[0]=po.time;
+		data[1]=ReceiptType.getName(po.type);
+		data[2]=po.total;
+		data[3]=ReceiptState.getName(po.statement);
+		data[4]=DealState.getName(po.dealState);
+		insertRow(row,data);
+	}
 }

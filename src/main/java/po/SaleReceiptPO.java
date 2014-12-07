@@ -11,6 +11,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int clientId;
+    private String client;
     private String salesman;
     private String operator;
     private String repository;
@@ -84,7 +85,13 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
+    public void setClient(String name){
+    	client=name;
+    }
+    public String getClient(){
+    	return client;
+    }
+    
 	public void setAllowance(BigDecimal allowance) {
 		this.allowance = allowance;
 	}

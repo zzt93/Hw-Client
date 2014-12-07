@@ -27,7 +27,17 @@ public class RecPO extends ReceiptPO implements Serializable {
 		total=vo.total;
 		type=ReceiptType.RECEIVE;
 	}
-	public RecPO(){}
+	public RecPO(){
+		client="张三";
+		operator="小李";
+		total=2180;
+		type=ReceiptType.RECEIVE;
+		bankList=new BkTransPO[2];
+		bankList[0]=new BkTransPO();
+		bankList[1]=new BkTransPO();
+		number="SKD-20140507-99653";
+		time="2014-05-07";
+	}
 	public String getClient() {
 		return client;
 	}

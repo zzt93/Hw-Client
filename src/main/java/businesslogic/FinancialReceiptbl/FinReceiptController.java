@@ -115,4 +115,14 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		ResultMessage result=finReceipt.makeReceive(po);
 		result.throwIfFailed();
 	}
+	public void update(ReceiptPO[] po)throws Exception{
+		ResultMessage result=finReceipt.update(po);
+		result.throwIfFailed();
+	}
+	public void update(ReceiptPO po)throws Exception{
+		ReceiptPO temp[]=new ReceiptPO[1];
+		temp[0]=po;
+		ResultMessage result=finReceipt.update(temp);
+		result.throwIfFailed();
+	}
 }
