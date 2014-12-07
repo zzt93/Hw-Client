@@ -20,7 +20,7 @@ public class CashVO extends ReceiptPO implements Serializable {
 		type=ReceiptType.CASH;
 	}
 	public CashVO(CashPO po){
-		number=po.number;
+		receipt_id=po.receipt_id;
 		operator=po.operator;
 		total=po.total;
 		itemList=po.itemList;

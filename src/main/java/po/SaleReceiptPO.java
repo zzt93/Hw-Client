@@ -30,7 +30,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     	this.totalValue=totalValue;
     }
     public String getNumber() {
-        return number;
+        return receipt_id;
     }
 
     public int getClientId() {
@@ -78,13 +78,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
         
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    
     public void setClient(String name){
     	client=name;
     }

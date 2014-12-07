@@ -30,7 +30,7 @@ public class GoodsReceiptPO extends ReceiptPO implements Serializable {
 		this.sumOfGifts = sumOfGifts;
 	}
 	public String getId(){
-		return goodsReceiptVO.getId();
+		return goodsReceiptVO.getReceipt_Id();
 	}
 
 	public GoodsReceiptVO getGoodsReceiptVO() {

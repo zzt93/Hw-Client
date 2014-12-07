@@ -99,7 +99,7 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			template = new RepoReceiptVO();
 			template.actualNum = 10;
 			template.statisticNum = 20;
-			template.number = "a1";
+			template.receipt_id = "a1";
 			template.receipt_id = "repo1";
 			template.time = "2014-12-3";
 		}
@@ -452,7 +452,7 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 					template = new RepoReceiptVO();
 					template.actualNum = 100;
 					template.statisticNum = 20;
-					template.number = "a1";
+					template.receipt_id = "a1";
 					template.receipt_id = "repo3";
 					template.time = "2014-12-3";
 				} else {

@@ -98,7 +98,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 			return " ";
 		} 
 		repoReceiptDataService.insert(new RepoReceiptPO(goods.id, goods.amount,
-				amount));
+				amount, "user"));//TODO
 		String type = "";
 		if (amount > goods.amount) {
 			type = "报溢单 "+ amount ;

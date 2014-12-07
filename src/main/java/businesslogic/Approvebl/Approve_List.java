@@ -89,7 +89,7 @@ public class Approve_List implements Approve_List_BLservice{
 		// TODO Auto-generated method stub
 		for(ReceiptPO rpo : array){
 			if(receipts.contains(rpo)){
-				receipts.get(receipts.indexOf(rpo)).statement=ReceiptState.approve;
+				receipts.get(receipts.indexOf(rpo)).state=ReceiptState.approve;
 			}			
 		}
 
@@ -163,7 +163,7 @@ public class Approve_List implements Approve_List_BLservice{
 
 	public ArrayList<ReceiptPO> screen(String item){//ReceiptFilter[] filter
 		for(ReceiptPO rpo:receipts){
-			if(rpo.statement == ReceiptState.wait||rpo.statement == ReceiptState.disapprove){
+			if(rpo.state == ReceiptState.wait||rpo.state == ReceiptState.disapprove){
 				screenReceipts.add(rpo);
 			}
 		}

@@ -166,14 +166,14 @@ public class StockReceiptPane {
 	}
 	public void set(StockReceiptPO receipt){
 		this.receipt=receipt;
-		textNum.setText(receipt.number);
+		textNum.setText(receipt.receipt_id);
 		textClient.setText(receipt.getClient());
 		textType.setText(ReceiptType.getName(receipt.type));
 		textRepository.setText(receipt.getRepository());
 		textDate.setText(receipt.time);
 		textComment.setText(receipt.getComment());
 		textOperator.setText(receipt.getOperator());
-		textState.setText(ReceiptState.getName(receipt.statement));
+		textState.setText(ReceiptState.getName(receipt.state));
 
 		
 		labelTotal.setText(receipt.getTotalValue().toString());

@@ -29,7 +29,7 @@ public class CashPO extends ReceiptPO implements Serializable {
 	}
 	public CashPO(){
 		
-		number="测试单据";
+		receipt_id="测试单据";
 		type=ReceiptType.CASH;
 	}
 }

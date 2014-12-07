@@ -19,7 +19,7 @@ public class RecVO extends ReceiptPO implements Serializable {
 		type=ReceiptType.RECEIVE;
 	}
 	public RecVO(RecPO po){
-		number=po.number;
+		receipt_id=po.receipt_id;
 		client=po.client;
 		operator=po.operator;
 		total=po.total;

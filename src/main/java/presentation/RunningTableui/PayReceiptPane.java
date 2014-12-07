@@ -163,12 +163,12 @@ public class PayReceiptPane {
 	}
 	public void set(RecPO receipt){
 		this.receipt=receipt;
-		textNum.setText(receipt.number);
+		textNum.setText(receipt.receipt_id);
 		textType.setText(ReceiptType.getName(receipt.type));
 		textDate.setText(receipt.time);
 		textOperator.setText(receipt.operator);
 		textClient.setText(receipt.client);
-		textState.setText(ReceiptState.getName(receipt.statement));
+		textState.setText(ReceiptState.getName(receipt.state));
 		textDeal.setText(DealState.getName(receipt.dealState));
 		tableModel.update(receipt.bankList);
 		labelTotal.setText(String.valueOf(receipt.total));

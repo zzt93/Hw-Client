@@ -12,28 +12,29 @@ import java.util.Date;
  */
 public class RepoReceiptPO extends ReceiptPO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	static long count = 0;
 
-	public RepoReceiptPO(String id, int a, int c) {
-		receipt_id = " "+ count++;
-		this.goods_id = id;
+	int actualNum;
+	int statisticNum;
+	String goods_id;
+	String operator;
+	public RepoReceiptPO(String goods_id, int a, int c, String user) {
+		
+		this.goods_id = goods_id;
 		actualNum = a;
 		statisticNum = c;
-		
+		operator = user;
 		super.type = ReceiptType.REPORECEIPT;
 		super.time=new DateGetter().toString();
 		
 	}	
-	int actualNum;
-	int statisticNum;
+	
 	public String getDate() {
 		return time;
 	}
-	String goods_id;
+	
 	public String getGoods_id() {
 		return goods_id;
 	}
-	String receipt_id;
 	
 	public String getReceipt_id() {
 		return receipt_id;

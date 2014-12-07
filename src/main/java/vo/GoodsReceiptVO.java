@@ -10,9 +10,8 @@ import java.util.Date;
 import java.util.Vector;
 
 public class GoodsReceiptVO extends ReceiptPO implements Serializable {
-	static long count = 0;
 	
-	public String id;
+	
 	public String date;
 	public String user;
 	
@@ -25,14 +24,12 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	}
 	public GoodsReceiptVO(Vector<GoodsVO> goodsVOs, String user) {
 		// TODO Auto-generated constructor stub
-		id = ""+count++;
-		date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		this.goodsVOs = goodsVOs;
 		this.user = user; 
 	}
 	
 	public String getDate() {
-		return date;
+		return time;
 	}
 	public Vector<GoodsVO> getGoodsVOs() {
 		return goodsVOs;
@@ -46,7 +43,7 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	public String getUser() {
 		return user;
 	}
-	public String getId() {
-		return id;
+	public String getReceipt_Id() {
+		return receipt_id;
 	}
 }

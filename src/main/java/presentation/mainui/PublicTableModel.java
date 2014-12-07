@@ -106,7 +106,7 @@ public class PublicTableModel extends DefaultTableModel {
 			for(int i=0;i<list.size();i++){
 				temp=(ReceiptPO)list.get(0);
 				data[i][1]=temp.time;
-				data[i][4]=ReceiptState.getName(temp.statement);
+				data[i][4]=ReceiptState.getName(temp.state);
 				switch(temp.type){
 				case SALE_ACCEPT:{
 					SaleReceiptPO temp1=(SaleReceiptPO)list.get(i);
@@ -183,7 +183,7 @@ public class PublicTableModel extends DefaultTableModel {
 				temp=(ReceiptPO)list.get(i);
 				data[i][0]=temp.time;
 				data[i][1]=ReceiptType.getName(temp.type);
-				data[i][3]=ReceiptState.getName(temp.statement);
+				data[i][3]=ReceiptState.getName(temp.state);
 				switch(temp.type){
 				case CASH:{
 					CashPO temp1=(CashPO)temp;
@@ -254,7 +254,7 @@ public class PublicTableModel extends DefaultTableModel {
 		data[0]=po.time;
 		data[1]=ReceiptType.getName(po.type);
 		data[2]=po.total;
-		data[3]=ReceiptState.getName(po.statement);
+		data[3]=ReceiptState.getName(po.state);
 		data[4]=DealState.getName(po.dealState);
 		insertRow(row,data);
 	}

@@ -55,7 +55,7 @@ public class Repo_rece extends javax.swing.JPanel {
 
         jLabel6.setText("统计数量：");
 
-        goods_id.setText(receiptVO.number);
+        goods_id.setText(receiptVO.receipt_id);
 
         c_amount.setText(""+receiptVO.actualNum);
 

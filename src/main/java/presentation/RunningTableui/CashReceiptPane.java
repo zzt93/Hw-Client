@@ -148,12 +148,12 @@ public class CashReceiptPane {
 	}
 	public void set(CashPO receipt){
 		this.receipt=receipt;
-		textNum.setText(receipt.number);
+		textNum.setText(receipt.receipt_id);
 		textType.setText(ReceiptType.getName(receipt.type));
 		textDate.setText(receipt.time);
 		textOperator.setText(receipt.operator);
 		textBank.setText(receipt.bank);
-		textState.setText(ReceiptState.getName(receipt.statement));
+		textState.setText(ReceiptState.getName(receipt.state));
 		tableModel.update(receipt.itemList);
 		labelTotal.setText(String.valueOf(receipt.total));
 	}	

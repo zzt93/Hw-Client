@@ -28,7 +28,7 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
     }
 
     public String getNumber() {
-        return number;
+        return receipt_id;
     }
 
     public int getSupplier() {
@@ -59,13 +59,7 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
         this.productList = productList;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
+    
     public void setClient(String name ){
     	client=name;
     }
