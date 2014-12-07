@@ -14,6 +14,7 @@ import po.PayPO;
 import po.ProductsReceipt;
 import po.RecPO;
 import po.ReceiptPO;
+import po.ReceiptState;
 import po.RepoReceiptPO;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
@@ -168,17 +169,7 @@ public class PublicTableModel extends DefaultTableModel {
 					break;
 				}
 				}
-				switch(temp.statement){
-				case approve:
-					data[i][4]="通过审批";
-					break;
-				case disapprove:
-					data[i][4]="未通过审批";
-					break;
-				case wait:
-					data[i][4]="待审批";
-					break;
-				}
+				data[i][4]=ReceiptState.getName(temp.statement);
 			}
 			update(data);
 					
@@ -195,6 +186,11 @@ public class PublicTableModel extends DefaultTableModel {
 			data[i][2]=temp.remark;
 		}
 		update(data);
+	}
+	public void update(BkTransPO[] list){
+		for(int i=0;i<list.length;i++){
+			addRow(list[i]);
+		}
 	}
 	public void addRow(ProductsReceipt pr){
 		Object[] data=new Object[7];
