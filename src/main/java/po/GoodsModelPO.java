@@ -96,7 +96,7 @@ public class GoodsModelPO implements Serializable {
 	}
 
 	public int getAver_in() {
-		// TODO Auto-generated method stub
+		// TODO to save or calculate
 		return 0;
 	}
 	

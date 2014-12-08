@@ -51,7 +51,7 @@ public class Exporter_test {
 		try {
 			new Exporter().export_excel(test);
 		} catch (ParsePropertyException | InvalidFormatException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

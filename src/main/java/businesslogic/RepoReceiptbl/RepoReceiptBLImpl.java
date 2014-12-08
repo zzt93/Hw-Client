@@ -18,8 +18,8 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	GL_controller gl_controller;
 
 	public RepoReceiptBLImpl() throws RemoteException, NullPointerException {
-		repoReceiptPOs = repoReceiptDataService.getRepoReceipts().getObj();
-		goodsReceiptPOs = repoReceiptDataService.getGoodsReceipts().getObj();
+		repoReceiptPOs = repoReceiptDataService.getRepoReceipts(null).getObj();
+		goodsReceiptPOs = repoReceiptDataService.getGoodsReceipts(null).getObj();
 		gl_controller = new GL_controller();
 	}
 
@@ -98,7 +98,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 			return " ";
 		} 
 		repoReceiptDataService.insert(new RepoReceiptPO(goods.id, goods.amount,
-				amount, "user"));//TODO
+				amount, "user"));//TODO how to get user
 		String type = "";
 		if (amount > goods.amount) {
 			type = "报溢单 "+ amount ;
@@ -118,9 +118,9 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	
 
 	
-	//TODO
-	public ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception {//TODO
-		ArrayList<RepoReceiptPO> temp = repoReceiptDataService.getRepoReceipts()
+	
+	public ArrayList<RepoReceiptVO> showRepoReceipt() throws Exception {
+		ArrayList<RepoReceiptPO> temp = repoReceiptDataService.getRepoReceipts(null)
 				.getObj();
 		ArrayList<RepoReceiptVO> res = new ArrayList<RepoReceiptVO>();
 		for (RepoReceiptPO repoReceiptPO : temp) {
@@ -163,7 +163,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	public ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception {
 		ArrayList<GoodsReceiptVO> res = new ArrayList<GoodsReceiptVO>();
 		for (GoodsReceiptPO goodsReceiptPO : goodsReceiptPOs) {
-			res.add(goodsReceiptPO.getGoodsReceiptVO());//TODO
+			res.add(new GoodsReceiptVO(goodsReceiptPO));
 		}
 		return res;
 	}
@@ -177,8 +177,13 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	public ArrayList<ReceiptPO> sendReceipt(ReceiptConditionVO condition)
 			throws Exception {
 		ArrayList<ReceiptPO> res = new ArrayList<ReceiptPO>();
-		// TODO
-
+		
+		for (ReceiptPO receiptPO : repoReceiptDataService.getGoodsReceipts(condition).getObj()) {
+			res.add(receiptPO);
+		}
+		for (ReceiptPO receiptPO : repoReceiptDataService.getRepoReceipts(condition).getObj()) {
+			res.add(receiptPO);
+		}
 		return res;
 	}
 

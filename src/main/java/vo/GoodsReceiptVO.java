@@ -12,7 +12,6 @@ import java.util.Vector;
 public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	
 	
-	public String date;
 	public String user;
 	
 	Vector<GoodsVO> goodsVOs;
@@ -20,7 +19,11 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public GoodsReceiptVO(GoodsReceiptPO goodsReceiptPO) {
-		//TODO
+		user = goodsReceiptPO.getUser();
+		for (GoodsVO goodsVO : goodsReceiptPO.getGoods()) {
+			goodsVOs.add(goodsVO);
+		}
+		sumOfGifts = goodsReceiptPO.getSumOfGifts();
 	}
 	public GoodsReceiptVO(Vector<GoodsVO> goodsVOs, String user) {
 		// TODO Auto-generated constructor stub

@@ -94,17 +94,16 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 		back = new javax.swing.JButton();
 		rece_panel = new javax.swing.JPanel();
 		show_buttons_panel = new javax.swing.JPanel();
-		RepoReceiptVO template = null;
-		if (MainFrame.DEBUG) {
-			template = new RepoReceiptVO();
-			template.actualNum = 10;
-			template.statisticNum = 20;
-			template.receipt_id = "a1";
-			template.receipt_id = "repo1";
-			template.time = "2014-12-3";
-		}
-		repo_rece1 = new Repo_rece(template);//TODO
-		
+		RepoReceiptVO template = new RepoReceiptVO();
+
+		template.actualNum = 10;
+		template.statisticNum = 20;
+		template.goods_id = "a1";
+		template.receipt_id = "repo1";
+		template.time = "2014-12-3";
+
+		repo_rece1 = new Repo_rece(template);
+
 		setPreferredSize(new java.awt.Dimension(800, 600));
 
 		Repo_navigator.setFloatable(false);
@@ -430,10 +429,11 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 		change.add(make_repo_rece, "make");
 
 		repo_rece_list.setPreferredSize(new java.awt.Dimension(524, 367));
-		
-		rece_panel.setLayout(new javax.swing.BoxLayout(rece_panel, javax.swing.BoxLayout.LINE_AXIS));
-        rece_panel.add(repo_rece1);
-        
+
+		rece_panel.setLayout(new javax.swing.BoxLayout(rece_panel,
+				javax.swing.BoxLayout.LINE_AXIS));
+		rece_panel.add(repo_rece1);
+
 		if (MainFrame.DEBUG) {
 			rece_name.setModel(new javax.swing.DefaultComboBoxModel<String>(
 					new String[] { "repo1", "repo2", "repo3" }));
@@ -445,7 +445,7 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				
 				int index = rece_name.getSelectedIndex();
 				RepoReceiptVO template;
 				if (MainFrame.DEBUG) {

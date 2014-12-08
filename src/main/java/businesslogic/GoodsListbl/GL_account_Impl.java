@@ -34,9 +34,9 @@ public class GL_account_Impl implements GL_account_BLservice {
 		return false;
 	}
 
-	public String getDatabase(String account) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public String getDatabase(String account) throws Exception {
+//		// 
+//		return null;
+//	}
 
 }

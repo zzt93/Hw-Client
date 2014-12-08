@@ -56,9 +56,9 @@ public class Approve_List implements Approve_List_BLservice{
 		//</yus>
 		//<zzt>
 		RepoReceiptDataService repository = new RepoReceiptDataImpl();
-		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts().getObj();
+		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts(null).getObj();
 		receipts.addAll(arrRepo);
-		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts().getObj();
+		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts(null).getObj();
 		receipts.addAll(arrGoods);
 		//</zzt>
 		

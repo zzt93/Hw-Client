@@ -237,7 +237,7 @@ public class ApproveUI {
 			tm = new DefaultTableModel(headers2, 1);
 			detailTable.setModel(tm);
 			tm.addRow(new String[] { gpo.type.toString(), gpo.receipt_id, gpo.time,
-					gpo.getGoodsPOs().toString(),
+					gpo.getGoods().toString(),
 					Double.toString(gpo.getSumOfGifts()),
 					gpo.state.toString() });
 			break;

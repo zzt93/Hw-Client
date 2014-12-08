@@ -11,7 +11,6 @@ public class RepoReceiptVO extends ReceiptPO implements Serializable {
 	public int actualNum;
 	public int statisticNum;
 	public String goods_id;
-	public String receipt_id;
 	public RepoReceiptVO(RepoReceiptPO repoReceiptPO) {
 		this.actualNum = repoReceiptPO.getaNum();
 		this.statisticNum = repoReceiptPO.getcNum();
@@ -21,6 +20,5 @@ public class RepoReceiptVO extends ReceiptPO implements Serializable {
 		this.receipt_id = repoReceiptPO.getReceipt_id();
 	}
 	public RepoReceiptVO() {
-		// TODO Auto-generated constructor stub
 	}
 }

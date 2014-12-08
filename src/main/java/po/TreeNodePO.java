@@ -49,13 +49,13 @@ public class TreeNodePO implements Serializable {
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
+		return type_so_far.hashCode();
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+		TreeNodePO temp = (TreeNodePO)obj;
+		return type_so_far.equals(temp.getType_so_far());
 	}
 	
 	public boolean is_leaf() {

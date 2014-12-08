@@ -19,7 +19,6 @@ public class GL_test {
 		try {
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			assert(false);
 		}

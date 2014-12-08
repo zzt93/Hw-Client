@@ -12,9 +12,7 @@ public class GTBLImpl implements GTBLservice{
 	
 	ArrayList<TreeNodePO> treeNodePOs ;
 	
-	public GTBLImpl(String account) {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	public GTBLImpl(ArrayList<TreeNodePO> treeNodePOs) {
 		this.treeNodePOs = treeNodePOs;

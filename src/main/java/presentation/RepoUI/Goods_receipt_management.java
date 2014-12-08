@@ -97,7 +97,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 		show_buttons = new javax.swing.JPanel();
 		back = new javax.swing.JPanel();
 
-		//TODO
+		//TODO whether to have it 
 		Vector<GoodsVO> tempGoodsVOs = new Vector<GoodsVO>();
 		tempGoodsVOs.add(new GoodsVO("a1", 100));
 		tempGoodsVOs.add(new GoodsVO("a2", 200));
@@ -641,7 +641,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 	}// GEN-LAST:event_addActionPerformed
 	GoodsReceiptVO goodsReceiptVO;
 	private void produceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_produceActionPerformed
-		// TODO add user
+		
 		// get data for produce goods receipt
 		Vector<GoodsVO> goodsVOs = new Vector<GoodsVO>();//get all added goods
 		DefaultTableModel giftTableModel = (DefaultTableModel) gift_table.getModel();
@@ -650,7 +650,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 			goodsVOs.add(new GoodsVO(info.get(0), info.get(1), info.get(2) ));
 		}
 		goodsReceiptVO = new GoodsReceiptVO(goodsVOs,
-				 "user");
+				 "user");// TODO add user
 		try {
 			receiptBLImpl.produceGoodsReceipt(goodsReceiptVO);
 		} catch (Exception e) {

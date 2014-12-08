@@ -5,6 +5,7 @@ import po.GoodsReceiptPO;
 import po.RepoFilterPO;
 import po.RepoReceiptPO;
 import po.ResultMessage;
+import vo.ReceiptConditionVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -12,14 +13,14 @@ import java.util.ArrayList;
 public class RepoReceiptDataImpl implements RepoReceiptDataService {
 
 	@Override
-	public ResultMessage<ArrayList<RepoReceiptPO>> getRepoReceipts()
+	public ResultMessage<ArrayList<RepoReceiptPO>> getRepoReceipts(ReceiptConditionVO receiptConditionVO)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage<ArrayList<GoodsReceiptPO>> getGoodsReceipts()
+	public ResultMessage<ArrayList<GoodsReceiptPO>> getGoodsReceipts(ReceiptConditionVO receiptConditionVO)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;

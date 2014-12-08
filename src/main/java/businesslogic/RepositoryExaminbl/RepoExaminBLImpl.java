@@ -68,12 +68,7 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		return result;
 	}
 
-	public void refresh() throws Exception {
-		// TODO
-	}
+	
 
-	public void synchronize() throws Exception {
-		// TODO
-	}
-
+	
 }

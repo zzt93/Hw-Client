@@ -1,6 +1,7 @@
 package po;
 
 import vo.GoodsReceiptVO;
+import vo.GoodsVO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,18 +11,26 @@ import java.util.ArrayList;
  */
 public class GoodsReceiptPO extends ReceiptPO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	ArrayList<GoodsPO> goodsPOs;
+	ArrayList<GoodsVO> goodsVOs;
 	double sumOfGifts;
-	GoodsReceiptVO goodsReceiptVO;
+	String user;
 	public GoodsReceiptPO(GoodsReceiptVO goodsReceiptVO) {
-		this.goodsReceiptVO = goodsReceiptVO;
+		user = goodsReceiptVO.getUser();
+		for (GoodsVO goodsVO : goodsReceiptVO.getGoodsVOs()) {
+			goodsVOs.add(goodsVO);
+		}
+		sumOfGifts = goodsReceiptVO.getSumOfGifts();
 	}
 	
-	public ArrayList<GoodsPO> getGoodsPOs() {
-		return goodsPOs;
+	public ArrayList<GoodsVO> getGoods() {
+		return goodsVOs;
 	}
-	public void setGoodsPOs(ArrayList<GoodsPO> goodsPOs) {
-		this.goodsPOs = goodsPOs;
+	public String getUser() {
+		return user;
+	}
+
+	public void setGoodsPOs(ArrayList<GoodsVO> goodsPOs) {
+		this.goodsVOs = goodsPOs;
 	}
 	public double getSumOfGifts() {
 		return sumOfGifts;
@@ -30,10 +39,8 @@ public class GoodsReceiptPO extends ReceiptPO implements Serializable {
 		this.sumOfGifts = sumOfGifts;
 	}
 	public String getId(){
-		return goodsReceiptVO.getReceipt_Id();
+		return receipt_id;
 	}
 
-	public GoodsReceiptVO getGoodsReceiptVO() {
-		return goodsReceiptVO;
-	}
+	
 }

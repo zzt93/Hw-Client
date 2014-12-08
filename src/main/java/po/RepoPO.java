@@ -24,7 +24,7 @@ public class RepoPO implements Serializable {
 		HashMap<String, ArrayList<GoodsPO>> goodsHashMap = tem.getGoods();
 		for (String id : goodsModel.keySet()) {
 			if (goodsModel.get(id).getAmount() > 0) {
-				repoGoods.add(new RepoGoods(id, goodsModel.get(id), goodsHashMap.get(id)));
+				repoGoods.add(new RepoGoods(id, goodsModel.get(id)));
 			}
 		}
 	}

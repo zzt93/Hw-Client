@@ -21,7 +21,6 @@ public class GT_controllerTest {
 			//assertTrue(gt.add(new TreeNodeVO(), "a"));
 			//assertTrue(gt.delete(new TreeNodeVO()));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			assert(false);
 		}

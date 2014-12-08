@@ -1,17 +1,16 @@
 package po;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class RepoGoods implements Serializable {
 	private static final long serialVersionUID = 1L;
-	public RepoGoods(String id, GoodsModelPO goodsModelPO, ArrayList<GoodsPO> arrayList) {
+	public RepoGoods(String id, GoodsModelPO goodsModelPO) {
 		this.id = id;
 		amount = goodsModelPO.getAmount();
 		aver_price = goodsModelPO.getAver_in();
-		//TODO whose name and model
+		
 		name = goodsModelPO.getName();
-		model = arrayList.get(0).model;
+		model = goodsModelPO.getModel();
 	}
 	String id;
 	

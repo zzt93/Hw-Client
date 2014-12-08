@@ -193,7 +193,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 							try {
 								gl_controller.set_signal_name(temp);
 							} catch (Exception e1) {
-								// TODO Auto-generated catch block
+								
 								e1.printStackTrace();
 							}
 						} else {
