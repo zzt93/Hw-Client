@@ -22,6 +22,7 @@ import presentation.FinancialReceiptui.FinReceiptPane.SubPanel;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
 
+//WARING:废弃不用啦！！！！！！！
 public class CashReceiptPane {
 	static private JFrame frame;
 	private JPanel panel;
@@ -158,9 +159,6 @@ public class CashReceiptPane {
 	public void creatCash(){
 		
 	}
-	public static void main(String[] args){
-		CashReceiptPane temp=new CashReceiptPane();
-	}
 	public class AddItem implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
@@ -215,7 +213,7 @@ public class CashReceiptPane {
 			
 			textItem = new JTextField();
 			textItem.setColumns(10);
-			textItem.setBounds(90, 10, 124, 26);
+			textItem.setBounds(90, 7, 124, 26);
 			panel.add(textItem);
 			
 			textBalance = new JTextField();
@@ -234,8 +232,10 @@ public class CashReceiptPane {
 			panel.add(button);
 			button.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
-					item=new ItemPO(textItem.getText(),
-							Double.valueOf(textBalance.getText()),textRemark.getText());
+					item=new ItemPO(
+							textItem.getText(),
+							Double.valueOf(textBalance.getText()),
+							textRemark.getText());
 					controller.addItem(item);
 					tableModel.addRow(item);
 				}
@@ -254,5 +254,8 @@ public class CashReceiptPane {
 		public void visit(boolean temp){
 			frame.setVisible(temp);
 		}
+	}
+	public static void main(String[] args){
+		CashReceiptPane a=new CashReceiptPane();
 	}
 }

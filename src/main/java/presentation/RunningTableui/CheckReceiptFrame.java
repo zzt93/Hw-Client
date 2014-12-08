@@ -3,6 +3,8 @@ package presentation.RunningTableui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ import vo.ReceiptConditionVO;
 import businesslogic.RunningTablebl.RunTableController;
 
 public class CheckReceiptFrame {
-	private JFrame frame;
+//	private JFrame frame;
 	private JTextField textRepository;
 	private JTable table;
 	private JTextField textStartTime;
@@ -39,6 +41,7 @@ public class CheckReceiptFrame {
 	JComboBox boxOperator;
 	JComboBox boxType;
 	JComboBox boxClient;
+	private JPanel panel;
 	private PublicTableModel tableModel;
 	private RunTableController controller;
 	private List<ReceiptPO> receiptList;
@@ -51,15 +54,15 @@ public class CheckReceiptFrame {
 //			e.printStackTrace();
 //		}
 		initialize();
-		frame.setVisible(true);
+//		frame.setVisible(true);
 	} 
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame = new JFrame();
+//		frame.setBounds(100, 100, 800, 500);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel = new JPanel();
+//		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("单据类型:");
@@ -85,8 +88,17 @@ public class CheckReceiptFrame {
 		JLabel label_5 = new JLabel("客户:");
 		label_5.setBounds(60, 260, 54, 15);
 		panel.add(label_5);
-		//TODO
-		boxClient = new JComboBox();
+		
+	
+		//TODO,获得客户列表,是否插入无客户情况?
+//		try {
+//			boxClient=new JComboBox(controller.getClient());
+//		} catch (Exception e1) {
+//			JOptionPane.showMessageDialog(null, e1.getMessage());
+//			e1.printStackTrace();
+//		}
+		boxClient = new JComboBox(new String[]{null,"客户1","客户2"});
+		
 		boxClient.setBounds(115, 260, 100, 21);
 		panel.add(boxClient);
 	
@@ -94,8 +106,16 @@ public class CheckReceiptFrame {
 		textRepository.setBounds(115, 217, 100, 21);
 		panel.add(textRepository);
 		textRepository.setColumns(10);
-		 //TODO
-		boxOperator = new JComboBox();
+		
+		//TODO,获得操作员列表,是否加入无操作员情况?
+//		try {
+//			boxOperator=new JComboBox(controller.getOperator());
+//		} catch (Exception e1) {
+//			JOptionPane.showMessageDialog(null, e1.getMessage());
+//			e1.printStackTrace();
+//		}
+		boxOperator = new JComboBox(new String[]{null,"操作员1","操作员2"});
+		
 		boxOperator.setBounds(115, 177, 100, 21);
 		panel.add(boxOperator);
 		//TODO
@@ -154,6 +174,9 @@ public class CheckReceiptFrame {
 		panel.add(btnCreditCopy);
 		
 	}
+	public JPanel getPanel(){
+		return panel;
+	}
 	public class Query implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			ReceiptType type;
@@ -180,6 +203,13 @@ public class CheckReceiptFrame {
 						
 		}
 		
+	}
+	public class MouseClick extends MouseAdapter{
+		public void mouseClicked(MouseEvent e){
+			if(e.getClickCount()>=2){
+				//TODO,响应鼠标点击，弹出单据内容
+			}
+		}
 	}
 	public static void main(String[] args){
 		CheckReceiptFrame a=new CheckReceiptFrame();
