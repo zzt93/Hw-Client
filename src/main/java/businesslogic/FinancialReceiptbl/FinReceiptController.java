@@ -96,8 +96,13 @@ public class FinReceiptController implements FinancialReceiptblservice{
 	}
 	public ReceiptPO[] getReceipt()throws Exception{
 		return new ReceiptPO[1];
+		//TODO
 	}
 	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception{
+		ResultMessage result;
+		result=finReceipt.queryReceipt(vo);
+		result.throwIfFailed();
+		//TODO
 		return null;
 	}
 	public void creditCash(CashVO vo)throws Exception{

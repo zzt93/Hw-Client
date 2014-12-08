@@ -11,6 +11,7 @@ import po.RecPO;
 import po.ReceiptPO;
 import po.ResultMessage;
 import util.RMIUtility;
+import vo.ReceiptConditionVO;
 
 public class FinReceipt {
 	  private static FinancialReceiptdataservice dataService;
@@ -38,6 +39,11 @@ public class FinReceipt {
 	public ResultMessage update(ReceiptPO [] receipt) throws RemoteException{
 		ResultMessage result;
 		result=dataService.update(receipt);
+		return result;
+	}
+	public ResultMessage queryReceipt(ReceiptConditionVO condition)throws RemoteException{
+		ResultMessage result;
+		result=dataService.queryReceipt(condition);
 		return result;
 	}
 }

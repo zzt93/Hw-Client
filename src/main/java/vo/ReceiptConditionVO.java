@@ -1,5 +1,7 @@
 package vo;
 
+import po.DealState;
+import po.ReceiptState;
 import po.ReceiptType;
 
 import java.io.Serializable;
@@ -7,6 +9,8 @@ import java.io.Serializable;
 public class ReceiptConditionVO extends TimeConditionVO implements Serializable {
     public String startTime, endTime, client, operator, storage;
     public ReceiptType type;
+    public ReceiptState state;
+    public DealState dealState;
     private static final long serialVersionUID = 1L;
     public ReceiptConditionVO(String startTime, String endTime, ReceiptType type, String client
             , String operator, String storage) {
@@ -24,4 +28,5 @@ public class ReceiptConditionVO extends TimeConditionVO implements Serializable 
 
     public ReceiptConditionVO() {
     }
+   
 }
