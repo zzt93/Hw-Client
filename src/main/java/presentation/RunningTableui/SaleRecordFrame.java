@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import businesslogic.RunningTablebl.RunTableController;
 import presentation.Saleui.GoodsPaneType;
@@ -31,16 +33,21 @@ public class SaleRecordFrame {
 	private JTextField textGoods;
 	private JComboBox boxOperator;
 	private JComboBox boxClient;
+	
 	private RunTableController controller;
 	private PublicTableModel tableModel;
 	
+	public SaleRecordFrame(){
+		initialize();
+		frame.setVisible(true);
+	}
 	private void initialize() {
-//		frame = new JFrame();
-//		frame.setBounds(100, 100, 800, 500);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 800, 500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		JPanel panel = new JPanel();
-//		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("商品:");
@@ -119,6 +126,8 @@ public class SaleRecordFrame {
 		btnGoodsList.setBounds(206, 56, 40, 23);
 		panel.add(btnGoodsList);
 		btnGoodsList.addActionListener(new GoodsList());
+		
+		textGoods.setEditable(false);
 	}
 	public class GoodsList implements ActionListener{
 		JFrame listFrame;
@@ -127,26 +136,33 @@ public class SaleRecordFrame {
 			showGoodsList();
 		}
 		public void showGoodsList(){
-			listFrame=new JFrame();
-			listFrame.setBounds(0,0,200,400);
-			listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			listFrame.setLocationRelativeTo(null);
-			String[] temp;
-			temp=controller.getGoodsList();
-			goodsList=new JList<String>(temp);
-			goodsList.addMouseListener(new MouseClick());
-			JScrollPane scroll=new JScrollPane();
-			scroll.setViewportView(goodsList);
-			listFrame.add(scroll);
+			if(listFrame==null){
+				listFrame=new JFrame();
+				listFrame.setBounds(0,0,200,400);
+				listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				listFrame.setLocationRelativeTo(null);
+				String[] temp;
+				temp=new String[]{"1","客户2","客户3","客户4"};
+				//FIXME
+//				temp=controller.getGoodsList();
+				goodsList=new JList<String>(temp);
+				goodsList.addMouseListener(new MouseClick());
+				JScrollPane scroll=new JScrollPane();
+				scroll.setViewportView(goodsList);
+				listFrame.add(scroll);
+			}
 			listFrame.setVisible(true);
 		}
 		public class MouseClick extends MouseAdapter{
 			public void mouseClicked(MouseEvent e){
 				if(e.getClickCount()>=2){
 					textGoods.setText(goodsList.getSelectedValue());
+					listFrame.setVisible(false);
 				}
 			}
 		}
 	}
-	
+	public static void main(String[] args){
+		SaleRecordFrame a=new SaleRecordFrame();
+	}
 }
