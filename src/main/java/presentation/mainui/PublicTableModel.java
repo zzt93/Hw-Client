@@ -62,6 +62,9 @@ public class PublicTableModel extends DefaultTableModel {
 		case SALERECORD:
 			name=new String[]{"时间","商品名","型号","数量","单价","总额"};
 			break;
+		case GOODSRECEIPT:
+			name=new String[]{"商品编号","名称","类型","数量","进价","售价"};
+			break;
 		default:
 			return;
 		}
@@ -204,6 +207,21 @@ public class PublicTableModel extends DefaultTableModel {
 			}
 			update(data);
 		}
+		case GOODSRECEIPT:{
+			data=new Object[list.size()][6];
+			GoodsPO temp;
+			for(int i=0;i<list.size();i++){
+				temp=(GoodsPO)list.get(i);
+				data[i][0]=temp.getId();
+				data[i][1]=temp.getName();
+				data[i][2]=temp.getModel();
+				data[i][3]=temp.getAmount();
+				data[i][4]=temp.getInPrice();
+				data[i][5]=temp.getOutPrice();
+			}
+			update(data);
+		}
+			
 		}
 	}
 	public void update(BankVO[] list){
