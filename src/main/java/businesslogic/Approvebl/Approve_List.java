@@ -187,7 +187,7 @@ public class Approve_List implements Approve_List_BLservice{
 	class IdComparator implements Comparator<ReceiptPO>{
 		@Override
 		public int compare(ReceiptPO o1,ReceiptPO o2){
-			return o1.id-o2.id;
+			return o1.receipt_id.compareTo(o2.receipt_id);
 		}
 	}
 	

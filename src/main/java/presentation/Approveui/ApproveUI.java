@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import businesslogic.Adminbl.Adminbl;
+import businesslogicservice.Adminblservice.AdminBLService;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
 
 import java.awt.*;
@@ -26,6 +28,7 @@ public class ApproveUI {
 	private ArrayList<ReceiptPO> approveIndex;
 	private ArrayList<ReceiptPO> listOfReceipts;
 	private String[][] cellData;
+	private AdminBLService ad;
 
 	/**
 	 * Launch the application.
@@ -325,7 +328,13 @@ public class ApproveUI {
 		cellData = new String[3][4];
 		int i = 0;
 		listOfReceipts = new ArrayList<ReceiptPO>();
-		listOfReceipts.add(new RepoReceiptPO("hehe", 12, 12));
+		try {
+			ad = new Adminbl();
+			listOfReceipts.add(new RepoReceiptPO("hehe", 12, 12,ad.getUser()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		listOfReceipts.add(new CashPO());
 		listOfReceipts.add(new SaleReceiptPO(10,"2","3","4",new BigDecimal(0)));
 		for (ReceiptPO po : listOfReceipts) {
