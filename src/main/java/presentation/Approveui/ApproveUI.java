@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import businesslogic.Adminbl.Adminbl;
+import businesslogic.Approvebl.Approve_Mock;
 import businesslogicservice.Adminblservice.AdminBLService;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
 
@@ -68,10 +69,10 @@ public class ApproveUI {
 		totalPanel.setBounds(0, 0, 750, 498);
 		totalPanel.setLayout(null);
 		frame.getContentPane().add(totalPanel);
-
+		//TODO 用于Mock的切换
 		// /Read Receipts
-		 //listOfReceipts = approveBL.showList();
-
+		// listOfReceipts = approveBL.showList();
+		listOfReceipts = new Approve_Mock().showList();
 		final JLabel labelHint = new JLabel("状态栏");
 		labelHint.setBounds(39, 473, 211, 15);
 		totalPanel.add(labelHint);
@@ -82,18 +83,19 @@ public class ApproveUI {
 		 * Details
 		 */
 		final JScrollPane detailScrollPane = new JScrollPane();
-		detailScrollPane.setBounds(108, 322, 557, 75);
+		detailScrollPane.setBounds(108, 322, 557, 81);
 		totalPanel.add(detailScrollPane);
 
 		TableModel detailTableModel = new DefaultTableModel(new String[1][2],
 				new String[] { "项目", "值" });
 		final JTable detailTable = new JTable(detailTableModel);
+		detailTable.setRowHeight(100);
 		detailTable.setBounds(107, 322, 325, 93);
 		detailScrollPane.setViewportView(detailTable);
 
 		// TODO 就是想搞你一下的存根;
-		 refreshTableDebug();
-		//refreshTable();
+		// refreshTableDebug();
+		refreshTable();
 
 		TableModel tm = new DefaultTableModel(cellData, name);
 
@@ -141,11 +143,14 @@ public class ApproveUI {
 			public void actionPerformed(ActionEvent arg0) {
 				int approves[] = table.getSelectedRows();
 				for (int i : approves) {
-					listOfReceipts.get(i).state = ReceiptState.approve;
-					refreshTable();
-					listOfReceipts.get(i).state = ReceiptState.disapprove;
-					approveIndex.add(listOfReceipts.get(i));
+					if(listOfReceipts.get(i).state == ReceiptState.wait){
+						listOfReceipts.get(i).state = ReceiptState.approve;
+						refreshTable();
+						listOfReceipts.get(i).state = ReceiptState.wait;
+						approveIndex.add(listOfReceipts.get(i));
 
+					}
+					
 				}
 			}
 		});
@@ -180,7 +185,7 @@ public class ApproveUI {
 				} else {
 					listOfReceipts.get(selectedRow).state = ReceiptState.approve;
 					refreshTable();
-					listOfReceipts.get(selectedRow).state = ReceiptState.disapprove;
+					listOfReceipts.get(selectedRow).state = ReceiptState.wait;
 					approveIndex.add(listOfReceipts.get(selectedRow));
 					labelHint.setText("已审批为通过");
 				}
