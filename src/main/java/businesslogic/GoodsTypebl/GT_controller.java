@@ -39,7 +39,8 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		}
 
 		if (treeNodePOs.size()==0) {
-			treeNodePOs.add(new TreeNodePO(new TreeNodePO("Light/灯")));
+			treeNodePOs.add(new TreeNodePO("Light/灯"));
+			goodsTypeDateService.insert(new TreeNodePO("Light/灯"));
 		}
 		gtbLservice = new GTBLImpl(treeNodePOs);
 		gt_gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
