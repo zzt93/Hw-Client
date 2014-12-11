@@ -31,6 +31,7 @@ public class BankController implements BankManageblservice{
 	public BankVO[] search(String field)throws Exception{
 		ResultMessage result=manage.search(field);
 		result.throwIfFailed();
-		return (BankVO[])result.getObj();
+		BankVO vo = new BankVO((BankPO) result.getObj());
+		return new BankVO[]{vo};
 	}
 }
