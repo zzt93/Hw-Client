@@ -129,6 +129,7 @@ public class LoggingPanel extends JPanel {
 						}else{
 							SalesmanUI sales=new SalesmanUI();
 						}
+						Gui.frame.dispose();
 					} else {
 						JOptionPane.showMessageDialog(Gui.frame,
 								"Wrong password", "Warning", 0);
