@@ -112,25 +112,24 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 	public int height() {
 		int height = 0;
 		TreeNodePO fa = treeNodePOs.get(0);
-		while (fa != null) {
-			for (TreeNodePO treeNodePO : fa.getSons()) {
-				int temp = travel(treeNodePO, height);
-				if (height > temp) {
-					System.err.println("some thing wrong");
-					assert (false);
-				} else {
-					height = temp;
-				}
-			}
-		}
-		return height;
+		return travel(fa, 0);
 	}
 
 	private int travel(TreeNodePO po, int i) {
-		if (po == null) {
+		if (po == null ) {
 			return i;
 		} else {
-			return travel(po, i + 1);
+			if (po.getSons().size() == 0){
+				return i+1;
+			}
+			int max = 0;
+			for (TreeNodePO treeNodePO : po.getSons()) {
+				int temp = travel(treeNodePO, i+1);
+				if (max < temp){
+					max = temp;
+				}
+			}
+			return max;
 		}
 	}
 }

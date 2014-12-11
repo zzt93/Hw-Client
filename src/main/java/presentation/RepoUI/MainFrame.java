@@ -30,7 +30,7 @@ import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 
 	/**
 	 * Creates new form MainFrame

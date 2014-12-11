@@ -1,5 +1,5 @@
 package businesslogic.RunningTablebl;
-
+/*
 import businesslogicservice.RunningTableblservice.RunningTableblservice;
 import po.ReceiptPO;
 import po.ResultMessage;
@@ -8,7 +8,7 @@ import vo.*;
 public class RunningTable_stub implements RunningTableblservice {
 	ResultMessage right=new ResultMessage(null,null);
 	ResultMessage wrong=new ResultMessage("出现了问题",null);
-	
+
 	public GoodsRecordVO[] getSaleTable(SaleConditionVO vo) throws Exception {
 		right.throwIfFailed();
 		GoodsRecordVO[] record=new GoodsRecordVO[2];
@@ -17,7 +17,7 @@ public class RunningTable_stub implements RunningTableblservice {
 		return record;
 	}
 
-	
+
 	public ReceiptPO[] getReceipt(ReceiptConditionVO vo) throws Exception {
 		right.throwIfFailed();
 		return new ReceiptPO[5];
@@ -36,3 +36,4 @@ public class RunningTable_stub implements RunningTableblservice {
 	}
 
 }
+*/

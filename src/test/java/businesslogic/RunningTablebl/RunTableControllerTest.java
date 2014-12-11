@@ -1,5 +1,5 @@
 package businesslogic.RunningTablebl;
-
+/*
 import org.junit.Before;
 import org.junit.Test;
 import po.ReceiptPO;
@@ -59,3 +59,4 @@ public class RunTableControllerTest {
 	}
 
 }
+*/
