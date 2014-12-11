@@ -40,6 +40,9 @@ public class SaleReceiptPane {
 	private PublicTableModel tableModel;
 	private SaleReceiptPO receipt;
 	
+	public SaleReceiptPane(){
+		initialize();
+	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 600);

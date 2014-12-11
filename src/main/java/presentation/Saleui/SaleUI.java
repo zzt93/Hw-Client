@@ -27,6 +27,7 @@ import javax.swing.JTextPane;
 import javax.swing.LayoutStyle;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.Adminbl.AdminController;
 import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
@@ -85,7 +86,6 @@ public class SaleUI extends JPanel {
     
     List<StrategyPO> strategyList;
     private StrategyList strategyController;
-    
     public static double total; 
     List<ClientPO> clientList;
     private SaleUtilityImpl saleController;
@@ -141,32 +141,32 @@ public class SaleUI extends JPanel {
         jButton3 = new JButton();
 
 //      FIXME,涉及服务器，暂时无法测试
-//      ClientUtilityImpl client;
-//		try {
-//	        saleController= new SaleUtilityImpl();
-//	        HashMap<String,Object> map=new HashMap<String,Object>();
-//	        map.put("type",ClientType.SELLER);
-//			client = new ClientUtilityImpl();
-//	        try {
-//				clientList=client.queryClient(map);
-//			} catch (Exception e) {
-//				JOptionPane.showMessageDialog(null, e.getMessage());
-//			}
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//			JOptionPane.showMessageDialog(null, "服务器出现问题");
-//			System.exit(ERROR);
-//		} catch (NotBoundException e) {
-//			e.printStackTrace();
-//			JOptionPane.showMessageDialog(null, "服务器出现问题");
-//			System.exit(ERROR);
-//		}
-//      String[] temp=new String[clientList.size()];
-//      for(int i=0;i<temp.length;i++){
-//      	temp[i]=clientList.get(i).getName();
-//      }
-//      boxClient = new JComboBox(temp);
-        boxClient=new JComboBox(new String[]{"张三","李四"});
+        ClientUtilityImpl client;
+		try {
+			saleController= new SaleUtilityImpl();
+			HashMap<String,Object> map=new HashMap<String,Object>();
+			map.put("type",ClientType.SELLER);
+			client = new ClientUtilityImpl();
+			try {
+				clientList=client.queryClient(map);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "服务器出现问题");
+			System.exit(ERROR);
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "服务器出现问题");
+			System.exit(ERROR);
+		}
+		String[] temp=new String[clientList.size()];
+		for(int i=0;i<temp.length;i++){
+			temp[i]=clientList.get(i).getName();
+		}
+		boxClient = new JComboBox(temp);
+//      	boxClient=new JComboBox(new String[]{"张三","李四"});
         boxType=new JComboBox(new String[]{"销售","销售退货"});
         boxType.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent e) {
@@ -436,10 +436,23 @@ public class SaleUI extends JPanel {
     	ClientPO client=clientList.get(boxClient.getSelectedIndex());
     	//FIXME,操作员get
     	//int id=123;
+    	AdminController adminController;
+    	String operator=null;
+		try {
+			adminController = new AdminController();
+			operator=adminController.getUser();
+		} catch (RemoteException | NotBoundException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}catch (Exception e2){
+			JOptionPane.showMessageDialog(null, e2.getMessage());
+			e2.printStackTrace();
+		}
+    	
     	saleReceipt=new SaleReceiptPO(
     			client.getId(),
     			textRepository.getText(),
-    			"操作员",
+    			operator,
     			textComment.getText(),
     			new BigDecimal(total));
     	saleReceipt.setProductList(prList);

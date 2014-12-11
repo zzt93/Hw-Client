@@ -54,18 +54,18 @@ public class FinReceiptPane {
 	JLabel label4;
 	JLabel label3;
 	JScrollPane scrollPane;
-	
-//	FinReceiptController controller;
+	//FIXME
+	FinReceiptController controller;
 	SubPanel listPane;
 	
 	public FinReceiptPane(){
 		//FIXME
-//		try {
-//			controller=new FinReceiptController();
-//		} catch (RemoteException | NotBoundException e) {
-//			JOptionPane.showMessageDialog(null, "服务器出现了问题");
-//			e.printStackTrace();
-//		}
+		try {
+			controller=new FinReceiptController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现了问题");
+			e.printStackTrace();
+		}
 		initialize();
 	}
 	public void ini(){//每次发起一次添加单据操作前执行,
@@ -73,8 +73,8 @@ public class FinReceiptPane {
 		if(comboBox!=null)
 		panel.remove(comboBox);
 		//FIXME
-//		controller.clearBank();
-//		controller.clearItem();
+		controller.clearBank();
+		controller.clearItem();
 	}
 	public void initialize(){
 		frame = new JFrame();
@@ -99,10 +99,20 @@ public class FinReceiptPane {
 //		textNum.setColumns(10);
 //		textNum.setEditable(false);
 		//FIXME,操作员获得
-		JLabel labelOperator = new JLabel("操作员");
-		labelOperator.setFont(font);
-		labelOperator.setBounds(90, 93, 54, 20);
-		panel.add(labelOperator);
+		
+		JLabel labelOperator;
+		try {
+			labelOperator = new JLabel(controller.getOperator());
+			labelOperator.setFont(font);
+			labelOperator.setBounds(90, 93, 54, 20);
+			panel.add(labelOperator);
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}
+//		labelOperator.setFont(font);
+//		labelOperator.setBounds(90, 93, 54, 20);
+//		panel.add(labelOperator);
 		
 		textOperator = new JTextField();
 		textOperator.setFont(font2);
@@ -151,10 +161,6 @@ public class FinReceiptPane {
 		panel.add(btnCancel);
 		btnCancel.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				//FIXME
-//				controller.clearBank();
-//				controller.clearItem();
-//				panel.remove(comboBox);
 				frame.dispose();
 			}
 		});
@@ -176,13 +182,13 @@ public class FinReceiptPane {
 		
 		//FIXEME,客户获得
 		String[] temp=null;
-//		try {
-//			temp = controller.getClient();
-//		} catch (Exception e1) {
-//			JOptionPane.showMessageDialog(null, e1.getMessage());
-//			e1.printStackTrace();
-//		}
-		temp=new String[]{"客户1","客户2"};
+		try {
+			temp = controller.getClient();
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}
+//		temp=new String[]{"客户1","客户2"};
 		
 		comboBox = new JComboBox(temp);
 		comboBox.setFont(font2);
@@ -201,13 +207,13 @@ public class FinReceiptPane {
 		label4.setText("条目清单");
 		//FIXEME,银行获得
 		String[] temp=null;
-//		try {
-//			temp = controller.getClient();
-//		} catch (Exception e1) {
-//			JOptionPane.showMessageDialog(null, e1.getMessage());
-//			e1.printStackTrace();
-//		}
-		temp=new String[]{"银行账户1","银行账户2"};
+		try {
+			temp = controller.getClient();
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}
+//		temp=new String[]{"银行账户1","银行账户2"};
 		
 		comboBox = new JComboBox(temp);
 		comboBox.setFont(font2);
@@ -226,14 +232,14 @@ public class FinReceiptPane {
 						(String)comboBox.getSelectedItem(),
 						textOperator.getText(),
 						total);
-				JOptionPane.showMessageDialog(null, "添加成功");
-				//FIXME
-//				try {
-//					controller.makePayment(pay);
 //				JOptionPane.showMessageDialog(null, "添加成功");
-//				} catch (Exception e1) {
-//					JOptionPane.showMessageDialog(null, e1.getMessage());
-//				}
+				//FIXME,
+				try {
+					controller.makePayment(pay);
+					JOptionPane.showMessageDialog(null, "添加成功");
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
 			}
 			
 		});
@@ -251,14 +257,14 @@ public class FinReceiptPane {
 						textOperator.getText(),
 						total);
 				
-				JOptionPane.showMessageDialog(null, "添加成功");
+//				JOptionPane.showMessageDialog(null, "添加成功");
 				//FIXME
-//				try {
-//					controller.makeCash(cash);
-//					JOptionPane.showMessageDialog(null, "添加成功");
-//				} catch (Exception e1) {
-//					JOptionPane.showMessageDialog(null, e1.getMessage());
-//				}
+				try {
+					controller.makeCash(cash);
+					JOptionPane.showMessageDialog(null, "添加成功");
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
 			}
 			
 		});
@@ -275,14 +281,14 @@ public class FinReceiptPane {
 						textOperator.getText(),
 						total);
 				
-				JOptionPane.showMessageDialog(null, "添加成功");
-				//FIXME
-//				try {
-//					controller.makeReceive(receive);
 //				JOptionPane.showMessageDialog(null, "添加成功");
-//				} catch (Exception e1) {
-//					JOptionPane.showMessageDialog(null, e1.getMessage());
-//				}
+				//FIXME
+				try {
+					controller.makeReceive(receive);
+				JOptionPane.showMessageDialog(null, "添加成功");
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
 			}
 			
 		});
@@ -295,8 +301,8 @@ public class FinReceiptPane {
 				JOptionPane.showMessageDialog(null, "未选中账户");
 			}else{
 				//FIXME,
-				//tableModel,ArrayList是否一样动态调整？
-//				controller.deleteBank(table.getSelectedRow());
+//				tableModel,ArrayList是否一样动态调整？
+				controller.deleteBank(table.getSelectedRow());
 				tableModel.removeRow(table.getSelectedRow());
 			}
 			
@@ -381,13 +387,13 @@ public class FinReceiptPane {
 		public void transfer(){
 			String[] temp=null;
 			
-//			try {
-//				temp = controller.getBank();
-//			} catch (Exception e1) {
-//				JOptionPane.showMessageDialog(null, e1.getMessage());
-//				e1.printStackTrace();
-//			}
-			temp=new String[]{"银行账户1","银行账户2","银行账户3"};
+			try {
+				temp = controller.getBank();
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+				e1.printStackTrace();
+			}
+//			temp=new String[]{"银行账户1","银行账户2","银行账户3"};
 			//FIXME,获得银行列表
 			
 			comboBox=new JComboBox(temp);
@@ -402,10 +408,9 @@ public class FinReceiptPane {
 							textRemark.getText());
 					tableModel.addRow(bankTrans);
 					//FIXME
-//					total=controller.addBank(bankTrans);
+					total=controller.addBank(bankTrans);
 					labelTotal.setText(String.valueOf(total));
 					textAmount.setText(null);
-//					textRemark.setText(null);
 					frame.setVisible(false);
 				}
 			});
@@ -424,7 +429,7 @@ public class FinReceiptPane {
 							Double.valueOf(textAmount.getText()),
 							textRemark.getText());
 					//FIXME
-//					controller.addItem(item);
+					controller.addItem(item);
 					tableModel.addRow(item);
 					textAmount.setText(null);
 					textRemark.setText(null);

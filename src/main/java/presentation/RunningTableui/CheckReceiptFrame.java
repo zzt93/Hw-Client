@@ -25,9 +25,14 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
+import po.CashPO;
+import po.GoodsReceiptPO;
 import po.RecPO;
 import po.ReceiptPO;
 import po.ReceiptType;
+import po.RepoReceiptPO;
+import po.SaleReceiptPO;
+import po.StockReceiptPO;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
 import vo.ReceiptConditionVO;
@@ -48,12 +53,12 @@ public class CheckReceiptFrame {
 	private List<ReceiptPO> receiptList;
 	
 	public CheckReceiptFrame(){
-//		try {
-//			controller=new RunTableController();
-//		} catch (RemoteException | NotBoundException e) {
-//			JOptionPane.showMessageDialog(null, "服务器出现问题");
-//			e.printStackTrace();
-//		}
+		try {
+			controller=new RunTableController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现问题");
+			e.printStackTrace();
+		}
 		initialize();
 //		frame.setVisible(true);
 	} 
@@ -92,13 +97,13 @@ public class CheckReceiptFrame {
 		
 	
 		//TODO,获得客户列表,是否插入无客户情况?
-//		try {
-//			boxClient=new JComboBox(controller.getClient());
-//		} catch (Exception e1) {
-//			JOptionPane.showMessageDialog(null, e1.getMessage());
-//			e1.printStackTrace();
-//		}
-		boxClient = new JComboBox(new String[]{null,"客户1","客户2"});
+		try {
+			boxClient=new JComboBox(controller.getClient());
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}
+//		boxClient = new JComboBox(new String[]{null,"客户1","客户2"});
 		
 		boxClient.setBounds(115, 260, 100, 21);
 		panel.add(boxClient);
@@ -109,13 +114,13 @@ public class CheckReceiptFrame {
 		textRepository.setColumns(10);
 		
 		//TODO,获得操作员列表,是否加入无操作员情况?
-//		try {
-//			boxOperator=new JComboBox(controller.getOperator());
-//		} catch (Exception e1) {
-//			JOptionPane.showMessageDialog(null, e1.getMessage());
-//			e1.printStackTrace();
-//		}
-		boxOperator = new JComboBox(new String[]{null,"操作员1","操作员2"});
+		try {
+			boxOperator=new JComboBox(controller.getOperator());
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}
+//		boxOperator = new JComboBox(new String[]{null,"操作员1","操作员2"});
 		
 		boxOperator.setBounds(115, 177, 100, 21);
 		panel.add(boxOperator);
@@ -199,15 +204,23 @@ public class CheckReceiptFrame {
 					(String)boxOperator.getSelectedItem(),
 					textRepository.getText());
 			//FIXME，进行查询操作，更新列表
-					//测试代码
-			{
-				RecPO rec=new RecPO();
-				RecPO rec1=new RecPO();
-				List<ReceiptPO> tempList=new ArrayList<ReceiptPO>();
-				tempList.add(rec);
-				tempList.add(rec1);
-				tableModel.update(tempList);
+			try {
+				receiptList=controller.getReceipt(condition);
+				tableModel.update(receiptList);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+			
+//					//测试代码
+//			{
+//				RecPO rec=new RecPO();
+//				RecPO rec1=new RecPO();
+//				List<ReceiptPO> tempList=new ArrayList<ReceiptPO>();
+//				tempList.add(rec);
+//				tempList.add(rec1);
+//				tableModel.update(tempList);
+//			}
 				
 						
 		}
@@ -217,6 +230,48 @@ public class CheckReceiptFrame {
 		public void mouseClicked(MouseEvent e){
 			if(e.getClickCount()>=2){
 				//TODO,响应鼠标点击，弹出单据内容
+				ReceiptPO temp=receiptList.get(table.getSelectedRow());
+				switch(temp.type){
+				case CASH:{
+					CashReceiptPane cash=new CashReceiptPane();
+					cash.set((CashPO)temp);
+					cash.visit(true);
+					break;
+				}
+				case PAYMENT:
+				case RECEIVE:{
+					PayReceiptPane pay=new PayReceiptPane();
+					pay.set((RecPO)temp);
+					pay.visit(true);
+					break;
+				}
+				case REPORECEIPT:{
+					RepoReceiptPane repo=new RepoReceiptPane();
+					repo.set((RepoReceiptPO)temp);
+					repo.visit(true);
+					break;
+				}
+				case SALE_ACCEPT:
+				case SALE_REJECTION:{
+					SaleReceiptPane sale=new SaleReceiptPane();
+					sale.set((SaleReceiptPO)temp);
+					sale.visit(true);
+					break;
+				}
+				case STOCK_ACCEPT:
+				case STOCK_REJECTION:{
+					StockReceiptPane stock=new StockReceiptPane();
+					stock.set((StockReceiptPO)temp);
+					stock.visit(true);
+					break;
+				}
+				case GOODSRECEIPT:{
+					GoodsReceiptPane goods=new GoodsReceiptPane();
+					goods.set((GoodsReceiptPO)temp);
+					goods.visit(true);
+					break;
+				}
+				}
 			}
 		}
 	}

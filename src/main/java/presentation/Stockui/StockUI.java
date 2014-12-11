@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle;
 
+import businesslogic.Adminbl.AdminController;
 import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
 import po.ClientPO;
@@ -110,29 +111,28 @@ public class StockUI extends JPanel {
         jButton1 = new JButton();
         jButton2 = new JButton();
        //FIXME,涉及服务器，暂时无法测试
-//        ClientUtilityImpl client;
-//		try {
-//	        stockController= new StockUtilityImpl();
-//	        HashMap<String,Object> map=new HashMap<String,Object>();
-//	        map.put("type",ClientType.STOCKER);
-//			client = new ClientUtilityImpl();
-//	        try {
-//				clientList=client.queryClient(map);
-//			} catch (Exception e) {
-//				JOptionPane.showMessageDialog(null, e.getMessage());
-//			}
-//		} catch (RemoteException | NotBoundException e) {
-//			e.printStackTrace();
-//			JOptionPane.showMessageDialog(null, "服务器出现问题");
-//			//System.exit(ERROR);
-//		} 
-//        String[] temp=new String[clientList.size()];
-//        for(int i=0;i<temp.length;i++){
-//        	temp[i]=clientList.get(i).getName();
-//        }
-        String[] temp={"客户1","客户2"};
+        ClientUtilityImpl client;
+		try {
+	        stockController= new StockUtilityImpl();
+	        HashMap<String,Object> map=new HashMap<String,Object>();
+	        map.put("type",ClientType.STOCKER);
+			client = new ClientUtilityImpl();
+	        try {
+				clientList=client.queryClient(map);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
+		} catch (RemoteException | NotBoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "服务器出现问题");
+			//System.exit(ERROR);
+		} 
+        String[] temp=new String[clientList.size()];
+        for(int i=0;i<temp.length;i++){
+        	temp[i]=clientList.get(i).getName();
+        }
+//        String[] temp={"客户1","客户2"};
         boxClient = new JComboBox(temp);
-        //boxClient=new JComboBox(new String[]{"张三","李四"});
         boxType = new JComboBox(new String[]{"进货","进货退货"});
         
         jScrollPane3.setPreferredSize(new java.awt.Dimension(750, 500));
@@ -365,10 +365,22 @@ public class StockUI extends JPanel {
     private void setStockReceipt(){
     	ClientPO client=clientList.get(boxClient.getSelectedIndex());
     	//FIXME,操作员get
+    	AdminController adminController;
+    	String operator=null;
+		try {
+			adminController = new AdminController();
+			operator=adminController.getUser();
+		} catch (RemoteException | NotBoundException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}catch (Exception e2){
+			JOptionPane.showMessageDialog(null, e2.getMessage());
+			e2.printStackTrace();
+		}
     	stockReceipt=new StockReceiptPO(
     			client.getId(),
     			textRepository.getText(),
-    			"操作员",
+    			operator,
     			textComment.getText(),
     			new BigDecimal(total));
     	stockReceipt.setProductList(list);

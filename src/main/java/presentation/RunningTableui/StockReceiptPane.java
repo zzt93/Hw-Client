@@ -34,6 +34,9 @@ public class StockReceiptPane {
 	private PublicTableModel tableModel;
 	private StockReceiptPO receipt;
 	
+	public StockReceiptPane(){
+		initialize();
+	}
 	private void initialize(){
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 600);

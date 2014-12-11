@@ -26,6 +26,9 @@ public class RepoReceiptPane {
 	private JButton btnCancel;
 
 	private RepoReceiptPO receipt;
+	public RepoReceiptPane(){
+		initialize();
+	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -147,5 +150,8 @@ public class RepoReceiptPane {
 		textState.setText(ReceiptState.getName(receipt.state));
 		textReport.setText(String.valueOf(actualNum-statisticNum));
 		textStatisticNum.setText(String.valueOf(statisticNum));
+	}
+	public void visit(boolean temp){
+		frame.setVisible(temp);
 	}
 }
