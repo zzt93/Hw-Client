@@ -1,5 +1,6 @@
 package businesslogic.FinancialReceiptbl;
 
+import businesslogic.Adminbl.AdminController;
 import businesslogic.BankManagebl.BankController;
 import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
@@ -22,9 +23,11 @@ public class FinReceiptController implements FinancialReceiptblservice{
 	FinReceipt finReceipt;
 	ClientUtilityImpl clientController;
 	BankController bankController;
+	AdminController adminController;
 	public FinReceiptController() throws RemoteException, NotBoundException{
 		finReceipt=new FinReceipt();
 		clientController=new ClientUtilityImpl();
+		adminController=new AdminController();
 	}
 	public void clearBank(){
 		bankList.clear();
@@ -90,9 +93,10 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		}
 		return result;
 	}
-	public String[] getOperator(){
+	public String getOperator() throws Exception{
 		//TODO,通过Admin获得
-		return null;
+		return adminController.getUser();
+	
 	}
 	public ReceiptPO[] getReceipt()throws Exception{
 		return new ReceiptPO[1];
