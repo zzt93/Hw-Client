@@ -12,6 +12,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,6 +68,8 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 				JOptionPane.showMessageDialog(MainFrame.frame,
 						nullPointerException + ": Fail to get gt_controller");
 			}
+		} catch (NotBoundException e) {
+			e.printStackTrace();
 		}
 		if (MainFrame.DEBUG) {
 			treeNodePOs = new ArrayList<TreeNodePO>();

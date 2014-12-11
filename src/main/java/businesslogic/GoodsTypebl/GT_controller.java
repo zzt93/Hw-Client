@@ -8,8 +8,10 @@ import dataservice.GoodsTypedataservice.GoodsTypeDateService;
 import po.GoodsListPO;
 import po.TreeNodePO;
 import presentation.RepoUI.MainFrame;
+import util.RMIUtility;
 import vo.TreeNodeVO;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -24,9 +26,11 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		return treeNodePOs;
 	}
 
-	GoodsTypeDateService goodsTypeDateService = new GoodsTypeDataImpl();
+	GoodsTypeDateService goodsTypeDateService;
+	static String gt_service = "goods type data service";
 
-	public GT_controller() throws RemoteException, NullPointerException {
+	public GT_controller() throws RemoteException, NullPointerException, NotBoundException {
+		goodsTypeDateService = (GoodsTypeDateService) RMIUtility.getImpl(gt_service);
 
 		if (MainFrame.DEBUG) {
 			treeNodePOs = new ArrayList<TreeNodePO>();
@@ -34,7 +38,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 			treeNodePOs = goodsTypeDateService.getGoodsTypde().getObj();
 		}
 
-		if (treeNodePOs == null || treeNodePOs.size()==0) {
+		if (treeNodePOs.size()==0) {
 			treeNodePOs.add(new TreeNodePO(new TreeNodePO("Light/灯")));
 		}
 		gtbLservice = new GTBLImpl(treeNodePOs);

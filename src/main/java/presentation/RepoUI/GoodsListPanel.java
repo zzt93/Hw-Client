@@ -1,6 +1,7 @@
 package presentation.RepoUI;
 
 import java.awt.CardLayout;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +61,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 				JOptionPane.showMessageDialog(MainFrame.frame, e2
 						+ ": Fail to connect to get goods list");
 			}
+		} catch (NotBoundException e) {
+			e.printStackTrace();
 		}
 		initComponents();
 	}
@@ -430,6 +433,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		} catch (NullPointerException nullPointerException) {
 			JOptionPane.showMessageDialog(MainFrame.frame, nullPointerException
 					+ ": Fail to get type info");
+		} catch (NotBoundException e) {
+			e.printStackTrace();
 		}
 		try {
 			addable_type.setModel(new javax.swing.DefaultComboBoxModel(temp

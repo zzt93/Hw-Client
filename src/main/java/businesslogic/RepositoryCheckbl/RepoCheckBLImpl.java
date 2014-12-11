@@ -6,7 +6,9 @@ import businesslogicservice.RepositoryCheckblservice.RepoCheckBLservice;
 import dataservice.RepositoryCheckdataservice.RepoCheckDataService;
 import po.GoodsListPO;
 import po.RepoPO;
+import util.RMIUtility;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -17,14 +19,15 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 	RepoCheckDataService repoCheckDataService;
 	ArrayList<RepoPO> checkRes;
 
+	static String check = "repo check data service";
 	public ArrayList<RepoPO> getCheckRes() {
 		return checkRes;
 	}
 
-	public RepoCheckBLImpl() throws RemoteException, NullPointerException {
+	public RepoCheckBLImpl() throws RemoteException, NullPointerException, NotBoundException {
 		this.gl_repo_BLservice = new GL_manager_repo_Impl();
 		expoter = new Exporter();
-		repoCheckDataService = new RepoCheckDataImpl();
+		repoCheckDataService = (RepoCheckDataService) RMIUtility.getImpl(check);
 		checkRes = repoCheckDataService.getRepo().getObj();
 	}
 
@@ -46,7 +49,7 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 	}
 
 	public void refresh() throws Exception {
-		checkRes = new RepoCheckDataImpl().getRepo().getObj();
+		checkRes = ((RepoCheckDataService) RMIUtility.getImpl(check)).getRepo().getObj();
 	}
 
 	

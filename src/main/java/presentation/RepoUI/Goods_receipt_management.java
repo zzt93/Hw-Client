@@ -6,6 +6,7 @@ import vo.GoodsVO;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.Vector;
@@ -53,6 +54,8 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 			} else {
 				nullPointerException.printStackTrace();
 			}
+		} catch (NotBoundException e) {
+			e.printStackTrace();
 		}
 		initComponents();
 	}

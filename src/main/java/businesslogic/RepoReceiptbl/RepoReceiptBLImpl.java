@@ -4,20 +4,25 @@ import businesslogic.GoodsListbl.GL_controller;
 import businesslogicservice.RepoReceiptblservice.RepoReceBLservice;
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
 import po.*;
+import util.RMIUtility;
 import vo.*;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RepoReceiptBLImpl implements RepoReceBLservice {
 
-	RepoReceiptDataService repoReceiptDataService = new RepoReceiptDataImpl();
+	RepoReceiptDataService repoReceiptDataService ;
 	ArrayList<RepoReceiptPO> repoReceiptPOs;
 	ArrayList<GoodsReceiptPO> goodsReceiptPOs;
 	GL_controller gl_controller;
 
-	public RepoReceiptBLImpl() throws RemoteException, NullPointerException {
+	static String receipt = "receipt";
+
+	public RepoReceiptBLImpl() throws RemoteException, NullPointerException, NotBoundException {
+		repoReceiptDataService = (RepoReceiptDataService) RMIUtility.getImpl(receipt);
 		repoReceiptPOs = repoReceiptDataService.getRepoReceipts(null).getObj();
 		goodsReceiptPOs = repoReceiptDataService.getGoodsReceipts(null).getObj();
 		gl_controller = new GL_controller();

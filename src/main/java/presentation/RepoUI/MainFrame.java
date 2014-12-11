@@ -3,6 +3,7 @@ package presentation.RepoUI;
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.io.File;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -35,10 +36,11 @@ public class MainFrame extends javax.swing.JFrame {
 	 * Creates new form MainFrame
 	 */
 	RepoCheckBLImpl repoCheckBLservice;
-	RepoExaminBLservice repoExaminBLservice = new RepoExaminBLImpl();
+	RepoExaminBLservice repoExaminBLservice ;
 
 	public MainFrame() {
 		try {
+			repoExaminBLservice = new RepoExaminBLImpl();
 			repoCheckBLservice = new RepoCheckBLImpl();
 		} catch (RemoteException e) {
 			JOptionPane.showMessageDialog(frame,
@@ -46,6 +48,8 @@ public class MainFrame extends javax.swing.JFrame {
 		} catch (NullPointerException e1) {
 			JOptionPane.showMessageDialog(frame,
 					"NullPointerException: Repo Check fail to get data");
+		} catch (NotBoundException e) {
+			e.printStackTrace();
 		}
 
 		initComponents();

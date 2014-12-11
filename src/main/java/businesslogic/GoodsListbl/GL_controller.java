@@ -6,9 +6,11 @@ import dataservice.GoodsListdataservice.GoodsListDataService;
 import po.GoodsListPO;
 import po.GoodsModelPO;
 import po.GoodsPO;
+import util.RMIUtility;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,15 +19,17 @@ import java.util.HashMap;
 public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		 GL_receipt_BLservice, GL_signal_BLservice, GL_stock_BLservice, GLBLservice {
 	
-	GoodsListDataService goodsListDataService = new GoodsListDataImpl(null);
-	
-	public GL_controller() throws RemoteException, NullPointerException {
-		
+	GoodsListDataService goodsListDataService;
+	static String gl_service = "goodsListDataService";
+
+
+	public GL_controller() throws RemoteException, NullPointerException, NotBoundException {
+		goodsListDataService = (GoodsListDataService) RMIUtility.getImpl(gl_service);
 		try {
 			goodsListPO = goodsListDataService.getGoodsList().getObj();
 		} catch (NullPointerException e) {
-			//e.printStackTrace();
-			goodsListPO = new GoodsListPO();
+			e.printStackTrace();
+			//goodsListPO = new GoodsListPO();
 		}
 		
 		glbLservice = new GLBLImpl(goodsListPO);
@@ -67,7 +71,11 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	
 	
 	public void refresh() throws RemoteException {
-		goodsListPO = new GoodsListDataImpl(null).getGoodsList().getObj();
+		try {
+			goodsListPO = ((GoodsListDataService)RMIUtility.getImpl(gl_service)).getGoodsList().getObj();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// for glblservice

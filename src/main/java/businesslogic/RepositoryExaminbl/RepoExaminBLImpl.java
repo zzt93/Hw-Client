@@ -8,17 +8,26 @@ import businesslogicservice.Stockblservice.StockUtility;
 import dataservice.RepositoryExamindataservice.RepoExaminDataService;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
+import util.RMIUtility;
 import vo.GoodsRecordVO;
 import vo.InOutRepoVO;
 import vo.ReceiptConditionVO;
 import vo.SaleConditionVO;
 
 import java.math.BigDecimal;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
 public class RepoExaminBLImpl implements RepoExaminBLservice {
 
-	RepoExaminDataService repoExaminDataService = new RepoExamDataImpl();
+	public RepoExaminBLImpl() throws RemoteException, NotBoundException {
+		this.repoExaminDataService = (RepoExaminDataService) RMIUtility.getImpl(examin);
+	}
+
+	RepoExaminDataService repoExaminDataService;
+	static String examin = "repo examin service";
+
 
 	public InOutRepoVO countInOut(String start, String end) throws Exception {
 		BigDecimal in = new BigDecimal(0);

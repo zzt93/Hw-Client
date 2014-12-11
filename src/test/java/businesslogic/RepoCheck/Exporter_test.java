@@ -49,7 +49,7 @@ public class Exporter_test {
 		
 		RepoPO test = new RepoPO(tem);
 		try {
-			new Exporter().export_excel(test);
+			new Exporter().export_excel(test, "test.xls");
 		} catch (ParsePropertyException | InvalidFormatException | IOException e) {
 			
 			e.printStackTrace();

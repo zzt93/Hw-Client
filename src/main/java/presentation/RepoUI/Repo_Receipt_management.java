@@ -3,6 +3,7 @@ package presentation.RepoUI;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -45,6 +46,8 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			} else {
 				nullPointerException.printStackTrace();
 			}
+		} catch (NotBoundException e) {
+			e.printStackTrace();
 		}
 		initComponents();
 	}
