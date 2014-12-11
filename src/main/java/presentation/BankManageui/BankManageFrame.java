@@ -145,7 +145,7 @@ public class BankManageFrame {
 						,JOptionPane.ERROR_MESSAGE);
 			}
 			else{
-				int i=JOptionPane.showConfirmDialog(null, "是否删除？");
+				int i=JOptionPane.showConfirmDialog(null,"","是否删除？",JOptionPane.YES_NO_OPTION);
 				if(i==0){
 					try {
 						controller.delete(list[currentRow]);
