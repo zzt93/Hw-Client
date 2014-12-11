@@ -129,10 +129,11 @@ public class BankPanel {
 		balance.setEditable(false);
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				JOptionPane.showMessageDialog(null,"修改成功");
-				frame.dispose();
+//				JOptionPane.showMessageDialog(null,"修改成功");
+//				frame.dispose();
 				//FIXME,底层
 				try {
+					bank.remark = remark.getText();
 					controller.modify(bank);
 					JOptionPane.showMessageDialog(null,"修改成功");
 					frame.dispose();
