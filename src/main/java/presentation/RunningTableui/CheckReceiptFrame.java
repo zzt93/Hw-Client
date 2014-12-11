@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -172,6 +173,14 @@ public class CheckReceiptFrame {
 		JButton btnCreditCopy = new JButton("红冲复制");
 		btnCreditCopy.setBounds(60, 400, 80, 23);
 		panel.add(btnCreditCopy);
+		
+		JButton btnExcel = new JButton("导出EXCEL");
+		btnExcel.setBounds(280, 410, 93, 23);
+		panel.add(btnExcel);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(404, 410, 283, 23);
+		panel.add(progressBar);
 		
 	}
 	public JPanel getPanel(){

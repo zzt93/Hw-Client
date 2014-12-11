@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -143,6 +144,14 @@ public class SaleRecordFrame {
 		btnGoodsList.setBounds(206, 56, 40, 23);
 		panel.add(btnGoodsList);
 		btnGoodsList.addActionListener(new GoodsList());
+		
+		JButton btnExcel = new JButton("导出EXCEL");
+		btnExcel.setBounds(280, 410, 93, 23);
+		panel.add(btnExcel);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(404, 410, 283, 23);
+		panel.add(progressBar);
 		
 		textGoods.setEditable(false);
 	}
