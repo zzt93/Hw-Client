@@ -378,7 +378,7 @@ public class FinReceiptPane {
 			button_1.setBounds(237, 169, 72, 33);
 			button_1.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					frame.dispose();
+					frame.setVisible(false);
 				}
 			});
 			panel.add(button_1);
