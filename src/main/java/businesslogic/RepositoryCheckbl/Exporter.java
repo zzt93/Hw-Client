@@ -12,9 +12,8 @@ import java.util.HashMap;
 public class Exporter {
 
 	private static String templateFileName = "repo_check.xls";
-	private static String destFileName = "repo_check_output.xls";
 
-	public void export_excel(RepoPO repo) throws ParsePropertyException,
+	public void export_excel(RepoPO repo, String destFileName) throws ParsePropertyException,
 			InvalidFormatException, IOException {
 		HashMap<String, RepoPO> beans = new HashMap<String, RepoPO>();
 		beans.put("repo", repo);

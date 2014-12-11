@@ -41,9 +41,11 @@ public class MainFrame extends javax.swing.JFrame {
 		try {
 			repoCheckBLservice = new RepoCheckBLImpl();
 		} catch (RemoteException e) {
-			JOptionPane.showMessageDialog(frame, "RemoteException: Repo Check fail to get data");
-		} catch (NullPointerException e1){
-			JOptionPane.showMessageDialog(frame, "NullPointerException: Repo Check fail to get data");
+			JOptionPane.showMessageDialog(frame,
+					"RemoteException: Repo Check fail to get data");
+		} catch (NullPointerException e1) {
+			JOptionPane.showMessageDialog(frame,
+					"NullPointerException: Repo Check fail to get data");
 		}
 
 		initComponents();
@@ -76,7 +78,7 @@ public class MainFrame extends javax.swing.JFrame {
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-//		log_in1 = new Log_in();
+		// log_in1 = new Log_in();
 		first = new javax.swing.JPanel();
 		tab_pane = new javax.swing.JTabbedPane();
 		goods_panel = new javax.swing.JPanel();
@@ -122,7 +124,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new java.awt.CardLayout());
-//		getContentPane().add(log_in1, "log_card");
+		// getContentPane().add(log_in1, "log_card");
 
 		first.setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -696,7 +698,6 @@ public class MainFrame extends javax.swing.JFrame {
 
 	private void repo_examinActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_repo_examinActionPerformed
 
-		
 		String[] data = new String[6];
 
 		data[0] = (String) s_year.getSelectedItem() + "-"
@@ -705,7 +706,7 @@ public class MainFrame extends javax.swing.JFrame {
 				+ s_mon1.getSelectedItem() + "-" + s_day1.getSelectedItem();
 
 		InOutRepoVO inout = null;
-		
+
 		if (DEBUG) {
 			data[2] = "20";
 			data[3] = "200";
@@ -715,13 +716,14 @@ public class MainFrame extends javax.swing.JFrame {
 			try {
 				inout = repoExaminBLservice.countInOut(data[0], data[1]);
 			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(frame, e1+": Can't connect to get data");
+				JOptionPane.showMessageDialog(frame, e1
+						+ ": Can't connect to get data");
 				e1.printStackTrace();
 			}
 			data[2] = inout.getSumOfIn().toString();
 			data[3] = inout.getSumOfOut().toString();
-			data[4] = ""+inout.getSumOfIn_num();
-			data[5] = ""+inout.getSumOfOut_num();
+			data[4] = "" + inout.getSumOfIn_num();
+			data[5] = "" + inout.getSumOfOut_num();
 		}
 		// show a dialog
 		final Repo_examin_dialog dialog = new Repo_examin_dialog(frame, true,
@@ -742,7 +744,7 @@ public class MainFrame extends javax.swing.JFrame {
 	}// GEN-LAST:event_repo_receActionPerformed
 
 	private void exportActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exportActionPerformed
-		ArrayList<RepoPO> temp ;
+		ArrayList<RepoPO> temp;
 		if (MainFrame.DEBUG) {
 			temp = new ArrayList<RepoPO>();
 		} else {
@@ -787,9 +789,18 @@ public class MainFrame extends javax.swing.JFrame {
 		});
 
 		int result = exporter.showSaveDialog(MainFrame.frame);
+		File saveFile = exporter.getSelectedFile();
+		if (!saveFile.getName().toLowerCase().endsWith(".xls")) {
+			saveFile = new File(saveFile.getParent(), saveFile.getName()
+					+ ".xls");
+		}
+		if (saveFile.exists()) {
+			JOptionPane.showMessageDialog(null, "该文件已存在,保存失败!");
+
+		}
 		if (result == JFileChooser.APPROVE_OPTION) {
 			try {
-				repoCheckBLservice.export(which);
+				repoCheckBLservice.export(which, saveFile.getPath());
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(frame,
 						"Repo Check fail to run export");
@@ -818,7 +829,7 @@ public class MainFrame extends javax.swing.JFrame {
 		frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		update_bar.setIndeterminate(true);
 		// TODO add logic
-		
+
 		// change back
 		frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		update_bar.setIndeterminate(false);
@@ -912,8 +923,6 @@ public class MainFrame extends javax.swing.JFrame {
 		}
 		// </editor-fold>
 
-		
-		
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
