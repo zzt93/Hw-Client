@@ -261,12 +261,12 @@ public class StrategyNewUI {
 				listFrame = new JFrame();
 				listFrame.setBounds(0, 0, 200, 400);
 				listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				GL_manager_BLservice gmb;
+				GL_manager_BLservice goodsManager;
 
 				try {
-					gmb = new GL_manager_repo_Impl();
+					goodsManager = new GL_manager_repo_Impl();
 
-					tempGoodsPO = new ArrayList<GoodsModelPO>(gmb
+					tempGoodsPO = new ArrayList<GoodsModelPO>(goodsManager
 							.getGoodsList().getGoodsModels().values());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

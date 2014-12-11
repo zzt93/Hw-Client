@@ -174,6 +174,8 @@ public class Approve_List implements Approve_List_BLservice{
 			Collections.sort(receipts, new TimeComparator());
 		}else if(item.equals("编号")){
 			Collections.sort(receipts,new IdComparator());
+		}else if(item.equals("审批状态")){
+			Collections.sort(receipts,new StateComparator());
 		}
 		return receipts;
 	}
@@ -187,7 +189,13 @@ public class Approve_List implements Approve_List_BLservice{
 	class IdComparator implements Comparator<ReceiptPO>{
 		@Override
 		public int compare(ReceiptPO o1,ReceiptPO o2){
-			return o1.id-o2.id;
+			return o1.receipt_id.compareTo(o2.receipt_id);
+		}
+	}
+	class StateComparator implements Comparator<ReceiptPO>{
+		@Override
+		public int compare(ReceiptPO o1,ReceiptPO o2){
+			return -o1.state.compareTo(o2.state);//Wait in the front
 		}
 	}
 	

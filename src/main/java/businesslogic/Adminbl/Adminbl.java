@@ -14,7 +14,7 @@ public class Adminbl implements AdminBLService{
 	private static AdminDataService ads;
 	private static ArrayList<UserPO> arrUser;
 	private static String currentUser;
-	Adminbl(){
+	public Adminbl(){
 		if(ads==null){
 			try {
 				ads = (AdminDataService)RMIUtility.getImpl("Admin");

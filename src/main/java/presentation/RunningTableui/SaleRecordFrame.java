@@ -25,7 +25,7 @@ import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
 
 public class SaleRecordFrame {
-	private JFrame frame;
+//	private JFrame frame;
 	private JTextField textRepository;
 	private JTable table;
 	private JTextField textStartTime;
@@ -33,21 +33,22 @@ public class SaleRecordFrame {
 	private JTextField textGoods;
 	private JComboBox boxOperator;
 	private JComboBox boxClient;
+	private JPanel panel; 
 	
 	private RunTableController controller;
 	private PublicTableModel tableModel;
 	
 	public SaleRecordFrame(){
 		initialize();
-		frame.setVisible(true);
+//		frame.setVisible(true);
 	}
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame = new JFrame();
+//		frame.setBounds(100, 100, 800, 500);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel);
+		panel = new JPanel();
+//		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("商品:");
@@ -74,8 +75,16 @@ public class SaleRecordFrame {
 		textRepository.setBounds(115, 217, 100, 21);
 		panel.add(textRepository);
 		textRepository.setColumns(10);
+
+		//TODO,获得操作员列表,是否加入无操作员情况?
+//		try {
+//			boxOperator=new JComboBox(controller.getOperator());
+//		} catch (Exception e1) {
+//			JOptionPane.showMessageDialog(null, e1.getMessage());
+//			e1.printStackTrace();
+//		}
+		boxOperator = new JComboBox(new String[]{null,"操作员1","操作员2"});
 		
-		boxOperator = new JComboBox();
 		boxOperator.setBounds(115, 177, 100, 21);
 		panel.add(boxOperator);
 		
@@ -109,7 +118,15 @@ public class SaleRecordFrame {
 		label_5.setBounds(60, 261, 54, 15);
 		panel.add(label_5);
 		
-		boxClient = new JComboBox();
+		//TODO,获得客户列表,是否插入无客户情况?
+//		try {
+//			boxClient=new JComboBox(controller.getClient());
+//		} catch (Exception e1) {
+//			JOptionPane.showMessageDialog(null, e1.getMessage());
+//			e1.printStackTrace();
+//		}
+		boxClient = new JComboBox(new String[]{null,"客户1","客户2"});
+		
 		boxClient.setBounds(115, 258, 100, 21);
 		panel.add(boxClient);
 		
@@ -129,6 +146,9 @@ public class SaleRecordFrame {
 		
 		textGoods.setEditable(false);
 	}
+	public JPanel getPanel(){
+		return panel;
+	}
 	public class GoodsList implements ActionListener{
 		JFrame listFrame;
 		JList<String> goodsList;
@@ -142,8 +162,8 @@ public class SaleRecordFrame {
 				listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				listFrame.setLocationRelativeTo(null);
 				String[] temp;
-				temp=new String[]{"1","客户2","客户3","客户4"};
-				//FIXME
+				temp=new String[]{"商品1","商品2","商品3","商品4"};
+				//FIXME，获得商品列表
 //				temp=controller.getGoodsList();
 				goodsList=new JList<String>(temp);
 				goodsList.addMouseListener(new MouseClick());

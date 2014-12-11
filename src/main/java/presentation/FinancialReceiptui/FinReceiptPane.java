@@ -68,7 +68,8 @@ public class FinReceiptPane {
 //		}
 		initialize();
 	}
-	public void ini(){
+	public void ini(){//每次发起一次添加单据操作前执行,
+		//comboBox有时是客户列表，有时是银行账户,
 		if(comboBox!=null)
 		panel.remove(comboBox);
 		//FIXME
@@ -414,6 +415,7 @@ public class FinReceiptPane {
 			textItem=new JTextField();
 			textItem.setBounds(90,13,100,25);
 			textItem.setColumns(10);
+			panel.add(textItem);
 			
 			button.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {

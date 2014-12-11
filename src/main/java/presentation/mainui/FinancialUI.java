@@ -2,6 +2,8 @@ package presentation.mainui;
 
 import presentation.BankManageui.BankManageFrame;
 import presentation.FinancialReceiptui.FinancialReceiptFrame;
+import presentation.RunningTableui.CheckReceiptFrame;
+import presentation.RunningTableui.SaleRecordFrame;
 
 import javax.swing.*;
 
@@ -13,6 +15,8 @@ public class FinancialUI {
 	JPanel topPanel;
 	BankManageFrame BMF=new BankManageFrame();
 	FinancialReceiptFrame FRF=new FinancialReceiptFrame();
+	CheckReceiptFrame CRF=new CheckReceiptFrame();
+	SaleRecordFrame SRF=new SaleRecordFrame();
 	public FinancialUI(){
 		try {
 			UIManager.setLookAndFeel(new com.sun.java.swing.plaf.windows.WindowsLookAndFeel());
@@ -59,7 +63,8 @@ public class FinancialUI {
 		frame.add(mainPanel);
 		mainPanel.add("银行账户",BMF.getPanel());
 		mainPanel.add("财务单据",FRF.getPanel());
-		
+		mainPanel.add("经营表格",CRF.getPanel());
+		mainPanel.add("销售记录",SRF.getPanel());
 		frame.setVisible(true);
 	}
 	public static void main(String[] args){
