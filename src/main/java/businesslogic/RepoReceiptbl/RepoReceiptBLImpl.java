@@ -38,7 +38,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 						+ goods.getAmount());
 			}
 		}
-		return (String[]) temp.toArray();
+		return temp.toArray(new String[temp.size()]);
 	}
 
 	public String[] check_type() {
