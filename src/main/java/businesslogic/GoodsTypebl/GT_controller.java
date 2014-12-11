@@ -57,7 +57,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 	GL_controller gl_controller;
 
 	public boolean add(TreeNodePO fa, String son_type) throws Exception {
-		if (gl_controller.checkEverHas(fa.getType_so_far())) {
+		if (check_ever_has(fa.getType_so_far())) {
 			return false;
 		}
 		boolean res = gtbLservice.add(fa, null);
@@ -67,6 +67,14 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		return res;
 	}
 
+	private boolean check_ever_has(String type){
+		for (TreeNodePO treeNodePO : treeNodePOs) {
+			if (type.equals(treeNodePO.getType_so_far())){
+				return true;
+			}
+		}
+		return false;
+	}
 	public boolean update(TreeNodePO tNode) throws Exception {
 		boolean res = gtbLservice.update(tNode);
 		if (res) {

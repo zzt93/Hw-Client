@@ -31,7 +31,9 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 			e.printStackTrace();
 			//goodsListPO = new GoodsListPO();
 		}
-		
+		if (goodsListPO.getGoodsModels().size() == 0){
+
+		}
 		glbLservice = new GLBLImpl(goodsListPO);
 		gl_signal_BLservice = new GL_signal_Impl(goodsListPO);
 		try {

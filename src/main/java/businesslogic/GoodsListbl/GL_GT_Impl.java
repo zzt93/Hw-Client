@@ -18,6 +18,9 @@ public class GL_GT_Impl implements GL_GT_BLservice{
 	}
 
 	public boolean checkEverHas(String info) throws Exception {
+		if (goodsModels.size() == 0){
+			return false;
+		}
 		return goodsModels.get(info).isEverHas();
 	}
 
