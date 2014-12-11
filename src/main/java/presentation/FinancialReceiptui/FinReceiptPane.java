@@ -101,26 +101,25 @@ public class FinReceiptPane {
 		//FIXME,操作员获得
 		
 		JLabel labelOperator;
-		try {
-			labelOperator = new JLabel(controller.getOperator());
-			labelOperator.setFont(font);
-			labelOperator.setBounds(90, 93, 54, 20);
-			panel.add(labelOperator);
-		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-			e1.printStackTrace();
-		}
+		labelOperator = new JLabel("操作员:");
+		labelOperator.setFont(font);
+		labelOperator.setBounds(90, 93, 54, 20);
+		panel.add(labelOperator);
 //		labelOperator.setFont(font);
 //		labelOperator.setBounds(90, 93, 54, 20);
 //		panel.add(labelOperator);
-		
-		textOperator = new JTextField();
-		textOperator.setFont(font2);
-		textOperator.setBounds(155, 91, 150, 25);
-		panel.add(textOperator);
-		textOperator.setColumns(10);
-		textOperator.setEditable(false);
-		
+
+		try {
+			textOperator = new JTextField(controller.getOperator());
+			textOperator.setFont(font2);
+			textOperator.setBounds(155, 91, 150, 25);
+			panel.add(textOperator);
+			textOperator.setColumns(10);
+			textOperator.setEditable(false);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
 
 		label3 = new JLabel("客户");
 		label3.setFont(font);

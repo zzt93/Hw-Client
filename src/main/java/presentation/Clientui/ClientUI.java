@@ -15,6 +15,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -181,8 +183,13 @@ public class ClientUI extends JPanel {
 		JButton button_4 = new JButton("返回");
 		button_4.setBounds(548, 566, 93, 23);
 		add(button_4);
-		
 
+
+		try {
+			clientController = new ClientUtilityImpl();
+		} catch (RemoteException | NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 	public class Add implements ActionListener{
 		//FIXME,检查生成

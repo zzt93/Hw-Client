@@ -2,6 +2,7 @@ package businesslogic.BankManagebl;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import businesslogicservice.BankManageblservice.BankManageblservice;
 import po.BankPO;
@@ -31,7 +32,19 @@ public class BankController implements BankManageblservice{
 	public BankVO[] search(String field)throws Exception{
 		ResultMessage result=manage.search(field);
 		result.throwIfFailed();
-		BankVO vo = new BankVO((BankPO) result.getObj());
-		return new BankVO[]{vo};
+		Object obj = result.getObj();
+		BankVO[] vos;
+		if (obj instanceof BankPO) {
+			BankVO vo = new BankVO((BankPO) result.getObj());
+			vos = new BankVO[]{vo};
+		} else {
+			List<BankPO> list = (List<BankPO>) obj;
+			vos = new BankVO[list.size()];
+			for (int i = 0; i < list.size(); ++i) {
+				vos[i] = new BankVO(list.get(i));
+			}
+		}
+
+		return vos;
 	}
 }
