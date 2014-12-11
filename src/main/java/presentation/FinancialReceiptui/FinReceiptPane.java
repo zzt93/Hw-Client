@@ -103,7 +103,7 @@ public class FinReceiptPane {
 		JLabel labelOperator;
 		labelOperator = new JLabel("操作员:");
 		labelOperator.setFont(font);
-		labelOperator.setBounds(90, 93, 54, 20);
+		labelOperator.setBounds(90, 93, 80, 20);
 		panel.add(labelOperator);
 //		labelOperator.setFont(font);
 //		labelOperator.setBounds(90, 93, 54, 20);
@@ -139,10 +139,10 @@ public class FinReceiptPane {
 //		table = new JTable(tableModel);
 //		scrollPane.setViewportView(table);
 		
-		JLabel labelTotal = new JLabel("总额");
-		labelTotal.setFont(font);
-		labelTotal.setBounds(230, 446, 200, 20);
-		panel.add(labelTotal);
+		JLabel label = new JLabel("总额");
+		label.setFont(font);
+		label.setBounds(230, 446, 200, 20);
+		panel.add(label);
 		
 		labelTotal = new JLabel("");
 		labelTotal.setFont(font);
@@ -238,6 +238,7 @@ public class FinReceiptPane {
 					JOptionPane.showMessageDialog(null, "添加成功");
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
 				}
 			}
 			
@@ -301,8 +302,11 @@ public class FinReceiptPane {
 			}else{
 				//FIXME,
 //				tableModel,ArrayList是否一样动态调整？
-				controller.deleteBank(table.getSelectedRow());
+				
+				total=controller.deleteBank(table.getSelectedRow());
 				tableModel.removeRow(table.getSelectedRow());
+				
+				labelTotal.setText(String.valueOf(total));
 			}
 			
 		}

@@ -23,8 +23,8 @@ public class BankList {
 		}
 	}
 	public void delete(int i){
-		list.remove(i);
-		
+		BkTransPO temp=list.remove(i);
+		total-=temp.getAmount();
 	}
 	public double getTotal(){
 		return total;
