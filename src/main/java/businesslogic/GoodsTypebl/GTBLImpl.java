@@ -50,11 +50,11 @@ public class GTBLImpl implements GTBLservice{
 		return false;
 	}
 
-	public TreeNodeVO eSearch(String id) throws Exception{
+	public TreeNodePO eSearch(String id) throws Exception{
 		for (Iterator<TreeNodePO> iterator = treeNodePOs.iterator(); iterator.hasNext();) {
 			TreeNodePO treeNodePO = iterator.next();
 			if (treeNodePO.getType_so_far().equals(id)) {
-				return new TreeNodeVO(treeNodePO);
+				return treeNodePO;
 			}
 		}
 		return null;

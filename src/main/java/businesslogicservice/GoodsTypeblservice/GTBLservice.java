@@ -12,7 +12,7 @@ public interface GTBLservice {
 	boolean update(TreeNodePO tNode) throws Exception;
 	boolean delete(TreeNodePO tNode) throws Exception;
 	
-	TreeNodeVO eSearch(String id) throws Exception;
+	TreeNodePO eSearch(String id) throws Exception;
 	
 	ArrayList<TreeNodePO> show() throws Exception;//return the tree so to build the tree
 	

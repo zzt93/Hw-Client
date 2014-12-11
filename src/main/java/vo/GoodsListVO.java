@@ -11,7 +11,6 @@ public class GoodsListVO implements Serializable {
 	HashMap<String, GoodsModelVO> goodsModels;
 	HashMap<String, GoodsVO> goods;
 	public GoodsListVO(GoodsListPO goodsListPO) {
-		// TODO Auto-generated constructor stub
 	}
 	public HashMap<String, GoodsModelVO> getGoodsModels() {
 		return goodsModels;

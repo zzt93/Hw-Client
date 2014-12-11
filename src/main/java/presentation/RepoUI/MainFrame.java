@@ -762,7 +762,7 @@ public class MainFrame extends javax.swing.JFrame {
 					JOptionPane.QUESTION_MESSAGE, null, dates, dates[0]));
 		} else {
 			JOptionPane.showMessageDialog(MainFrame.frame,
-					"You haven't check the repo, you check first");
+					"You haven't check the repo, you should check first");
 		}
 
 		JFileChooser exporter = new JFileChooser();

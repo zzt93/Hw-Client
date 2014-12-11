@@ -26,7 +26,6 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 		sumOfGifts = goodsReceiptPO.getSumOfGifts();
 	}
 	public GoodsReceiptVO(Vector<GoodsVO> goodsVOs, String user) {
-		// TODO Auto-generated constructor stub
 		this.goodsVOs = goodsVOs;
 		this.user = user; 
 	}

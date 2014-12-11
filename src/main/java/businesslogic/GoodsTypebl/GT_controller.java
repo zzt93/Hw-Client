@@ -78,7 +78,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		return res;
 	}
 
-	public TreeNodeVO eSearch(String id) throws Exception {
+	public TreeNodePO eSearch(String id) throws Exception {
 		return gtbLservice.eSearch(id);
 	}
 
