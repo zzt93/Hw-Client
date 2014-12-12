@@ -291,6 +291,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g); // Do the original draw
+            this.removeAll();
             if (MainFrame.DEBUG) {
                 this.setPreferredSize(new Dimension(2000, 1000));
             } else {
@@ -319,7 +320,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 
                 gridBagConstraints.gridx = row;
                 gridBagConstraints.gridy = height;
-                tree_panel.add(nodes.get(fa), gridBagConstraints);
+                this.add(nodes.get(fa), gridBagConstraints);
 
                 int i = 1;
                 if (fa.getSons().size() == 0) {

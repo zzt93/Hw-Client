@@ -431,8 +431,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
 					+ ": Fail to get type info");
 			e.printStackTrace();
 		} catch (NullPointerException nullPointerException) {
+			nullPointerException.printStackTrace();
 			JOptionPane.showMessageDialog(MainFrame.frame, nullPointerException
-					+ ": Fail to get type info");
+					+ ": Fail to get type info at ");
 		} catch (NotBoundException e) {
 			e.printStackTrace();
 		}

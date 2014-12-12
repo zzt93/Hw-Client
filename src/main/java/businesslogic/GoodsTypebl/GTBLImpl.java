@@ -41,6 +41,7 @@ public class GTBLImpl implements GTBLservice{
 			if (treeNodePO.getType_so_far().equals(tNode.getType_so_far())
 					&& treeNodePO.type_editable()) {
 				iterator.remove();
+				treeNodePO.getFa().getSons().remove(treeNodePO);
 				return true;
 			}
 		}

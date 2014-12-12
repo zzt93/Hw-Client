@@ -88,7 +88,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 	public boolean update(TreeNodePO tNode) throws Exception {
 		boolean res = gtbLservice.update(tNode);
 		if (res) {
-			goodsTypeDateService.update(new TreeNodePO(tNode));
+			goodsTypeDateService.update(tNode);
 		}
 		return res;
 	}
@@ -96,7 +96,7 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 	public boolean delete(TreeNodePO tNode) throws Exception {
 		boolean res = gtbLservice.delete(tNode);
 		if (res) {
-			goodsTypeDateService.delete(new TreeNodePO(tNode));
+			goodsTypeDateService.delete(tNode);
 		}
 		return res;
 	}
