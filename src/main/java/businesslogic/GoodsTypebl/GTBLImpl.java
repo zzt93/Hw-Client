@@ -3,7 +3,6 @@ package businesslogic.GoodsTypebl;
 
 import businesslogicservice.GoodsTypeblservice.GTBLservice;
 import po.TreeNodePO;
-import vo.TreeNodeVO;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,11 +17,9 @@ public class GTBLImpl implements GTBLservice{
 		this.treeNodePOs = treeNodePOs;
 	}
 
-	public boolean add(TreeNodePO fa, String son_type) throws Exception {
-		if (son_type == null) {
-			treeNodePOs.add(new TreeNodePO(fa));
-		} 
-		treeNodePOs.add(new TreeNodePO(fa, son_type));
+	public boolean add(TreeNodePO node) throws Exception {
+
+		treeNodePOs.add(node);
 		return true;
 	}
 

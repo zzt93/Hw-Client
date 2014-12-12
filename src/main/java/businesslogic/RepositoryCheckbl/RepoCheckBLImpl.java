@@ -52,5 +52,7 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 		checkRes = ((RepoCheckDataService) RMIUtility.getImpl(check)).getRepo().getObj();
 	}
 
-	
+	public RepoPO get_aver_in(){
+		
+	}
 }

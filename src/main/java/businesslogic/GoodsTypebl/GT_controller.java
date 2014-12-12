@@ -15,8 +15,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		GT_account_service {
 
@@ -39,13 +37,27 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		}
 
 		if (treeNodePOs.size()==0) {
-			treeNodePOs.add(new TreeNodePO("Light/灯"));
-			goodsTypeDateService.insert(new TreeNodePO("Light/灯"));
+			TreeNodePO root = new TreeNodePO("Light/灯");
+			treeNodePOs.add(root);
+			goodsTypeDateService.insert(root);
 		}
+		initial_list();
 		gtbLservice = new GTBLImpl(treeNodePOs);
 		gt_gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
 
 		gl_controller = new GL_controller();
+	}
+
+	private void initial_list() {
+		for (int i = 0; i < treeNodePOs.size(); i++) {
+			TreeNodePO temp = treeNodePOs.get(i);
+			for (int j = 1; j < treeNodePOs.size(); j++) {//skip the first root node
+				TreeNodePO son = treeNodePOs.get(j);
+				if (son.getFa().equals(temp)){
+					temp.getSons().add(son);
+				}
+			}
+		}
 	}
 
 	GTBLservice gtbLservice;
@@ -56,18 +68,16 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 	 */
 	GL_controller gl_controller;
 
-	public boolean add(TreeNodePO fa, String son_type) throws Exception {
-		if (check_ever_has(fa.getType_so_far())) {
-			return false;
-		}
-		boolean res = gtbLservice.add(fa, son_type);
+	public boolean add(TreeNodePO node) throws Exception {
+
+		boolean res = gtbLservice.add(node);
 		if (res) {
-			goodsTypeDateService.insert(new TreeNodePO(fa));
+			goodsTypeDateService.insert(node);
 		}
 		return res;
 	}
 
-	private boolean check_ever_has(String type){
+	public boolean check_ever_has(String type){
 		for (TreeNodePO treeNodePO : treeNodePOs) {
 			if (type.equals(treeNodePO.getType_so_far())){
 				return treeNodePO.getGoodsModels().size() > 0;

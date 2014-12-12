@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import po.TreeNodePO;
 
 public interface GTBLservice {
-	boolean add(TreeNodePO fa, String son_type) throws Exception;
+	boolean add(TreeNodePO node) throws Exception;
 	boolean update(TreeNodePO tNode) throws Exception;
 	boolean delete(TreeNodePO tNode) throws Exception;
 	
