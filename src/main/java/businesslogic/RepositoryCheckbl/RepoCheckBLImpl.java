@@ -53,6 +53,9 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 	}
 
 	public RepoPO get_aver_in(){
-		
+		if (checkRes.size() == 0){
+			return null;
+		}
+		return checkRes.get(checkRes.size()-1);
 	}
 }
