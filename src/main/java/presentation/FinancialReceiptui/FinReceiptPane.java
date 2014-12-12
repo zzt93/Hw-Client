@@ -101,26 +101,25 @@ public class FinReceiptPane {
 		//FIXME,操作员获得
 		
 		JLabel labelOperator;
-		try {
-			labelOperator = new JLabel(controller.getOperator());
-			labelOperator.setFont(font);
-			labelOperator.setBounds(90, 93, 54, 20);
-			panel.add(labelOperator);
-		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-			e1.printStackTrace();
-		}
+		labelOperator = new JLabel("操作员:");
+		labelOperator.setFont(font);
+		labelOperator.setBounds(90, 93, 80, 20);
+		panel.add(labelOperator);
 //		labelOperator.setFont(font);
 //		labelOperator.setBounds(90, 93, 54, 20);
 //		panel.add(labelOperator);
-		
-		textOperator = new JTextField();
-		textOperator.setFont(font2);
-		textOperator.setBounds(155, 91, 150, 25);
-		panel.add(textOperator);
-		textOperator.setColumns(10);
-		textOperator.setEditable(false);
-		
+
+		try {
+			textOperator = new JTextField(controller.getOperator());
+			textOperator.setFont(font2);
+			textOperator.setBounds(155, 91, 150, 25);
+			panel.add(textOperator);
+			textOperator.setColumns(10);
+			textOperator.setEditable(false);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
 
 		label3 = new JLabel("客户");
 		label3.setFont(font);
@@ -140,10 +139,10 @@ public class FinReceiptPane {
 //		table = new JTable(tableModel);
 //		scrollPane.setViewportView(table);
 		
-		JLabel labelTotal = new JLabel("总额");
-		labelTotal.setFont(font);
-		labelTotal.setBounds(230, 446, 200, 20);
-		panel.add(labelTotal);
+		JLabel label = new JLabel("总额");
+		label.setFont(font);
+		label.setBounds(230, 446, 200, 20);
+		panel.add(label);
 		
 		labelTotal = new JLabel("");
 		labelTotal.setFont(font);
@@ -239,6 +238,7 @@ public class FinReceiptPane {
 					JOptionPane.showMessageDialog(null, "添加成功");
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
 				}
 			}
 			
@@ -302,8 +302,11 @@ public class FinReceiptPane {
 			}else{
 				//FIXME,
 //				tableModel,ArrayList是否一样动态调整？
-				controller.deleteBank(table.getSelectedRow());
+				
+				total=controller.deleteBank(table.getSelectedRow());
 				tableModel.removeRow(table.getSelectedRow());
+				
+				labelTotal.setText(String.valueOf(total));
 			}
 			
 		}
@@ -378,7 +381,7 @@ public class FinReceiptPane {
 			button_1.setBounds(237, 169, 72, 33);
 			button_1.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					frame.dispose();
+					frame.setVisible(false);
 				}
 			});
 			panel.add(button_1);

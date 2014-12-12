@@ -53,7 +53,7 @@ public class SalesmanUI extends JFrame {
         jTabbedPane1.addTab("销售管理", sale11);
         jTabbedPane1.addTab("进货管理", stock11);
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(750, 500));
+//        jScrollPane1.setPreferredSize(new java.awt.Dimension(750, 500));
 
         clientUI2.setPreferredSize(new java.awt.Dimension(800, 600));
         jScrollPane1.setViewportView(clientUI2);

@@ -71,8 +71,8 @@ public class ApproveUI {
 		frame.getContentPane().add(totalPanel);
 		//TODO 用于Mock的切换
 		// /Read Receipts
-		// listOfReceipts = approveBL.showList();
-		listOfReceipts = new Approve_Mock().showList();
+		listOfReceipts = approveBL.showList();
+		//listOfReceipts = new Approve_Mock().showList();
 		final JLabel labelHint = new JLabel("状态栏");
 		labelHint.setBounds(39, 473, 211, 15);
 		totalPanel.add(labelHint);
@@ -219,7 +219,7 @@ public class ApproveUI {
 
 	void insert(String[] item, ReceiptPO po) {
 		item[0] = po.receipt_id;
-		//item[1] = po.type.toString();
+		item[1] = po.type.toString();
 		item[2] = po.time;
 		item[3] = po.state.toString();
 

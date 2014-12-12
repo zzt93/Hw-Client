@@ -38,6 +38,11 @@ public class ClientPanel {
 		frame.setBounds(0,0,450,500);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		try {
+			clientController = new ClientUtilityImpl();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public void show(){
 		panel=new JPanel();
