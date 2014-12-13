@@ -44,6 +44,7 @@ public class CheckReceiptFrame {
 	private JTable table;
 	private JTextField textStartTime;
 	private JTextField textEndTime;
+	private JProgressBar progressBar;
 	JComboBox boxOperator;
 	JComboBox boxType;
 	JComboBox boxClient;
@@ -139,6 +140,10 @@ public class CheckReceiptFrame {
 		table = new JTable(tableModel);
 		table.setFillsViewportHeight(true);
 		scrollPane.setViewportView(table);
+		ArrayList<ReceiptPO> list=new ArrayList<ReceiptPO>();
+		list.add(new RecPO());
+		list.add(new RecPO());
+		tableModel.update(list);
 		
 		JLabel label_6 = new JLabel("单据列表");
 		label_6.setBounds(431, 57, 54, 15);
@@ -179,13 +184,20 @@ public class CheckReceiptFrame {
 		btnCreditCopy.setBounds(60, 400, 80, 23);
 		panel.add(btnCreditCopy);
 		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(404, 410, 283, 23);
+		progressBar.setStringPainted(true);
+		panel.add(progressBar);
+		
 		JButton btnExcel = new JButton("导出EXCEL");
 		btnExcel.setBounds(280, 410, 93, 23);
 		panel.add(btnExcel);
+		btnExcel.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				Exporter export=new Exporter(table,progressBar);
+			}
+		});
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(404, 410, 283, 23);
-		panel.add(progressBar);
 		
 	}
 	public JPanel getPanel(){
@@ -277,5 +289,12 @@ public class CheckReceiptFrame {
 	}
 	public static void main(String[] args){
 		CheckReceiptFrame a=new CheckReceiptFrame();
+//		PublicTableModel tableModel=new PublicTableModel(ModelType.RECEIPT);
+//		JTable table=new JTable(tableModel);
+//		ArrayList<ReceiptPO> list=new ArrayList<ReceiptPO>();
+////		list.add(new RecPO());
+////		list.add(new RecPO());
+////		tableModel.update(list);
+////		Exporter test=new Exporter(table);
 	}
 }
