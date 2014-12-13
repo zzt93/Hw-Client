@@ -104,15 +104,10 @@ public class Exporter {
 				JOptionPane.showMessageDialog(null, "写文件时发生错误");
 				e.printStackTrace();
 			}
-			try {
-				book.write();
-				book.close();
-				JOptionPane.showMessageDialog(null, "Excel导出完毕");
-				progressBar.setValue(0);
-			} catch (WriteException e) {
-				JOptionPane.showMessageDialog(null,"导出的文件无法关闭");
-				e.printStackTrace();
-			}
+			book.write();
+			book.close();
+			JOptionPane.showMessageDialog(null, "Excel导出完毕");
+			progressBar.setValue(0);
 			
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "导出EXCEL的过程中遇到了问题");
