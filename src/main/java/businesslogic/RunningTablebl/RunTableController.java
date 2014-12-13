@@ -39,7 +39,7 @@ public class RunTableController implements RunningTableblservice {
 		return list;
 	}
 
-	public ProfitVO getProfit(TimeConditionVO vo) throws Exception {
+	public ProfitVO getProfit(ReceiptConditionVO vo) throws Exception {
 		
 		return profit.getProfit(vo);
 	}
