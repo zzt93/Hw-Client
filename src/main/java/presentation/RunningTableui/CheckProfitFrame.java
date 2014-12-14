@@ -24,11 +24,12 @@ import vo.ProfitVO;
 import vo.ReceiptConditionVO;
 
 public class CheckProfitFrame {
-	private JFrame frame;
+//	private JFrame frame;
 	private JTextField textStartTime;
 	private JTextField textEndTime;
 	private JTable table;
 	private JProgressBar progressBar;
+	private JPanel panel;
 	
 	private PublicTableModel tableModel;
 	private RunTableController controller;
@@ -40,17 +41,17 @@ public class CheckProfitFrame {
 			e.printStackTrace();
 		}
 		initialize();
-		frame.setVisible(true);
+//		frame.setVisible(true);
 		
 	}
 
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame = new JFrame();
+//		frame.setBounds(100, 100, 800, 500);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel = new JPanel();
+//		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("起始时间:");
@@ -103,6 +104,9 @@ public class CheckProfitFrame {
 			
 		});
 		
+	}
+	public JPanel getPanel(){
+		return panel;
 	}
 	public class Query implements ActionListener{
 		public void actionPerformed(ActionEvent e){
