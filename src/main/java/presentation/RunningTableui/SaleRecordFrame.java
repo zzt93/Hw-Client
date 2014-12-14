@@ -5,12 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -24,9 +26,12 @@ import presentation.Saleui.GoodsPaneType;
 import presentation.Saleui.GoodsPanel.MouseClick;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
+import vo.GoodsRecordVO;
+import vo.ReceiptConditionVO;
+import vo.SaleConditionVO;
 
 public class SaleRecordFrame {
-//	private JFrame frame;
+	private JFrame frame;
 	private JTextField textRepository;
 	private JTable table;
 	private JTextField textStartTime;
@@ -38,18 +43,19 @@ public class SaleRecordFrame {
 	
 	private RunTableController controller;
 	private PublicTableModel tableModel;
+	private JProgressBar progressBar;
 	
 	public SaleRecordFrame(){
 		initialize();
-//		frame.setVisible(true);
+		frame.setVisible(true);
 	}
 	private void initialize() {
-//		frame = new JFrame();
-//		frame.setBounds(100, 100, 800, 500);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame = new JFrame();
+		frame.setBounds(100, 100, 800, 500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
-//		frame.getContentPane().add(panel);
+		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("商品:");
@@ -64,7 +70,7 @@ public class SaleRecordFrame {
 		label_2.setBounds(60, 140, 54, 15);
 		panel.add(label_2);
 		
-		JLabel label_3 = new JLabel("操作员:");
+		JLabel label_3 = new JLabel("业务员:");
 		label_3.setBounds(60, 180, 54, 15);
 		panel.add(label_3);
 		
@@ -100,6 +106,11 @@ public class SaleRecordFrame {
 		JButton btnClear = new JButton("清空");
 		btnClear.setBounds(612, 379, 60, 23);
 		panel.add(btnClear);
+		btnClear.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				tableModel.clear();
+			}
+		});
 		
 		textStartTime = new JTextField();
 		textStartTime.setBounds(115, 97, 100, 21);
@@ -114,6 +125,7 @@ public class SaleRecordFrame {
 		JButton btnQuery = new JButton("查询");
 		btnQuery.setBounds(60, 301, 60, 23);
 		panel.add(btnQuery);
+		btnQuery.addActionListener(new Query());
 		
 		JLabel label_5 = new JLabel("客户:");
 		label_5.setBounds(60, 261, 54, 15);
@@ -145,18 +157,46 @@ public class SaleRecordFrame {
 		panel.add(btnGoodsList);
 		btnGoodsList.addActionListener(new GoodsList());
 		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(404, 410, 283, 23);
+		panel.add(progressBar);
+		
 		JButton btnExcel = new JButton("导出EXCEL");
 		btnExcel.setBounds(280, 410, 93, 23);
 		panel.add(btnExcel);
+		btnExcel.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Exporter temp=new Exporter(table,progressBar);
+			}
+		});
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(404, 410, 283, 23);
-		panel.add(progressBar);
 		
 		textGoods.setEditable(false);
 	}
 	public JPanel getPanel(){
 		return panel;
+	}
+	public class Query implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			SaleConditionVO condition=new SaleConditionVO();
+			condition.client=(String)boxClient.getSelectedItem();
+			condition.endTime=textEndTime.getText();
+			condition.startTime=textStartTime.getText();
+			condition.goods=textGoods.getText();
+			condition.buisnessman=(String)boxOperator.getSelectedItem();
+			condition.storage=textRepository.getText();
+			try{
+				GoodsRecordVO[] list=controller.getSaleTable(condition);
+				tableModel.update(list);
+			}catch(Exception e1){
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+				e1.printStackTrace();
+			}
+			
+			
+			
+		}
+		
 	}
 	public class GoodsList implements ActionListener{
 		JFrame listFrame;

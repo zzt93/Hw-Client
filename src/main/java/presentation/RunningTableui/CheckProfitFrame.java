@@ -1,10 +1,15 @@
 package presentation.RunningTableui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -12,20 +17,41 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import businesslogic.RunningTablebl.RunTableController;
+import presentation.mainui.ModelType;
+import presentation.mainui.PublicTableModel;
+import vo.ProfitVO;
+import vo.ReceiptConditionVO;
+
 public class CheckProfitFrame {
-	private JFrame frame;
+//	private JFrame frame;
 	private JTextField textStartTime;
 	private JTextField textEndTime;
 	private JTable table;
-
+	private JProgressBar progressBar;
+	private JPanel panel;
+	
+	private PublicTableModel tableModel;
+	private RunTableController controller;
+	public CheckProfitFrame(){
+		try {
+			controller=new RunTableController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器发生了问题");
+			e.printStackTrace();
+		}
+		initialize();
+//		frame.setVisible(true);
+		
+	}
 
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame = new JFrame();
+//		frame.setBounds(100, 100, 800, 500);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel = new JPanel();
+//		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("起始时间:");
@@ -50,23 +76,8 @@ public class CheckProfitFrame {
 		scrollPane.setBounds(276, 79, 452, 275);
 		panel.add(scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"\u9500\u552E", null, null, null},
-				{"\u62A5\u6EA2\u62A5\u635F", null, null, null},
-				{"\u6210\u672C\u8C03\u4EF7", null, null, null},
-				{"\u8FDB\u8D27\u9000\u8D27\u5DEE\u4EF7", null, null, null},
-				{"\u4EE3\u91D1\u5377\u5DEE\u4EF7", null, null, null},
-				{"\u5546\u54C1\u8D60\u51FA", null, null, null},
-				{"\u603B\u8BA1", null, null, null},
-				{"\u6298\u8BA9", null, null, null},
-				{"\u6298\u8BA9\u540E\u603B\u8BA1", null, null, null},
-			},
-			new String[] {
-				"\u9879\u76EE", "\u6536\u5165", "\u652F\u51FA", "\u5229\u6DA6"
-			}
-		));
+		tableModel=new PublicTableModel(ModelType.PROFIT);
+		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		
 		JLabel label_2 = new JLabel("经营情况");
@@ -76,13 +87,44 @@ public class CheckProfitFrame {
 		JButton btnQuery = new JButton("查询");
 		btnQuery.setBounds(60, 216, 60, 23);
 		panel.add(btnQuery);
+		btnQuery.addActionListener(new Query());
+		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(404, 366, 283, 23);
+		panel.add(progressBar);
 		
 		JButton btnExcel = new JButton("导出EXCEL");
 		btnExcel.setBounds(280, 366, 93, 23);
 		panel.add(btnExcel);
+		btnExcel.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				Exporter temp=new Exporter(table,progressBar);
+				
+			}
+			
+		});
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(404, 366, 283, 23);
-		panel.add(progressBar);
+	}
+	public JPanel getPanel(){
+		return panel;
+	}
+	public class Query implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			ReceiptConditionVO condition=new ReceiptConditionVO();
+			condition.startTime=textStartTime.getText();
+			condition.endTime=textEndTime.getText();
+			try {
+				ProfitVO profit=controller.getProfit(condition);
+				tableModel.update(profit);
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+				e1.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public static void main(String[] args){
+		CheckProfitFrame a=new CheckProfitFrame();
 	}
 }

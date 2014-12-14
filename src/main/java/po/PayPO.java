@@ -26,5 +26,8 @@ public class PayPO extends RecPO implements Serializable {
 	public PayPO(){
 		type = ReceiptType.PAYMENT;
 	}
-	
+	public static void main(String[] args){
+		PayPO a=new PayPO();
+		System.out.println(a.type);
+	}
 }

@@ -29,7 +29,7 @@ public class RunTableController implements RunningTableblservice {
 	}
 	
 	public GoodsRecordVO[] getSaleTable(SaleConditionVO vo) throws Exception {
-		System.out.println("进入controller");
+//		System.out.println("进入controller");
 		return record.getSaleTable(vo);
 	}
 
@@ -39,7 +39,7 @@ public class RunTableController implements RunningTableblservice {
 		return list;
 	}
 
-	public ProfitVO getProfit(TimeConditionVO vo) throws Exception {
+	public ProfitVO getProfit(ReceiptConditionVO vo) throws Exception {
 		
 		return profit.getProfit(vo);
 	}

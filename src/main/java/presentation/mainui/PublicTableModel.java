@@ -23,6 +23,7 @@ import po.StockReceiptPO;
 import vo.BankVO;
 import vo.GoodsRecordVO;
 import vo.GoodsVO;
+import vo.ProfitVO;
 
 public class PublicTableModel extends DefaultTableModel {
 	String[] name;
@@ -65,6 +66,9 @@ public class PublicTableModel extends DefaultTableModel {
 			break;
 		case GOODSRECEIPT:
 			name=new String[]{"商品编号","名称","类型","数量","进价","售价"};
+			break;
+		case PROFIT:
+			name=new String[]{"项目","收入","支出","利润"};
 			break;
 		default:
 			return;
@@ -169,7 +173,7 @@ public class PublicTableModel extends DefaultTableModel {
 					//FIXME
 					RepoReceiptPO temp1=(RepoReceiptPO)temp;
 					data[i][0]="报溢报损单";
-//					data[i][2]=temp1.get
+//					data[i][2]=temp1
 					break;
 				}
 				case GOODSRECEIPT:{
@@ -255,6 +259,31 @@ public class PublicTableModel extends DefaultTableModel {
 			addRow(list[i]);
 		}
 	}
+	public void update(ProfitVO vo){
+		data=new Object[9][4];
+		data[0][0]="销售";
+		data[0][1]=vo.saleIncome;
+		data[0][2]=vo.saleCost;
+		data[1][0]="报溢报损";
+		data[1][1]=vo.goodsOverflow;
+		data[1][2]=vo.goodsLost;
+		data[2][0]="成本调价";
+		data[2][1]=vo.costAdjust;
+		data[3][0]="进货退货差价";
+		data[3][1]=vo.stockDiffer;
+		data[4][0]="商品赠出";
+		data[4][2]=vo.giftCost;
+		data[5][0]="总计";
+		data[5][1]=vo.income;
+		data[5][2]=vo.expense;
+		data[6][0]="折让";
+		data[6][1]=vo.discount;
+		data[7][0]="折让后总计";
+		data[7][1]=vo.actualIncome;
+		data[7][2]=vo.expense;
+		data[7][3]=vo.profit;
+		update(data);
+	}
 	public void update(GoodsRecordVO[] list){
 		data=new Object[list.length][6];
 		for(int i=0;i<list.length;i++){
@@ -301,5 +330,10 @@ public class PublicTableModel extends DefaultTableModel {
 		data[3]=ReceiptState.getName(po.state);
 		data[4]=DealState.getName(po.dealState);
 		insertRow(row,data);
+	}
+	public void clear(){
+		for(int i=0;i<this.getRowCount();i++){
+			this.removeRow(0);
+		}
 	}
 }

@@ -4,6 +4,7 @@ import java.io.*;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -18,8 +19,11 @@ import jxl.write.biff.RowsExceededException;
 
 public class Exporter {
 	private JTable table;
-	public Exporter(JTable table){
+	private JProgressBar progressBar;
+	private File excel;
+	public Exporter(JTable table,JProgressBar progressBar){
 		this.table=table;
+		this.progressBar=progressBar;
 		select();
 	}
 	public Exporter(){
@@ -47,7 +51,6 @@ public class Exporter {
 		if (result == JFileChooser.APPROVE_OPTION) {
 			//TODO,获得路径开始写入
 			File tempFile=exporter.getSelectedFile();
-			File excel;
 			if(!tempFile.getName().endsWith(".xls")){
 				excel=new File(tempFile.getParent(),tempFile.getName()+".xls");
 			}else{
@@ -58,7 +61,12 @@ public class Exporter {
 				return null;
 			}else{
 				//TODO,调用creatExcel
-				createExcel(excel);
+				new Thread(new Runnable(){
+					public void run() {
+						createExcel(excel);
+					}
+					
+				});
 				return excel.getPath();
 			}
 		} else if (result == JFileChooser.CANCEL_OPTION) {
@@ -73,13 +81,22 @@ public class Exporter {
 			WritableSheet sheet=book.createSheet("firse page",0);
 			int rowNum=table.getRowCount();
 			int columnNum=table.getColumnCount();
+			progressBar.setMaximum(rowNum);
+			
+			sheet.getSettings().setDefaultColumnWidth(20);
 			try {
-				for(int i=0;i<columnNum;i++){
-					for(int j=0;i<rowNum;j++){
-						Label label=new Label(i,j,(String)table.getValueAt(i, j));
+				for(int j=0;j<columnNum;j++){
+					Label label=new Label(j,0,table.getColumnName(j));
+					sheet.addCell(label);
+				}
+				for(int i=1;i<rowNum+1;i++){
+					for(int j=0;j<columnNum;j++){
+						Label label=new Label(j,i,String.valueOf(table.getValueAt(i-1, j)));
 						sheet.addCell(label);
 					}
+					progressBar.setValue(i);
 				}
+				
 			} catch (RowsExceededException e) {
 				JOptionPane.showMessageDialog(null, "行数溢出");
 				e.printStackTrace();
@@ -88,12 +105,9 @@ public class Exporter {
 				e.printStackTrace();
 			}
 			book.write();
-			try {
-				book.close();
-			} catch (WriteException e) {
-				JOptionPane.showMessageDialog(null,"导出的文件无法关闭");
-				e.printStackTrace();
-			}
+			book.close();
+			JOptionPane.showMessageDialog(null, "Excel导出完毕");
+			progressBar.setValue(0);
 			
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "导出EXCEL的过程中遇到了问题");
