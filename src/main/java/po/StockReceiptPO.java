@@ -28,7 +28,7 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
     }
 
     public String getNumber() {
-        return receipt_id;
+        return number;
     }
 
     public int getSupplier() {

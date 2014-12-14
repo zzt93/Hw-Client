@@ -139,10 +139,10 @@ public class GoodsReceiptPane {
 	}
 	public void set(GoodsReceiptPO receipt){
 		this.receipt=receipt;
-		textNum.setText(receipt.receipt_id);
+		textNum.setText(receipt.number);
 		textOperator.setText(receipt.getUser());
 		textType.setText(ReceiptType.getName(receipt.type));
-		textState.setText(ReceiptState.getName(receipt.state));
+		textState.setText(ReceiptState.getName(receipt.statement));
 		textDate.setText(receipt.time);
 		
 		labelTotal.setText(String.valueOf(receipt.getSumOfGifts()));

@@ -37,7 +37,7 @@ public class RepoReceiptPO extends ReceiptPO implements Serializable {
 	}
 	
 	public String getReceipt_id() {
-		return receipt_id;
+		return number;
 	}
 	public int getaNum() {
 		return actualNum;

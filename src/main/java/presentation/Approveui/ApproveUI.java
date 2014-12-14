@@ -143,10 +143,10 @@ public class ApproveUI {
 			public void actionPerformed(ActionEvent arg0) {
 				int approves[] = table.getSelectedRows();
 				for (int i : approves) {
-					if(listOfReceipts.get(i).state == ReceiptState.wait){
-						listOfReceipts.get(i).state = ReceiptState.approve;
+					if(listOfReceipts.get(i).statement == ReceiptState.wait){
+						listOfReceipts.get(i).statement = ReceiptState.approve;
 						refreshTable();
-						listOfReceipts.get(i).state = ReceiptState.wait;
+						listOfReceipts.get(i).statement = ReceiptState.wait;
 						approveIndex.add(listOfReceipts.get(i));
 
 					}
@@ -180,12 +180,12 @@ public class ApproveUI {
 		buttonApproveSingle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedRow = table.getSelectedRow();
-				if (listOfReceipts.get(selectedRow).state == ReceiptState.approve) {
+				if (listOfReceipts.get(selectedRow).statement == ReceiptState.approve) {
 					labelHint.setText("这是已经通过了的单据");
 				} else {
-					listOfReceipts.get(selectedRow).state = ReceiptState.approve;
+					listOfReceipts.get(selectedRow).statement = ReceiptState.approve;
 					refreshTable();
-					listOfReceipts.get(selectedRow).state = ReceiptState.wait;
+					listOfReceipts.get(selectedRow).statement = ReceiptState.wait;
 					approveIndex.add(listOfReceipts.get(selectedRow));
 					labelHint.setText("已审批为通过");
 				}
@@ -218,10 +218,10 @@ public class ApproveUI {
 	}
 
 	void insert(String[] item, ReceiptPO po) {
-		item[0] = po.receipt_id;
+		item[0] = po.number;
 		item[1] = po.type.toString();
 		item[2] = po.time;
-		item[3] = po.state.toString();
+		item[3] = po.statement.toString();
 
 	}
 
@@ -234,9 +234,9 @@ public class ApproveUI {
 					"operator", "total", "ItemList", "State" };
 			tm = new DefaultTableModel(headers1, 1);
 			detailTable.setModel(tm);
-			tm.addRow(new String[] { cPO.type.toString(), cPO.receipt_id, cPO.time,
+			tm.addRow(new String[] { cPO.type.toString(), cPO.number, cPO.time,
 					cPO.operator, Double.toString(cPO.total),
-					cPO.itemList.toString(), cPO.state.toString() });
+					cPO.itemList.toString(), cPO.statement.toString() });
 			break;
 		case GOODSRECEIPT:
 			GoodsReceiptPO gpo = (GoodsReceiptPO) po;
@@ -244,10 +244,10 @@ public class ApproveUI {
 					"goodsPOs", "sumOfGifts", "State" };
 			tm = new DefaultTableModel(headers2, 1);
 			detailTable.setModel(tm);
-			tm.addRow(new String[] { gpo.type.toString(), gpo.receipt_id, gpo.time,
+			tm.addRow(new String[] { gpo.type.toString(), gpo.number, gpo.time,
 					gpo.getGoods().toString(),
 					Double.toString(gpo.getSumOfGifts()),
-					gpo.state.toString() });
+					gpo.statement.toString() });
 			break;
 		case PAYMENT:
 			PayPO ppo = (PayPO) po;
@@ -255,10 +255,10 @@ public class ApproveUI {
 					"client", "operator", "bankList", "total", "State" };
 			tm = new DefaultTableModel(header3, 1);
 			detailTable.setModel(tm);
-			tm.addRow(new String[] { ppo.time.toString(), ppo.receipt_id, ppo.time,
+			tm.addRow(new String[] { ppo.time.toString(), ppo.number, ppo.time,
 					ppo.getClient(), ppo.getOperator(),
 					ppo.getBankList().toString(),
-					Double.toString(ppo.getTotal()), ppo.state.toString() });
+					Double.toString(ppo.getTotal()), ppo.statement.toString() });
 			break;
 		case RECEIVE:
 			RecPO rpo = (RecPO) po;
@@ -266,20 +266,20 @@ public class ApproveUI {
 					"client", "operator", "bankList", "total", "State" };
 			tm = new DefaultTableModel(header4, 1);
 			detailTable.setModel(tm);
-			tm.addRow(new String[] { rpo.time.toString(), rpo.receipt_id, rpo.time,
+			tm.addRow(new String[] { rpo.time.toString(), rpo.number, rpo.time,
 					rpo.getClient(), rpo.getOperator(),
 					rpo.getBankList().toString(),
-					Double.toString(rpo.getTotal()), rpo.state.toString() });
+					Double.toString(rpo.getTotal()), rpo.statement.toString() });
 			break;
 		case REPORECEIPT:
 			RepoReceiptPO rrpo = (RepoReceiptPO) po;
 			String[] header5 = new String[] { "type", "number", "time",
 					"actualNum", "statisticNum", "date", "id", "State" };
 			tm = new DefaultTableModel(header5, 1);
-			tm.addRow(new String[] { rrpo.time.toString(), rrpo.receipt_id,
+			tm.addRow(new String[] { rrpo.time.toString(), rrpo.number,
 					rrpo.time, Integer.toString(rrpo.getaNum()),
 					Integer.toString(rrpo.getcNum()), null, rrpo.getReceipt_id(),
-					rrpo.state.toString() });
+					rrpo.statement.toString() });
 			break;
 		case SALE_ACCEPT:
 		case SALE_REJECTION:
@@ -289,7 +289,7 @@ public class ApproveUI {
 					"productList", "totalValue", "allowance", "coupon",
 					"actualValue", "comment" };
 			tm = new DefaultTableModel(header6, 1);
-			tm.addRow(new String[] { srpo.time.toString(), srpo.receipt_id,
+			tm.addRow(new String[] { srpo.time.toString(), srpo.number,
 					srpo.time, Integer.toString(srpo.getClientId()),
 					srpo.getSalesman(), srpo.getOperator().toString(),
 					srpo.getRepository(), srpo.getProductList().toString(),
@@ -306,7 +306,7 @@ public class ApproveUI {
 					"cliendID", "operator", "respository", "productList",
 					"comment", "totalValue" };
 			tm = new DefaultTableModel(header7, 1);
-			tm.addRow(new String[] { stock.time.toString(), stock.receipt_id,
+			tm.addRow(new String[] { stock.time.toString(), stock.number,
 					stock.time, Integer.toString(stock.getSupplier()),
 					stock.getOperator().toString(), stock.getRepository(),
 					stock.getProductList().toString(), stock.getComment(),

@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 public class ReceiptPO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	public ReceiptState state=ReceiptState.disapprove;
-	public String receipt_id;
+	public ReceiptState statement=ReceiptState.disapprove;
+	public String number;
 	public ReceiptType type;
 	public String time;
 

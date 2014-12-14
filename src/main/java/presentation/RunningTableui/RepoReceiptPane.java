@@ -142,12 +142,12 @@ public class RepoReceiptPane {
 		this.receipt=receipt;
 		int actualNum=receipt.getaNum();
 		int statisticNum=receipt.getcNum();
-		textNum.setText(receipt.receipt_id);
+		textNum.setText(receipt.number);
 		textType.setText(ReceiptType.getName(receipt.type));
 		textDate.setText(receipt.time);
 		textGoodsID.setText(receipt.getGoods_id());
 		textActualNum.setText(String.valueOf(actualNum));
-		textState.setText(ReceiptState.getName(receipt.state));
+		textState.setText(ReceiptState.getName(receipt.statement));
 		textReport.setText(String.valueOf(actualNum-statisticNum));
 		textStatisticNum.setText(String.valueOf(statisticNum));
 	}

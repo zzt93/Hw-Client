@@ -30,7 +30,7 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     	this.totalValue=totalValue;
     }
     public String getNumber() {
-        return receipt_id;
+        return number;
     }
 
     public int getClientId() {

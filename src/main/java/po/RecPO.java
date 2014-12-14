@@ -35,7 +35,7 @@ public class RecPO extends ReceiptPO implements Serializable {
 		bankList=new BkTransPO[2];
 		bankList[0]=new BkTransPO();
 		bankList[1]=new BkTransPO();
-		receipt_id="SKD-20140507-99653";
+		number="SKD-20140507-99653";
 		time="2014-05-07";
 	}
 	public String getClient() {

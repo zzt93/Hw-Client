@@ -212,14 +212,14 @@ public class SaleReceiptPane {
 	}
 	public void set(SaleReceiptPO receipt){
 		this.receipt=receipt;
-		textNum.setText(receipt.receipt_id);
+		textNum.setText(receipt.number);
 		textClient.setText(receipt.getClient());
 		textType.setText(ReceiptType.getName(receipt.type));
 		textRepository.setText(receipt.getRepository());
 		textDate.setText(receipt.time);
 		textComment.setText(receipt.getComment());
 		textOperator.setText(receipt.getOperator());
-		textState.setText(ReceiptState.getName(receipt.state));
+		textState.setText(ReceiptState.getName(receipt.statement));
 		
 		textSalesman.setText(receipt.getSalesman());
 		textAllowance.setText(receipt.getAllowance().toString());

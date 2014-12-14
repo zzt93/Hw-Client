@@ -46,6 +46,6 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 		return user;
 	}
 	public String getReceipt_Id() {
-		return receipt_id;
+		return number;
 	}
 }

@@ -17,7 +17,7 @@ public class RepoReceiptVO extends ReceiptPO implements Serializable {
 		type = ReceiptType.REPORECEIPT;
 		time = repoReceiptPO.getDate();
 		this.goods_id = repoReceiptPO.getGoods_id();
-		this.receipt_id = repoReceiptPO.getReceipt_id();
+		this.number = repoReceiptPO.getReceipt_id();
 	}
 	public RepoReceiptVO() {
 	}
