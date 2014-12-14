@@ -6,21 +6,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TreeNodePO implements Serializable {
-	@Override
-	public String toString() {
-		if(fa == null){
-			return "TreeNodePO [type=" + type + "\n type_so_far=" + type_so_far
-					+ "\n fa=null" + "\n sons=" + sons + "]\n";
-		}
-		return "TreeNodePO [type=" + type + "\n type_so_far=" + type_so_far
-				+ "\n fa=" + fa.type + "\n sons=" + sons + "]\n";
-	}
+
+
 	private static final long serialVersionUID = 1L;
 
 	String type;
 	
 	/*
-	 * this member is to record the type info up to now
+	 * this member is to record the type info up to this node
 	 */
 	String type_so_far = "";
 	
@@ -43,7 +36,9 @@ public class TreeNodePO implements Serializable {
 		this.fa = fa2;
 	}
 
-
+/*
+	This constructor is for the initial node
+ */
 	public TreeNodePO(String type) {
 		this.type = type;
 		this.type_so_far = type;
@@ -71,7 +66,13 @@ public class TreeNodePO implements Serializable {
 		}
 		return is_leaf()&&(goodsModels.isEmpty());
 	}
-	
+	public String sons_info() {
+		String info = "";
+		for (TreeNodePO son : sons) {
+			info = info + son.type_so_far;
+		}
+		return info;
+	}
 	public String getType() {
 		return type;
 	}

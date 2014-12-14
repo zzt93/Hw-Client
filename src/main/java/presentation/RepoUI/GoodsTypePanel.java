@@ -575,9 +575,11 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         private void addActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addActionPerformed
             String type = JOptionPane.showInputDialog("New type name:");
             boolean add_result = false;
-            TreeNodePO to_add = new TreeNodePO(treeNodePO_in_nodepanel, type);
+            TreeNodePO to_add;
             if (type == null) {
                 to_add = new TreeNodePO(treeNodePO_in_nodepanel);
+            } else {
+                to_add = new TreeNodePO(treeNodePO_in_nodepanel, type);
             }
             if (gt_controller.check_ever_has(treeNodePO_in_nodepanel.getType_so_far())) {
                 JOptionPane.showMessageDialog(null, "Invaild type to add: already has goods under it");
@@ -640,7 +642,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             if (MainFrame.DEBUG) {
                 full_info = "Light-A-A-B";
             } else {
-                full_info = treeNodePO_in_nodepanel.toString();
+                full_info = treeNodePO_in_nodepanel.sons_info();
             }
             JLabel childern = new JLabel(full_info);
             JOptionPane.showMessageDialog(MainFrame.frame, new Object[]{
@@ -652,7 +654,9 @@ public class GoodsTypePanel extends javax.swing.JPanel {
                     .showInputDialog("Input new type for this node");
             type_info = new_type;
             TreeNodePO temp = new TreeNodePO(treeNodePO_in_nodepanel.getFa(),
-                    new_type);
+                    treeNodePO_in_nodepanel.getType());
+            //TODO
+            temp.setType(new_type);
             boolean update_res = false;
             try {
                 update_res = gt_controller.update(temp);
