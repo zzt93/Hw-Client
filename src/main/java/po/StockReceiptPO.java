@@ -63,6 +63,9 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
     public void setClient(String name ){
     	client=name;
     }
+    public void setTotalValue(BigDecimal temp){
+    	totalValue=temp;
+    }
     public String getClient(){
     	return client;
     }

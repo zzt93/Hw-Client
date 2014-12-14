@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -16,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import businesslogic.FinancialReceiptbl.FinReceiptController;
+import businesslogic.RunningTablebl.RunTableController;
+import po.BkTransPO;
 import po.DealState;
 import po.RecPO;
 import po.ReceiptState;
@@ -39,9 +43,10 @@ public class PayReceiptPane {
 	
 	private PublicTableModel receiptModel;
 	private int currentRow;
-	private PublicTableModel tableModel;
 	private FinReceiptController finController;
+	private PublicTableModel tableModel;
 	private RecPO receipt;
+	private RunTableController controller;
 	
 	public PayReceiptPane(){
 		initialize();
@@ -50,7 +55,19 @@ public class PayReceiptPane {
 		this();
 		currentRow=row;
 		receiptModel=model;
+		try {
+			finController=new FinReceiptController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现了问题");
+			e.printStackTrace();
+		}
 	} 
+	public PayReceiptPane(RunTableController controller,RecPO receipt){
+		this();
+		this.receipt=receipt;
+		this.controller=controller;
+		credit();
+	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 600);
@@ -194,15 +211,38 @@ public class PayReceiptPane {
 //					e1.printStackTrace();
 //				}
 				receiptModel.insteadRow(currentRow, receipt);
+				try {
+					finController.update(receipt);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,e1.getMessage());
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
 	public void credit(){
 		//TODO
+		BkTransPO[] temp=receipt.bankList;
+		for(int i=0;i<temp.length;i++){
+			temp[i].amount=-temp[i].amount;
+		}
+		receipt.total=-receipt.total;
+		set(receipt);
+		
 		JButton button = new JButton("提交");
 		button.setBounds(219, 493, 60, 23);
 		panel.add(button);
-		
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.CreditNote(receipt);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+			
+		});
 
 	}
 }

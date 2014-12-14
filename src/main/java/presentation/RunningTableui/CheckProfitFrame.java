@@ -99,7 +99,6 @@ public class CheckProfitFrame {
 		btnExcel.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				Exporter temp=new Exporter(table,progressBar);
-				
 			}
 			
 		});

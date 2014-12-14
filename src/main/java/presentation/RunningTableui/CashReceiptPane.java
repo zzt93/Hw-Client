@@ -7,13 +7,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.RunningTablebl.RunTableController;
 import po.CashPO;
 import po.DealState;
+import po.ItemPO;
 import po.ReceiptState;
 import po.ReceiptType;
 import presentation.mainui.ModelType;
@@ -34,13 +37,16 @@ public class CashReceiptPane {
 	
 	private PublicTableModel tableModel;
 	private CashPO receipt;
+	private RunTableController controller;
 	
-	public static void main(String[] args){
-		CashReceiptPane a=new CashReceiptPane();
-		a.visit(true);
-	}
 	public CashReceiptPane(){
 		initialize();
+	}
+	public CashReceiptPane(RunTableController controller,CashPO receipt){
+		this();
+		this.receipt=receipt;
+		this.controller=controller;
+		credit();
 	}
 	
 	private void initialize() {
@@ -146,6 +152,9 @@ public class CashReceiptPane {
 	public void visit(boolean temp){
 		frame.setVisible(temp);
 	}
+	public void setReceipt(CashPO receipt){
+		this.receipt=receipt;
+	}
 	public void set(CashPO receipt){
 		this.receipt=receipt;
 		textNum.setText(receipt.number);
@@ -162,6 +171,29 @@ public class CashReceiptPane {
 	}
 	public void credit(){
 		//TODO
+		ItemPO[] temp=receipt.itemList;
+		for(int i=0;i<temp.length;i++){
+			Double temp1=temp[i].getAmount();
+			temp[i].setAmount(-temp1);
+		}
+		receipt.total=-receipt.total;
+		
+		set(receipt);
+		JButton button = new JButton("提交");
+		button.setBounds(219, 493, 60, 23);
+		panel.add(button);
+		
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.CreditNote(receipt);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+			
+		});
 	}
 	
 }

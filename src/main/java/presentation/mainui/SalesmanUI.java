@@ -12,6 +12,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import presentation.Clientui.ClientUI;
 import presentation.Saleui.SaleUI;
@@ -43,22 +45,23 @@ public class SalesmanUI extends JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new JTabbedPane();
-        sale11 = new SaleUI();
-        stock11 = new StockUI();
+        saleUI = new SaleUI();
+        stockUI = new StockUI();
         jScrollPane1 = new JScrollPane();
-        clientUI2 = new ClientUI();
+        clientUI = new ClientUI();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(750, 500));
-        jTabbedPane1.addTab("销售管理", sale11);
-        jTabbedPane1.addTab("进货管理", stock11);
+        jTabbedPane1.addTab("销售管理", saleUI);
+        jTabbedPane1.addTab("进货管理", stockUI);
 
 //        jScrollPane1.setPreferredSize(new java.awt.Dimension(750, 500));
 
-        clientUI2.setPreferredSize(new java.awt.Dimension(800, 600));
-        jScrollPane1.setViewportView(clientUI2);
+        clientUI.setPreferredSize(new java.awt.Dimension(800, 600));
+        jScrollPane1.setViewportView(clientUI);
 
         jTabbedPane1.addTab("客户管理", jScrollPane1);
+        jTabbedPane1.addChangeListener(new Change());
 
 //        query.setPreferredSize(new java.awt.Dimension(750, 500));
 //
@@ -97,6 +100,26 @@ public class SalesmanUI extends JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public class Change implements ChangeListener{
+		public void stateChanged(ChangeEvent e) {
+			JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
+		    int index = tabbedPane.getSelectedIndex();
+		    switch(index){
+		    case 0:
+		    {	
+		    	saleUI=new SaleUI();
+		    	tabbedPane.setComponentAt(0, saleUI);
+		    	break;
+		    }
+		    case 1:{
+		    	stockUI=new StockUI();
+		    	tabbedPane.setComponentAt(1, stockUI);
+		    	break;
+		    }
+		    }
+		}
+    	
+    }
 
     /**
      * @param args the command line arguments
@@ -137,10 +160,10 @@ public class SalesmanUI extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ClientUI clientUI2;
+    private ClientUI clientUI;
     private JScrollPane jScrollPane1;
     private JTabbedPane jTabbedPane1;
-    private SaleUI sale11;
-    private StockUI stock11;
+    private SaleUI saleUI;
+    private StockUI stockUI;
     // End of variables declaration//GEN-END:variables
 }

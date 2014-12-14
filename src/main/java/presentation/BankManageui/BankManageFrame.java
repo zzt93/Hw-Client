@@ -111,9 +111,10 @@ public class BankManageFrame {
 		
 		table = new JTable();
 		tableModel=new PublicTableModel(ModelType.BANK);
-		list=new BankVO[1];
-		list[0]=new BankVO();
-		tableModel.update(list);
+		//FIXME,TEST CODE
+//		list=new BankVO[1];
+//		list[0]=new BankVO();
+//		tableModel.update(list);
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
 		table.setFillsViewportHeight(true);

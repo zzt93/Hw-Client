@@ -168,9 +168,19 @@ public class ClientUI extends JPanel {
 		buttonConfirm.addActionListener(new Add());
 		panel_1.add(buttonConfirm);
 		
-//		JButton buttonCancel = new JButton("取消");
-//		buttonCancel.setBounds(329, 396, 93, 23);
-//		panel_1.add(buttonCancel);
+		JButton buttonClear = new JButton("清空");
+		buttonClear.setBounds(329, 396, 93, 23);
+		panel_1.add(buttonClear);
+		buttonClear.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				textFieldName.setText("");
+				textFieldPhone.setText("");
+				textFieldAddress.setText("");
+				textFieldZip.setText("");
+				textFieldEmail.setText("");
+			}
+			
+		});
 		
 		JLabel label = new JLabel("客户管理");
 		label.setBounds(32, 22, 54, 15);
@@ -180,9 +190,9 @@ public class ClientUI extends JPanel {
 //		label_1.setBounds(32, 570, 224, 15);
 //		add(label_1);
 		
-		JButton button_4 = new JButton("返回");
-		button_4.setBounds(548, 566, 93, 23);
-		add(button_4);
+//		JButton button_4 = new JButton("返回");
+//		button_4.setBounds(548, 566, 93, 23);
+//		add(button_4);
 
 
 		try {
