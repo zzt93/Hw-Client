@@ -208,6 +208,7 @@ public class PublicTableModel extends DefaultTableModel {
 					RecPO temp1=(RecPO)temp;
 					data[i][2]=temp1.total;
 					data[i][4]=DealState.getName(temp1.dealState);
+					break;
 				}
 				}
 			}

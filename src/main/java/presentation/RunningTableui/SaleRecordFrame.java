@@ -31,7 +31,7 @@ import vo.ReceiptConditionVO;
 import vo.SaleConditionVO;
 
 public class SaleRecordFrame {
-	private JFrame frame;
+//	private JFrame frame;
 	private JTextField textRepository;
 	private JTable table;
 	private JTextField textStartTime;
@@ -47,15 +47,15 @@ public class SaleRecordFrame {
 	
 	public SaleRecordFrame(){
 		initialize();
-		frame.setVisible(true);
+//		frame.setVisible(true);
 	}
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame = new JFrame();
+//		frame.setBounds(100, 100, 800, 500);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
-		frame.getContentPane().add(panel);
+//		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("商品:");
@@ -211,9 +211,9 @@ public class SaleRecordFrame {
 				listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				listFrame.setLocationRelativeTo(null);
 				String[] temp;
-				temp=new String[]{"商品1","商品2","商品3","商品4"};
+//				temp=new String[]{"商品1","商品2","商品3","商品4"};
 				//FIXME，获得商品列表
-//				temp=controller.getGoodsList();
+				temp=controller.getGoodsList();
 				goodsList=new JList<String>(temp);
 				goodsList.addMouseListener(new MouseClick());
 				JScrollPane scroll=new JScrollPane();

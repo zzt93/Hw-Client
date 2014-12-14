@@ -3,18 +3,25 @@ package presentation.FinancialReceiptui;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
+import businesslogic.FinancialReceiptbl.FinReceiptController;
+import po.DealState;
 import po.RecPO;
 import po.ReceiptPO;
+import po.ReceiptState;
+import po.ReceiptType;
 import presentation.RunningTableui.PayReceiptPane;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
 import vo.BankVO;
+import vo.ReceiptConditionVO;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.List;
@@ -26,18 +33,27 @@ public class FinancialReceiptFrame {
 	PublicTableModel tableModel;
 	private Font font=new Font("宋体",Font.PLAIN,18);
 	private Font font2=new Font("宋体",Font.PLAIN,14);
-	private List<ReceiptPO> list;
+	
+	private List<ReceiptPO> list=new ArrayList<ReceiptPO>();
+	private FinReceiptController controller;
 	public FinancialReceiptFrame(){
 		initialize();
 		receiptPane=new FinReceiptPane();
-		//TODO,获得list
-		//测试代码
-		{
-			RecPO rec=new RecPO();
-			list=new ArrayList<ReceiptPO>();
-			list.add(rec);
-			tableModel.update(list);
+		try {
+			controller=new FinReceiptController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现了问题");
+			e.printStackTrace();
 		}
+		getReceipt();
+		//TODO,获得list
+//		//测试代码
+//		{
+//			RecPO rec=new RecPO();
+//			list=new ArrayList<ReceiptPO>();
+//			list.add(rec);
+//			tableModel.update(list);
+//		}
 	}
 	public void initialize(){
 		panel = new JPanel();
@@ -79,7 +95,41 @@ public class FinancialReceiptFrame {
 		table.setFont(font2);
 		table.addMouseListener(new MouseClick());
 	}
-
+	
+	private void getReceipt(){
+		ReceiptConditionVO condition=new ReceiptConditionVO();
+		List<ReceiptPO> temp;
+		try {
+			condition.type=ReceiptType.PAYMENT;
+			condition.dealState=DealState.UNDEAL;
+			condition.state=ReceiptState.approve;
+			temp=controller.getReceipt(condition);
+			list.addAll(temp);
+			
+			condition.type=ReceiptType.RECEIVE;
+			temp=controller.getReceipt(condition);
+			list.addAll(temp);
+			
+			condition.dealState=null;
+			condition.state=ReceiptState.disapprove;
+			temp=controller.getReceipt(condition);
+			list.addAll(temp);
+			
+			condition.type=ReceiptType.CASH;
+			temp=controller.getReceipt(condition);
+			list.addAll(temp);
+			
+			condition.type=ReceiptType.PAYMENT;
+			temp=controller.getReceipt(condition);
+			list.addAll(temp);
+			
+			tableModel.update(list);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
+		
+	}
 	public JPanel getPanel(){
 		return panel;
 	}
