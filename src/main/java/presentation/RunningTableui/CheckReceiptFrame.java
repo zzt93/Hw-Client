@@ -154,9 +154,7 @@ public class CheckReceiptFrame {
 		panel.add(btnClear);
 		btnClear.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				for(int i=0;i<=table.getRowCount();i++){
-					tableModel.removeRow(0);
-				}
+				tableModel.clear();
 			}
 			
 		});

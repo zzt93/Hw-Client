@@ -29,7 +29,7 @@ public class RunTableController implements RunningTableblservice {
 	}
 	
 	public GoodsRecordVO[] getSaleTable(SaleConditionVO vo) throws Exception {
-		System.out.println("进入controller");
+//		System.out.println("进入controller");
 		return record.getSaleTable(vo);
 	}
 

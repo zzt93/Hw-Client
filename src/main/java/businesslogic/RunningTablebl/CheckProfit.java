@@ -57,6 +57,7 @@ public class CheckProfit {
 		checkRepoReceipt();
 		checkStockReceipt();
 		checkCostAdjust();
+		profit.calculate();
 		return profit;
 	}
 	private void checkSaleReceipt()throws Exception{
