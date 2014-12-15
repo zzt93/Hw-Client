@@ -98,7 +98,7 @@ public class CashReceiptPane {
 		label_8.setBounds(225, 444, 54, 15);
 		panel.add(label_8);
 		
-		labelTotal = new JLabel("3120");
+		labelTotal = new JLabel("");
 		labelTotal.setBounds(256, 444, 150, 15);
 		panel.add(labelTotal);
 		

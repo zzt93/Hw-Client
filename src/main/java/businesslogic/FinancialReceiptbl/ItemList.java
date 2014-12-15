@@ -22,6 +22,9 @@ public class ItemList {
 			}
 		}
 	}
+	public void delete(int i){
+		list.remove(i);
+	}
 	public double getTotal(){
 		return total;
 	}
@@ -36,4 +39,5 @@ public class ItemList {
 		}
 		return data;
 	}
+	
 }

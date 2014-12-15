@@ -28,7 +28,7 @@ import vo.ProfitVO;
 public class PublicTableModel extends DefaultTableModel {
 	String[] name;
 	Object[][] data;
-	ModelType type;
+	public ModelType type;
 	public PublicTableModel(){
 		super(0,3);
 	} 

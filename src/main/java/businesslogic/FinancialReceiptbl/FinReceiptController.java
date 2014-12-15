@@ -55,6 +55,10 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		itemList.delete(po);
 		return itemList.getTotal();
 	}
+	public double deleteItem(int i){
+		itemList.delete(i);
+		return itemList.getTotal();
+	}
 	public void makePayment(PayVO vo) throws Exception{
 		PayPO po=new PayPO(vo,bankList.getData());
 		bankList.clear();
