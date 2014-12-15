@@ -7,16 +7,17 @@ import po.GoodsModelPO;
 import po.GoodsPO;
 import vo.GoodsVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GL_stock_rece_Impl implements GL_stock_BLservice,
 		GL_receipt_BLservice {
 
-	GoodsListPO goodsListPO;
 
-	public GL_stock_rece_Impl(GoodsListPO goodsListPO) {
-		this.goodsListPO = goodsListPO;
+
+	public GL_stock_rece_Impl() {
+
 	}
 
 	// this method will not be invoked
@@ -26,19 +27,22 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice,
 		return false;
 	}
 
+	public GoodsListPO goodsListPO() throws RemoteException {
+		return GL_controller.goodsListDataService.getGoodsList().getObj();
+	}
 	public GoodsModelPO getGoodsModelPO(String id) throws Exception {
-		HashMap<String, GoodsModelPO> temp = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> temp = goodsListPO().getGoodsModels();
 		return temp.get(id);
 	}
 
 	public int amount(GoodsPO goods) throws Exception {
-		HashMap<String, GoodsModelPO> temp = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> temp = goodsListPO().getGoodsModels();
 		GoodsModelPO goodsModelPO = temp.get(goods.getId());
 		return goodsModelPO.getAmount();
 	}
 
 	public boolean checkGoodsExists(GoodsVO goodsVO) throws Exception {
-		HashMap<String, GoodsModelPO> temp = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> temp = goodsListPO().getGoodsModels();
 
 		return !(temp.get(goodsVO.id) == null);
 	}
@@ -129,9 +133,9 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice,
 
 	
 	@Override
-	public ArrayList<String> sell_type() {
+	public ArrayList<String> sell_type() throws RemoteException {
 		ArrayList<String> sell = new ArrayList<String>();
-		HashMap<String, GoodsModelPO> goodsModels = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> goodsModels = goodsListPO().getGoodsModels();
 		for (String temp : goodsModels.keySet()) {
 			GoodsModelPO gm = goodsModels.get(temp);
 			
@@ -143,9 +147,9 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice,
 	}
 
 	@Override
-	public ArrayList<String> stock_type() {
+	public ArrayList<String> stock_type() throws RemoteException {
 		ArrayList<String> stock = new ArrayList<String>();
-		HashMap<String, ArrayList<GoodsPO>> goods = goodsListPO.getGoods();
+		HashMap<String, ArrayList<GoodsPO>> goods = goodsListPO().getGoods();
 		for (String temp : goods.keySet()) {
 			GoodsPO gm = goods.get(temp).get(0);
 			stock.add(temp+"("+gm.getName()+")");

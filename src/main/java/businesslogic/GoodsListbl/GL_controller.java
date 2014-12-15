@@ -34,24 +34,26 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		if (goodsListPO.getGoodsModels().size() == 0){
 
 		}
-		glbLservice = new GLBLImpl(goodsListPO);
-		gl_signal_BLservice = new GL_signal_Impl(goodsListPO);
+		glbLservice = new GLBLImpl();
+		gl_signal_BLservice = new GL_signal_Impl();
 		try {
-			gl_GT_BLservice = new GL_GT_Impl(goodsListPO);
+			gl_GT_BLservice = new GL_GT_Impl();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 		
 
-		gl_stock_BLservice = new GL_stock_rece_Impl(goodsListPO);
-		gl_receipt_BLservice = new GL_stock_rece_Impl(goodsListPO);
-		gl_account_BLservice = new GL_account_Impl(goodsListPO);
+		gl_stock_BLservice = new GL_stock_rece_Impl();
+		gl_receipt_BLservice = new GL_stock_rece_Impl();
+		gl_account_BLservice = new GL_account_Impl();
 	}
 	GoodsListPO goodsListPO;
 	
-	public GoodsListPO getGoodsListPO() {
-		return goodsListPO;
+	public GoodsListPO getGoodsListPO() throws RemoteException {
+		return goodsListDataService.getGoodsList().getObj();
+
 	}
+
 	GLBLservice glbLservice ;
 	GL_signal_BLservice gl_signal_BLservice ;
 	GL_GT_BLservice gl_GT_BLservice ;
@@ -223,12 +225,12 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	}
 
 	@Override
-	public ArrayList<String> sell_type() {
+	public ArrayList<String> sell_type() throws RemoteException {
 		return gl_stock_BLservice.sell_type();
 	}
 
 	@Override
-	public ArrayList<String> stock_type() {
+	public ArrayList<String> stock_type() throws RemoteException {
 		return gl_stock_BLservice.stock_type();
 	}
 

@@ -6,15 +6,18 @@ import po.GoodsModelPO;
 import vo.GoodsVO;
 import vo.SignalVO;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 public class GL_signal_Impl implements GL_signal_BLservice {
 	
-	GoodsListPO goodsListPO ;
-	public GL_signal_Impl(GoodsListPO goodsListPO) {
-		this.goodsListPO = goodsListPO;
+
+	public GL_signal_Impl() {
 	}
 
+	public GoodsListPO goodsListPO() throws RemoteException {
+		return GL_controller.goodsListDataService.getGoodsList().getObj();
+	}
 	public boolean check_signal(GoodsVO goods) throws Exception {
 		System.err.println("this method shouldn't be invoked");
 		System.exit(0);
@@ -26,7 +29,7 @@ public class GL_signal_Impl implements GL_signal_BLservice {
 	}
 
 	public GoodsModelPO set_signal_name(GoodsVO goods) throws Exception {
-		HashMap<String, GoodsModelPO> goodsModels = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> goodsModels = goodsListPO().getGoodsModels();
 		GoodsModelPO temp = goodsModels.get(goods.id);
 		temp.setName(goods.name);
 		if (goods.amount > 0) {//TODO may be more logic here
@@ -37,7 +40,7 @@ public class GL_signal_Impl implements GL_signal_BLservice {
 	}
 
 	public int getSignal(GoodsVO goods) throws Exception {
-		HashMap<String, GoodsModelPO> goodsModels = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> goodsModels = goodsListPO().getGoodsModels();
 		GoodsModelPO temp = goodsModels.get(goods.id);
 		
 		return temp.getSignal();
@@ -58,8 +61,8 @@ public class GL_signal_Impl implements GL_signal_BLservice {
 //		return false;
 //	}
 
-	private int getAmount(GoodsVO goodsVO){
-		HashMap<String, GoodsModelPO> temp = goodsListPO.getGoodsModels();
+	private int getAmount(GoodsVO goodsVO) throws RemoteException {
+		HashMap<String, GoodsModelPO> temp = goodsListPO().getGoodsModels();
 		return temp.get(goodsVO.id).getAmount();
 	}
 }

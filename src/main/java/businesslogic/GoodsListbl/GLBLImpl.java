@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class GLBLImpl implements GLBLservice {
 
-	public GLBLImpl(GoodsListPO po) {
+	public GLBLImpl() {
 		
 	}
 

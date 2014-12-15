@@ -8,9 +8,8 @@ import java.util.ArrayList;
 
 public class GL_account_Impl implements GL_account_BLservice {
 
-	GoodsListPO goodsListPO;
-	public GL_account_Impl(GoodsListPO goodsListPO) {
-		this.goodsListPO = goodsListPO;
+
+	public GL_account_Impl() {
 	}
 
 	public GoodsListPO initialize(String account) throws Exception {
