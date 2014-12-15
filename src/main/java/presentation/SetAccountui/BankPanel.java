@@ -76,7 +76,7 @@ public class BankPanel {
 		JButton button_1;
 		private Font font=new Font("宋体",Font.PLAIN,18);
 
-		public SubBankPanel(){
+		public AddBankPanel(){
 			initialize();
 			frame.setVisible(true);
 		}

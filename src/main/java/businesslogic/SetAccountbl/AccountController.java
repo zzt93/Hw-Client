@@ -1,5 +1,10 @@
 package businesslogic.SetAccountbl;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.List;
+
+import businesslogic.GoodsTypebl.GT_controller;
 import businesslogicservice.SetAccountblservice.SetAccountblservice;
 import po.ClientPO;
 import po.ResultMessage;
@@ -11,6 +16,10 @@ public class AccountController implements SetAccountblservice {
 	BankList bankList=new BankList();
 	ClientList clientList=new ClientList();
 	GoodsList goodsList=new GoodsList();
+	GT_controller GTcontroller;
+	public AccountController() throws RemoteException, NullPointerException, NotBoundException{
+		GTcontroller=new GT_controller();
+	}
 	@Override
 	public void inherit(String name, String account) throws Exception {
 		setAccount.inherit(name, account);
@@ -102,6 +111,17 @@ public class AccountController implements SetAccountblservice {
 	public void delClient(ClientPO po) {
 		clientList.delete(po);
 
+	}
+	
+	public void getClient(){
+		//TODO,获得客户应收应付;
+		
+	}
+	public String[] getGoodsType() throws RemoteException{
+		//TODO,获得商品分类
+		List<String> type=GTcontroller.addable_type();
+		return type.toArray(new String[type.size()]);
+		
 	}
 
 }

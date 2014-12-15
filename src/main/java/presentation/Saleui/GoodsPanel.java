@@ -33,7 +33,7 @@ public class GoodsPanel {
 	JList<String> goodsList;
 	private JTextField textName;
 	private JTextField textId;
-	private JTextField textType;
+	private JTextField textModel;
 	private JTextField textNum;
 	private JTextField textComment;
 	private JTextField textPrice;
@@ -42,7 +42,7 @@ public class GoodsPanel {
 	private GoodsPaneType type;
 	List<ProductsReceipt> list;
 	PublicTableModel tableModel;
-	GoodsVO goods;
+	GoodsModelVO goods;
 	
 	public GoodsPanel(List<ProductsReceipt> list,PublicTableModel tableModel,GoodsPaneType type){
 		this.tableModel=tableModel;
@@ -88,11 +88,11 @@ public class GoodsPanel {
 		textId.setColumns(10);
 		textId.setEditable(false);
 		
-		textType = new JTextField();
-		textType.setBounds(70, 120, 100, 21);
-		panel.add(textType);
-		textType.setColumns(10);
-		textType.setEditable(false);
+		textModel = new JTextField();
+		textModel.setBounds(70, 120, 100, 21);
+		panel.add(textModel);
+		textModel.setColumns(10);
+		textModel.setEditable(false);
 		
 		JLabel label4 = new JLabel("数量:");
 		label4.setBounds(30, 160, 30, 15);
@@ -170,7 +170,7 @@ public class GoodsPanel {
 //				FIXME,测试暂时注释掉
 				String temp2[]=temp.split("\\(");
 				try {
-					goods=controller.eSearch_batch(temp2[0]).get(0);
+					goods=controller.eSearch_total(temp2[0]);
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
@@ -179,13 +179,13 @@ public class GoodsPanel {
 //				goods.model="类型1";
 //				goods.inPrice=15;
 //				goods.outPrice=15;
-				textName.setText(goods.name);
-				textType.setText(goods.model);
-				textId.setText(goods.id);
+				textName.setText(goods.getName());
+				textModel.setText(goods.getModel());
+				textId.setText(goods.getId());
 				if(type==GoodsPaneType.SALE){
-					textPrice.setText(String.valueOf(goods.inPrice));
+					textPrice.setText(String.valueOf(goods.getDefault_in()));
 				}else{
-					textPrice.setText(String.valueOf(goods.outPrice));
+					textPrice.setText(String.valueOf(goods.getDefault_out()));
 				}
 				listFrame.dispose();		
 			}
@@ -199,7 +199,7 @@ public class GoodsPanel {
 			pr.setComment(textComment.getText());
 			pr.setNumber(Integer.valueOf(textNum.getText()));
 			pr.setPrice(new BigDecimal(textPrice.getText()));
-			pr.setType(textType.getText());
+			pr.setType(textModel.getText());
 			pr.setName(textName.getText());
 			//添加到表格，添加到list,刷新界面总额
 			tableModel.addRow(pr);

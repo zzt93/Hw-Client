@@ -23,6 +23,7 @@ import po.RepoReceiptPO;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
 import vo.BankVO;
+import vo.GoodsModelVO;
 import vo.GoodsRecordVO;
 import vo.GoodsVO;
 import vo.ProfitVO;
@@ -312,6 +313,15 @@ public class PublicTableModel extends DefaultTableModel {
 		data[4]=pr.getPrice();
 		data[5]=pr.getTotal();
 		data[6]=pr.getComment();
+		addRow(data);
+	}
+	public void addRow(GoodsModelVO vo){
+		Object[] data=new Object[7];
+		data[0]=vo.getName();
+		data[1]=vo.getType();
+		data[2]=vo.getModel();
+		data[3]=vo.getDefault_in();
+		data[4]=vo.getDefault_out();
 		addRow(data);
 	}
 	public void addRow(ClientPO po){

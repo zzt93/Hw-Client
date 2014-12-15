@@ -4,17 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.SetAccountbl.AccountController;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
 import vo.BankVO;
@@ -24,7 +27,12 @@ public class GoodsPanel {
 	private JPanel panel;
 	private JTable table;
 	private PublicTableModel tableModel;
-	public ArrayList<GoodsModelVO> GoodsList;
+	public ArrayList<GoodsModelVO> goodsList;
+	private AccountController controller;
+	public GoodsPanel(AccountController controller){
+		this.controller=controller;
+		initialize();
+	}
 	public void initialize(){
 		panel = new JPanel();
 		panel.setBounds(0, 0, 800, 500);
@@ -74,6 +82,7 @@ public class GoodsPanel {
 		
 		public AddGoodsPanel(){
 			initialize();
+			frame.setVisible(true);
 		}
 		private void initialize() {
 			frame = new JFrame();
@@ -124,17 +133,46 @@ public class GoodsPanel {
 			textOutprice.setBounds(94, 197, 100, 21);
 			panel.add(textOutprice);
 			
-			JComboBox comboBox = new JComboBox();
+		
+			
+			try {
+				comboBox = new JComboBox(controller.getGoodsType());
+			} catch (RemoteException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+				e1.printStackTrace();
+			}
 			comboBox.setBounds(94, 77, 120, 21);
 			panel.add(comboBox);
 			
 			JButton button = new JButton("确定");
 			button.setBounds(49, 268, 60, 23);
 			panel.add(button);
-			
+			button.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					//TODO
+					String type=(String)comboBox.getSelectedItem();
+					String model=textModel.getText();
+					String name=textName.getText();
+					String id=type+"-"+model;
+					GoodsModelVO goods=new GoodsModelVO(type,id,name,model);
+					goods.setDefault_in(Double.valueOf(textInprice.getText()));
+					goods.setDefault_out(Double.valueOf(textOutprice.getText()));
+					
+					tableModel.addRow(goods);
+					goodsList.add(goods);
+				}
+				
+			});
 			JButton button_1 = new JButton("取消");
 			button_1.setBounds(154, 268, 60, 23);
 			panel.add(button_1);
+			button_1.addActionListener(new ActionListener(){
+
+				public void actionPerformed(ActionEvent e) {
+					frame.dispose();
+				}
+				
+			});
 		}
 	}
 }
