@@ -4,11 +4,16 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import businesslogic.BankManagebl.BankController;
+import businesslogic.BankManagebl.BankControllerTest;
+import businesslogic.Clientbl.ClientUtilityImpl;
+import businesslogic.GoodsListbl.GL_controller;
 import businesslogic.GoodsTypebl.GT_controller;
 import businesslogicservice.SetAccountblservice.SetAccountblservice;
 import po.ClientPO;
 import po.ResultMessage;
 import vo.BankVO;
+import vo.GoodsModelVO;
 import vo.GoodsVO;
 
 public class AccountController implements SetAccountblservice {
@@ -17,6 +22,9 @@ public class AccountController implements SetAccountblservice {
 	ClientList clientList=new ClientList();
 	GoodsList goodsList=new GoodsList();
 	GT_controller GTcontroller;
+	ClientUtilityImpl clientController;
+	GL_controller goodsController;
+	BankController bankController;
 	public AccountController() throws RemoteException, NullPointerException, NotBoundException{
 		GTcontroller=new GT_controller();
 	}
@@ -122,6 +130,32 @@ public class AccountController implements SetAccountblservice {
 		List<String> type=GTcontroller.addable_type();
 		return type.toArray(new String[type.size()]);
 		
+	}
+	public void creatClient(List<ClientPO> client) throws Exception{
+		for(int i=0;i<client.size();i++){
+			clientController.addClient(client.get(i));
+		}
+	}
+	public void creatBank(List<BankVO> bank) throws Exception{
+		for(int i=0;i<bank.size();i++){
+			bankController.add(bank.get(i));
+		}
+	}
+	public void creatGoods(List<GoodsModelVO> goods) throws Exception{
+		for(int i=0;i<goods.size();i++){
+			goodsController.add(goods.get(i));
+		}
+	}
+	public String[] getAllAccount(){
+		//TODO
+		return null;
+	}
+	public String getAccount(){
+		//TODO
+		return null;
+	}
+	public void setAccount(String name){
+		//TODO
 	}
 
 }

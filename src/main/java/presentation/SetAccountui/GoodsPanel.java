@@ -33,6 +33,9 @@ public class GoodsPanel {
 		this.controller=controller;
 		initialize();
 	}
+	public JPanel getPanel(){
+		return panel;
+	}
 	public void initialize(){
 		panel = new JPanel();
 		panel.setBounds(0, 0, 800, 500);

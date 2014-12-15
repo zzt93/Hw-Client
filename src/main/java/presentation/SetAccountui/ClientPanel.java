@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.SetAccountbl.AccountController;
 import po.ClientPO;
 import po.ClientType;
 import presentation.mainui.ModelType;
@@ -25,7 +26,15 @@ public class ClientPanel {
 	private JPanel panel;
 	private JTable table;
 	private PublicTableModel tableModel;
+	private AccountController controller; 
 	public ArrayList<ClientPO> clientList;
+	public ClientPanel(AccountController controller){
+		this.controller=controller;
+		initialize();
+	}
+	public JPanel getPanel(){
+		return panel;
+	}
 	public void initialize(){
 		panel = new JPanel();
 		panel.setBounds(0, 0, 800, 500);
