@@ -1037,7 +1037,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	private void set_detail_data(HashMap<String, GoodsModelPO> goods) {
 		DefaultTableModel detail_model = (DefaultTableModel) detailed_table
 				.getModel();
-
+		detail_model.setRowCount(0);
 		for (String string : goods.keySet()) {
 			GoodsModelPO temp = goods.get(string);
 			Object[] row = new Object[] { temp.getName(), temp.getId(),
@@ -1220,11 +1220,12 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		card.show(this, "GL_main");
 	}// GEN-LAST:event_detailed_list_backActionPerformed
 
+	static String type_model_seperator = " ";
 	private void moreActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_moreActionPerformed
 		String add_type = (String) addable_type.getSelectedItem();
 		String mo = model.getText();
 		//TODO add name of goods
-		GoodsModelVO temp = new GoodsModelVO(add_type, add_type +"-"+ mo, "light", mo);
+		GoodsModelVO temp = new GoodsModelVO(add_type, add_type +type_model_seperator+ mo, "light", mo);
 		goodsModel_add.add(temp);
 
 		add_add_del_search_data(add_table, temp);
@@ -1250,11 +1251,11 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 		} else {
 			all = (String) type_del.getSelectedItem();
-			del_type = all.split("-")[0];
-			mo = all.split("-")[1];
+			del_type = all.split(type_model_seperator)[0];
+			mo = all.split(type_model_seperator)[1];
 		}
 		//TODO add name of goods
-		GoodsModelVO temp = new GoodsModelVO(del_type, del_type +"-"+ mo, "light", mo);
+		GoodsModelVO temp = new GoodsModelVO(del_type, all, "light", mo);
 		goodsModel_del.add(temp);
 
 		add_add_del_search_data(del_table, temp);
@@ -1263,7 +1264,10 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	private void subscribe_delActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_subscribe_delActionPerformed
 		try {
 			for (GoodsModelVO goodsModelVO : goodsModel_del) {
-				gl_controller.delete(goodsModelVO);
+				boolean res = gl_controller.delete(goodsModelVO);
+				if (!res){
+					JOptionPane.showMessageDialog(null, "Fail to delete this goods");
+				}
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(MainFrame.frame, e

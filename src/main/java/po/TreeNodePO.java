@@ -66,11 +66,15 @@ public class TreeNodePO implements Serializable {
 		}
 		return is_leaf()&&(goodsModels.isEmpty());
 	}
+	public static String newline_dialog = "<br>";
 	public String sons_info() {
-		String info = "";
+		String info = "<html>";
+		int i = 0;
 		for (TreeNodePO son : sons) {
-			info = info + son.type_so_far;
+			info = info +"$"+i+ son.type_so_far+newline_dialog;
+			++i;
 		}
+		info += "</html>";
 		return info;
 	}
 	public String getType() {

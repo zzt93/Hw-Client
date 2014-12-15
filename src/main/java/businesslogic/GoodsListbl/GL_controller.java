@@ -86,7 +86,9 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	// for glblservice
 	public boolean delete(GoodsModelVO goods) throws Exception {
 		boolean res = glbLservice.delete(goods);
-		goodsListDataService.delete(new GoodsModelPO(goods));
+		if (res){
+			goodsListDataService.delete(new GoodsModelPO(goods));
+		}
 		return res;
 	}
 

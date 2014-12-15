@@ -13,8 +13,13 @@ public class GoodsPO implements Serializable {
 	double inPrice;
 	double outPrice;
 	
+	/*
+	 * This constructor is only for repo receipt
+	 */
 	public GoodsPO(GoodsVO goods){
+		amount = goods.amount;
 		
+		id = goods.id;
 	}
 	public int getAmount() {
 		return amount;

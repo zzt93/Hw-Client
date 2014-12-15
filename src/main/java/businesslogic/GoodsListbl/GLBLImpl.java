@@ -42,7 +42,7 @@ public class GLBLImpl implements GLBLservice {
 				.getGoodsModels();
 
 		GoodsModelPO temp = tempGoodsModelPOs.get(goods.getId());
-		if (is_del(temp)) {
+		if (!is_del(temp)) {
 			return false;
 		}
 		tempGoodsModelPOs.remove(goods.getId());

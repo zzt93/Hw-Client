@@ -15,16 +15,19 @@ import java.util.HashMap;
 public class RepoReceiptBLImpl implements RepoReceBLservice {
 
 	RepoReceiptDataService repoReceiptDataService ;
-	ArrayList<RepoReceiptPO> repoReceiptPOs;
-	ArrayList<GoodsReceiptPO> goodsReceiptPOs;
+	public ArrayList<RepoReceiptPO> repoReceiptPOs() throws RemoteException {
+		return repoReceiptDataService.getRepoReceipts(new ReceiptConditionVO()).getObj();
+	}
+	public ArrayList<GoodsReceiptPO> goodsReceiptPOs() throws RemoteException {
+		return repoReceiptDataService.getGoodsReceipts(new ReceiptConditionVO()).getObj();
+	}
 	GL_controller gl_controller;
 
 	static String receipt = "receipt";
 
 	public RepoReceiptBLImpl() throws RemoteException, NullPointerException, NotBoundException {
 		repoReceiptDataService = (RepoReceiptDataService) RMIUtility.getImpl(receipt);
-		repoReceiptPOs = repoReceiptDataService.getRepoReceipts(null).getObj();
-		goodsReceiptPOs = repoReceiptDataService.getGoodsReceipts(null).getObj();
+		
 		gl_controller = new GL_controller();
 	}
 
@@ -41,14 +44,14 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		return temp.toArray(new String[temp.size()]);
 	}
 
+	public static String check_type_id_name = ":";
 	public String[] check_type() throws RemoteException {
 		HashMap<String, GoodsModelPO> goodsModel = gl_controller
 				.getGoodsModelPOs();
 		String[] res = new String[goodsModel.size()];
 		int i = 0;
 		for (GoodsModelPO goods : goodsModel.values()) {
-			res[i++] = goods.getId() + " " + goods.getName() + " "
-					+ goods.getAmount();
+			res[i++] = goods.getId() + check_type_id_name + goods.getName();
 		}
 		return res;
 	}
@@ -62,27 +65,27 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	 */
 	
 
-	public String[] receipt_ids(){
-		String[] res = new String[repoReceiptPOs.size()];
+	public String[] receipt_ids() throws RemoteException {
+		String[] res = new String[repoReceiptPOs().size()];
 		int i = 0;
-		for (RepoReceiptPO receiptPO : repoReceiptPOs) {
+		for (RepoReceiptPO receiptPO : repoReceiptPOs()) {
 			res[i++] = receiptPO.getReceipt_id();
 		}
 		return  res;
 	}
 	
-	public GoodsReceiptVO show_a_GoodsReceiptVO(int i){
-		GoodsReceiptVO res = new GoodsReceiptVO(goodsReceiptPOs.get(i));
+	public GoodsReceiptVO show_a_GoodsReceiptVO(int i) throws RemoteException {
+		GoodsReceiptVO res = new GoodsReceiptVO(goodsReceiptPOs().get(i));
 		return res;
 	}
-	public RepoReceiptVO show_a_RepoReceiptVO(int i){
-		RepoReceiptVO res = new RepoReceiptVO(repoReceiptPOs.get(i));
+	public RepoReceiptVO show_a_RepoReceiptVO(int i) throws RemoteException {
+		RepoReceiptVO res = new RepoReceiptVO(repoReceiptPOs().get(i));
 		return res;
 	}
-	public String[] show_goods_rece_id(){
-		String[] res = new String[goodsReceiptPOs.size()];
+	public String[] show_goods_rece_id() throws RemoteException {
+		String[] res = new String[goodsReceiptPOs().size()];
 		int i = 0;
-		for (GoodsReceiptPO goodsReceiptVO : goodsReceiptPOs) {
+		for (GoodsReceiptPO goodsReceiptVO : goodsReceiptPOs()) {
 			res[i++] = goodsReceiptVO.getId();
 		}
 		return res;
@@ -167,7 +170,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	@Override
 	public ArrayList<GoodsReceiptVO> showGoodsReceipt() throws Exception {
 		ArrayList<GoodsReceiptVO> res = new ArrayList<GoodsReceiptVO>();
-		for (GoodsReceiptPO goodsReceiptPO : goodsReceiptPOs) {
+		for (GoodsReceiptPO goodsReceiptPO : goodsReceiptPOs()) {
 			res.add(new GoodsReceiptVO(goodsReceiptPO));
 		}
 		return res;

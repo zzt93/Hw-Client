@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -111,18 +111,20 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 
 		rece_buttons = new javax.swing.JPanel();
 
-		String[] goods_receipt_list;
+		String[] goods_receipt_list = new String[0];
 		if (MainFrame.DEBUG) {
 			goods_rece_List = new javax.swing.JComboBox<String>(new String[] {
 					"Light1 a1 10", "Light2 a2 10", "Light3 a3 10" });
 		} else {
-			goods_receipt_list = receiptBLImpl.show_goods_rece_id();
-			if (goods_receipt_list == null) {
-				JOptionPane.showMessageDialog(MainFrame.frame, "No goods receipt now");
-			} else {
-				goods_rece_List = new javax.swing.JComboBox<String>(
-						goods_receipt_list);
+			try {
+				goods_receipt_list = receiptBLImpl.show_goods_rece_id();
+			} catch (RemoteException e) {
+				e.printStackTrace();
 			}
+
+			goods_rece_List = new javax.swing.JComboBox<String>(
+						goods_receipt_list);
+			
 			
 		}
 		goods_rece_List.addActionListener(new ActionListener() {
@@ -131,12 +133,16 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = goods_rece_List.getSelectedIndex();
 				
-				GoodsReceiptVO temp ;
+				GoodsReceiptVO temp = null;
 				if (MainFrame.DEBUG) {
 					temp = goodsReceiptVO;
 					temp.user = "....";
 				} else {
-					temp = receiptBLImpl.show_a_GoodsReceiptVO(index);
+					try {
+						temp = receiptBLImpl.show_a_GoodsReceiptVO(index);
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
 				}
 				if (temp == null) {
 					JOptionPane.showMessageDialog(MainFrame.frame, "no repo receipt");
@@ -594,7 +600,17 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void show_receActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_show_receActionPerformed
+		String[] goods_receipts = new String[0];
+		try {
+			 goods_receipts = receiptBLImpl.show_goods_rece_id();
 
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		goods_rece_List.setModel(new DefaultComboBoxModel<String>(goods_receipts));
+		if (goods_receipts.length == 0) {
+			JOptionPane.showMessageDialog(MainFrame.frame, "No goods receipt now");
+		}
 		CardLayout cardlayout = (CardLayout) change.getLayout();
 		cardlayout.show(change, "show");
 	}// GEN-LAST:event_show_receActionPerformed

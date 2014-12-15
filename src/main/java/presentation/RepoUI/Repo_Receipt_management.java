@@ -446,8 +446,12 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			rece_name.setModel(new javax.swing.DefaultComboBoxModel<String>(
 					new String[] { "repo1", "repo2", "repo3" }));
 		} else {
-			rece_name.setModel(new javax.swing.DefaultComboBoxModel<String>(
-					repoReceiptBLImpl.receipt_ids()));
+			try {
+				rece_name.setModel(new DefaultComboBoxModel<String>(
+                        repoReceiptBLImpl.receipt_ids()));
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 		rece_name.addActionListener(new ActionListener() {
 
@@ -455,7 +459,7 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				int index = rece_name.getSelectedIndex();
-				RepoReceiptVO template;
+				RepoReceiptVO template = null;
 				if (MainFrame.DEBUG) {
 					template = new RepoReceiptVO();
 					template.actualNum = 100;
@@ -464,7 +468,11 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 					template.number = "repo3";
 					template.time = "2014-12-3";
 				} else {
-					template = repoReceiptBLImpl.show_a_RepoReceiptVO(index);
+					try {
+						template = repoReceiptBLImpl.show_a_RepoReceiptVO(index);
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
 				}
 				rece_panel.removeAll();
 				rece_panel.add(new Repo_rece(template));
@@ -631,8 +639,12 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			rece_name.setModel(new javax.swing.DefaultComboBoxModel<String>(
 					new String[] { "repo1", "repo2", "repo3", "test" }));
 		} else {
-			rece_name.setModel(new javax.swing.DefaultComboBoxModel<String>(
-					repoReceiptBLImpl.receipt_ids()));
+			try {
+				rece_name.setModel(new DefaultComboBoxModel<String>(
+                        repoReceiptBLImpl.receipt_ids()));
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 		CardLayout card = (CardLayout) change.getLayout();
 		card.show(change, "show");
@@ -647,18 +659,20 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 	private void compActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_compActionPerformed
 		String res = " ";
 		boolean vaild = true;
+		String id_string = ((String) choose_id.getSelectedItem()).split(RepoReceiptBLImpl.check_type_id_name)[0];
 		try {
-			GoodsVO temp = new GoodsVO((String) choose_id.getSelectedItem(),
+			GoodsVO temp = new GoodsVO(id_string,
 					Integer.parseInt(amount.getText()));
 			res = repoReceiptBLImpl.produceRepoReceipt(temp);
 		} catch (NumberFormatException numberFormatException) {
+			numberFormatException.printStackTrace();
 			JOptionPane.showMessageDialog(
 					null,
-					"Fail to parse the number for input is : "
+					"Fail to parse the number for your input is : "
 							+ amount.getText());
 			vaild = false;
 		} catch (Exception e) {
-
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(MainFrame.frame, e
 					+ ": fail to produce repo receipt");
 			if (MainFrame.DEBUG) {
@@ -683,7 +697,7 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			title.setText(infos[0]);
 			c_amount.setText(infos[1]);
 		}
-		id.setText((String) choose_id.getSelectedItem());
+		id.setText(id_string);
 		s_amount.setText(amount.getText());
 	}// GEN-LAST:event_compActionPerformed
 	

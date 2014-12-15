@@ -35,6 +35,10 @@ public class GoodsModelPO implements Serializable {
 	String model;
 	String type;
 
+	public String getType() {
+		return type;
+	}
+
 	boolean everHas;
 	boolean gift;
 	
