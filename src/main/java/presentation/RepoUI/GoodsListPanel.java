@@ -1137,7 +1137,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		} else {
 			GoodsModelVO temp = null;
 			if (MainFrame.DEBUG) {
-				temp = new GoodsModelVO("a1", "Light", "A");
+				temp = new GoodsModelVO("a1","a1-A", "Light", "A");
 			} else {
 				try {
 					if (goods_info_search.getText() == null){
@@ -1223,7 +1223,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	private void moreActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_moreActionPerformed
 		String add_type = (String) addable_type.getSelectedItem();
 		String mo = model.getText();
-		GoodsModelVO temp = new GoodsModelVO(add_type +"-"+ mo, "light", mo);
+		//TODO add name of goods
+		GoodsModelVO temp = new GoodsModelVO(add_type, add_type +"-"+ mo, "light", mo);
 		goodsModel_add.add(temp);
 
 		add_add_del_search_data(add_table, temp);
@@ -1252,7 +1253,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			del_type = all.split("-")[0];
 			mo = all.split("-")[1];
 		}
-		GoodsModelVO temp = new GoodsModelVO(del_type + mo, "light", mo);
+		//TODO add name of goods
+		GoodsModelVO temp = new GoodsModelVO(del_type, del_type +"-"+ mo, "light", mo);
 		goodsModel_del.add(temp);
 
 		add_add_del_search_data(del_table, temp);

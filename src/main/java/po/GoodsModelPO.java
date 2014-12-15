@@ -24,6 +24,8 @@ public class GoodsModelPO implements Serializable {
 		this.gift = goodsVO.isGift();
 		this.lastInPrice = goodsVO.getLastInPrice();
 		this.lastOutPrice = goodsVO.getLastOutPrice();
+
+		this.type = goodsVO.getType();
 	}
 
 	int amount;
@@ -31,7 +33,7 @@ public class GoodsModelPO implements Serializable {
 	String id;//id = type + model
 	String name;
 	String model;
-	
+	String type;
 
 	boolean everHas;
 	boolean gift;
@@ -39,7 +41,20 @@ public class GoodsModelPO implements Serializable {
 	double lastInPrice;
 	
 	double lastOutPrice;
-	
+	public double getDefault_in() {
+		return default_in;
+	}
+	public void setDefault_in(double in){
+		default_in = in;
+	}
+	public void setDefault_out(double default_out){
+		this.default_out = default_out;
+	}
+	public double getDefault_out(){
+		return default_in;
+	}
+	double default_in;
+	double default_out;
 	@Override
 	public String toString() {
 		return id+" "+amount+" "+signal;

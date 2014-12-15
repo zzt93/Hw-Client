@@ -115,8 +115,8 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             protected void paintComponent(Graphics g) {
 
                 super.paintComponent(g);
-                this.getViewport().setViewPosition(
-                        new Point(scroll_fcous_x, scroll_fcous_y));
+//                this.getViewport().setViewPosition(
+//                        new Point(scroll_fcous_x, scroll_fcous_y));
             }
 
         };
@@ -278,8 +278,8 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             if (MainFrame.DEBUG) {
                 this.setPreferredSize(new Dimension(2000, 1000));
             } else {
-                this.setPreferredSize(new java.awt.Dimension(2000 + NODE_W
-                        * gt_controller.getTreeNodePOs().size() / 2, 1000
+                this.setPreferredSize(new java.awt.Dimension(pre_w + NODE_W
+                        * gt_controller.getTreeNodePOs().size() / 2, pre_h
                         + NODE_H * gt_controller.height()));
             }
 
@@ -288,6 +288,8 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 
         }
 
+        int pre_w = 400;
+        int pre_h = 0;
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g); // Do the original draw
@@ -295,8 +297,8 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             if (MainFrame.DEBUG) {
                 this.setPreferredSize(new Dimension(2000, 1000));
             } else {
-                this.setPreferredSize(new java.awt.Dimension(2000 + NODE_W
-                        * gt_controller.getTreeNodePOs().size() / 2, 1000
+                this.setPreferredSize(new java.awt.Dimension(pre_w + NODE_W
+                        * gt_controller.getTreeNodePOs().size() / 2, pre_h
                         + NODE_H * gt_controller.height()));
             }
 
