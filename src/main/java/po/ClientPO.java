@@ -38,6 +38,9 @@ public class ClientPO implements Serializable {
         this.defaultSalesMan = defaultSalesMan;
     }
     public ClientPO(){
+    	
+    }
+    public ClientPO(String test){
     	type=ClientType.SELLER;
     	level=ClientLevel.LEVEL1;
     	name="茶农";

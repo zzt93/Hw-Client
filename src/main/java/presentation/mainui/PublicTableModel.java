@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
+import po.BankPO;
 import po.BkTransPO;
 import po.CashPO;
 import po.ClientPO;
+import po.ClientType;
 import po.DealState;
 import po.GoodsPO;
 import po.GoodsReceiptPO;
@@ -70,6 +72,10 @@ public class PublicTableModel extends DefaultTableModel {
 		case PROFIT:
 			name=new String[]{"项目","收入","支出","利润"};
 			break;
+		case ACCOUNTGOODS:
+			name=new String[]{"名称","类别","型号","进价","售价","最近进价","最近售价"};
+		case ACCOUNTCLIENT:
+			name=new String[]{"客户名称","客户分类","联系方式","应收","应付"};
 		default:
 			return;
 		}
@@ -308,11 +314,27 @@ public class PublicTableModel extends DefaultTableModel {
 		data[6]=pr.getComment();
 		addRow(data);
 	}
+	public void addRow(ClientPO po){
+		Object[] data=new Object[3];
+		data[0]=po.getName();
+		data[1]=ClientType.getName(po.getType());
+		data[2]=po.getPhone();
+		data[3]=po.getToReceive();
+		data[4]=po.getToPay();
+		addRow(data);
+	}
 	public void addRow(BkTransPO po ){
 		Object[] data=new Object[3];
 		data[0]=po.getName();
 		data[1]=po.getAmount();
 		data[2]=po.getRemark();
+		addRow(data);
+	}
+	public void addRow(BankVO vo){
+		Object[] data=new Object[3];
+		data[0]=vo.name;
+		data[1]=vo.balance;
+		data[2]=vo.remark;
 		addRow(data);
 	}
 	public void addRow(ItemPO po){

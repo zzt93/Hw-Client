@@ -168,17 +168,17 @@ public class GoodsPanel {
 				//System.out.println(temp);
 				//处理temp,获得商品信息，修改界面信息
 //				FIXME,测试暂时注释掉
-				String temp2[]=temp.split("(");
+				String temp2[]=temp.split("\\(");
 				try {
 					goods=controller.eSearch_batch(temp2[0]).get(0);
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
-				//GoodsVO goods=new GoodsVO("0001",20);
-				goods.name="商品1";
-				goods.model="类型1";
-				goods.inPrice=15;
-				goods.outPrice=15;
+//				GoodsVO goods=new GoodsVO("0001",20);
+//				goods.name="商品1";
+//				goods.model="类型1";
+//				goods.inPrice=15;
+//				goods.outPrice=15;
 				textName.setText(goods.name);
 				textType.setText(goods.model);
 				textId.setText(goods.id);
