@@ -10,7 +10,7 @@ import po.StockReceiptPO;
 import vo.*;
 
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.List;
 
 public class CheckReceipt {
 	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception{
@@ -25,7 +25,7 @@ public class CheckReceipt {
 			case SALE_ACCEPT:
 			case SALE_REJECTION:{
 				SaleUtilityImpl sale=new SaleUtilityImpl();
-				Vector<SaleReceiptPO> temp=sale.queryReceipt(vo);
+				List<SaleReceiptPO> temp=sale.queryReceipt(vo);
 				for(int i=0;i<temp.size();i++){
 					list.add(temp.get(i));
 				}
@@ -34,7 +34,7 @@ public class CheckReceipt {
 			case STOCK_ACCEPT:
 			case STOCK_REJECTION:{
 				StockUtilityImpl stock=new StockUtilityImpl();
-				Vector<StockReceiptPO> temp=stock.queryReceipt(vo);
+				List<StockReceiptPO> temp=stock.queryReceipt(vo);
 				for(int i=0;i<temp.size();i++){
 					list.add(temp.get(i));
 				}

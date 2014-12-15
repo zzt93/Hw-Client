@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.List;
 import java.util.List;
 
 public class FinancialReceiptFrame {

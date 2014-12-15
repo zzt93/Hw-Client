@@ -6,7 +6,8 @@ import vo.SaleConditionVO;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MockSaleUtilityImpl extends SaleUtilityImpl{
 
@@ -14,10 +15,10 @@ public class MockSaleUtilityImpl extends SaleUtilityImpl{
 		super();
 	}
 
-	public Vector<GoodsRecordVO> querySaleRecord(SaleConditionVO filter) throws Exception {
+	public List<GoodsRecordVO> querySaleRecord(SaleConditionVO filter) throws Exception {
         //TODO get filter
 		System.out.println("进入了Mock");
-        Vector<GoodsRecordVO> record=new Vector<GoodsRecordVO>();
+        List<GoodsRecordVO> record=new ArrayList<GoodsRecordVO>();
         record.add(new GoodsRecordVO());
         return record;
 

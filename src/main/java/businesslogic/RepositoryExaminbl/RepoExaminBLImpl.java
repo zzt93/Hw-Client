@@ -17,7 +17,7 @@ import vo.SaleConditionVO;
 import java.math.BigDecimal;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Vector;
+import java.util.List;
 
 public class RepoExaminBLImpl implements RepoExaminBLservice {
 
@@ -41,10 +41,10 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		ReceiptConditionVO conditionVO = new ReceiptConditionVO();
 		SaleConditionVO saleConditionVO = new SaleConditionVO();
 
-		Vector<StockReceiptPO> stockReceiptPOs = stock
+		List<StockReceiptPO> stockReceiptPOs = stock
 				.queryReceipt(conditionVO);
-		Vector<SaleReceiptPO> saleReceiptPOs = sale.queryReceipt(conditionVO);
-		Vector<GoodsRecordVO> goodsRecordVOs = sale
+		List<SaleReceiptPO> saleReceiptPOs = sale.queryReceipt(conditionVO);
+		List<GoodsRecordVO> goodsRecordVOs = sale
 				.querySaleRecord(saleConditionVO);
 
 		for (StockReceiptPO stockReceiptPO : stockReceiptPOs) {

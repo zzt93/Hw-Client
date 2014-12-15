@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * @author Mebleyev.G.Longinus
@@ -39,7 +39,7 @@ public class Approve_List implements Approve_List_BLservice{
 			ads = (ApproveDataService) RMIUtility.getImpl("Approve");
 		}
 	}
-	private <E> void addOneByOne(Vector<E> ver){
+	private <E> void addOneByOne(List<E> ver){
 		Iterator<E> itR = ver.iterator();
 		while(itR.hasNext()){
 			receipts.add((ReceiptPO) itR.next());
@@ -49,10 +49,10 @@ public class Approve_List implements Approve_List_BLservice{
 	public ArrayList<ReceiptPO> showList() throws Exception {
 		//<yus>
 		SaleUtility saleUtility = new SaleUtilityImpl();
-		Vector<SaleReceiptPO> verSale = saleUtility.queryReceipt(new ReceiptConditionVO());
+		List<SaleReceiptPO> verSale = saleUtility.queryReceipt(new ReceiptConditionVO());
 		addOneByOne(verSale);
 		StockUtility stockUtility = new StockUtilityImpl();
-		Vector<StockReceiptPO> verStock = stockUtility.queryReceipt(new ReceiptConditionVO());
+		List<StockReceiptPO> verStock = stockUtility.queryReceipt(new ReceiptConditionVO());
 		addOneByOne(verStock);
 		//</yus>
 		//<zzt>

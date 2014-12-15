@@ -8,7 +8,7 @@ import vo.SaleConditionVO;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Created by Nifury on 2014/10/25.
@@ -16,7 +16,7 @@ import java.util.Vector;
 public interface SaleDataService extends Remote {
     public ResultMessage makeReceipt(SaleReceiptPO receiptPO) throws RemoteException;
 
-    public ResultMessage<Vector<SaleReceiptPO>> queryReceipt(ReceiptConditionVO filter) throws RemoteException;
+    public ResultMessage<List<SaleReceiptPO>> queryReceipt(ReceiptConditionVO filter) throws RemoteException;
 
-    public ResultMessage<Vector<GoodsRecordVO>> querySaleRecord(SaleConditionVO filter) throws Exception;
+    public ResultMessage<List<GoodsRecordVO>> querySaleRecord(SaleConditionVO filter) throws Exception;
 }
