@@ -11,7 +11,8 @@ import vo.SaleConditionVO;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nifury on 2014/10/25.
@@ -32,15 +33,15 @@ public class SaleUtilityImpl implements SaleUtility {
     }
 
     @Override
-    public Vector<SaleReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
-        ResultMessage<Vector<SaleReceiptPO>> result = impl.queryReceipt(filter);
+    public List<SaleReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
+        ResultMessage<List<SaleReceiptPO>> result = impl.queryReceipt(filter);
         result.throwIfFailed();
         return result.getObj();
     }
 
     @Override
-    public Vector<GoodsRecordVO> querySaleRecord(SaleConditionVO filter) throws Exception {
-        ResultMessage<Vector<GoodsRecordVO>> result = impl.querySaleRecord(filter);
+    public List<GoodsRecordVO> querySaleRecord(SaleConditionVO filter) throws Exception {
+        ResultMessage<List<GoodsRecordVO>> result = impl.querySaleRecord(filter);
         result.throwIfFailed();
         return result.getObj();
     }

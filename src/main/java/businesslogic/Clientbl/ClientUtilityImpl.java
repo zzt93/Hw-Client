@@ -44,7 +44,7 @@ public class ClientUtilityImpl implements ClientUtility {
 
     /**
      * @param filters 客户信息过滤向量，可为null
-     * @return 当没有满足条件时，返回空List，否则返回符合条件的客户Vector
+     * @return 当没有满足条件时，返回空List，否则返回符合条件的客户List
      */
     @Override
     public List<ClientPO> queryClient(Map<String, Object> filters) throws Exception {

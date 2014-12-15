@@ -9,7 +9,7 @@ import vo.ReceiptConditionVO;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Created by Nifury on 2014/10/25.
@@ -30,9 +30,9 @@ public class StockUtilityImpl implements StockUtility {
     }
 
     @Override
-    public Vector<StockReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
+    public List<StockReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
         //TODO get filter
-        ResultMessage<Vector<StockReceiptPO>> result = impl.queryReceipt(null);
+        ResultMessage<List<StockReceiptPO>> result = impl.queryReceipt(null);
         result.throwIfFailed();
         return result.getObj();
     }

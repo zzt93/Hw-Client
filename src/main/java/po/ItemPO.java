@@ -33,4 +33,7 @@ public class ItemPO implements Serializable {
 	public String getName(){
 		return item;
 	}
+	public void setAmount(double amount){
+		this.amount=amount;
+	}
 }

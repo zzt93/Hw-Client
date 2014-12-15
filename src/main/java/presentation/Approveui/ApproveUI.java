@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import businesslogic.Adminbl.Adminbl;
+import businesslogic.Approvebl.Approve_List;
 import businesslogic.Approvebl.Approve_Mock;
 import businesslogicservice.Adminblservice.AdminBLService;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
@@ -71,6 +72,7 @@ public class ApproveUI {
 		frame.getContentPane().add(totalPanel);
 		//TODO 用于Mock的切换
 		// /Read Receipts
+		approveBL = new Approve_List();
 		listOfReceipts = approveBL.showList();
 		//listOfReceipts = new Approve_Mock().showList();
 		final JLabel labelHint = new JLabel("状态栏");

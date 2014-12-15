@@ -128,7 +128,7 @@ public class CheckReceiptFrame {
 		//TODO
 		String[] temp={"进货单","进货退货单","销售单","销售退货单","收款单"
 				,"付款单","现金费用单","报溢报损单","库存赠送单"};
-		boxType = new JComboBox();
+		boxType = new JComboBox(temp);
 		boxType.setBounds(115, 57, 100, 21);
 		panel.add(boxType);
 		
@@ -140,10 +140,11 @@ public class CheckReceiptFrame {
 		table = new JTable(tableModel);
 		table.setFillsViewportHeight(true);
 		scrollPane.setViewportView(table);
-		ArrayList<ReceiptPO> list=new ArrayList<ReceiptPO>();
-		list.add(new RecPO());
-		list.add(new RecPO());
-		tableModel.update(list);
+		//FIXME,test code
+//		ArrayList<ReceiptPO> list=new ArrayList<ReceiptPO>();
+//		list.add(new RecPO());
+//		list.add(new RecPO());
+//		tableModel.update(list);
 		
 		JLabel label_6 = new JLabel("单据列表");
 		label_6.setBounds(431, 57, 54, 15);
@@ -177,6 +178,7 @@ public class CheckReceiptFrame {
 		JButton btnCredit = new JButton("红冲");
 		btnCredit.setBounds(60, 350, 60, 23);
 		panel.add(btnCredit);
+		btnCredit.addActionListener(new Credit());
 		
 		JButton btnCreditCopy = new JButton("红冲复制");
 		btnCreditCopy.setBounds(60, 400, 80, 23);
@@ -233,6 +235,45 @@ public class CheckReceiptFrame {
 //			}
 				
 						
+		}
+		
+	}
+	public class Credit implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			if(table.getSelectedRow()<0){
+				JOptionPane.showMessageDialog(null, "请选中单据");
+				return ;
+			}else{
+				ReceiptPO temp=receiptList.get(table.getSelectedRow());
+				switch(temp.type){
+				case CASH:{
+					CashReceiptPane creditPane=new CashReceiptPane(controller,(CashPO)temp);
+					break;
+				}
+				case RECEIVE:
+				case PAYMENT:{
+					PayReceiptPane creditPane=new PayReceiptPane(controller,(RecPO)temp);
+					break;
+				}
+				case SALE_ACCEPT:
+				case SALE_REJECTION:{
+					SaleReceiptPane creditPane=new SaleReceiptPane(controller,(SaleReceiptPO)temp);
+					break;
+				}
+				case STOCK_ACCEPT:
+				case STOCK_REJECTION:{
+					StockReceiptPane creditPane=new StockReceiptPane(controller,(StockReceiptPO)temp);
+					break;
+				}
+				case GOODSRECEIPT:{
+					GoodsReceiptPane creditPane=new GoodsReceiptPane(controller,(GoodsReceiptPO)temp);
+					break;
+				}
+				default:
+					JOptionPane.showMessageDialog(null, "该单据不可红冲");
+				}
+			}
+			
 		}
 		
 	}

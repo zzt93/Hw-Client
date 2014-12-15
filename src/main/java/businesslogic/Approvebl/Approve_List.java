@@ -14,6 +14,7 @@ import dataservice.GoodsListdataservice.GoodsListDataService;
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
 import po.*;
 import util.RMIUtility;
+import vo.ReceiptConditionVO;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -22,7 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * @author Mebleyev.G.Longinus
@@ -38,7 +39,7 @@ public class Approve_List implements Approve_List_BLservice{
 			ads = (ApproveDataService) RMIUtility.getImpl("Approve");
 		}
 	}
-	private <E> void addOneByOne(Vector<E> ver){
+	private <E> void addOneByOne(List<E> ver){
 		Iterator<E> itR = ver.iterator();
 		while(itR.hasNext()){
 			receipts.add((ReceiptPO) itR.next());
@@ -48,23 +49,23 @@ public class Approve_List implements Approve_List_BLservice{
 	public ArrayList<ReceiptPO> showList() throws Exception {
 		//<yus>
 		SaleUtility saleUtility = new SaleUtilityImpl();
-		Vector<SaleReceiptPO> verSale = saleUtility.queryReceipt(null);
+		List<SaleReceiptPO> verSale = saleUtility.queryReceipt(new ReceiptConditionVO());
 		addOneByOne(verSale);
 		StockUtility stockUtility = new StockUtilityImpl();
-		Vector<StockReceiptPO> verStock = stockUtility.queryReceipt(null);
+		List<StockReceiptPO> verStock = stockUtility.queryReceipt(new ReceiptConditionVO());
 		addOneByOne(verStock);
 		//</yus>
 		//<zzt>
 		RepoReceiptDataService repository = new RepoReceiptDataImpl();
-		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts(null).getObj();
+		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts(new ReceiptConditionVO()).getObj();
 		receipts.addAll(arrRepo);
-		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts(null).getObj();
+		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts(new ReceiptConditionVO()).getObj();
 		receipts.addAll(arrGoods);
 		//</zzt>
 		
 		//<gda>
 		FinReceiptController finreceipt = new FinReceiptController();
-		ArrayList<ReceiptPO> arrfin = finreceipt.getReceipt(null);
+		ArrayList<ReceiptPO> arrfin = finreceipt.getReceipt(new ReceiptConditionVO());
 		for(ReceiptPO po :arrfin){
 			receipts.add(po);
 		}

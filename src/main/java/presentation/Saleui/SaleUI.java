@@ -55,6 +55,7 @@ import presentation.mainui.PublicTableModel;
 public class SaleUI extends JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JLabel custom_label;
+    private JButton jButton0;
     private JButton jButton1;
     private JButton jButton2;
     private JButton jButton3;
@@ -109,7 +110,7 @@ public class SaleUI extends JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    public void initComponents() {
 
         jScrollPane3 = new JScrollPane();
         sale = new JPanel();
@@ -136,11 +137,11 @@ public class SaleUI extends JPanel {
         jLabel11 = new JLabel();
         labelActualValue = new JLabel();
         jPanel3 = new JPanel();
+        jButton0 = new JButton();
         jButton1 = new JButton();
         jButton2 = new JButton();
         jButton3 = new JButton();
-
-//      FIXME,涉及服务器，暂时无法测试
+      //FIXME,涉及服务器
         ClientUtilityImpl client;
 		try {
 			saleController= new SaleUtilityImpl();
@@ -152,22 +153,21 @@ public class SaleUI extends JPanel {
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
 			}
-		} catch (RemoteException e) {
+		} catch (RemoteException |NotBoundException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "服务器出现问题");
-			System.exit(ERROR);
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "服务器出现问题");
-			System.exit(ERROR);
-		}
+			//System.exit(ERROR);
+		} 
 		String[] temp=new String[clientList.size()];
 		for(int i=0;i<temp.length;i++){
 			temp[i]=clientList.get(i).getName();
 		}
+		
 		boxClient = new JComboBox(temp);
+		
 //      	boxClient=new JComboBox(new String[]{"张三","李四"});
         boxType=new JComboBox(new String[]{"销售","销售退货"});
+        
         boxType.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent e) {
 				if(boxType.getSelectedIndex()==1){
@@ -191,11 +191,12 @@ public class SaleUI extends JPanel {
 
         jLabel4.setText("单据类型");
         
-       
         textSalesman.setText("请输入业务员");
+        
         textRepository.setText("请输入仓库");
 
         jTable1.setModel(tableModel);
+        
         jScrollPane1.setViewportView(jTable1);
 
         jLabel13.setText("备注");
@@ -276,7 +277,19 @@ public class SaleUI extends JPanel {
                     .addComponent(labelActualValue))
                 .addContainerGap())
         );
-
+        jButton0.setText("清空");
+        jButton0.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent evt){
+        		 textSalesman.setText("请输入业务员");
+        	     textRepository.setText("请输入仓库");
+        	     textComment.setText("");
+        	     labelTotal.setText("");
+        	     labelAllowance.setText("");
+        	     labelCoupon.setText("");
+        	     labelActualValue.setText("");
+        	     tableModel.clear();
+        	}
+        });
         jButton1.setText("添加商品");
         jButton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -302,20 +315,31 @@ public class SaleUI extends JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jButton1)
-                .addGap(145, 145, 145)
-                .addComponent(jButton2)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(74, 74, 74))
+//                .addGap(49, 49, 49)
+//                .addComponent(jButton1)
+//                .addGap(145, 145, 145)
+//                .addComponent(jButton2)
+//                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+//                .addComponent(jButton3)
+//                .addGap(74, 74, 74)
+                  .addGap(30, 30, 30)
+                  .addComponent(jButton0)
+                  .addGap(80,80,80)
+                  .addComponent(jButton1)
+                  .addGap(80, 80, 80)
+                  .addComponent(jButton2)
+                  .addGap(80,80,80)
+                  .addComponent(jButton3)
+                  .addGap(74, 74, 74)
+            		)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jButton0)
+                	.addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addContainerGap())
@@ -404,7 +428,7 @@ public class SaleUI extends JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+   
     private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	goodsPane=new GoodsPanel(prList,tableModel,GoodsPaneType.SALE); 
     	goodsPane.showAddPane();

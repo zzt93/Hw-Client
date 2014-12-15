@@ -55,6 +55,10 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		itemList.delete(po);
 		return itemList.getTotal();
 	}
+	public double deleteItem(int i){
+		itemList.delete(i);
+		return itemList.getTotal();
+	}
 	public void makePayment(PayVO vo) throws Exception{
 		PayPO po=new PayPO(vo,bankList.getData());
 		bankList.clear();
@@ -94,20 +98,25 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		return result;
 	}
 	public String getOperator() throws Exception{
-		//TODO,通过Admin获得
 		return adminController.getUser();
 	
 	}
 	public ReceiptPO[] getReceipt()throws Exception{
-		return new ReceiptPO[1];
-		//TODO
+		ArrayList<ReceiptPO> list=getReceipt(new ReceiptConditionVO());
+		ReceiptPO[] result=new ReceiptPO[list.size()];
+		for(int i=0;i<result.length;i++){
+			result[i]=list.get(i);
+		}
+		return result;
 	}
 	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception{
 		ResultMessage result;
 		result=finReceipt.queryReceipt(vo);
 		result.throwIfFailed();
-		//TODO
-		return null;
+
+		ArrayList<ReceiptPO> list=(ArrayList<ReceiptPO>)result.getObj();
+		
+		return list;
 	}
 	public void creditCash(CashVO vo)throws Exception{
 		CashPO po=new CashPO(vo);

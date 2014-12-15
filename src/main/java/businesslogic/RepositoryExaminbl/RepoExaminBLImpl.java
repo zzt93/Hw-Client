@@ -18,7 +18,7 @@ import vo.SaleConditionVO;
 import java.math.BigDecimal;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Vector;
+import java.util.List;
 
 public class RepoExaminBLImpl implements RepoExaminBLservice {
 
@@ -43,32 +43,37 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		SaleConditionVO saleConditionVO = new SaleConditionVO();
 		saleConditionVO.startTime = start;
 		saleConditionVO.endTime = end;
-		//TODO
+
 
 		//get the all in
-		Vector<StockReceiptPO> stockReceiptPOs = stock
-				.queryReceipt(in_conditionVO);
+		List<StockReceiptPO> stock_in = stock.queryReceipt(in_conditionVO);
 		in_conditionVO.type = ReceiptType.SALE_REJECTION;
-		Vector<StockReceiptPO> stockReceiptPOs2 = stock.queryReceipt(in_conditionVO);
-		stockReceiptPOs.addAll(stockReceiptPOs2);
+		List<SaleReceiptPO> sale_in = sale.queryReceipt(in_conditionVO);
+		
+		
 		
 		//get all out
 		ReceiptConditionVO out_condition = new ReceiptConditionVO(start, end, ReceiptType.STOCK_REJECTION, null, null, null);
-		Vector<SaleReceiptPO> saleReceiptPOs = sale.queryReceipt(out_condition);
+		List<StockReceiptPO> stock_out = stock.queryReceipt(out_condition);
 		out_condition.type = ReceiptType.SALE_ACCEPT;
-		saleReceiptPOs.addAll(sale.queryReceipt(out_condition));
+		List<SaleReceiptPO> sale_out = sale.queryReceipt(out_condition);
 		
 		
 
-		for (StockReceiptPO stockReceiptPO : stockReceiptPOs) {
-			out.add(stockReceiptPO.getTotalValue());
+		for (StockReceiptPO stockReceiptPO : stock_in) {
+			in.add(stockReceiptPO.getTotalValue());
 		}
-		for (SaleReceiptPO saleReceiptPO : saleReceiptPOs) {
+		for (SaleReceiptPO saleReceiptPO : sale_in) {
 			in.add(saleReceiptPO.getTotalValue());
 		}
-		
+		for (StockReceiptPO saleReceiptPO : stock_out) {
+			out.add(saleReceiptPO.getTotalValue());
+		}
+		for (SaleReceiptPO saleReceiptPO : sale_out) {
+			out.add(saleReceiptPO.getTotalValue());
+		}
 		//count the amount
-		Vector<GoodsRecordVO> goodsRecordVOs = sale
+		List<GoodsRecordVO> goodsRecordVOs = sale
 				.querySaleRecord(saleConditionVO);
 		for (GoodsRecordVO goodsRecordVO : goodsRecordVOs) {
 			switch (goodsRecordVO.type) {

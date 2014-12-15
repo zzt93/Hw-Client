@@ -3,20 +3,24 @@ package presentation.RunningTableui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.RunningTablebl.RunTableController;
 import po.GoodsReceiptPO;
 import po.ReceiptState;
 import po.ReceiptType;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
+import vo.GoodsVO;
 
 public class GoodsReceiptPane {
 
@@ -33,11 +37,16 @@ public class GoodsReceiptPane {
 	
 	private GoodsReceiptPO receipt;
 	private PublicTableModel tableModel;
-	
+	private RunTableController controller;
 	public GoodsReceiptPane(){
 		initialize();
 	}
-
+	public GoodsReceiptPane(RunTableController controller,GoodsReceiptPO receipt){
+		this();
+		this.receipt=receipt;
+		this.controller=controller;
+		credit();
+	}
 	
 	private void initialize() {
 		frame = new JFrame();
@@ -129,9 +138,6 @@ public class GoodsReceiptPane {
 		textType.setEditable(false);
 		textState.setEditable(false);
 		textDate.setEditable(false);
-//		JButton btnRight = new JButton("确定");
-//		btnRight.setBounds(355, 318, 60, 23);
-//		panel.add(btnRight);
 		
 	}
 	public void query(){
@@ -150,5 +156,30 @@ public class GoodsReceiptPane {
 	}
 	public void visit(boolean temp){
 		frame.setVisible(temp);
+	}
+	public void credit(){
+		List<GoodsVO> temp=receipt.getGoods();
+		GoodsVO temp1;
+		for(int i=0;i<temp.size();i++){
+			temp1=temp.get(i);
+			temp1.amount=-temp1.amount;
+		}
+		receipt.setSumOfGifts(-receipt.getSumOfGifts());
+		
+		set(receipt);
+		JButton btnRight = new JButton("提交");
+		btnRight.setBounds(355, 318, 60, 23);
+		panel.add(btnRight);
+		btnRight.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.CreditNote(receipt);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+			
+		});
 	}
 }

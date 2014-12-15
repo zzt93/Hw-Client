@@ -78,7 +78,9 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
         
     }
 
-    
+    public void setTotalValue(BigDecimal temp){
+    	totalValue=temp;
+    }
     public void setClient(String name){
     	client=name;
     }

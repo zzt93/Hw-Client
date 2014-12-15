@@ -28,7 +28,7 @@ import vo.ProfitVO;
 public class PublicTableModel extends DefaultTableModel {
 	String[] name;
 	Object[][] data;
-	ModelType type;
+	public ModelType type;
 	public PublicTableModel(){
 		super(0,3);
 	} 
@@ -208,6 +208,7 @@ public class PublicTableModel extends DefaultTableModel {
 					RecPO temp1=(RecPO)temp;
 					data[i][2]=temp1.total;
 					data[i][4]=DealState.getName(temp1.dealState);
+					break;
 				}
 				}
 			}

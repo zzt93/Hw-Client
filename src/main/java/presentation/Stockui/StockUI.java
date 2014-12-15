@@ -46,6 +46,7 @@ public class StockUI extends JPanel {
     private JLabel custom_label;
     private JButton jButton1;
     private JButton jButton2;
+    private JButton jButton3;
     private JComboBox boxType;
     private JLabel jLabel13;
     private JLabel jLabel3;
@@ -88,7 +89,7 @@ public class StockUI extends JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    public void initComponents() {
 
         jScrollPane3 = new JScrollPane();
         stock = new JPanel();
@@ -110,7 +111,8 @@ public class StockUI extends JPanel {
         jPanel3 = new JPanel();
         jButton1 = new JButton();
         jButton2 = new JButton();
-       //FIXME,涉及服务器，暂时无法测试
+        jButton3 = new JButton();
+        //FIXME,涉及服务器，暂时无法测试
         ClientUtilityImpl client;
 		try {
 	        stockController= new StockUtilityImpl();
@@ -133,6 +135,7 @@ public class StockUI extends JPanel {
         }
 //        String[] temp={"客户1","客户2"};
         boxClient = new JComboBox(temp);
+        
         boxType = new JComboBox(new String[]{"进货","进货退货"});
         
         jScrollPane3.setPreferredSize(new java.awt.Dimension(750, 500));
@@ -223,22 +226,31 @@ public class StockUI extends JPanel {
                 .addContainerGap())
         );
 
-        jButton1.setText("添加商品");
+        jButton1.setText("清空");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+            	textRepository.setText("请输入仓库");
+            	textComment.setText("");
+            	labelTotal.setText("");
+            	tableModel.clear();
             }
         });
 
 
 
-        jButton2.setText("制定单据");
+        jButton2.setText("添加商品");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         
+        jButton3.setText("制定单据");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -246,10 +258,10 @@ public class StockUI extends JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(jButton1)
-//                .addGap(145, 145, 145)
-//                .addComponent(jButton2)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addGap(145, 145, 145)
                 .addComponent(jButton2)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addComponent(jButton3)
                 .addGap(74, 74, 74))
         );
         jPanel3Layout.setVerticalGroup(
@@ -258,8 +270,8 @@ public class StockUI extends JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-//                    .addComponent(jButton3))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -346,13 +358,15 @@ public class StockUI extends JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+   
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	goodsPane=new GoodsPanel(list,tableModel,GoodsPaneType.STOCK);
     	goodsPane.showAddPane();
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	
     	try {
 			stockController.makeReceipt(stockReceipt);
@@ -361,7 +375,7 @@ public class StockUI extends JPanel {
 		}
     	
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+   
     private void setStockReceipt(){
     	ClientPO client=clientList.get(boxClient.getSelectedIndex());
     	//FIXME,操作员get

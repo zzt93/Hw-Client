@@ -207,11 +207,14 @@ public class FinReceiptPane {
 		//FIXEME,银行获得
 		String[] temp=null;
 		try {
-			temp = controller.getClient();
+			temp = controller.getBank();
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 			e1.printStackTrace();
 		}
+		tableModel = new PublicTableModel(ModelType.ITEM);
+		table = new JTable(tableModel);
+		scrollPane.setViewportView(table);
 //		temp=new String[]{"银行账户1","银行账户2"};
 		
 		comboBox = new JComboBox(temp);
@@ -302,8 +305,15 @@ public class FinReceiptPane {
 			}else{
 				//FIXME,
 //				tableModel,ArrayList是否一样动态调整？
-				
-				total=controller.deleteBank(table.getSelectedRow());
+				switch(tableModel.type){
+				case ITEM:
+					total=controller.deleteItem(table.getSelectedRow());
+					break;
+				case BANK:
+					total=controller.deleteBank(table.getSelectedRow());
+					break;
+				}
+			
 				tableModel.removeRow(table.getSelectedRow());
 				
 				labelTotal.setText(String.valueOf(total));

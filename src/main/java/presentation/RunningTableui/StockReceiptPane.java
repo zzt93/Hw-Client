@@ -2,17 +2,22 @@ package presentation.RunningTableui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.RunningTablebl.RunTableController;
+import po.ProductsReceipt;
 import po.ReceiptState;
 import po.ReceiptType;
+import po.SaleReceiptPO;
 import po.StockReceiptPO;
 import presentation.mainui.PublicTableModel;
 
@@ -33,9 +38,16 @@ public class StockReceiptPane {
 	
 	private PublicTableModel tableModel;
 	private StockReceiptPO receipt;
+	private RunTableController controller;
 	
 	public StockReceiptPane(){
 		initialize();
+	}
+	public StockReceiptPane(RunTableController controller ,StockReceiptPO receipt){
+		this();
+		this.controller=controller;
+		this.receipt=receipt;
+		credit();
 	}
 	private void initialize(){
 		frame = new JFrame();
@@ -139,15 +151,11 @@ public class StockReceiptPane {
 		textNum.setEditable(false);
 		textClient.setEditable(false);
 		textType.setEditable(false);
-//		textAllowance.setEditable(false);
 		textDate.setEditable(false);
 		textRepository.setEditable(false);
-//		textCoupon.setEditable(false);
 		textOperator.setEditable(false);
 		textState.setEditable(false);
-//		textActualValue.setEditable(false);
 		textComment.setEditable(false);
-//		textSalesman.setEditable(false);
 		
 		
 		btnCancel = new JButton("取消");
@@ -184,5 +192,31 @@ public class StockReceiptPane {
 	}
 	public void query(){
 		btnCancel.setText("关闭");
+	}
+	public void credit(){
+		List<ProductsReceipt> temp=receipt.getProductList();
+		ProductsReceipt temp1;
+		for(int i=0;i<temp.size();i++){
+			temp1=temp.get(i);
+			temp1.setNumber(-temp1.getNumber());
+		}
+		receipt.setTotalValue(receipt.getTotalValue().negate());
+		
+		set(receipt);
+		
+		JButton button_1 = new JButton("提交");
+		button_1.setBounds(439, 491, 60, 23);
+		panel.add(button_1);
+		button_1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.CreditNote(receipt);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+			
+		});
 	}
 }

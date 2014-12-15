@@ -2,15 +2,19 @@ package presentation.RunningTableui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.RunningTablebl.RunTableController;
+import po.ProductsReceipt;
 import po.ReceiptState;
 import po.ReceiptType;
 import po.SaleReceiptPO;
@@ -39,9 +43,17 @@ public class SaleReceiptPane {
 	
 	private PublicTableModel tableModel;
 	private SaleReceiptPO receipt;
+	private RunTableController controller;
+	
 	
 	public SaleReceiptPane(){
 		initialize();
+	}
+	public SaleReceiptPane(RunTableController controller ,SaleReceiptPO receipt){
+		this();
+		this.controller=controller;
+		this.receipt=receipt;
+		credit();
 	}
 	private void initialize() {
 		frame = new JFrame();
@@ -232,6 +244,35 @@ public class SaleReceiptPane {
 	}
 	public void query(){
 		btnCancel.setText("关闭");
+	}
+	public void credit(){
+		List<ProductsReceipt> temp=receipt.getProductList();
+		ProductsReceipt temp1;
+		for(int i=0;i<temp.size();i++){
+			temp1=temp.get(i);
+			temp1.setNumber(-temp1.getNumber());
+		}
+		receipt.setTotalValue(receipt.getTotalValue().negate());
+		receipt.setActualValue(receipt.getActualValue().negate());
+		receipt.setActualValue(receipt.getAllowance().negate());
+		receipt.setCoupon(receipt.getCoupon().negate());
+		
+		set(receipt);
+		
+		JButton button_1 = new JButton("提交");
+		button_1.setBounds(439, 491, 60, 23);
+		panel.add(button_1);
+		button_1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.CreditNote(receipt);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+			
+		});
 	}
 	
 }
