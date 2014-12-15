@@ -1,13 +1,17 @@
 package presentation.RepoUI;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +44,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	 * Creates new form GoodsListPanel
 	 */
 	GL_controller gl_controller;
+	GT_GL_BLservice gt_GL_BLservice = null;
 	HashMap<String, GoodsModelPO> goodsModels = new HashMap<String, GoodsModelPO>();
 	ArrayList<GoodsModelVO> goodsModel_add = new ArrayList<GoodsModelVO>();
 	ArrayList<GoodsModelVO> goodsModel_del = new ArrayList<GoodsModelVO>();
@@ -126,6 +131,14 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		search_buttons = new javax.swing.JPanel();
 		search = new javax.swing.JButton();
 		goods_info_search = new javax.swing.JTextField();
+		goods_info_search.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				searchActionPerformed(e);
+				
+			}
+		});
 		jLabel4 = new javax.swing.JLabel();
 		ambiguous = new javax.swing.JCheckBox();
 		jScrollPane1 = new javax.swing.JScrollPane();
@@ -196,7 +209,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 							try {
 								gl_controller.set_signal_name(temp);
 							} catch (Exception e1) {
-								
+
 								e1.printStackTrace();
 							}
 						} else {
@@ -322,7 +335,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 								.addGap(18, 18, 18).addComponent(detail)
 								.addContainerGap()));
 
-		jLabel3.setText("注：下表中，商品名称和警戒值可以直接修改，提交修改请点击确认修改进行上传");
+		jLabel3.setText("注：下表中，商品名称和警戒值可以直接修改，提交修改请点击刷新数据进行上传");
 
 		javax.swing.GroupLayout gL_mainLayout = new javax.swing.GroupLayout(
 				gL_main);
@@ -423,9 +436,9 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		});
 
 		jLabel2.setText("型号:");
-		GT_GL_BLservice temp = null;
+		
 		try {
-			temp = new GT_controller();
+			gt_GL_BLservice = new GT_controller();
 		} catch (RemoteException e) {
 			JOptionPane.showMessageDialog(MainFrame.frame, e
 					+ ": Fail to get type info");
@@ -438,7 +451,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			e.printStackTrace();
 		}
 		try {
-			addable_type.setModel(new javax.swing.DefaultComboBoxModel(temp
+			addable_type.setModel(new javax.swing.DefaultComboBoxModel(gt_GL_BLservice
 					.addable_type().toArray()));
 		} catch (RemoteException e1) {
 			JOptionPane.showMessageDialog(MainFrame.frame, e1
@@ -857,8 +870,12 @@ public class GoodsListPanel extends javax.swing.JPanel {
 				more_delActionPerformed(evt);
 			}
 		});
-		type_del.setModel(new javax.swing.DefaultComboBoxModel(gl_controller
-				.type_del().toArray()));
+		try {
+			type_del.setModel(new javax.swing.DefaultComboBoxModel(gl_controller
+					.type_del().toArray()));
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 
 		subscribe_del.setText("提交");
 		subscribe_del.addActionListener(new java.awt.event.ActionListener() {
@@ -1037,21 +1054,20 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		if (MainFrame.DEBUG) {
 			model.addRow(new Object[] { "a", "b", "1", "2" });
 		} else {
-			model.addRow(new Object[] { goodsModelVO.getId(),
-					goodsModelVO.getName(), goodsModelVO.getAmount(),
+			model.addRow(new Object[] { goodsModelVO.getName(),
+					goodsModelVO.getId(), goodsModelVO.getAmount(),
 					goodsModelVO.getSignal() });
 		}
 	}
 
 	private void addActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addActionPerformed
-		CardLayout card = (CardLayout) this.getLayout();
-		card.show(this, "gl_add_del");
+		update("gl_add_del");
 	}// GEN-LAST:event_addActionPerformed
 
 	private void updateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateActionPerformed
 		try {
 			gl_controller.refresh();
-			goodsModels = gl_controller.getGoodsModelPOs();
+			goodsModels = gl_controller.getGoodsListPO().getGoodsModels();
 		} catch (Exception e) {
 			JOptionPane
 					.showMessageDialog(MainFrame.frame, "Fail to fetch data");
@@ -1061,11 +1077,29 @@ public class GoodsListPanel extends javax.swing.JPanel {
 			temp.setSignal(20);
 			temp.setAmount(30);
 			goodsModels.put("a1", temp);
-		} else {
-
-		}
+		} 
+		
+		//update the statistic of gl_main's general table
 		general_table.setModel(new GL_general_TableModel(goodsModels));
+		//update the statistic of detailed table
 		set_detail_data(goodsModels);
+		//update the type of del and add
+		try {
+			type_del.setModel(new javax.swing.DefaultComboBoxModel(gl_controller
+					.type_del().toArray()));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		try {
+			addable_type.setModel(new javax.swing.DefaultComboBoxModel(gt_GL_BLservice
+					.addable_type().toArray()));
+		} catch (RemoteException e1) {
+			JOptionPane.showMessageDialog(MainFrame.frame, e1
+					+ ": Fail to get addable type");
+		} catch (NullPointerException nullPointerException) {
+			JOptionPane.showMessageDialog(MainFrame.frame, nullPointerException
+					+ ": Failed to get addable type");
+		}
 	}// GEN-LAST:event_updateActionPerformed
 
 	private void detailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_detailActionPerformed
@@ -1079,18 +1113,46 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		if (ambiguous.isSelected()) {
 			String info = goods_info_search.getText();
 			if (info.contains(" ")) {
-				goodsModel_search = gl_controller.iSearch(info.split(" "));
+				try {
+					goodsModel_search = gl_controller.iSearch(info.split(" "));
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 			} else {
-				goodsModel_search = gl_controller.iSearch(info);
+				try {
+					goodsModel_search = gl_controller.iSearch(info);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+			if (goodsModel_search == null){
+				JOptionPane.showMessageDialog(null, "Invaild input ");
+				return;
+			} else if (goodsModel_search.size() == 0){
+				JOptionPane.showMessageDialog(null, "No goods meet your input");
+				return;
 			}
 			search_result
 					.setModel(new GL_general_TableModel(goodsModel_search));
 		} else {
-			GoodsModelVO temp;
+			GoodsModelVO temp = null;
 			if (MainFrame.DEBUG) {
 				temp = new GoodsModelVO("a1", "Light", "A");
 			} else {
-				temp = gl_controller.eSearch_total(goods_info_search.getText());
+				try {
+					if (goods_info_search.getText() == null){
+						JOptionPane.showMessageDialog(null, "Invaild input");
+						return;
+					}
+					temp = gl_controller.eSearch_total(goods_info_search.getText());
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				if (temp == null) {
+					JOptionPane.showMessageDialog(null, "No such goods as id: "
+							+ goods_info_search.getText());
+					return;
+				}
 			}
 			((DefaultTableModel) search_result.getModel()).setRowCount(0);
 			goodsModel_add.clear();
@@ -1122,13 +1184,19 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	}// GEN-LAST:event_log_outActionPerformed
 
 	private void deleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deleteActionPerformed
-		CardLayout card = (CardLayout) this.getLayout();
-		card.show(this, "gl_del");
+		update("gl_del");
 	}// GEN-LAST:event_deleteActionPerformed
 
+	private void update(String name){
+//		GoodsListPanel goodsListPanel1 = new GoodsListPanel();
+//		MainFrame.frame.getContentPane().add(goodsListPanel1, "goodsList_card");
+//		CardLayout card = (CardLayout) MainFrame.frame.getContentPane().getLayout();
+//		card.show(MainFrame.frame.getContentPane(), "goodsList_card");
+		CardLayout card2 = (CardLayout) this.getLayout();
+		card2.show(this, name);
+	}
 	private void findActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_findActionPerformed
-		CardLayout card = (CardLayout) this.getLayout();
-		card.show(this, "search");
+		update("search");
 	}// GEN-LAST:event_findActionPerformed
 
 	private void back_addActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_addActionPerformed
@@ -1138,9 +1206,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	}// GEN-LAST:event_back_addActionPerformed
 
 	private void back_delActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_delActionPerformed
-		updateActionPerformed(evt);
-		CardLayout card = (CardLayout) this.getLayout();
-		card.show(this, "GL_main");
+		back_addActionPerformed(evt);
 	}// GEN-LAST:event_back_delActionPerformed
 
 	private void backActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backActionPerformed
@@ -1157,7 +1223,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 	private void moreActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_moreActionPerformed
 		String add_type = (String) addable_type.getSelectedItem();
 		String mo = model.getText();
-		GoodsModelVO temp = new GoodsModelVO(add_type + mo, "light", mo);
+		GoodsModelVO temp = new GoodsModelVO(add_type +"-"+ mo, "light", mo);
 		goodsModel_add.add(temp);
 
 		add_add_del_search_data(add_table, temp);
@@ -1183,8 +1249,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 		} else {
 			all = (String) type_del.getSelectedItem();
-			del_type = all.split(" ")[0];
-			mo = all.split(" ")[1];
+			del_type = all.split("-")[0];
+			mo = all.split("-")[1];
 		}
 		GoodsModelVO temp = new GoodsModelVO(del_type + mo, "light", mo);
 		goodsModel_del.add(temp);

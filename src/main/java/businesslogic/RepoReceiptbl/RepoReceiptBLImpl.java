@@ -28,7 +28,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		gl_controller = new GL_controller();
 	}
 
-	public String[] gift_type() {
+	public String[] gift_type() throws RemoteException {
 		HashMap<String, GoodsModelPO> goodsModel = gl_controller
 				.getGoodsModelPOs();
 		ArrayList<String> temp = new ArrayList<String>();
@@ -41,7 +41,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		return temp.toArray(new String[temp.size()]);
 	}
 
-	public String[] check_type() {
+	public String[] check_type() throws RemoteException {
 		HashMap<String, GoodsModelPO> goodsModel = gl_controller
 				.getGoodsModelPOs();
 		String[] res = new String[goodsModel.size()];

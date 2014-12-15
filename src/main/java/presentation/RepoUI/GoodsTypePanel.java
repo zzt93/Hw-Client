@@ -650,8 +650,16 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         }// GEN-LAST:event_checkActionPerformed
 
         private void updateActionPerformed(java.awt.event.ActionEvent evt) {
+        	if (!treeNodePO_in_nodepanel.type_editable()){
+        		JOptionPane.showMessageDialog(null, "This type is not editable");
+        		return;
+        	}
             String new_type = JOptionPane
                     .showInputDialog("Input new type for this node");
+            if (new_type == null){
+            	JOptionPane.showMessageDialog(null, "Invaild input");
+            	return;
+            }
             type_info = new_type;
             TreeNodePO temp = new TreeNodePO(treeNodePO_in_nodepanel.getFa(),
                     treeNodePO_in_nodepanel.getType());

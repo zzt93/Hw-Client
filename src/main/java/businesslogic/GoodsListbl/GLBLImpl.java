@@ -7,23 +7,26 @@ import po.GoodsPO;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GLBLImpl implements GLBLservice {
 
 	public GLBLImpl(GoodsListPO po) {
-		goodsListPO = po;
+		
 	}
 
-	GoodsListPO goodsListPO ;
+
 
 	public boolean add(GoodsModelVO goods) throws Exception {
-		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO
+		HashMap<String, GoodsModelPO> tempGoodsModelPOs = GL_controller.goodsListDataService.getGoodsList().getObj()
 				.getGoodsModels();
-
-		GoodsModelPO goodsModelPO = new GoodsModelPO(goods.getId(), goods.getName(), goods.getModel());
-		tempGoodsModelPOs.put(goods.getId(), goodsModelPO);
+		if (tempGoodsModelPOs.get(goods.getId()) != null){
+			return false;
+		}
+//		GoodsModelPO goodsModelPO = new GoodsModelPO(goods.getId(), goods.getName(), goods.getModel());
+//		tempGoodsModelPOs.put(goods.getId(), goodsModelPO);
 		return true;
 	}
 
@@ -35,7 +38,7 @@ public class GLBLImpl implements GLBLservice {
 	}
 
 	public boolean delete(GoodsModelVO goods) throws Exception {
-		HashMap<String, GoodsModelPO> tempGoodsModelPOs = goodsListPO
+		HashMap<String, GoodsModelPO> tempGoodsModelPOs = GL_controller.goodsListDataService.getGoodsList().getObj()
 				.getGoodsModels();
 
 		GoodsModelPO temp = tempGoodsModelPOs.get(goods.getId());
@@ -46,9 +49,12 @@ public class GLBLImpl implements GLBLservice {
 		return true;
 	}
 
-	public ArrayList<GoodsModelVO> iSearch(String info){
+	public ArrayList<GoodsModelVO> iSearch(String info) throws RemoteException{
+		if (info == null){
+			return null;
+		}
 		ArrayList<GoodsModelVO> res = new ArrayList<GoodsModelVO>();
-		HashMap<String, GoodsModelPO> goodsModel = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> goodsModel = GL_controller.goodsListDataService.getGoodsList().getObj().getGoodsModels();
 		for (String id : goodsModel.keySet()) {
 			GoodsModelPO temp = goodsModel.get(id);
 			if (temp.toString().contains(info)) {
@@ -59,9 +65,12 @@ public class GLBLImpl implements GLBLservice {
 	}
 
 	// TODO whether to use different container to split different infos
-	public ArrayList<GoodsModelVO> iSearch(String[] infos) {
+	public ArrayList<GoodsModelVO> iSearch(String[] infos) throws RemoteException {
+		if (infos == null){
+			return null;
+		}
 		ArrayList<GoodsModelVO> res = new ArrayList<GoodsModelVO>();
-		HashMap<String, GoodsModelPO> goodsModel = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> goodsModel = GL_controller.goodsListDataService.getGoodsList().getObj().getGoodsModels();
 
 		for (int i = 0; i < infos.length; i++) {
 			String info = infos[i];
@@ -75,10 +84,13 @@ public class GLBLImpl implements GLBLservice {
 		return res;
 	}
 
-	public ArrayList<GoodsVO> eSearch_batch(String id){
+	public ArrayList<GoodsVO> eSearch_batch(String id) throws RemoteException{
+		if (id == null){
+			return null;
+		}
 		ArrayList<GoodsVO> res = new ArrayList<GoodsVO>();
 
-		HashMap<String, ArrayList<GoodsPO>> batch_goodsPO = goodsListPO
+		HashMap<String, ArrayList<GoodsPO>> batch_goodsPO = GL_controller.goodsListDataService.getGoodsList().getObj()
 				.getGoods();
 		ArrayList<GoodsPO> temp = batch_goodsPO.get(id);
 		for (GoodsPO goodsPO : temp) {
@@ -87,17 +99,22 @@ public class GLBLImpl implements GLBLservice {
 		return res;
 	}
 
-	public GoodsModelVO eSearch_total(String id){
-
-		HashMap<String, GoodsModelPO> total = goodsListPO.getGoodsModels();
-
+	public GoodsModelVO eSearch_total(String id) throws RemoteException{
+		if (id == null){
+			return null;
+		}
+		HashMap<String, GoodsModelPO> total = GL_controller.goodsListDataService.getGoodsList().getObj().getGoodsModels();
+		GoodsModelPO temp = total.get(id);
+		if (temp == null){
+			return null;
+		}
 		return new GoodsModelVO(total.get(id));
 	}
 
 	public HashMap<String, ArrayList<GoodsVO>> batch_statistic()
 			throws Exception {
 		HashMap<String, ArrayList<GoodsVO>> res = new HashMap<String, ArrayList<GoodsVO>>();
-		HashMap<String, ArrayList<GoodsPO>> goodsPO = goodsListPO.getGoods();
+		HashMap<String, ArrayList<GoodsPO>> goodsPO = GL_controller.goodsListDataService.getGoodsList().getObj().getGoods();
 		for (String id : goodsPO.keySet()) {
 			ArrayList<GoodsPO> temp = goodsPO.get(id);
 			ArrayList<GoodsVO> temRes = new ArrayList<GoodsVO>();
@@ -110,7 +127,7 @@ public class GLBLImpl implements GLBLservice {
 	}
 
 	public HashMap<String, GoodsModelVO> getGoodsModelVOs() throws Exception {
-		HashMap<String, GoodsModelPO> goodsModelPO = goodsListPO
+		HashMap<String, GoodsModelPO> goodsModelPO = GL_controller.goodsListDataService.getGoodsList().getObj()
 				.getGoodsModels();
 		HashMap<String, GoodsModelVO> res = new HashMap<String, GoodsModelVO>();
 		for (String id : goodsModelPO.keySet()) {
@@ -126,9 +143,9 @@ public class GLBLImpl implements GLBLservice {
 		return true;
 	}
 	@Override
-	public ArrayList<String> type_del() {
+	public ArrayList<String> type_del() throws RemoteException {
 		ArrayList<String> res = new ArrayList<String>();
-		for (GoodsModelPO model : goodsListPO.getGoodsModels().values()) {
+		for (GoodsModelPO model : GL_controller.goodsListDataService.getGoodsList().getObj().getGoodsModels().values()) {
 			if (is_del(model)) {
 				res.add(model.getId());
 			}

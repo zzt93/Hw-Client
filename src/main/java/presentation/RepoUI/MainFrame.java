@@ -683,19 +683,24 @@ public class MainFrame extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void goodsListActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_goodsListActionPerformed
-
+		goodsListPanel1 = new GoodsListPanel();
+		getContentPane().add(goodsListPanel1, "goodsList_card");
+		
 		CardLayout card = (CardLayout) this.getContentPane().getLayout();
 		card.show(this.getContentPane(), "goodsList_card");
 	}// GEN-LAST:event_goodsListActionPerformed
 
 	private void goods_receActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_goods_receActionPerformed
-
+		goods_receipt1 = new Goods_receipt_management();
+		
+		getContentPane().add(goods_receipt1, "goods_receipt_card");
 		CardLayout card = (CardLayout) this.getContentPane().getLayout();
 		card.show(this.getContentPane(), "goods_receipt_card");
 	}// GEN-LAST:event_goods_receActionPerformed
 
 	private void goodsTypeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_goodsTypeActionPerformed
-
+		goodsTypePanel1 = new GoodsTypePanel();
+		getContentPane().add(goodsTypePanel1, "goodsType_card");
 		CardLayout card = (CardLayout) this.getContentPane().getLayout();
 		card.show(this.getContentPane(), "goodsType_card");
 	}// GEN-LAST:event_goodsTypeActionPerformed
@@ -724,6 +729,10 @@ public class MainFrame extends javax.swing.JFrame {
 						+ ": Can't connect to get data");
 				e1.printStackTrace();
 			}
+			if(inout == null){
+				JOptionPane.showMessageDialog(null, "Fail to get data");
+				return;
+			}
 			data[2] = inout.getSumOfIn().toString();
 			data[3] = inout.getSumOfOut().toString();
 			data[4] = "" + inout.getSumOfIn_num();
@@ -744,6 +753,7 @@ public class MainFrame extends javax.swing.JFrame {
 	private void repo_receActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_repo_receActionPerformed
 
 		CardLayout card = (CardLayout) this.getContentPane().getLayout();
+		repo_receipt1.update_ui();
 		card.show(this.getContentPane(), "repo_receipt_card");
 	}// GEN-LAST:event_repo_receActionPerformed
 
@@ -833,7 +843,7 @@ public class MainFrame extends javax.swing.JFrame {
 		frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		update_bar.setIndeterminate(true);
 		// TODO add logic
-
+		
 		// change back
 		frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		update_bar.setIndeterminate(false);

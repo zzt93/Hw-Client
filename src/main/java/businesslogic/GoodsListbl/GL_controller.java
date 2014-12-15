@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		 GL_receipt_BLservice, GL_signal_BLservice, GL_stock_BLservice, GLBLservice {
 	
-	GoodsListDataService goodsListDataService;
+	static GoodsListDataService goodsListDataService;
 	static String gl_service = "goodsListDataService";
 
 
@@ -49,6 +49,9 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	}
 	GoodsListPO goodsListPO;
 	
+	public GoodsListPO getGoodsListPO() {
+		return goodsListPO;
+	}
 	GLBLservice glbLservice ;
 	GL_signal_BLservice gl_signal_BLservice ;
 	GL_GT_BLservice gl_GT_BLservice ;
@@ -87,24 +90,24 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		return res;
 	}
 
-	public ArrayList<GoodsModelVO> iSearch(String info) {
+	public ArrayList<GoodsModelVO> iSearch(String info) throws RemoteException {
 		ArrayList<GoodsModelVO> res = glbLservice.iSearch(info);
 		return res;
 	}
 
 	
-	public ArrayList<GoodsModelVO> iSearch(String[] infos){
+	public ArrayList<GoodsModelVO> iSearch(String[] infos) throws RemoteException{
 		ArrayList<GoodsModelVO> res = glbLservice.iSearch(infos);
 		
 		return res;
 	}
 
-	public ArrayList<GoodsVO> eSearch_batch(String id){
+	public ArrayList<GoodsVO> eSearch_batch(String id) throws RemoteException{
 		ArrayList<GoodsVO> res = glbLservice.eSearch_batch(id);
 		return res;
 	}
 
-	public GoodsModelVO eSearch_total(String id){
+	public GoodsModelVO eSearch_total(String id) throws RemoteException{
 		GoodsModelVO res = glbLservice.eSearch_total(id);
 		return res;
 	}
@@ -176,8 +179,8 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 		return res;
 	}
 
-	public HashMap<String, GoodsModelPO> getGoodsModelPOs() {
-		return goodsListPO.getGoodsModels();
+	public HashMap<String, GoodsModelPO> getGoodsModelPOs() throws RemoteException {
+		return GL_controller.goodsListDataService.getGoodsList().getObj().getGoodsModels();
 	}
 
 	
@@ -195,11 +198,16 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	}
 
 	public boolean add(ArrayList<GoodsModelVO> goodsModelVOsVOs) throws Exception {
-		boolean res = glbLservice.add(goodsModelVOsVOs);
+		
 		for (GoodsModelVO goodsModelVO : goodsModelVOsVOs) {
-			goodsListDataService.insert(new GoodsModelPO(goodsModelVO));
+			boolean res = glbLservice.add(goodsModelVO);
+			if(res){
+				goodsListDataService.insert(new GoodsModelPO(goodsModelVO)).throwIfFailed();
+			} else {
+				return false;
+			}
 		}
-		return res;
+		return false;
 	}
 
 	public HashMap<String, GoodsModelVO> getGoodsModelVOs() throws Exception {
@@ -225,7 +233,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	}
 
 	@Override
-	public ArrayList<String> type_del() {
+	public ArrayList<String> type_del() throws RemoteException {
 		return glbLservice.type_del();
 		
 	}

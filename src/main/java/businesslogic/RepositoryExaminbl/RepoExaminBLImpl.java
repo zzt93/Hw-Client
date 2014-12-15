@@ -6,6 +6,7 @@ import businesslogicservice.RepositoryExaminblservice.RepoExaminBLservice;
 import businesslogicservice.Saleblservice.SaleUtility;
 import businesslogicservice.Stockblservice.StockUtility;
 import dataservice.RepositoryExamindataservice.RepoExaminDataService;
+import po.ReceiptType;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
 import util.RMIUtility;
@@ -37,15 +38,27 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		InOutRepoVO result;
 		StockUtility stock = new StockUtilityImpl();
 		SaleUtility sale = new SaleUtilityImpl();
-
-		ReceiptConditionVO conditionVO = new ReceiptConditionVO();
+		//TODO add user
+		ReceiptConditionVO in_conditionVO = new ReceiptConditionVO(start, end, ReceiptType.STOCK_ACCEPT, null, null, null);
 		SaleConditionVO saleConditionVO = new SaleConditionVO();
+		saleConditionVO.startTime = start;
+		saleConditionVO.endTime = end;
+		//TODO
 
+		//get the all in
 		Vector<StockReceiptPO> stockReceiptPOs = stock
-				.queryReceipt(conditionVO);
-		Vector<SaleReceiptPO> saleReceiptPOs = sale.queryReceipt(conditionVO);
-		Vector<GoodsRecordVO> goodsRecordVOs = sale
-				.querySaleRecord(saleConditionVO);
+				.queryReceipt(in_conditionVO);
+		in_conditionVO.type = ReceiptType.SALE_REJECTION;
+		Vector<StockReceiptPO> stockReceiptPOs2 = stock.queryReceipt(in_conditionVO);
+		stockReceiptPOs.addAll(stockReceiptPOs2);
+		
+		//get all out
+		ReceiptConditionVO out_condition = new ReceiptConditionVO(start, end, ReceiptType.STOCK_REJECTION, null, null, null);
+		Vector<SaleReceiptPO> saleReceiptPOs = sale.queryReceipt(out_condition);
+		out_condition.type = ReceiptType.SALE_ACCEPT;
+		saleReceiptPOs.addAll(sale.queryReceipt(out_condition));
+		
+		
 
 		for (StockReceiptPO stockReceiptPO : stockReceiptPOs) {
 			out.add(stockReceiptPO.getTotalValue());
@@ -53,6 +66,10 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		for (SaleReceiptPO saleReceiptPO : saleReceiptPOs) {
 			in.add(saleReceiptPO.getTotalValue());
 		}
+		
+		//count the amount
+		Vector<GoodsRecordVO> goodsRecordVOs = sale
+				.querySaleRecord(saleConditionVO);
 		for (GoodsRecordVO goodsRecordVO : goodsRecordVOs) {
 			switch (goodsRecordVO.type) {
 			case STOCK_ACCEPT:

@@ -176,8 +176,13 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 			choose_id.setModel(new DefaultComboBoxModel<String>(new String[] {
 					"Light1 a1", "Light2 a2", "Light3 a3" }));
 		} else {
-			choose_id.setModel(new javax.swing.DefaultComboBoxModel<String>(
-					repoReceiptBLImpl.check_type()));
+			try {
+				choose_id.setModel(new javax.swing.DefaultComboBoxModel<String>(
+						repoReceiptBLImpl.check_type()));
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(
@@ -681,6 +686,16 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
 		id.setText((String) choose_id.getSelectedItem());
 		s_amount.setText(amount.getText());
 	}// GEN-LAST:event_compActionPerformed
+	
+	public void update_ui(){
+		try {
+			choose_id.setModel(new javax.swing.DefaultComboBoxModel<String>(
+					repoReceiptBLImpl.check_type()));
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JToolBar Repo_navigator;

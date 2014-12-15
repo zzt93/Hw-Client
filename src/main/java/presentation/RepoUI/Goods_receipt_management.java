@@ -233,8 +233,13 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 			goods_id.setModel(new javax.swing.DefaultComboBoxModel<String>(
 					new String[] { "Light a1 10", "Light a2 20", "Light a3 30", "Light a4 40" }));
 		} else {
-			goods_id.setModel(new javax.swing.DefaultComboBoxModel<String>(
-					receiptBLImpl.gift_type()));
+			try {
+				goods_id.setModel(new javax.swing.DefaultComboBoxModel<String>(
+						receiptBLImpl.gift_type()));
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		del.setText("删除");
