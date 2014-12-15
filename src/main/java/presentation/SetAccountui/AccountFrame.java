@@ -66,6 +66,7 @@ public class AccountFrame {
 		label_2.setBounds(462, 34, 54, 15);
 		panel.add(label_2);
 	}
+	public class 
 	public static void main(String[] args){
 		JFrame frame=new JFrame();
 		frame.setBounds(0,0,800,700);

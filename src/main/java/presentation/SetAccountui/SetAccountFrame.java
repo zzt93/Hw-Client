@@ -39,6 +39,7 @@ public class SetAccountFrame {
 		frame.getContentPane().setLayout(null);
 		
 		panel=new GoodsTypePanel();
+		panel.setVisible(false);
 		panel.setBounds(0, 0, 800, 500);
 		frame.add(panel);
 		
@@ -76,8 +77,11 @@ public class SetAccountFrame {
 					JOptionPane.showMessageDialog(null, e1.getMessage());	
 					e1.printStackTrace();
 				}
+				frame.remove(panel);
 				client=new ClientPanel(controller);
 				panel=client.getPanel();
+				frame.add(panel);
+				frame.repaint();
 				state=State.CLIENTINFO;
 				break;
 			}
@@ -88,8 +92,11 @@ public class SetAccountFrame {
 					JOptionPane.showMessageDialog(null,e1.getCause());
 					e1.printStackTrace();
 				}
+				frame.remove(panel);
 				bank=new BankPanel();
 				panel=bank.getPanel();
+				frame.add(panel);
+				frame.repaint();
 				state=State.BANKINFO;
 				break;
 			}

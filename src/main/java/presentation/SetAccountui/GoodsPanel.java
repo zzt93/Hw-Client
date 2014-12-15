@@ -152,7 +152,7 @@ public class GoodsPanel {
 			panel.add(button);
 			button.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
-					//TODO
+					//TODO获得商品进价售价
 					String type=(String)comboBox.getSelectedItem();
 					String model=textModel.getText();
 					String name=textName.getText();
