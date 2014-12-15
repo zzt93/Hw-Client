@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,7 +169,11 @@ public class GoodsPanel {
 				//处理temp,获得商品信息，修改界面信息
 //				FIXME,测试暂时注释掉
 				String temp2[]=temp.split("(");
-				goods=controller.eSearch_batch(temp2[0]).get(0);
+				try {
+					goods=controller.eSearch_batch(temp2[0]).get(0);
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 				//GoodsVO goods=new GoodsVO("0001",20);
 				goods.name="商品1";
 				goods.model="类型1";
