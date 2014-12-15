@@ -119,5 +119,7 @@ public class SetAccountFrame {
 		}
 		
 	}
-	
+	public static void main(String[] args){
+		SetAccountFrame a=new SetAccountFrame(null,null);
+	}
 }
