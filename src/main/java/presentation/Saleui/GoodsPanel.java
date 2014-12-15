@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -139,12 +140,22 @@ public class GoodsPanel {
 		listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		listFrame.setLocationRelativeTo(null);
 		String[] temp;
-		ArrayList tempList;
+		ArrayList tempList=null;
 		//FIXME,测试暂时隐掉
 		if(type==GoodsPaneType.SALE){
-			tempList=controller.sell_type();
+			try {
+				tempList=controller.sell_type();
+			} catch (RemoteException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+				e.printStackTrace();
+			}
 		}else{
-			tempList=controller.stock_type();
+			try {
+				tempList=controller.stock_type();
+			} catch (RemoteException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		temp=new String[tempList.size()];
 		for(int i=0;i<tempList.size();i++){//可能造成巨大的消耗

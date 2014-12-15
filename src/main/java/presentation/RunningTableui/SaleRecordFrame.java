@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,10 +211,15 @@ public class SaleRecordFrame {
 				listFrame.setBounds(0,0,200,400);
 				listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				listFrame.setLocationRelativeTo(null);
-				String[] temp;
+				String[] temp=null;
 //				temp=new String[]{"商品1","商品2","商品3","商品4"};
 				//FIXME，获得商品列表
-				temp=controller.getGoodsList();
+				try {
+					temp=controller.getGoodsList();
+				} catch (RemoteException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					e.printStackTrace();
+				}
 				goodsList=new JList<String>(temp);
 				goodsList.addMouseListener(new MouseClick());
 				JScrollPane scroll=new JScrollPane();
