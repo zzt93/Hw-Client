@@ -1066,7 +1066,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 	private void updateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateActionPerformed
 		try {
-			gl_controller.refresh();
+
 			goodsModels = gl_controller.getGoodsListPO().getGoodsModels();
 		} catch (Exception e) {
 			JOptionPane

@@ -256,6 +256,9 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         MainFrame.tab_pane.setSelectedIndex(3);
     }// GEN-LAST:event_log_outActionPerformed
 
+    private void set_GT_navigator_not_visible(){
+        GT_navigator.setVisible(false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar GT_navigator;
     private javax.swing.Box.Filler filler1;
