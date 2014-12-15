@@ -2,32 +2,45 @@ package businesslogic.SetAccountbl;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
+import dataservice.Clientdataservice.ClientDataService;
+import dataservice.SetAccountdataservice.SetAccountdataservice;
 import businesslogic.BankManagebl.BankController;
 //import businesslogic.BankManagebl.BankControllerTest;
 import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogic.GoodsListbl.GL_controller;
 import businesslogic.GoodsTypebl.GT_controller;
 import businesslogicservice.SetAccountblservice.SetAccountblservice;
+import po.BankPO;
 import po.ClientPO;
+import po.GoodsModelPO;
 import po.ResultMessage;
+import util.RMIUtility;
 import vo.BankVO;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 
 public class AccountController implements SetAccountblservice {
-	SetAccount setAccount=new SetAccount();
-	BankList bankList=new BankList();
-	ClientList clientList=new ClientList();
-	GoodsList goodsList=new GoodsList();
-	GT_controller GTcontroller;
-	ClientUtilityImpl clientController;
-	GL_controller goodsController;
-	BankController bankController;
+	private SetAccount setAccount=new SetAccount();
+	private BankList bankList=new BankList();
+	private ClientList clientList=new ClientList();
+	private GoodsList goodsList=new GoodsList();
+	private GT_controller GTcontroller;
+	private ClientUtilityImpl clientController;
+	private GL_controller goodsController;
+	private BankController bankController;
+	private static SetAccountdataservice dataService;
 	public AccountController() throws RemoteException, NullPointerException, NotBoundException{
+		  if (dataService == null)
+	            dataService = (SetAccountdataservice) RMIUtility.getImpl("SetAccount");
 		GTcontroller=new GT_controller();
+		clientController=new ClientUtilityImpl();
+		goodsController=new GL_controller();
+		bankController=new BankController();
 	}
+	
 	@Override
 	public void inherit(String name, String account) throws Exception {
 		setAccount.inherit(name, account);
@@ -57,12 +70,7 @@ public class AccountController implements SetAccountblservice {
 
 	}
 
-	@Override
-	public void setup(String name) throws Exception {
-		setAccount.setup(name);
-	}
-
-	@Override
+	
 	public void checkGoodsType(String name) throws Exception {
 		//待定
 	}
@@ -121,12 +129,15 @@ public class AccountController implements SetAccountblservice {
 
 	}
 	
-	public void getClient(){
+	public void getClientInfo(){
 		//TODO,获得客户应收应付;
 		
 	}
+	public void getGoodsInfo(){
+		//TODO,获得商品进价售价;
+	}
 	public String[] getGoodsType() throws RemoteException{
-		//TODO,获得商品分类
+		
 		List<String> type=GTcontroller.addable_type();
 		return type.toArray(new String[type.size()]);
 		
@@ -141,21 +152,42 @@ public class AccountController implements SetAccountblservice {
 			bankController.add(bank.get(i));
 		}
 	}
-	public void creatGoods(List<GoodsModelVO> goods) throws Exception{
-		for(int i=0;i<goods.size();i++){
-			goodsController.add(goods.get(i));
-		}
+	public void creatGoods(ArrayList<GoodsModelVO> goods) throws Exception{
+		goodsController.add(goods);
 	}
-	public String[] getAllAccount(){
+	public void setup(String name) throws Exception{
+		ResultMessage result=dataService.setup(name);
+		result.throwIfFailed();
+	}
+	public String[] getAllAccount()throws Exception{
 		//TODO
 		return null;
 	}
-	public String getAccount(){
+	public String getDefaultAccount()throws Exception{
 		//TODO
 		return null;
 	}
-	public void setAccount(String name){
+	public void setDefaultAccount(String name)throws Exception{
 		//TODO
+	}
+	public void creatCopy() throws Exception{
+		ResultMessage result=dataService.creatCopy();
+		result.throwIfFailed();
+	}
+	public List<BankPO> checkBank() throws Exception{
+		ResultMessage result=dataService.getBank();
+		result.throwIfFailed();
+		return (List<BankPO>)result.getObj();
+	}
+	public List<ClientPO> checkClient() throws Exception{
+		ResultMessage result=dataService.getClient();
+		result.throwIfFailed();
+		return (List<ClientPO>)result.getObj();
+	}
+	public List<GoodsModelPO> checkGoods()throws Exception{
+		ResultMessage result=dataService.getClient();
+		result.throwIfFailed();
+		return (List<GoodsModelPO>)result.getObj();
 	}
 
 }

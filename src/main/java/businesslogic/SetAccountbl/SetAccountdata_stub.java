@@ -10,19 +10,58 @@ import java.rmi.RemoteException;
 
 
 public class SetAccountdata_stub implements SetAccountdataservice {
-	public ResultMessage setup(String[] name) throws RemoteException {
-		return new ResultMessage(null,null);
+	
+	@Override
+	public ResultMessage setup(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public ResultMessage goods() throws RemoteException {
+	@Override
+	public ResultMessage setDefaultAccount(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage getDefaultAccount() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage getAllAccount() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage inherit(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage creatCopy() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage getGoods() throws RemoteException {
+		// TODO Auto-generated method stub
 		return new ResultMessage(null,new GoodsPO[5]);
 	}
 
-	public ResultMessage bank() throws RemoteException {
+	@Override
+	public ResultMessage getBank() throws RemoteException {
+		// TODO Auto-generated method stub
 		return new ResultMessage(null,new BankPO[5]);
 	}
 
-	public ResultMessage client() throws RemoteException {
+	@Override
+	public ResultMessage getClient() throws RemoteException {
+		// TODO Auto-generated method stub
 		return new ResultMessage(null,new ClientPO[5]);
 	}
 

@@ -9,22 +9,22 @@ public class SetAccountdata_driver {
 	ResultMessage result;
 	public void driver(SetAccountdata_stub accountData){
 		try {
-			result=accountData.setup(new String[3]);
+			result=accountData.setup(new String());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		try {
-			result=accountData.goods();
+			result=accountData.getGoods();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		try {
-			result=accountData.bank();
+			result=accountData.getBank();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		try {
-			result=accountData.client();
+			result=accountData.getClient();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

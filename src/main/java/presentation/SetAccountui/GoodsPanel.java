@@ -27,6 +27,9 @@ public class GoodsPanel {
 	private JPanel panel;
 	private JTable table;
 	private PublicTableModel tableModel;
+	private JButton btnAdd;
+	private JButton btnDel;
+	
 	public ArrayList<GoodsModelVO> goodsList;
 	private AccountController controller;
 	public GoodsPanel(AccountController controller){
@@ -54,7 +57,7 @@ public class GoodsPanel {
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		
-		JButton btnAdd = new JButton("添加");
+		btnAdd = new JButton("添加");
 		btnAdd.setBounds(464, 387, 80, 30);
 		panel.add(btnAdd);
 		btnAdd.addActionListener(new ActionListener(){
@@ -64,7 +67,7 @@ public class GoodsPanel {
 			
 		});
 		
-		JButton btnDel = new JButton("删除");
+		btnDel = new JButton("删除");
 		btnDel.setBounds(581, 387, 80, 30);
 		panel.add(btnDel);
 		btnDel.addActionListener(new ActionListener(){
@@ -74,6 +77,16 @@ public class GoodsPanel {
 			}
 			
 		});
+	}
+	public void checkGoods(){
+		try {
+			tableModel.update(controller.checkGoods());
+			panel.remove(btnAdd);
+			panel.remove(btnDel);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	public class AddGoodsPanel{
 		private JFrame frame;
@@ -152,7 +165,7 @@ public class GoodsPanel {
 			panel.add(button);
 			button.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
-					//TODO
+					//TODO获得商品进价售价
 					String type=(String)comboBox.getSelectedItem();
 					String model=textModel.getText();
 					String name=textName.getText();
