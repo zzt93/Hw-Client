@@ -9,15 +9,20 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
+import businesslogic.Clientbl.ClientUtilityImpl;
+import businesslogic.SetAccountbl.AccountController;
 import presentation.RepoUI.GoodsTypePanel;
 
+enum State{
+	GOODSMODEL,GOODSINFO,CLIENTINFO,BANKINFO;
+}
 public class SetAccountFrame {
 	private JFrame frame;
-	private JTable table;
+	private AccountController controller;
 
-
-	public SetAccountFrame() {
+	public SetAccountFrame(AccountController controller) {
 		initialize();
+		frame.setVisible(true);
 	}
 
 

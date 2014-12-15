@@ -64,7 +64,7 @@ public class RunTableController implements RunningTableblservice {
 		}
 		return result;
 	}
-	public String[] getGoodsList() {
+	public String[] getGoodsList() throws RemoteException {
 		String[] result;
 		ArrayList tempList;
 	
