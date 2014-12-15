@@ -75,8 +75,10 @@ public class PublicTableModel extends DefaultTableModel {
 			break;
 		case ACCOUNTGOODS:
 			name=new String[]{"名称","类别","型号","进价","售价","最近进价","最近售价"};
+			break;
 		case ACCOUNTCLIENT:
 			name=new String[]{"客户名称","客户分类","联系方式","应收","应付"};
+			break;
 		default:
 			return;
 		}

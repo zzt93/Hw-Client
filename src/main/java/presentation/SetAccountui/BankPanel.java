@@ -27,6 +27,12 @@ public class BankPanel {
 	private JTable table;
 	private PublicTableModel tableModel;
 	public ArrayList<BankVO> bankList;
+	public BankPanel(){
+		initialize();
+	}
+	public JPanel getPanel(){
+		return panel;
+	}
 	public void initialize(){
 		panel = new JPanel();
 		panel.setBounds(0, 0, 800, 500);

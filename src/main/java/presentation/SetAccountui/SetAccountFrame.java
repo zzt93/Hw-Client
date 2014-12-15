@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
@@ -31,7 +32,6 @@ public class SetAccountFrame {
 		frame.setVisible(true);
 	}
 
-
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 600);
@@ -54,32 +54,55 @@ public class SetAccountFrame {
 		JButton button_1 = new JButton("取消");
 		button_1.setBounds(667, 20, 80, 30);
 		panel_1.add(button_1);
-		frame.setVisible(true);
+		
 	}
 	public class Next implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
 			switch(state){
 			case GOODSTYPE:{
-				GoodsPanel goods=new GoodsPanel(controller);
+				frame.remove(panel);
+				goods=new GoodsPanel(controller);
 				panel=goods.getPanel();
+				frame.add(panel);
+				frame.repaint();
 				state=State.GOODSINFO;
 				break;
 			}
 			case GOODSINFO:{
-				
-				ClientPanel client=new ClientPanel(controller);
+				try {
+					controller.creatGoods(goods.goodsList);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());	
+					e1.printStackTrace();
+				}
+				client=new ClientPanel(controller);
 				panel=client.getPanel();
+				state=State.CLIENTINFO;
 				break;
 			}
 			case CLIENTINFO:{
+				try {
+					controller.creatClient(client.clientList);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,e1.getCause());
+					e1.printStackTrace();
+				}
+				bank=new BankPanel();
+				panel=bank.getPanel();
+				state=State.BANKINFO;
 				break;
 			}
 			case BANKINFO:{
+				JOptionPane.showMessageDialog(null, "建立账目成功");
+				frame.dispose();
 				break;
 			}
 			}
 		}
 		
+	}
+	public static void main(String[] args){
+		SetAccountFrame temp=new SetAccountFrame(null);
 	}
 }
