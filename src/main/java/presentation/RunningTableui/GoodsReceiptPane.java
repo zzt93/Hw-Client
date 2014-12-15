@@ -46,6 +46,7 @@ public class GoodsReceiptPane {
 		this.receipt=receipt;
 		this.controller=controller;
 		credit();
+		visit(true);
 	}
 	
 	private void initialize() {

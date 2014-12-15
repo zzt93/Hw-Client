@@ -67,6 +67,7 @@ public class PayReceiptPane {
 		this.receipt=receipt;
 		this.controller=controller;
 		credit();
+		frame.setVisible(true);
 	}
 	private void initialize() {
 		frame = new JFrame();
@@ -244,5 +245,14 @@ public class PayReceiptPane {
 			
 		});
 
+	}
+	public static void main(String[] args){
+		RecPO temp=new RecPO();
+	
+		
+		PayReceiptPane temp1=new PayReceiptPane(null,temp);
+//		temp1.set(temp);
+//		temp1.query();
+//		temp1.visit(true);
 	}
 }

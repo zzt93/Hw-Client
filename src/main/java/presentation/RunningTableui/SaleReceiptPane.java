@@ -54,6 +54,7 @@ public class SaleReceiptPane {
 		this.controller=controller;
 		this.receipt=receipt;
 		credit();
+		visit(true);
 	}
 	private void initialize() {
 		frame = new JFrame();
