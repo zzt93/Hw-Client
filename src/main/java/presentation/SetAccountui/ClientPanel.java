@@ -26,6 +26,9 @@ public class ClientPanel {
 	private JPanel panel;
 	private JTable table;
 	private PublicTableModel tableModel;
+	private JButton btnDel;
+	private JButton btnAdd;
+	
 	private AccountController controller; 
 	public ArrayList<ClientPO> clientList;
 	public ClientPanel(AccountController controller){
@@ -53,7 +56,7 @@ public class ClientPanel {
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		
-		JButton btnAdd = new JButton("添加");
+		btnAdd = new JButton("添加");
 		btnAdd.setBounds(464, 387, 80, 30);
 		panel.add(btnAdd);
 		btnAdd.addActionListener(new ActionListener(){
@@ -63,7 +66,7 @@ public class ClientPanel {
 			
 		});
 		
-		JButton btnDel = new JButton("删除");
+		btnDel = new JButton("删除");
 		btnDel.setBounds(581, 387, 80, 30);
 		panel.add(btnDel);
 		btnDel.addActionListener(new ActionListener(){
@@ -73,6 +76,16 @@ public class ClientPanel {
 			}
 			
 		});
+	}
+	public void checkClient(){
+		try {
+			tableModel.update(controller.checkClient());
+			panel.remove(btnAdd);
+			panel.remove(btnDel);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	public class AddClientPanel{
 

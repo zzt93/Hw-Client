@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import businesslogic.BankManagebl.BankController;
+import businesslogic.SetAccountbl.AccountController;
 import po.BkTransPO;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
@@ -27,6 +28,13 @@ public class BankPanel {
 	private JTable table;
 	private PublicTableModel tableModel;
 	public ArrayList<BankVO> bankList;
+	private AccountController controller;
+	private JButton btnDel;
+	private JButton btnAdd;
+	public BankPanel(AccountController controller){
+		this.controller=controller;
+		initialize();
+	}
 	public BankPanel(){
 		initialize();
 	}
@@ -51,7 +59,7 @@ public class BankPanel {
 		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
 		
-		JButton btnAdd = new JButton("添加");
+		btnAdd = new JButton("添加");
 		btnAdd.setBounds(464, 387, 80, 30);
 		panel.add(btnAdd);
 		btnAdd.addActionListener(new ActionListener(){
@@ -61,7 +69,7 @@ public class BankPanel {
 			
 		});
 		
-		JButton btnDel = new JButton("删除");
+		btnDel = new JButton("删除");
 		btnDel.setBounds(581, 387, 80, 30);
 		panel.add(btnDel);
 		btnDel.addActionListener(new ActionListener(){
@@ -71,6 +79,16 @@ public class BankPanel {
 			}
 			
 		});
+	}
+	public void checkBank(){
+		try {
+			tableModel.update(controller.checkBank());
+			panel.remove(btnAdd);
+			panel.remove(btnDel);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	public class AddBankPanel{
 		JFrame frame;

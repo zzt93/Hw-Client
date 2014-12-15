@@ -10,6 +10,7 @@ import po.CashPO;
 import po.ClientPO;
 import po.ClientType;
 import po.DealState;
+import po.GoodsModelPO;
 import po.GoodsPO;
 import po.GoodsReceiptPO;
 import po.ItemPO;
@@ -241,11 +242,47 @@ public class PublicTableModel extends DefaultTableModel {
 			break;
 		}
 		case BANK:{
-			//生成data
-			//示例代码
+			data=new Object[list.size()][3];
+			BankPO temp;
+			for(int i=0;i<list.size();i++){
+				temp=(BankPO)list.get(i);
+				data[i][0]=temp.getName();
+				data[i][1]=temp.getBalance();
+				data[i][2]=temp.getRemark();
+			}
 			update(data);
 			break;
-		}	
+		}
+		case ACCOUNTCLIENT:{
+			data=new Object[list.size()][5];
+			ClientPO temp;
+			for(int i=0;i<list.size();i++){
+				temp=(ClientPO)list.get(i);
+				data[i][0]=temp.getName();
+				data[i][1]=ClientType.getName(temp.getType());
+				data[i][2]=temp.getPhone();
+				data[i][3]=temp.getToPay();
+				data[i][4]=temp.getToReceive();
+			}
+			update(data);
+			break;
+		}
+		case ACCOUNTGOODS:{
+			data=new Object[list.size()][7];
+			GoodsModelPO temp;
+			for(int i=0;i<list.size();i++){
+				temp=(GoodsModelPO)list.get(i);
+				data[i][0]=temp.getName();
+				data[i][1]=temp.getType();
+				data[i][2]=temp.getModel();
+				data[i][3]=temp.getDefault_in();
+				data[i][4]=temp.getDefault_out();
+				data[i][5]=temp.getLastInPrice();
+				data[i][6]=temp.getLastOutPrice();
+			}
+			update(data);
+			break;
+		}
 		}
 	}
 	public void update(BankVO[] list){

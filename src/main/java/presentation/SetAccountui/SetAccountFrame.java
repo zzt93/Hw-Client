@@ -27,7 +27,10 @@ public class SetAccountFrame {
 	private GoodsPanel goods;
 	private ClientPanel client;
 	private BankPanel bank;
-	public SetAccountFrame(AccountController controller) {
+	private String newAccount;
+	public SetAccountFrame(AccountController controller,String name) {
+		this.controller=controller;
+		this.newAccount=name;
 		initialize();
 		frame.setVisible(true);
 	}
@@ -101,15 +104,20 @@ public class SetAccountFrame {
 				break;
 			}
 			case BANKINFO:{
-				JOptionPane.showMessageDialog(null, "建立账目成功");
-				frame.dispose();
+				try {
+					controller.creatCopy();
+//					controller.setDefaultAccount(newAccount);
+					JOptionPane.showMessageDialog(null, "建立账目成功");
+					frame.dispose();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
 				break;
 			}
 			}
 		}
 		
 	}
-	public static void main(String[] args){
-		SetAccountFrame temp=new SetAccountFrame(null);
-	}
+	
 }
