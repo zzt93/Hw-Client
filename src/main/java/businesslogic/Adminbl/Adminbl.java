@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class Adminbl implements AdminBLService{
+
 	private static AdminDataService ads;
 	private static ArrayList<UserPO> arrUser;
 	private static String currentUser;
@@ -73,5 +74,7 @@ public class Adminbl implements AdminBLService{
 	public static void saveUser(String str) {
 		currentUser = str;
 	}
+
+
 
 }

@@ -4,10 +4,13 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
+
 import dataservice.Admindataservice.AdminDataService;
 import dataservice.Clientdataservice.ClientDataService;
 import po.ResultMessage;
 import po.UserPO;
+import presentation.LoginUI.Gui;
 import util.RMIUtility;
 import businesslogicservice.Adminblservice.AdminBLService;
 
@@ -48,7 +51,8 @@ public class AdminController implements AdminBLService{
 		
 	}
 	
-		
+
+
 }
 	
 
