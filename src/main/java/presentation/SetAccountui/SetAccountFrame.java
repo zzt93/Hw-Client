@@ -41,8 +41,9 @@ public class SetAccountFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		panel=new GoodsTypePanel();
-		panel.setVisible(false);
+		GoodsTypePanel temp=new GoodsTypePanel();
+		temp.set_GT_navigator_not_visible();
+		panel=temp;
 		panel.setBounds(0, 0, 800, 500);
 		frame.add(panel);
 		
