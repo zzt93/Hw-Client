@@ -94,7 +94,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 
 	public ArrayList<GoodsModelVO> iSearch(String info) throws RemoteException {
 		ArrayList<GoodsModelVO> res = glbLservice.iSearch(info);
-		return res;
+ 		return res;
 	}
 
 	
@@ -110,7 +110,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 	}
 
 	public GoodsModelVO eSearch_total(String id) throws RemoteException{
-		GoodsModelVO res = glbLservice.eSearch_total(id);
+ 		GoodsModelVO res = glbLservice.eSearch_total(id);
 		return res;
 	}
 

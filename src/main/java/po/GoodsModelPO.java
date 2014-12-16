@@ -58,11 +58,19 @@ public class GoodsModelPO implements Serializable {
 		return default_in;
 	}
 	double default_in;
-	double default_out;
+
 	@Override
 	public String toString() {
-		return id+" "+amount+" "+signal;
+		return "" + amount +
+				signal +
+				id +
+				name +
+				model +
+				type ;
 	}
+
+	double default_out;
+
 	public String getModel() {
 		return model;
 	}
@@ -114,10 +122,7 @@ public class GoodsModelPO implements Serializable {
 		this.lastOutPrice = lastOutPrice;
 	}
 
-	public int getAver_in() {
-		// TODO to save or calculate
-		return 0;
-	}
+
 	
 
 }

@@ -1,5 +1,6 @@
 package presentation.RepoUI;
 
+import businesslogic.Adminbl.AdminController;
 import vo.GoodsReceiptVO;
 import vo.GoodsVO;
 
@@ -673,8 +674,20 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 		for (Vector<?> info : dataVector ) {
 			goodsVOs.add(new GoodsVO(info.get(0), info.get(1), info.get(2) ));
 		}
-		goodsReceiptVO = new GoodsReceiptVO(goodsVOs,
-				 "user");// TODO add user
+		AdminController adminController = null;
+		try {
+			adminController = new AdminController();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			goodsReceiptVO = new GoodsReceiptVO(goodsVOs,
+                     adminController.getUser());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		try {
 			receiptBLImpl.produceGoodsReceipt(goodsReceiptVO);
 		} catch (Exception e) {

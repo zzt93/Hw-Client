@@ -38,7 +38,7 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		InOutRepoVO result;
 		StockUtility stock = new StockUtilityImpl();
 		SaleUtility sale = new SaleUtilityImpl();
-		//TODO add user
+
 		ReceiptConditionVO in_conditionVO = new ReceiptConditionVO(start, end, ReceiptType.STOCK_ACCEPT, null, null, null);
 		SaleConditionVO saleConditionVO = new SaleConditionVO();
 		saleConditionVO.startTime = start;

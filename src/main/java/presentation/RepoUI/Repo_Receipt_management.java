@@ -183,7 +183,6 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
                 choose_id.setModel(new javax.swing.DefaultComboBoxModel<String>(
                         repoReceiptBLImpl.check_type()));
             } catch (RemoteException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         }
@@ -677,7 +676,6 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
             choose_id.setModel(new javax.swing.DefaultComboBoxModel<String>(
                     repoReceiptBLImpl.check_type()));
         } catch (RemoteException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }

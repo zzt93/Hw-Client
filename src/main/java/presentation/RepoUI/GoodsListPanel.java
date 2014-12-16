@@ -1111,8 +1111,16 @@ public class GoodsListPanel extends javax.swing.JPanel {
 
 	private void searchActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchActionPerformed
 
+		if (goods_info_search.getText() == null){
+			return;
+		}
+		if (goods_info_search.getText().equals("")){
+			JOptionPane.showMessageDialog(null, "Invaild input");
+			return;
+		}
 		if (ambiguous.isSelected()) {
 			String info = goods_info_search.getText();
+
 			if (info.contains(" ")) {
 				try {
 					goodsModel_search = gl_controller.iSearch(info.split(" "));
@@ -1141,10 +1149,6 @@ public class GoodsListPanel extends javax.swing.JPanel {
 				temp = new GoodsModelVO("a1","a1-A", "Light", "A");
 			} else {
 				try {
-					if (goods_info_search.getText() == null){
-						JOptionPane.showMessageDialog(null, "Invaild input");
-						return;
-					}
 					temp = gl_controller.eSearch_total(goods_info_search.getText());
 				} catch (RemoteException e) {
 					e.printStackTrace();

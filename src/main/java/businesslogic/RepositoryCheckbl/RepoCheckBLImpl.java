@@ -42,10 +42,11 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 
 	@Override
 	public boolean export(int which, String destFileName) throws Exception {
-		if ((getCheckRes() == null) || getCheckRes().isEmpty() || (which > (getCheckRes().size() - 1))) {
+		ArrayList<RepoPO> temp = getCheckRes();
+		if ((temp == null) || temp.isEmpty() || (which > (temp.size() - 1))) {
 			return false;
 		}
-		expoter.export_excel(getCheckRes().get(which), destFileName);
+		expoter.export_excel(temp.get(which), destFileName);
 		return true;
 	}
 

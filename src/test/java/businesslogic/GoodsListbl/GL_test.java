@@ -25,12 +25,10 @@ public class GL_test {
 /*		assertThat("test ", 0, new BaseMatcher<Integer>() {
 
 			public boolean matches(Object arg0) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			public void describeTo(Description arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 		}); */

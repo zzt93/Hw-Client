@@ -12,6 +12,7 @@ import po.RepoPO;
 import vo.GoodsVO;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -46,8 +47,13 @@ public class Exporter_test {
 		goods.put("a2", a2_list);
 		
 		tem.setGoods(goods);
-		
-		RepoPO test = new RepoPO(tem);
+
+		RepoPO test = null;
+		try {
+			test = new RepoPO(tem);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		try {
 			new Exporter().export_excel(test, "test.xls");
 		} catch (ParsePropertyException | InvalidFormatException | IOException e) {

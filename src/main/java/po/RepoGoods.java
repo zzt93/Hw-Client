@@ -1,13 +1,18 @@
 package po;
 
+import businesslogic.RepositoryCheckbl.RepoCheckDataImpl;
+import dataservice.RepositoryCheckdataservice.RepoCheckDataService;
+
 import java.io.Serializable;
+import java.rmi.RemoteException;
 
 public class RepoGoods implements Serializable {
 	private static final long serialVersionUID = 1L;
-	public RepoGoods(String id, GoodsModelPO goodsModelPO) {
+	public RepoGoods(String id, GoodsModelPO goodsModelPO) throws RemoteException {
+		RepoCheckDataService repoCheckDataService = new RepoCheckDataImpl();
 		this.id = id;
 		amount = goodsModelPO.getAmount();
-		aver_price = goodsModelPO.getAver_in();
+		aver_price = repoCheckDataService.getAver_in(id).getObj();
 		
 		name = goodsModelPO.getName();
 		model = goodsModelPO.getModel();

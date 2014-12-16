@@ -671,7 +671,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             type_info = new_type;
             TreeNodePO temp = new TreeNodePO(treeNodePO_in_nodepanel.getFa(),
                     treeNodePO_in_nodepanel.getType());
-            //TODO
+
             temp.setType(new_type);
             boolean update_res = false;
             try {

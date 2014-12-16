@@ -41,6 +41,11 @@ public class RepoCheckDataImpl implements RepoCheckDataService {
 		return null;
 	}
 
+	@Override
+	public ResultMessage<Double> getAver_in(String id) throws RemoteException {
+		return null;
+	}
+
 	public ResultMessage<ArrayList<RepoPO>> ifind(RepoFilterPO filterPO)
 			throws RemoteException {
 		// TODO Auto-generated method stub

@@ -15,5 +15,5 @@ public interface RepoCheckDataService extends Remote {
 	ResultMessage<Boolean> update(RepoPO repoPO) throws RemoteException;
 	
 	ResultMessage<RepoPO> efind(String info) throws RemoteException;
-	
+	ResultMessage<Double> getAver_in(String id) throws RemoteException;
 }

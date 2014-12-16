@@ -1,5 +1,6 @@
 package businesslogic.RepoReceiptbl;
 
+import businesslogic.Adminbl.AdminController;
 import businesslogic.GoodsListbl.GL_controller;
 import businesslogicservice.RepoReceiptblservice.RepoReceBLservice;
 import dataservice.RepoReceiptdataservice.RepoReceiptDataService;
@@ -104,9 +105,17 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		int amount = gl_controller.amount(new GoodsPO(goods));
 		if (amount == goods.amount) {
 			return " ";
-		} 
+		}
+		AdminController adminController = null;
+		try {
+			adminController = new AdminController();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 		repoReceiptDataService.insert(new RepoReceiptPO(goods.id, goods.amount,
-				amount, "user"));//TODO how to get user
+				amount, adminController.getUser()));
 		String type = "";
 		if (amount > goods.amount) {
 			type = "报溢单 "+ amount ;
