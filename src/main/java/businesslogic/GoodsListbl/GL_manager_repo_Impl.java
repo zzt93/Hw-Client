@@ -17,22 +17,20 @@ import java.util.HashMap;
 
 public class GL_manager_repo_Impl implements GL_manager_BLservice, GL_repo_BLservice {
 
-	GoodsListPO goodsListPO;
+
 	GoodsListDataService glDataService;
 
 
 
 	public GL_manager_repo_Impl() throws RemoteException, NullPointerException, NotBoundException {
 		glDataService = (GoodsListDataService) RMIUtility.getImpl(GL_controller.gl_service);
-		goodsListPO = glDataService.getGoodsList().getObj();
+
 	}
 	
-	public GoodsListPO sum() throws Exception {
-		return goodsListPO;
-	}
+
 	
 	public int amount(GoodsVO goods) throws Exception {
-		HashMap<String, GoodsModelPO> goodsModels = goodsListPO.getGoodsModels();
+		HashMap<String, GoodsModelPO> goodsModels = getGoodsList().getGoodsModels();
 		GoodsModelPO goodsModel = goodsModels.get(goods.id);
 		if (goodsModel == null) {
 			return 0;
@@ -41,7 +39,7 @@ public class GL_manager_repo_Impl implements GL_manager_BLservice, GL_repo_BLser
 	}
 
 	public GoodsListPO getGoodsList() throws Exception {
-		return goodsListPO;
+		return glDataService.getGoodsList().getObj();
 	}
 
 }

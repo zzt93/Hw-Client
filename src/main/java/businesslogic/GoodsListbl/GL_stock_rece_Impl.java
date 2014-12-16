@@ -149,9 +149,9 @@ public class GL_stock_rece_Impl implements GL_stock_BLservice,
 	@Override
 	public ArrayList<String> stock_type() throws RemoteException {
 		ArrayList<String> stock = new ArrayList<String>();
-		HashMap<String, ArrayList<GoodsPO>> goods = goodsListPO().getGoods();
-		for (String temp : goods.keySet()) {
-			GoodsPO gm = goods.get(temp).get(0);
+		HashMap<String, GoodsModelPO> goodsModels = goodsListPO().getGoodsModels();
+		for (String temp : goodsModels.keySet()) {
+			GoodsModelPO gm = goodsModels.get(temp);
 			stock.add(temp+"("+gm.getName()+")");
 		}
 		return stock;

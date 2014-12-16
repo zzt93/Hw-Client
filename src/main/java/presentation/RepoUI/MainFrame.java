@@ -758,11 +758,16 @@ public class MainFrame extends javax.swing.JFrame {
 	}// GEN-LAST:event_repo_receActionPerformed
 
 	private void exportActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exportActionPerformed
-		ArrayList<RepoPO> temp;
+		ArrayList<RepoPO> temp = null;
 		if (MainFrame.DEBUG) {
 			temp = new ArrayList<RepoPO>();
 		} else {
-			temp = repoCheckBLservice.getCheckRes();
+			try {
+				temp = repoCheckBLservice.getCheckRes();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+				return;
+			}
 		}
 		int size = temp.size();
 		String[] dates = new String[size];

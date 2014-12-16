@@ -14,48 +14,47 @@ import java.util.ArrayList;
 
 public class RepoCheckBLImpl implements RepoCheckBLservice {
 
-	GL_repo_BLservice gl_repo_BLservice;
+
 	Exporter expoter;
 	RepoCheckDataService repoCheckDataService;
-	ArrayList<RepoPO> checkRes;
+
 
 	static String check = "repo check data service";
-	public ArrayList<RepoPO> getCheckRes() {
-		return checkRes;
+	public ArrayList<RepoPO> getCheckRes() throws RemoteException {
+		return repoCheckDataService.getRepo().getObj();
 	}
 
 	public RepoCheckBLImpl() throws RemoteException, NullPointerException, NotBoundException {
-		this.gl_repo_BLservice = new GL_manager_repo_Impl();
+
 		expoter = new Exporter();
 		repoCheckDataService = (RepoCheckDataService) RMIUtility.getImpl(check);
-		checkRes = repoCheckDataService.getRepo().getObj();
+
 	}
 
 	public RepoPO checkAndSum() throws Exception {
-		GoodsListPO temp = gl_repo_BLservice.sum();
-
-		checkRes.add(new RepoPO(temp));
-		return checkRes.get(checkRes.size());
+		GL_repo_BLservice gl_repo_BLservice = new GL_manager_repo_Impl();
+		GoodsListPO temp = gl_repo_BLservice.getGoodsList();
+		RepoPO repoPO = new RepoPO(temp);
+		repoCheckDataService.insert(repoPO);
+		return repoPO;
 
 	}
 
 	@Override
 	public boolean export(int which, String destFileName) throws Exception {
-		if (checkRes == null || checkRes.isEmpty() || which < checkRes.size() - 1) {
+		if ((getCheckRes() == null) || getCheckRes().isEmpty() || (which > (getCheckRes().size() - 1))) {
 			return false;
 		}
-		expoter.export_excel(checkRes.get(which), destFileName);
+		expoter.export_excel(getCheckRes().get(which), destFileName);
 		return true;
 	}
 
-	public void refresh() throws Exception {
-		checkRes = ((RepoCheckDataService) RMIUtility.getImpl(check)).getRepo().getObj();
-	}
 
-	public RepoPO get_aver_in(){
-		if (checkRes.size() == 0){
+
+	public RepoPO get_aver_in() throws RemoteException {
+		if (getCheckRes().size() == 0){
 			return null;
 		}
-		return checkRes.get(checkRes.size()-1);
+		return getCheckRes().get(getCheckRes().size() - 1);
 	}
 }
