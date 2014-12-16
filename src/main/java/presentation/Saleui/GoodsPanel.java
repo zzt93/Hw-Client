@@ -214,7 +214,7 @@ public class GoodsPanel {
 
 		public void actionPerformed(ActionEvent e) {
 			pr=new ProductsReceipt();
-			pr.setCommodity_id(Integer.valueOf(textId.getText()));
+			pr.setCommodity_id(textId.getText());
 			pr.setComment(textComment.getText());
 			pr.setNumber(Integer.valueOf(textNum.getText()));
 			pr.setPrice(new BigDecimal(textPrice.getText()));
