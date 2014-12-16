@@ -33,6 +33,7 @@ public class CashReceiptPane {
 	private JTextField textOperator;
 	private JTextField textBank;
 	private JTextField textState;
+	private JTextField textDeal;
 	private JButton btnCancel;
 	private JLabel labelTotal;
 	
@@ -84,6 +85,10 @@ public class CashReceiptPane {
 		label_5.setBounds(90, 190, 54, 15);
 		panel.add(label_5);
 		
+		JLabel label_6 = new JLabel("处理状态:");
+		label_6.setBounds(90, 220, 54, 15);
+		panel.add(label_6);
+		
 		JLabel label_7 = new JLabel("条目清单");
 		label_7.setBounds(180, 250, 54, 15);
 		panel.add(label_7);
@@ -134,6 +139,11 @@ public class CashReceiptPane {
 		textState.setBounds(145, 187, 200, 21);
 		panel.add(textState);
 		
+		textDeal = new JTextField();
+		textDeal.setColumns(10);
+		textDeal.setBounds(145, 217, 200, 21);
+		panel.add(textDeal);
+		
 		btnCancel = new JButton("取消");
 		btnCancel.setBounds(319, 493, 60, 23);
 		panel.add(btnCancel);
@@ -150,6 +160,7 @@ public class CashReceiptPane {
 		textOperator.setEditable(false);
 		textBank.setEditable(false);
 		textState.setEditable(false);
+		textDeal.setEditable(false);
 	}
 	public void visit(boolean temp){
 		frame.setVisible(temp);
@@ -167,6 +178,7 @@ public class CashReceiptPane {
 		textState.setText(ReceiptState.getName(receipt.statement));
 		tableModel.update(receipt.itemList);
 		labelTotal.setText(String.valueOf(receipt.total));
+		textDeal.setText(DealState.getName(receipt.dealState));
 	}	
 	public void query(){
 		btnCancel.setText("关闭");

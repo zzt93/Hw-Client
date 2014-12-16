@@ -126,7 +126,7 @@ public class PublicTableModel extends DefaultTableModel {
 			data=new Object[list.size()][5];
 			ReceiptPO temp;
 			for(int i=0;i<list.size();i++){
-				temp=(ReceiptPO)list.get(0);
+				temp=(ReceiptPO)list.get(i);
 				data[i][1]=temp.time;
 				data[i][4]=ReceiptState.getName(temp.statement);
 				switch(temp.type){
@@ -168,7 +168,7 @@ public class PublicTableModel extends DefaultTableModel {
 				case PAYMENT:
 				case RECEIVE:{
 					RecPO temp1=(RecPO)temp;
-					data[i][0]="收款单";
+					data[i][0]=ReceiptType.getName(temp.type);
 					data[i][2]=temp1.operator;
 					data[i][3]=temp1.total;
 					break;
@@ -198,18 +198,14 @@ public class PublicTableModel extends DefaultTableModel {
 			ReceiptPO temp;
 			for(int i=0;i<list.size();i++){
 				temp=(ReceiptPO)list.get(i);
-				if(temp!=null){
-					System.out.println("YES");
-				}else{
-					System.out.println("NO");
-				}
 				data[i][0]=temp.time;
 				data[i][1]=ReceiptType.getName(temp.type);
 				data[i][3]=ReceiptState.getName(temp.statement);
 				switch(temp.type){
 				case CASH:{
 					CashPO temp1=(CashPO)temp;
-					data[i][2]=temp1.total;
+					data[i][2]=temp1.total;		
+					data[i][4]=DealState.getName(temp1.dealState);
 					break;
 				}
 				case RECEIVE:
@@ -221,7 +217,6 @@ public class PublicTableModel extends DefaultTableModel {
 				}
 				}
 			}
-			System.out.println("lala");
 			update(data);
 			break;
 		}
