@@ -123,6 +123,7 @@ public class StockUI extends JPanel {
 				clientList=client.queryClient(map);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
+				e.printStackTrace();
 			}
 		} catch (RemoteException | NotBoundException e) {
 			e.printStackTrace();
@@ -369,9 +370,12 @@ public class StockUI extends JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	
     	try {
+    		setStockReceipt();
 			stockController.makeReceipt(stockReceipt);
+			JOptionPane.showMessageDialog(null, "制定单据成功");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
 		}
     	
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -399,6 +403,8 @@ public class StockUI extends JPanel {
     			new BigDecimal(total));
     	stockReceipt.setProductList(list);
     	stockReceipt.setClient(client.getName());
+    	
+    	
     }
 
 }

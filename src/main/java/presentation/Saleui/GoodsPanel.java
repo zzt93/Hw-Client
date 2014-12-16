@@ -192,6 +192,7 @@ public class GoodsPanel {
 					goods=controller.eSearch_total(temp2[0]);
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
+					e1.printStackTrace();
 				}
 //				GoodsVO goods=new GoodsVO("0001",20);
 //				goods.name="商品1";

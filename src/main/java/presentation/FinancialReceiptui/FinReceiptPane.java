@@ -239,7 +239,7 @@ public class FinReceiptPane {
 				try {
 					controller.makePayment(pay);
 					JOptionPane.showMessageDialog(null, "添加成功");
-					frame.setVisible(false);
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();
@@ -266,8 +266,10 @@ public class FinReceiptPane {
 				try {
 					controller.makeCash(cash);
 					JOptionPane.showMessageDialog(null, "添加成功");
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
 				}
 			}
 			
@@ -289,9 +291,11 @@ public class FinReceiptPane {
 				//FIXME
 				try {
 					controller.makeReceive(receive);
-				JOptionPane.showMessageDialog(null, "添加成功");
+					JOptionPane.showMessageDialog(null, "添加成功");
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
 				}
 			}
 			
@@ -443,7 +447,8 @@ public class FinReceiptPane {
 							Double.valueOf(textAmount.getText()),
 							textRemark.getText());
 					//FIXME
-					controller.addItem(item);
+					total=controller.addItem(item);
+					labelTotal.setText(String.valueOf(total));
 					tableModel.addRow(item);
 					textAmount.setText(null);
 					textRemark.setText(null);

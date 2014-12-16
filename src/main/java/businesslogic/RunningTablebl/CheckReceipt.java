@@ -43,7 +43,7 @@ public class CheckReceipt {
 			case CASH:
 			case RECEIVE:
 			case PAYMENT:{
-				MockFinReceiptController FinReceipt=new MockFinReceiptController();
+				FinReceiptController FinReceipt=new FinReceiptController();
 				list=FinReceipt.getReceipt(vo);
 				break;
 			}
@@ -77,7 +77,7 @@ public class CheckReceipt {
 			break;
 		}
 		case CASH:{
-			MockFinReceiptController temp=new MockFinReceiptController();
+			FinReceiptController temp=new FinReceiptController();
 			temp.creditCash((CashVO)vo);
 			break;
 		}

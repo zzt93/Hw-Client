@@ -152,6 +152,7 @@ public class SaleUI extends JPanel {
 				clientList=client.queryClient(map);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
+				e.printStackTrace();
 			}
 		} catch (RemoteException |NotBoundException e) {
 			e.printStackTrace();
@@ -442,17 +443,19 @@ public class SaleUI extends JPanel {
 			StrategyPane strategyPane=new StrategyPane();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,e.getMessage());
+			e.printStackTrace();
 		}
     	//StrategyPane strategyPane=new StrategyPane();
    }//GEN-LAST:event_jButton1ActionPerformed
     private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	if(saleReceipt==null){
-        	setSaleReceipt();
-    	}
+    	
     	try {
+    		setSaleReceipt();
 			saleController.makeReceipt(saleReceipt);
+			JOptionPane.showMessageDialog(null, "制定单据成功");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
 		}
    }//GEN-LAST:event_jButton1ActionPerformed
     public void setSaleReceipt(){
@@ -481,6 +484,8 @@ public class SaleUI extends JPanel {
     			new BigDecimal(total));
     	saleReceipt.setProductList(prList);
     	saleReceipt.setClient(client.getName());
+    	
+    	
     }
     public class StrategyPane{
     	private JFrame frame;
@@ -580,6 +585,7 @@ public class SaleUI extends JPanel {
 					labelActualValue.setText(saleReceipt.getActualValue().toString());
     	    	} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
+					e.printStackTrace();
 				}
     	    }
     	 public void refresh(StrategyPO po){

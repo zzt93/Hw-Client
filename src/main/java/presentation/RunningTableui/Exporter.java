@@ -66,7 +66,7 @@ public class Exporter {
 						createExcel(excel);
 					}
 					
-				});
+				}).start();;
 				return excel.getPath();
 			}
 		} else if (result == JFileChooser.CANCEL_OPTION) {

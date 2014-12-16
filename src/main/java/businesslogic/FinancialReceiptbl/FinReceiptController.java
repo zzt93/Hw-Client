@@ -61,21 +61,21 @@ public class FinReceiptController implements FinancialReceiptblservice{
 	}
 	public void makePayment(PayVO vo) throws Exception{
 		PayPO po=new PayPO(vo,bankList.list);
-		bankList.clear();
 		ResultMessage result=finReceipt.makePayMent(po);
 		result.throwIfFailed();
+		bankList.clear();
 	}
 	public void makeReceive(RecVO vo) throws Exception{
 		RecPO po=new RecPO(vo,bankList.list);
-		bankList.clear();
 		ResultMessage result=finReceipt.makeReceive(po);
 		result.throwIfFailed();
+		bankList.clear();
 	}
 	public void makeCash(CashVO vo) throws Exception{
 		CashPO po=new CashPO(vo,itemList.list);
-		itemList.clear();
 		ResultMessage result=finReceipt.makeCash(po);
 		result.throwIfFailed();
+		itemList.clear();
 	}		
 	public String[] getBank() throws Exception{
 		BankController bankController;

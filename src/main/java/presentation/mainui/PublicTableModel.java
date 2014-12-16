@@ -165,13 +165,7 @@ public class PublicTableModel extends DefaultTableModel {
 					data[i][3]=temp1.total;
 					break;
 				}
-				case PAYMENT:{
-					PayPO temp1=(PayPO)temp;
-					data[i][0]="付款单";
-					data[i][2]=temp1.operator;
-					data[i][3]=temp1.total;
-					break;
-				}
+				case PAYMENT:
 				case RECEIVE:{
 					RecPO temp1=(RecPO)temp;
 					data[i][0]="收款单";
@@ -183,14 +177,14 @@ public class PublicTableModel extends DefaultTableModel {
 					//FIXME
 					RepoReceiptPO temp1=(RepoReceiptPO)temp;
 					data[i][0]="报溢报损单";
-//					data[i][2]=temp1
+//					data[i][2]=temp1.get
 					break;
 				}
 				case GOODSRECEIPT:{
 					//FIXME
 					GoodsReceiptPO temp1=(GoodsReceiptPO)temp;
 					data[i][0]="库存赠送单";
-//					data[i][2]
+					data[i][2]=temp1.getUser();
 					break;
 				}
 				}

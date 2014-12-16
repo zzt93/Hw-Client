@@ -29,7 +29,6 @@ import java.util.List;
 public class FinancialReceiptFrame {
 	private JPanel panel;
 	private JTable table;
-	private FinReceiptPane receiptPane;
 	PublicTableModel tableModel;
 	private Font font=new Font("宋体",Font.PLAIN,18);
 	private Font font2=new Font("宋体",Font.PLAIN,14);
@@ -38,7 +37,6 @@ public class FinancialReceiptFrame {
 	private FinReceiptController controller;
 	public FinancialReceiptFrame(){
 		initialize();
-		receiptPane=new FinReceiptPane();
 		try {
 			controller=new FinReceiptController();
 		} catch (RemoteException | NotBoundException e) {
@@ -158,17 +156,20 @@ public class FinancialReceiptFrame {
 	}
 	public class Payment implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
+			FinReceiptPane receiptPane=new FinReceiptPane();
 			receiptPane.creatPay();
 		}
 		
 	}
 	public class Receive implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			FinReceiptPane receiptPane=new FinReceiptPane();
 			receiptPane.creatRec();
 		}
 	}
 	public class Cash implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
+			FinReceiptPane receiptPane=new FinReceiptPane();
 			receiptPane.creatCash();
 		}
 	}
