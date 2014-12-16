@@ -302,6 +302,22 @@ public class PublicTableModel extends DefaultTableModel {
 			update(data);
 			break;
 		}
+		case PRODUCTS:{
+			data=new Object[list.size()][7];
+			ProductsReceipt temp;
+			for(int i=0;i<list.size();i++){
+				temp=(ProductsReceipt)list.get(i);
+				data[i][0]=temp.getCommodity_id();
+				data[i][1]=temp.getName();
+				data[i][2]=temp.getType();
+				data[i][3]=temp.getNumber();
+				data[i][4]=temp.getPrice();
+				data[i][5]=temp.getTotal();
+				data[i][6]=temp.getComment();
+			}
+			update(data);
+			break;
+		}
 		}
 	}
 	public void update(BankVO[] list){
@@ -413,6 +429,16 @@ public class PublicTableModel extends DefaultTableModel {
 		addRow(data);
 	}
 	public void insteadRow(int row,RecPO po){
+		removeRow(row);
+		Object[] data=new Object[5];
+		data[0]=po.time;
+		data[1]=ReceiptType.getName(po.type);
+		data[2]=po.total;
+		data[3]=ReceiptState.getName(po.statement);
+		data[4]=DealState.getName(po.dealState);
+		insertRow(row,data);
+	}
+	public void insteadRow(int row,CashPO po){
 		removeRow(row);
 		Object[] data=new Object[5];
 		data[0]=po.time;

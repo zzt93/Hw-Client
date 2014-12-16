@@ -4,11 +4,13 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 import businesslogic.FinancialReceiptbl.FinReceiptController;
+import po.CashPO;
 import po.DealState;
 import po.RecPO;
 import po.ReceiptPO;
 import po.ReceiptState;
 import po.ReceiptType;
+import presentation.RunningTableui.CashReceiptPane;
 import presentation.RunningTableui.PayReceiptPane;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
@@ -108,7 +110,10 @@ public class FinancialReceiptFrame {
 			temp=controller.getReceipt(condition);
 			list.addAll(temp);
 			
-			condition.dealState=null;
+			condition.type=ReceiptType.CASH;
+			temp=controller.getReceipt(condition);
+			list.addAll(temp);
+			
 			condition.state=ReceiptState.disapprove;
 			temp=controller.getReceipt(condition);
 			list.addAll(temp);
@@ -140,7 +145,10 @@ public class FinancialReceiptFrame {
 			if(e.getClickCount()>=2){
 				switch(list.get(table.getSelectedRow()).type){
 				case CASH:{
-					//TODO
+					CashReceiptPane cashReceiptPane=new CashReceiptPane(table.getSelectedRow(),tableModel);
+					cashReceiptPane.set((CashPO)list.get(table.getSelectedRow()));
+					cashReceiptPane.deal();
+					cashReceiptPane.visit(true);
 					break;
 				}
 				case PAYMENT:

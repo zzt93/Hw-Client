@@ -26,6 +26,7 @@ import businesslogic.Stockbl.StockUtilityImpl;
 import po.ClientPO;
 import po.ClientType;
 import po.ProductsReceipt;
+import po.ReceiptType;
 import po.StockReceiptPO;
 import presentation.Saleui.GoodsPaneType;
 import presentation.Saleui.GoodsPanel;
@@ -403,7 +404,11 @@ public class StockUI extends JPanel {
     			new BigDecimal(total));
     	stockReceipt.setProductList(list);
     	stockReceipt.setClient(client.getName());
-    	
+    	if(boxType.getSelectedIndex()==0){
+    		stockReceipt.type=ReceiptType.STOCK_ACCEPT;
+    	}else{
+    		stockReceipt.type=ReceiptType.STOCK_REJECTION;
+    	}
     	
     }
 

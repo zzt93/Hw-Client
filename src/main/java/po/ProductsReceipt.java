@@ -27,7 +27,6 @@ public class ProductsReceipt implements Serializable {
         price=price.multiply(new BigDecimal(number));
         total_value=total_value.add(price);
     }
-    public ProductsReceipt(){}
     public String getName(){
     	return name;
     }

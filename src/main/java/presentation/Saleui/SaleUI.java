@@ -35,6 +35,7 @@ import businesslogic.Strategybl.StrategyList;
 import po.ClientPO;
 import po.ClientType;
 import po.ProductsReceipt;
+import po.ReceiptType;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
 import po.StrategyPO;
@@ -484,7 +485,11 @@ public class SaleUI extends JPanel {
     			new BigDecimal(total));
     	saleReceipt.setProductList(prList);
     	saleReceipt.setClient(client.getName());
-    	
+    	if(boxType.getSelectedIndex()==0){
+    		saleReceipt.type=ReceiptType.SALE_ACCEPT;
+    	}else{
+    		saleReceipt.type=ReceiptType.SALE_REJECTION;
+    	}
     	
     }
     public class StrategyPane{

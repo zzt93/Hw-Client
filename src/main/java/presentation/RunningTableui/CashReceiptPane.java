@@ -3,6 +3,8 @@ package presentation.RunningTableui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.FinancialReceiptbl.FinReceiptController;
 import businesslogic.RunningTablebl.RunTableController;
 import po.CashPO;
 import po.DealState;
@@ -40,10 +43,24 @@ public class CashReceiptPane {
 	private PublicTableModel tableModel;
 	private CashPO receipt;
 	private RunTableController controller;
+	private PublicTableModel receiptModel;
+	private int currentRow;
+	private FinReceiptController finController;
 	
 	public CashReceiptPane(){
 		initialize();
 	}
+	public CashReceiptPane(int row,PublicTableModel model){
+		this();
+		currentRow=row;
+		receiptModel=model;
+		try {
+			finController=new FinReceiptController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现了问题");
+			e.printStackTrace();
+		}
+	} 
 	public CashReceiptPane(RunTableController controller,CashPO receipt){
 		this();
 		this.receipt=receipt;
@@ -182,6 +199,32 @@ public class CashReceiptPane {
 	}	
 	public void query(){
 		btnCancel.setText("关闭");
+	}
+	public void deal(){
+		JButton button = new JButton("处理");
+		button.setBounds(219, 493, 60, 23);
+		panel.add(button);
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				receipt.dealState=DealState.DEAL;
+				//FIXME
+//				try {
+//					finController.update(receipt);
+//					
+//				} catch (Exception e1) {
+//					JOptionPane.showMessageDialog(null, e1.getMessage());
+//					e1.printStackTrace();
+//				}
+				try {
+					finController.update(receipt);
+					receiptModel.insteadRow(currentRow, receipt);
+					frame.dispose();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 	public void credit(){
 		//TODO

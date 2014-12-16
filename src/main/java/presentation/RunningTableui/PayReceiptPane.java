@@ -206,15 +206,10 @@ public class PayReceiptPane {
 			public void actionPerformed(ActionEvent e) {
 				receipt.dealState=DealState.DEAL;
 				//FIXME
-//				try {
-//					finController.update(receipt);
-//				} catch (Exception e1) {
-//					JOptionPane.showMessageDialog(null, e1.getMessage());
-//					e1.printStackTrace();
-//				}
-				receiptModel.insteadRow(currentRow, receipt);
 				try {
 					finController.update(receipt);
+					receiptModel.insteadRow(currentRow, receipt);
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null,e1.getMessage());
 					e1.printStackTrace();

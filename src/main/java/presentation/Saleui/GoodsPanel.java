@@ -214,13 +214,14 @@ public class GoodsPanel {
 	public class Right implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
-			pr=new ProductsReceipt();
-			pr.setCommodity_id(textId.getText());
-			pr.setComment(textComment.getText());
-			pr.setNumber(Integer.valueOf(textNum.getText()));
-			pr.setPrice(new BigDecimal(textPrice.getText()));
-			pr.setType(textModel.getText());
-			pr.setName(textName.getText());
+			pr=new ProductsReceipt(
+					textId.getText(),
+					Integer.valueOf(textNum.getText()),
+					new BigDecimal(textPrice.getText()),
+					textComment.getText(),
+					textModel.getText(),
+					textName.getText());
+			
 			//添加到表格，添加到list,刷新界面总额
 			tableModel.addRow(pr);
 			list.add(pr);
