@@ -204,6 +204,11 @@ public class PublicTableModel extends DefaultTableModel {
 			ReceiptPO temp;
 			for(int i=0;i<list.size();i++){
 				temp=(ReceiptPO)list.get(i);
+				if(temp!=null){
+					System.out.println("YES");
+				}else{
+					System.out.println("NO");
+				}
 				data[i][0]=temp.time;
 				data[i][1]=ReceiptType.getName(temp.type);
 				data[i][3]=ReceiptState.getName(temp.statement);

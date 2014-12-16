@@ -9,18 +9,21 @@ import presentation.SetAccountui.AccountFrame;
 
 import javax.swing.*;
 
+import businesslogic.Adminbl.AdminController;
+
 import java.awt.*;
 
 public class FinancialUI {
 	JFrame frame;
 	JTabbedPane mainPanel;
 	JPanel topPanel;
+	AdminController adminController;
 	BankManageFrame BMF=new BankManageFrame();
 	FinancialReceiptFrame FRF=new FinancialReceiptFrame();
 	CheckReceiptFrame CRF=new CheckReceiptFrame();
 	SaleRecordFrame SRF=new SaleRecordFrame();
 	CheckProfitFrame CPF=new CheckProfitFrame();
-	AccountFrame AF=new AccountFrame();
+//	AccountFrame AF=new AccountFrame();
 	public FinancialUI(){
 		try {
 			UIManager.setLookAndFeel(new com.sun.java.swing.plaf.windows.WindowsLookAndFeel());
@@ -56,10 +59,18 @@ public class FinancialUI {
 		topPanel.setLayout(null);
 		frame.add(topPanel);
 		
-		JLabel label = new JLabel("账户：操作员1");
-		label.setFont(new Font("宋体", Font.PLAIN, 18));
-		label.setBounds(590, 20, 150, 50);
-		topPanel.add(label);
+		
+		try {
+			adminController=new AdminController();
+			JLabel label = new JLabel("账户:"+adminController.getUser());
+			label.setFont(new Font("宋体", Font.PLAIN, 18));
+			label.setBounds(590, 20, 150, 50);
+			topPanel.add(label);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
+
 		
 		mainPanel=new JTabbedPane(JTabbedPane.TOP);
 		mainPanel.setFont(new Font("宋体", Font.PLAIN, 18));
@@ -70,7 +81,7 @@ public class FinancialUI {
 		mainPanel.add("经营表格",CRF.getPanel());
 		mainPanel.add("销售记录",SRF.getPanel());
 		mainPanel.add("经营情况",CPF.getPanel());
-		mainPanel.add("账目管理",AF.getPanel());
+//		mainPanel.add("账目管理",AF.getPanel());
 		frame.setVisible(true);
 	}
 	public static void main(String[] args){

@@ -183,7 +183,11 @@ public class BankManageFrame {
 	public class Search implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			try {
-				list=controller.search(search.getText());
+				String field=search.getText();
+				if(field.equals("")){
+					field=null;
+				}
+				list=controller.search(field);
 				tableModel.update(list);
 			} catch (Exception e1) {
 				e1.printStackTrace();

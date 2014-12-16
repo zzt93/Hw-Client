@@ -160,7 +160,7 @@ public class FinReceiptPane {
 		panel.add(btnCancel);
 		btnCancel.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				frame.setVisible(false);
 			}
 		});
 		
@@ -239,6 +239,7 @@ public class FinReceiptPane {
 				try {
 					controller.makePayment(pay);
 					JOptionPane.showMessageDialog(null, "添加成功");
+					frame.setVisible(false);
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();
