@@ -3,6 +3,7 @@ package po;
 import vo.RecVO;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by MethyleneBlue on 2014/10/??.
@@ -10,10 +11,10 @@ import java.io.Serializable;
 public class RecPO extends ReceiptPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public String client,operator;
-	public BkTransPO[] bankList;
+	public List<BkTransPO> bankList;
 	public double total=0;
 	public DealState dealState=DealState.UNDEAL;
-	public RecPO(RecVO vo,BkTransPO[] list){
+	public RecPO(RecVO vo,List<BkTransPO> list){
 		client=vo.client;
 		operator=vo.operator;
 		bankList=list;
@@ -32,9 +33,6 @@ public class RecPO extends ReceiptPO implements Serializable {
 		operator="小李";
 		total=2180;
 		type=ReceiptType.RECEIVE;
-		bankList=new BkTransPO[2];
-		bankList[0]=new BkTransPO();
-		bankList[1]=new BkTransPO();
 		number="SKD-20140507-99653";
 		time="2014-05-07";
 	}
@@ -44,7 +42,7 @@ public class RecPO extends ReceiptPO implements Serializable {
 	public String getOperator() {
 		return operator;
 	}
-	public BkTransPO[] getBankList() {
+	public List<BkTransPO> getBankList() {
 		return bankList;
 	}
 	public double getTotal() {

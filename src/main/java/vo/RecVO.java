@@ -6,10 +6,11 @@ import po.ReceiptPO;
 import po.ReceiptType;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class RecVO extends ReceiptPO implements Serializable {
 	public String client,operator;
-	public BkTransPO[] bankList;
+	public List<BkTransPO> bankList;
 	public double total=0;
 	private static final long serialVersionUID = 1L;
 	public RecVO(String client,String operator,double total){

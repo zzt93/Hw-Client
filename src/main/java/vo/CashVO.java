@@ -6,12 +6,13 @@ import po.ReceiptPO;
 import po.ReceiptType;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CashVO extends ReceiptPO implements Serializable {
 	public String operator;
 	public double total=0;
 	public String bank;
-	public ItemPO[] itemList;
+	public List<ItemPO> itemList;
 	private static final long serialVersionUID = 1L;
 	public CashVO(String bank,String operator,double total){
 		this.bank=bank;

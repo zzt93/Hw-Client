@@ -165,13 +165,7 @@ public class PublicTableModel extends DefaultTableModel {
 					data[i][3]=temp1.total;
 					break;
 				}
-				case PAYMENT:{
-					PayPO temp1=(PayPO)temp;
-					data[i][0]="付款单";
-					data[i][2]=temp1.operator;
-					data[i][3]=temp1.total;
-					break;
-				}
+				case PAYMENT:
 				case RECEIVE:{
 					RecPO temp1=(RecPO)temp;
 					data[i][0]="收款单";
@@ -183,14 +177,14 @@ public class PublicTableModel extends DefaultTableModel {
 					//FIXME
 					RepoReceiptPO temp1=(RepoReceiptPO)temp;
 					data[i][0]="报溢报损单";
-//					data[i][2]=temp1
+//					data[i][2]=temp1.get
 					break;
 				}
 				case GOODSRECEIPT:{
 					//FIXME
 					GoodsReceiptPO temp1=(GoodsReceiptPO)temp;
 					data[i][0]="库存赠送单";
-//					data[i][2]
+					data[i][2]=temp1.getUser();
 					break;
 				}
 				}
@@ -204,6 +198,11 @@ public class PublicTableModel extends DefaultTableModel {
 			ReceiptPO temp;
 			for(int i=0;i<list.size();i++){
 				temp=(ReceiptPO)list.get(i);
+				if(temp!=null){
+					System.out.println("YES");
+				}else{
+					System.out.println("NO");
+				}
 				data[i][0]=temp.time;
 				data[i][1]=ReceiptType.getName(temp.type);
 				data[i][3]=ReceiptState.getName(temp.statement);
@@ -243,14 +242,27 @@ public class PublicTableModel extends DefaultTableModel {
 		}
 		case BANK:{
 			data=new Object[list.size()][3];
-			BankPO temp;
-			for(int i=0;i<list.size();i++){
-				temp=(BankPO)list.get(i);
-				data[i][0]=temp.getName();
-				data[i][1]=temp.getBalance();
-				data[i][2]=temp.getRemark();
+			if(list.size()>0){
+				Object obj=list.get(0);
+				if(obj instanceof BankPO){
+					BankPO temp;
+					for(int i=0;i<list.size();i++){
+						temp=(BankPO)list.get(i);
+						data[i][0]=temp.getName();
+						data[i][1]=temp.getBalance();
+						data[i][2]=temp.getRemark();
+					}
+				}else{
+					BkTransPO temp;
+					for(int i=0;i<list.size();i++){
+						temp=(BkTransPO)list.get(i);
+						data[i][0]=temp.getName();
+						data[i][1]=temp.getAmount();
+						data[i][2]=temp.getRemark();
+				}
+				update(data);
+				}
 			}
-			update(data);
 			break;
 		}
 		case ACCOUNTCLIENT:{
@@ -279,6 +291,18 @@ public class PublicTableModel extends DefaultTableModel {
 				data[i][4]=temp.getDefault_out();
 				data[i][5]=temp.getLastInPrice();
 				data[i][6]=temp.getLastOutPrice();
+			}
+			update(data);
+			break;
+		}
+		case ITEM:{
+			data=new Object[list.size()][3];
+			ItemPO temp;
+			for(int i=0;i<list.size();i++){
+				temp=(ItemPO)list.get(i);
+				data[i][0]=temp.getName();
+				data[i][1]=temp.getAmount();
+				data[i][2]=temp.getRemark();
 			}
 			update(data);
 			break;

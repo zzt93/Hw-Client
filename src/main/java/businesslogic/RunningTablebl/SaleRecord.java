@@ -5,9 +5,11 @@ import vo.SaleConditionVO;
 
 import java.util.List;
 
+import businesslogic.Salebl.SaleUtilityImpl;
+
 public class SaleRecord {
 	public GoodsRecordVO[]  getSaleTable(SaleConditionVO vo) throws Exception{
-		MockSaleUtilityImpl sale=new MockSaleUtilityImpl();
+		SaleUtilityImpl sale=new SaleUtilityImpl();
 		List<GoodsRecordVO> record=sale.querySaleRecord(vo);
 		GoodsRecordVO[] result=new GoodsRecordVO[record.size()];
 		for(int i=0;i<record.size();i++){

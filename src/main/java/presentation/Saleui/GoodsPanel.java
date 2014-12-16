@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class GoodsPanel {
 		this.tableModel=tableModel;
 		this.list=list;
 		this.type=type;
+		
 	}
 	public void showAddPane() {
 		frame=new JFrame();
@@ -139,6 +141,12 @@ public class GoodsPanel {
 		listFrame.setBounds(0,0,200,400);
 		listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		listFrame.setLocationRelativeTo(null);
+		try {
+			controller=new GL_controller();
+		} catch (RemoteException | NullPointerException | NotBoundException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}
 		String[] temp;
 		ArrayList tempList=null;
 		//FIXME,测试暂时隐掉
@@ -184,6 +192,7 @@ public class GoodsPanel {
 					goods=controller.eSearch_total(temp2[0]);
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
+					e1.printStackTrace();
 				}
 //				GoodsVO goods=new GoodsVO("0001",20);
 //				goods.name="商品1";
@@ -206,7 +215,7 @@ public class GoodsPanel {
 
 		public void actionPerformed(ActionEvent e) {
 			pr=new ProductsReceipt();
-			pr.setCommodity_id(Integer.valueOf(textId.getText()));
+			pr.setCommodity_id(textId.getText());
 			pr.setComment(textComment.getText());
 			pr.setNumber(Integer.valueOf(textNum.getText()));
 			pr.setPrice(new BigDecimal(textPrice.getText()));

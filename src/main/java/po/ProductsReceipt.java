@@ -10,14 +10,14 @@ public class ProductsReceipt implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int commodity_id;
+    private String commodity_id;
     private int number;
     private String name;
     private BigDecimal price;
     private BigDecimal total_value;
     private String comment;
     private String type;
-    public ProductsReceipt(int commodity_id, int number, BigDecimal price, String comment,String type,String name) {
+    public ProductsReceipt(String commodity_id, int number, BigDecimal price, String comment,String type,String name) {
         this.commodity_id = commodity_id;
         this.number = number;
         this.price = price;
@@ -41,11 +41,11 @@ public class ProductsReceipt implements Serializable {
     	this.type=type;
     }
 
-    public int getCommodity_id() {
+    public String getCommodity_id() {
         return commodity_id;
     }
 
-    public void setCommodity_id(int commodity_id) {
+    public void setCommodity_id(String commodity_id) {
         this.commodity_id = commodity_id;
     }
 

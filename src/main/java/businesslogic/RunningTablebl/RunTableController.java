@@ -50,17 +50,19 @@ public class RunTableController implements RunningTableblservice {
 	
 	public String[] getClient() throws Exception{
 		List<ClientPO> list=clientController.queryClient(null);
-		String[] result=new String[list.size()];
-		for(int i=0;i<list.size();i++){
-			result[i]=list.get(i).getName();
+		String[] result=new String[list.size()+1];
+		result[0]=null;
+		for(int i=1;i<list.size()+1;i++){
+			result[i]=list.get(i-1).getName();
 		}
 		return result;
 	}
 	public String[] getOperator() throws Exception{
 		ArrayList<UserPO> list=adminController.show();
-		String[] result=new String[list.size()];
-		for(int i=0;i<list.size();i++){
-			result[i]=list.get(i).getName();
+		String[] result=new String[list.size()+1];
+		result[0]=null;
+		for(int i=1;i<list.size()+1;i++){
+			result[i]=list.get(i-1).getName();
 		}
 		return result;
 	}

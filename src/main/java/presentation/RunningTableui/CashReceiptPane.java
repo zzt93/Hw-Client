@@ -3,6 +3,7 @@ package presentation.RunningTableui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -172,10 +173,11 @@ public class CashReceiptPane {
 	}
 	public void credit(){
 		//TODO
-		ItemPO[] temp=receipt.itemList;
-		for(int i=0;i<temp.length;i++){
-			Double temp1=temp[i].getAmount();
-			temp[i].setAmount(-temp1);
+		List<ItemPO> temp=receipt.itemList;
+		ItemPO temp1;
+		for(int i=0;i<temp.size();i++){
+			temp1=temp.get(i);
+			temp1.setAmount(-temp1.getAmount());
 		}
 		receipt.total=-receipt.total;
 		

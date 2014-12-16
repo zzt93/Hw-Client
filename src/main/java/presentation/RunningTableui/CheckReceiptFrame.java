@@ -97,7 +97,7 @@ public class CheckReceiptFrame {
 		panel.add(label_5);
 		
 	
-		//TODO,获得客户列表,是否插入无客户情况?
+		//TODO,获得客户列表
 		try {
 			boxClient=new JComboBox(controller.getClient());
 		} catch (Exception e1) {
@@ -114,7 +114,7 @@ public class CheckReceiptFrame {
 		panel.add(textRepository);
 		textRepository.setColumns(10);
 		
-		//TODO,获得操作员列表,是否加入无操作员情况?
+		//TODO,获得操作员列表
 		try {
 			boxOperator=new JComboBox(controller.getOperator());
 		} catch (Exception e1) {
@@ -140,6 +140,7 @@ public class CheckReceiptFrame {
 		table = new JTable(tableModel);
 		table.setFillsViewportHeight(true);
 		scrollPane.setViewportView(table);
+		table.addMouseListener(new MouseClick());
 		//FIXME,test code
 //		ArrayList<ReceiptPO> list=new ArrayList<ReceiptPO>();
 //		list.add(new RecPO());
@@ -220,7 +221,7 @@ public class CheckReceiptFrame {
 				receiptList=controller.getReceipt(condition);
 				tableModel.update(receiptList);
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, e1.getMessage());
 				e1.printStackTrace();
 			}
 			
@@ -279,7 +280,7 @@ public class CheckReceiptFrame {
 	}
 	public class MouseClick extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
-			if(e.getClickCount()>=2){
+			if(e.getClickCount()==2){
 				//TODO,响应鼠标点击，弹出单据内容
 				ReceiptPO temp=receiptList.get(table.getSelectedRow());
 				switch(temp.type){
