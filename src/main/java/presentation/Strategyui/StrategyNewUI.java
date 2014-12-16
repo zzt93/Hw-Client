@@ -32,7 +32,7 @@ public class StrategyNewUI {
 	private ArrayList<GoodsModelPO> tempGoodsPO;
 	private ArrayList<GoodsModelPO> goodsPOGive;
 
-	 Strategy_New_BLservice snb = new StrategyController();
+	Strategy_New_BLservice snb = new StrategyController();
 
 	/**
 	 * Launch the application.
@@ -124,7 +124,7 @@ public class StrategyNewUI {
 		lblHint.setBounds(10, 366, 386, 15);
 		newFrame.getContentPane().add(lblHint);
 
-		//FIXME日期的大小不好调整
+		// FIXME日期的大小不好调整
 		startTimeText = new JTextField("单击选择日期");
 		startTimeText.setBounds(184, 191, 109, 11);
 		// newFrame.getContentPane().add(startTimeText);
@@ -158,38 +158,47 @@ public class StrategyNewUI {
 						endTimeDate.getDate());
 				Condition c = null;
 				Treatment t = null;
-				switch (comboBoxCondition.getSelectedIndex()) {
-				case 0:
-					c = new Condition(CatOfCondition.CUSTOMERLEVEL, Integer
-							.parseInt(textFieldCondition.getText()));
-					break;
-				case 1:
-					c = new Condition(CatOfCondition.TOTALPRICE, Double
-							.parseDouble(textFieldCondition.getText()));
-				case 2:
-					c = new Condition(CatOfCondition.COMPOSITION, goodsPO);
-				}
+				try{
+					switch (comboBoxCondition.getSelectedIndex()) {
+					case 0:
+						c = new Condition(CatOfCondition.CUSTOMERLEVEL, Integer
+								.parseInt(textFieldCondition.getText()));
+						break;
+					case 1:
+						c = new Condition(CatOfCondition.TOTALPRICE, Double
+								.parseDouble(textFieldCondition.getText()));
+					case 2:
+						c = new Condition(CatOfCondition.COMPOSITION, goodsPO);
+					}
 
-				switch (comboBoxTreatment.getSelectedIndex()) {
-				case 0:
-					t = new Treatment(CatOfTreatment.GIVE, goodsPOGive);
-				case 1:
-					t = new Treatment(CatOfTreatment.DISCOUNT, Double
-							.parseDouble(textFieldTreatment.getText()));
-				case 2:
-					t = new Treatment(CatOfTreatment.COUPON, Double
-							.parseDouble(textFieldTreatment.getText()));
+					switch (comboBoxTreatment.getSelectedIndex()) {
+					case 0:
+						t = new Treatment(CatOfTreatment.GIVE, goodsPOGive);
+					case 1:
+						t = new Treatment(CatOfTreatment.DISCOUNT, Double
+								.parseDouble(textFieldTreatment.getText()));
+					case 2:
+						t = new Treatment(CatOfTreatment.COUPON, Double
+								.parseDouble(textFieldTreatment.getText()));
+					}
+
+					snb.newStrategy(c, t, tp);
+					if (!snb.examine()) {
+						lblHint.setText("输入折扣价格或时间有误，请检查");
+					} else {
+						if (snb.confirm()) {
+							JOptionPane.showMessageDialog(null, "成功");
+							newFrame.dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "失败了>o<");
+						}
+					}
+				}catch(NumberFormatException e){
+					e.printStackTrace();
+					lblHint.setText("输入的数字格式错误");
 				}
 				
-				 snb.newStrategy(c, t, tp); if(!snb.examine()){
-				  lblHint.setText("输入折扣价格或时间有误，请检查"); }else{
-					  if(snb.confirm()){
-						  JOptionPane.showMessageDialog(null, "成功");
-					  }else{
-						  JOptionPane.showMessageDialog(null, "失败了>o<");
-					  }
-				 }
-				 
+
 			}
 		});
 		buttonConfirm.setBounds(126, 297, 93, 23);
@@ -205,9 +214,9 @@ public class StrategyNewUI {
 		newFrame.getContentPane().add(buttonCancel);
 
 		comboBoxCondition.addItemListener(new MyItemListener(comboBoxCondition,
-				txtComposition, lblHint, textFieldCondition,goodsPO));
+				txtComposition, lblHint, textFieldCondition, goodsPO));
 		comboBoxTreatment.addItemListener(new MyItemListener(comboBoxTreatment,
-				txtGive,lblHint,textFieldTreatment,goodsPOGive));
+				txtGive, lblHint, textFieldTreatment, goodsPOGive));
 	}
 
 	class MyTableModel extends DefaultTableModel {
@@ -228,12 +237,13 @@ public class StrategyNewUI {
 	void insert(String[] item, GoodsModelPO po) {
 		item[0] = po.getId();
 		item[1] = po.getName();
-		 item[2] = po.getModel();
+		item[2] = po.getModel();
 
 	}
 
 	/**
 	 * This means to deal with cases to choose Goods.
+	 * 
 	 * @author Mebleyev.G.Longinus
 	 *
 	 */
@@ -246,7 +256,8 @@ public class StrategyNewUI {
 		ArrayList<GoodsModelPO> myGoodsPO;
 
 		public MyItemListener(JComboBox<String> comboBox, String txt,
-				JLabel lblHint, JTextField textField,ArrayList<GoodsModelPO> myGoodsPO) {
+				JLabel lblHint, JTextField textField,
+				ArrayList<GoodsModelPO> myGoodsPO) {
 			super();
 			this.comboBox = comboBox;
 			this.txt = txt;

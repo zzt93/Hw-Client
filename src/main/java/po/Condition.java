@@ -78,5 +78,16 @@ public class Condition implements Serializable {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	public String toString(){
+		switch(type){
+		case TOTALPRICE:
+			return "总价:"+totalPrice;
+		case CUSTOMERLEVEL:
+			return "用户等级>="+customerLevel;
+		case COMPOSITION:
+			return "组合商品:"+composition.toString();
+		}
+		return "空条件";
+	}
 
 }

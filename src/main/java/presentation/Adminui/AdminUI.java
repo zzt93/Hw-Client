@@ -78,7 +78,7 @@ public class AdminUI {
 		}
 
 		String head[] = new String[] { "id", "name", "role" };
-		data = new String[8][3];
+		refreshTable();
 		TableModel tm = new MyTableModel(data, head);
 
 		table = new JTable(tm);
@@ -94,7 +94,14 @@ public class AdminUI {
 		buttonNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminNewUI.main(null);
+				try {
+					users = am.show();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				refreshTable();
+				
 			}
 		});
 		buttonNew.setBounds(560, 73, 93, 23);
@@ -118,6 +125,12 @@ public class AdminUI {
 				users.remove(table.getSelectedRow());
 				AdminNewUI admin = new AdminNewUI(users.get(table
 						.getSelectedRow()));
+				try {
+					users = am.show();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				refreshTable();
 			}
 		});
@@ -131,17 +144,16 @@ public class AdminUI {
 				boolean judge = false;
 				try {
 					judge = am.delete(users.get(table.getSelectedRow()));
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				if (judge) {
 					lblHint.setText("删除成功");
 					users.remove(table.getSelectedRow());
-				} else {
+					
+					refreshTable();
+					table.repaint();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
 					lblHint.setText("删除失败");
+					e1.printStackTrace();
 				}
-
 			}
 		});
 		buttonRemove.setBounds(560, 206, 93, 23);

@@ -142,8 +142,6 @@ public class AdminNewUI extends JDialog {
 						if(judge){
 							JOptionPane.showMessageDialog(null, "成功");
 							AdminNewUI.this.dispose();
-						}else{
-							JOptionPane.showMessageDialog(null, "添加失败");
 						}
 						
 					}

@@ -61,4 +61,15 @@ public class Treatment implements Serializable {
 	public void setCoupon(int coupon) {
 		this.coupon = coupon;
 	}
+	public String toString(){
+		switch(type){
+		case GIVE:
+			return "赠品:"+give.toString();
+		case COUPON:
+			return "代金券:"+coupon;
+		case DISCOUNT:
+			return "折扣:"+discount;
+		}
+		return "空优惠";
+	}
 }

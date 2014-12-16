@@ -42,7 +42,7 @@ public class AdminController implements AdminBLService{
 	public boolean confirm(UserPO po) throws Exception {
 		ResultMessage result=impl.confirm(po);
 		result.throwIfFailed();
-		return false;
+		return true;
 	}
 	@Override
 	public String getUser() throws Exception {

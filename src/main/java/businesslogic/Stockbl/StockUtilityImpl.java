@@ -32,7 +32,7 @@ public class StockUtilityImpl implements StockUtility {
     @Override
     public List<StockReceiptPO> queryReceipt(ReceiptConditionVO filter) throws Exception {
         //TODO get filter
-        ResultMessage<List<StockReceiptPO>> result = impl.queryReceipt(null);
+        ResultMessage<List<StockReceiptPO>> result = impl.queryReceipt(filter);
         result.throwIfFailed();
         return result.getObj();
     }

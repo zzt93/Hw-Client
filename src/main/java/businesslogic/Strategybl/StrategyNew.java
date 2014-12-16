@@ -58,7 +58,7 @@ public class StrategyNew implements Strategy_New_BLservice {
 	@Override
 	public boolean examine() {
 		if (po.getTimePeriod().getStart().getTime() > po.getTimePeriod()
-				.getStart().getTime()) {
+				.getEnd().getTime()) {
 			return false;
 		} else if (po.getCondition().totalPrice != 0
 				&& po.getTreatment().discount != 0) {

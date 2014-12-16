@@ -1,6 +1,8 @@
 package po;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimePeriod implements Serializable {
@@ -27,5 +29,8 @@ public class TimePeriod implements Serializable {
 	public void setEnd(Date end) {
 		this.end = end;
 	}
-	
+	public String toString(){
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		return df.format(start)+"~"+df.format(end);
+	}
 }

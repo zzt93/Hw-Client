@@ -53,14 +53,16 @@ public class Approve_List implements Approve_List_BLservice{
 		addOneByOne(verSale);
 		StockUtility stockUtility = new StockUtilityImpl();
 		List<StockReceiptPO> verStock = stockUtility.queryReceipt(new ReceiptConditionVO());
+		//FIXME
 		addOneByOne(verStock);
 		//</yus>
 		//<zzt>
-		RepoReceiptDataService repository = new RepoReceiptDataImpl();
-		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts(new ReceiptConditionVO()).getObj();
-		receipts.addAll(arrRepo);
-		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts(new ReceiptConditionVO()).getObj();
-		receipts.addAll(arrGoods);
+//		RepoReceiptDataService repository = new RepoReceiptDataImpl();
+//		//FIXME
+//		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts(new ReceiptConditionVO()).getObj();
+//		receipts.addAll(arrRepo);
+//		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts(new ReceiptConditionVO()).getObj();
+//		receipts.addAll(arrGoods);
 		//</zzt>
 		
 		//<gda>
