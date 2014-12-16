@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,12 @@ public class SaleRecordFrame {
 	private JProgressBar progressBar;
 	
 	public SaleRecordFrame(){
+		try {
+			controller=new RunTableController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
 		initialize();
 //		frame.setVisible(true);
 	}
@@ -84,14 +91,15 @@ public class SaleRecordFrame {
 		panel.add(textRepository);
 		textRepository.setColumns(10);
 
-		//TODO,获得操作员列表,是否加入无操作员情况?
-//		try {
-//			boxOperator=new JComboBox(controller.getOperator());
-//		} catch (Exception e1) {
-//			JOptionPane.showMessageDialog(null, e1.getMessage());
-//			e1.printStackTrace();
-//		}
-		boxOperator = new JComboBox(new String[]{null,"操作员1","操作员2"});
+		//TODO,获得操作员列表
+		try {
+			boxOperator=new JComboBox(controller.getOperator());
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}
+		
+//		boxOperator = new JComboBox(new String[]{null,"操作员1","操作员2"});
 		
 		boxOperator.setBounds(115, 177, 100, 21);
 		panel.add(boxOperator);
@@ -132,14 +140,14 @@ public class SaleRecordFrame {
 		label_5.setBounds(60, 261, 54, 15);
 		panel.add(label_5);
 		
-		//TODO,获得客户列表,是否插入无客户情况?
-//		try {
-//			boxClient=new JComboBox(controller.getClient());
-//		} catch (Exception e1) {
-//			JOptionPane.showMessageDialog(null, e1.getMessage());
-//			e1.printStackTrace();
-//		}
-		boxClient = new JComboBox(new String[]{null,"客户1","客户2"});
+		//TODO,获得客户列表
+		try {
+			boxClient=new JComboBox(controller.getClient());
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
+		}
+//		boxClient = new JComboBox(new String[]{null,"客户1","客户2"});
 		
 		boxClient.setBounds(115, 258, 100, 21);
 		panel.add(boxClient);
@@ -179,13 +187,19 @@ public class SaleRecordFrame {
 	}
 	public class Query implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			SaleConditionVO condition=new SaleConditionVO();
-			condition.client=(String)boxClient.getSelectedItem();
-			condition.endTime=textEndTime.getText();
-			condition.startTime=textStartTime.getText();
-			condition.goods=textGoods.getText();
-			condition.buisnessman=(String)boxOperator.getSelectedItem();
-			condition.storage=textRepository.getText();
+			SaleConditionVO condition=new SaleConditionVO(
+					textStartTime.getText(),
+					textEndTime.getText(),
+					textGoods.getText(),
+					(String)boxClient.getSelectedItem(),
+					textRepository.getText(),
+					(String)boxOperator.getSelectedItem());
+//			condition.client=(String)boxClient.getSelectedItem();
+//			condition.endTime=textEndTime.getText();
+//			condition.startTime=textStartTime.getText();
+//			condition.goods=textGoods.getText();
+//			condition.buisnessman=(String)boxOperator.getSelectedItem();
+//			condition.storage=textRepository.getText();
 			try{
 				GoodsRecordVO[] list=controller.getSaleTable(condition);
 				tableModel.update(list);

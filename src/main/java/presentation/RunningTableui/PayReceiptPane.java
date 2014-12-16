@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
@@ -223,9 +224,11 @@ public class PayReceiptPane {
 	}
 	public void credit(){
 		//TODO
-		BkTransPO[] temp=receipt.bankList;
-		for(int i=0;i<temp.length;i++){
-			temp[i].amount=-temp[i].amount;
+		List<BkTransPO> temp=receipt.bankList;
+		BkTransPO temp1;
+		for(int i=0;i<temp.size();i++){
+			temp1=temp.get(i);
+			temp1.amount=-temp1.amount;
 		}
 		receipt.total=-receipt.total;
 		set(receipt);
