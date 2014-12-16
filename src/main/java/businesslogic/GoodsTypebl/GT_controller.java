@@ -70,9 +70,9 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 
 	public boolean add(TreeNodePO node) throws Exception {
 
-		boolean res = gtbLservice.add(node);
+		boolean res = goodsTypeDateService.insert(node).getObj();
 		if (res) {
-			goodsTypeDateService.insert(node);
+			gtbLservice.add(node);
 		}
 		return res;
 	}

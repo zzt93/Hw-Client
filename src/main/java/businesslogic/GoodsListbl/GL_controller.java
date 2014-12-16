@@ -138,7 +138,7 @@ public class GL_controller implements GL_account_BLservice, GL_GT_BLservice,
 
 	public GoodsModelPO set_signal_name(GoodsVO goods) throws Exception {
 		GoodsModelPO res = gl_signal_BLservice.set_signal_name(goods);
-		goodsListDataService.update(res);
+		goodsListDataService.update(res).throwIfFailed();
 		return res; 
 	}
 

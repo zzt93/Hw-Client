@@ -102,8 +102,8 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 
 		//TODO whether to have it 
 		Vector<GoodsVO> tempGoodsVOs = new Vector<GoodsVO>();
-		tempGoodsVOs.add(new GoodsVO("a1", 100));
-		tempGoodsVOs.add(new GoodsVO("a2", 200));
+		tempGoodsVOs.add(new GoodsVO("a1", "light",100));
+		tempGoodsVOs.add(new GoodsVO("a2", "light", 200));
 		GoodsReceiptVO template = new GoodsReceiptVO(tempGoodsVOs, "repo user");
 		show_table_model = new Goods_receipt_table_model(new Object[0][], gift_table_col);
 		

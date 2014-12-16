@@ -581,7 +581,10 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             String type = JOptionPane.showInputDialog("New type name:");
             boolean add_result = false;
             TreeNodePO to_add;
-            if (type == null) {
+            if (type == null){
+                return;
+            }
+            if (type == "") {
                 to_add = new TreeNodePO(treeNodePO_in_nodepanel);
             } else {
                 to_add = new TreeNodePO(treeNodePO_in_nodepanel, type);
@@ -607,7 +610,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
                     tree_panel.revalidate();
                     set_tree_scrol_view(nodes.get(to_add).getLocation());
                 } else {
-                    JOptionPane.showMessageDialog(MainFrame.frame, "Fail to add for network");
+                    JOptionPane.showMessageDialog(MainFrame.frame, "Fail to add ");
                 }
             }
 

@@ -18,7 +18,6 @@ public class GTBLImpl implements GTBLservice{
 	}
 
 	public boolean add(TreeNodePO node) throws Exception {
-
 		treeNodePOs.add(node);
 		return true;
 	}

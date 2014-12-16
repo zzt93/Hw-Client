@@ -17,8 +17,9 @@ public class GoodsVO implements Serializable {
 		this.name = goodsPO.getName();
 		this.model = goodsPO.getModel();
 	}
-	public GoodsVO(String id, int amount) {
+	public GoodsVO(String id, String name, int amount) {
 		this.id = id;
+		this.name = name;
 		this.amount = amount;
 	}
 	
@@ -34,4 +35,6 @@ public class GoodsVO implements Serializable {
 	public String model;
 	public double inPrice;
 	public double outPrice;
+
+
 }

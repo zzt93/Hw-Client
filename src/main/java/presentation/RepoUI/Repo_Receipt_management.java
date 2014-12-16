@@ -630,8 +630,9 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
     private void compActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_compActionPerformed
         String res = " ";
         boolean vaild = true;
+        String[] infos = ((String) choose_id.getSelectedItem()).split(RepoReceiptBLImpl.check_type_id_name);
         try {
-            GoodsVO temp = new GoodsVO(((String) choose_id.getSelectedItem()).split(RepoReceiptBLImpl.check_type_id_name)[0],
+            GoodsVO temp = new GoodsVO(infos[0], infos[1],
                     Integer.parseInt(amount.getText()));
             res = repoReceiptBLImpl.produceRepoReceipt(temp);
         } catch (NumberFormatException numberFormatException) {
@@ -663,9 +664,9 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
             title.setText("Amount is right");
             c_amount.setText(amount.getText());
         } else {
-            String[] infos = res.split(" ");
-            title.setText(infos[0]);
-            c_amount.setText(infos[1]);
+            String[] info = res.split(" ");
+            title.setText(info[0]);
+            c_amount.setText(info[1]);
         }
         id.setText((String) choose_id.getSelectedItem());
         s_amount.setText(amount.getText());

@@ -61,7 +61,7 @@ public class TreeNodePO implements Serializable {
 		return sons.isEmpty();
 	}
 	public boolean type_editable() {
-		if (type_so_far.equals("Light/灯")){
+  		if (type_so_far.equals("Light/灯")){
 			return false;
 		}
 		return is_leaf()&&(goodsModels.isEmpty());

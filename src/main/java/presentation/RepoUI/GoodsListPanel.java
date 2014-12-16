@@ -189,17 +189,18 @@ public class GoodsListPanel extends javax.swing.JPanel {
 						int row = e.getFirstRow();
 						int column = e.getColumn();
 						TableModel model = (TableModel) e.getSource();
-						Integer data = (Integer) model.getValueAt(row, column);
-						String id = (String) model.getValueAt(row, 2);
-						GoodsVO temp = new GoodsVO(id, data);
+						Integer data = (Integer)model.getValueAt(row, 3);
+						String id = (String) model.getValueAt(row, 1);
+						String name = (String) model.getValueAt(row, 0);
+						GoodsVO temp = new GoodsVO(id, name, data);
 						System.out
 								.println("-----------------------------------------------");
-						if (column == 0 && data != null) {// name is vaild
+						if (column == 0 && data != null && !data.equals("")) {// name is vaild
 							try {
 								gl_controller.set_signal_name(temp);
 							} catch (Exception e1) {
 								JOptionPane.showMessageDialog(MainFrame.frame,
-										e + " : Fail to update information");
+										e1 + " : Fail to update information");
 								e1.printStackTrace();
 							}
 						} else if (column == 3 && data != null

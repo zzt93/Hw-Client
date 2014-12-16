@@ -28,6 +28,9 @@ public class RepoReceiptPO extends ReceiptPO implements Serializable {
 		
 	}	
 	
+	public String getOperator(){
+		return operator;
+	}
 	public String getDate() {
 		return time;
 	}
