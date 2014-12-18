@@ -17,7 +17,11 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import businesslogic.RepositoryCheckbl.RepoCheckBLImpl;
+import businesslogic.RepositoryCheckbl.RepoCheckDataImpl;
+import dataservice.RepositoryCheckdataservice.RepoCheckDataService;
 import po.GoodsModelPO;
+import util.RMIUtility;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
 import businesslogic.GoodsListbl.GL_controller;
@@ -652,7 +656,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
 				return canEdit[columnIndex];
 			}
 		});
-		set_detail_data(goodsModels);
+//		set_detail_data(goodsModels);
 
 		detailed_table.getTableHeader().setReorderingAllowed(false);
 		jScrollPane3.setViewportView(detailed_table);
@@ -1039,12 +1043,25 @@ public class GoodsListPanel extends javax.swing.JPanel {
 		DefaultTableModel detail_model = (DefaultTableModel) detailed_table
 				.getModel();
 		detail_model.setRowCount(0);
+		RepoCheckDataService repoCheckDataService = null;
+		try {
+			repoCheckDataService = (RepoCheckDataService) RMIUtility.getImpl(RepoCheckBLImpl.check);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 		for (String string : goods.keySet()) {
 			GoodsModelPO temp = goods.get(string);
-			Object[] row = new Object[] { temp.getName(), temp.getId(),
-					temp.getAmount(), temp.getSignal(), temp.getLastInPrice(),
-					temp.getLastOutPrice(), temp.getAver_in(),
-					temp.isEverHas(), temp.isGift(), };
+			Object[] row = new Object[0];
+			try {
+				row = new Object[] { temp.getName(), temp.getId(),
+                        temp.getAmount(), temp.getSignal(), temp.getLastInPrice(),
+                        temp.getLastOutPrice(), repoCheckDataService.getAver_in(temp.getId()).getObj(),
+                        temp.isEverHas(), temp.isGift(), };
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 			detail_model.addRow(row);
 		}
 	}

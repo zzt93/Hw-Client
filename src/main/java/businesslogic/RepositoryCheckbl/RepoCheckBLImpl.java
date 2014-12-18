@@ -19,7 +19,7 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 	RepoCheckDataService repoCheckDataService;
 
 
-	static String check = "repo check data service";
+	public static String check = "repo check data service";
 	public ArrayList<RepoPO> getCheckRes() throws RemoteException {
 		return repoCheckDataService.getRepo().getObj();
 	}

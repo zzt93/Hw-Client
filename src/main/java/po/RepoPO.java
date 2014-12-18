@@ -1,6 +1,7 @@
 package po;
 
 import java.io.Serializable;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class RepoPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	public RepoPO(GoodsListPO tem) throws RemoteException {
+	public RepoPO(GoodsListPO tem) throws RemoteException, NotBoundException {
 		count ++;
 		date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		batch = Math.abs(random.nextLong());

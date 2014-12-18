@@ -15,9 +15,9 @@ public class RepoExaminBLImplTest {
 	@Test
 	public void test() {
 		try {
-			assert(repoExamin.countInOut("", "")==null);
+			assert(repoExamin.countInOut("2014-12-2", "2014-12-16")==null);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

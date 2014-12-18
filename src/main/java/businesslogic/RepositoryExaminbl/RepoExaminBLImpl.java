@@ -40,9 +40,7 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		SaleUtility sale = new SaleUtilityImpl();
 
 		ReceiptConditionVO in_conditionVO = new ReceiptConditionVO(start, end, ReceiptType.STOCK_ACCEPT, null, null, null);
-		SaleConditionVO saleConditionVO = new SaleConditionVO();
-		saleConditionVO.startTime = start;
-		saleConditionVO.endTime = end;
+		SaleConditionVO saleConditionVO = new SaleConditionVO(start, end, "", null, null, null);
 
 
 		//get the all in

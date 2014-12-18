@@ -784,6 +784,7 @@ public class MainFrame extends javax.swing.JFrame {
 		} else {
 			JOptionPane.showMessageDialog(MainFrame.frame,
 					"You haven't check the repo, you should check first");
+			return;
 		}
 
 		JFileChooser exporter = new JFileChooser();

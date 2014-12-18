@@ -12,6 +12,7 @@ import po.RepoPO;
 import vo.GoodsVO;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +53,8 @@ public class Exporter_test {
 		try {
 			test = new RepoPO(tem);
 		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
 			e.printStackTrace();
 		}
 		try {
