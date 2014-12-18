@@ -58,6 +58,7 @@ public class StockReceiptPane {
 	public StockReceiptPane(Approve_List_BLservice approveBL,StockReceiptPO receipt){
 		this.approveBL=approveBL;
 		this.receipt=receipt;
+		initialize();
 		set(receipt);
 		approve();
 		visit(true);
@@ -243,7 +244,6 @@ public class StockReceiptPane {
 				temp.add(receipt);
 				try {
 					approveBL.passList(temp);
-					approveBL.upload();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();

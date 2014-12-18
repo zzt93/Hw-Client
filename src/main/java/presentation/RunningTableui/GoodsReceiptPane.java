@@ -55,6 +55,7 @@ public class GoodsReceiptPane {
 	public GoodsReceiptPane(Approve_List_BLservice approveBL,GoodsReceiptPO receipt){
 		this.approveBL=approveBL;
 		this.receipt=receipt;
+		initialize();
 		set(receipt);
 		approve();
 		visit(true);
@@ -205,7 +206,6 @@ public class GoodsReceiptPane {
 				temp.add(receipt);
 				try {
 					approveBL.passList(temp);
-					approveBL.upload();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();

@@ -107,7 +107,7 @@ public class Approve_List implements Approve_List_BLservice{
 		ArrayList<SaleReceiptPO> sale = new ArrayList<SaleReceiptPO>();
 		ArrayList<StockReceiptPO> stock = new ArrayList<StockReceiptPO>();
 		ArrayList<CashPO> cash = new ArrayList<CashPO>();
-		ArrayList<PayPO> pay = new ArrayList<PayPO>();
+//		ArrayList<PayPO> pay = new ArrayList<PayPO>();
 		ArrayList<RecPO> rec = new ArrayList<RecPO>();//Receive);
 		
 		
@@ -122,10 +122,9 @@ public class Approve_List implements Approve_List_BLservice{
 				sale.add((SaleReceiptPO)po);
 				break;
 			case RECEIVE: 
-				rec.add((RecPO)po);
-				break;
+				//收款单和付款单统一都是RecPO类型，只有type属性不一样
 			case PAYMENT: 
-				pay.add((PayPO)po);
+				rec.add((RecPO)po);
 				break;
 			case CASH:
 				cash.add((CashPO)po);
