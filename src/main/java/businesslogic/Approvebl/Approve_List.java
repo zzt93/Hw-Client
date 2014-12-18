@@ -99,7 +99,7 @@ public class Approve_List implements Approve_List_BLservice{
 		return true;
 	}
 
-	@Override
+	
 	public ArrayList<ReceiptPO> upload() throws Exception {
 		// TODO Auto-generated method stub 这个借口不用了。。
 		ArrayList<GoodsReceiptPO> goods = new ArrayList<GoodsReceiptPO>();
@@ -155,6 +155,7 @@ public class Approve_List implements Approve_List_BLservice{
 	 * Interface Changed
 	 * @param po
 	 */
+	@Override
 	public void upload(ArrayList<ReceiptPO> po){
 		ads.uploadReceipt(po);
 	}
