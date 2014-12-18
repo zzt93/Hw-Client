@@ -8,9 +8,9 @@ import javax.swing.table.TableModel;
 
 import businesslogic.Adminbl.Adminbl;
 import businesslogic.Approvebl.Approve_List;
-import businesslogic.Approvebl.Approve_Mock;
 import businesslogicservice.Adminblservice.AdminBLService;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
+import presentation.RunningTableui.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -156,7 +156,7 @@ public class ApproveUI {
 				}
 			}
 		});
-		buttonApproveAll.setBounds(572, 124, 93, 23);
+		buttonApproveAll.setBounds(572, 111, 93, 23);
 		totalPanel.add(buttonApproveAll);
 
 		JButton buttonScreen = new JButton("筛选");
@@ -166,7 +166,7 @@ public class ApproveUI {
 				refreshTable();
 			}
 		});
-		buttonScreen.setBounds(572, 192, 93, 23);
+		buttonScreen.setBounds(572, 211, 93, 23);
 		totalPanel.add(buttonScreen);
 
 		JButton buttonReturn = new JButton("返回");
@@ -217,6 +217,37 @@ public class ApproveUI {
 		});
 		buttonUpload.setBounds(572, 60, 93, 23);
 		totalPanel.add(buttonUpload);
+		
+		JButton buttonDetail = new JButton("详细信息");
+		buttonDetail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReceiptPO po = listOfReceipts.get(table.getSelectedRow());
+				switch(po.type){
+				case STOCK_ACCEPT:
+		    		
+		    	case STOCK_REJECTION:
+		    		
+		    	case SALE_ACCEPT:
+		    		
+		    	case SALE_REJECTION:
+		    		
+		    	case RECEIVE:
+		    		
+		    	case PAYMENT:
+		    		
+		    	case CASH:
+		    		new CashReceiptPane(null,(CashPO)po).approve();
+		    	case REPORECEIPT:
+		    		
+		    	case GOODSRECEIPT:
+		    		
+		    	case SIGNAL:
+		    		
+				}
+			}
+		});
+		buttonDetail.setBounds(572, 162, 93, 23);
+		totalPanel.add(buttonDetail);
 
 	}
 

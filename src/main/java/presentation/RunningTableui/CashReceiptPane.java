@@ -253,4 +253,17 @@ public class CashReceiptPane {
 			
 		});
 	}
+	public void approve(){
+		set(receipt);
+		JButton button = new JButton("修改");
+		button.setBounds(219, 493, 60, 23);
+		panel.add(button);
+		
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+			
+		});
+	}
 }

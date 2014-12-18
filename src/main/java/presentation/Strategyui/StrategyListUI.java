@@ -21,6 +21,8 @@ public class StrategyListUI {
 	Strategy_List_BLservice strategyList;
 	String[][] cellData;
 	ArrayList<StrategyPO> arrStrategy;
+	JTable table;
+	TableModel tm;
 
 	/**
 	 * Launch the application.
@@ -99,12 +101,11 @@ public class StrategyListUI {
 		subpanel.setLayout(null);
 		
 		
-		String[] name = {"满足条件","优惠方式","起止时间"};
+		final String[] name = {"满足条件","优惠方式","起止时间"};
 		
 		cellData = new String[arrStrategy.size()][3];
-		refreshTable();
-		TableModel tm = new MyTableModel(cellData,name); 	
-		JTable table = new JTable(tm);
+		refreshTable(name);
+
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 20, 532, 408);
@@ -121,7 +122,6 @@ public class StrategyListUI {
 				try {
 					arrStrategy = strategyList.show();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, "未能获取到单据");
 					e1.printStackTrace();
 				}
@@ -148,13 +148,15 @@ public class StrategyListUI {
 		
 	}
 	
-	void refreshTable() {
+	void refreshTable(String name[]) {
 		cellData = new String[arrStrategy.size()][3];
 		int i = 0;
 		for (StrategyPO po : arrStrategy) {
 			insert(cellData[i], po);
 			i++;
 		}
+		tm = new MyTableModel(cellData,name); 	
+		table = new JTable(tm);
 	}
 	void insert(String[] item,StrategyPO po){
 		item[0]=po.getCondition().toString();
@@ -162,9 +164,7 @@ public class StrategyListUI {
 		item[2]=po.getTimePeriod().toString();
 	}
 	public static class MyTableModel extends DefaultTableModel{
-		/**
-		 * 
-		 */
+
 		private static final long serialVersionUID = 1L;
 		
 		public MyTableModel(Object[][] data, Object[] columnNames) {

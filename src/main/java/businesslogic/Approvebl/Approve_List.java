@@ -7,6 +7,7 @@ import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
 import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
+import businesslogicservice.RepoReceiptblservice.RepoReceBLservice;
 import businesslogicservice.Saleblservice.SaleUtility;
 import businesslogicservice.Stockblservice.StockUtility;
 import dataservice.ApproveDataService.ApproveDataService;
@@ -57,12 +58,11 @@ public class Approve_List implements Approve_List_BLservice{
 		addOneByOne(verStock);
 		//</yus>
 		//<zzt>
-//		RepoReceiptDataService repository = new RepoReceiptDataImpl();
-//		//FIXME
-//		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts(new ReceiptConditionVO()).getObj();
-//		receipts.addAll(arrRepo);
-//		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts(new ReceiptConditionVO()).getObj();
-//		receipts.addAll(arrGoods);
+		RepoReceiptBLImpl respository = new RepoReceiptBLImpl();
+		List<RepoReceiptPO> verRepo = respository.repoReceiptPOs();
+		List<GoodsReceiptPO> verGoods = respository.goodsReceiptPOs();
+		addOneByOne(verRepo);
+		addOneByOne(verGoods);
 		//</zzt>
 		
 		//<gda>
