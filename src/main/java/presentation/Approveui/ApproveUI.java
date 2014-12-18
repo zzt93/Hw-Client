@@ -151,7 +151,7 @@ public class ApproveUI {
 				//FIXME 接口关键部分
 				try {
 					approveBL.passList(approveIndex);
-					approveBL.upload();
+					approveBL.upload(approveIndex);
 					listOfReceipts = approveBL.showList();
 					labelHint.setText("上传成功！");
 				} catch (Exception e1) {

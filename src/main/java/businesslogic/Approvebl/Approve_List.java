@@ -156,8 +156,14 @@ public class Approve_List implements Approve_List_BLservice{
 	 * @param po
 	 */
 	@Override
-	public void upload(){
-		ads.uploadReceipt(receipts);
+	public void upload(ArrayList<ReceiptPO> po){
+		ads.uploadReceipt(po);
+		try {
+			showList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public String message(String userName) throws Exception {
