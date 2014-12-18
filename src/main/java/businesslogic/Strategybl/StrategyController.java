@@ -65,15 +65,17 @@ public class StrategyController implements Strategy_New_BLservice,Strategy_List_
 		// TODO Auto-generated method stub
 		return sb.show();
 	}
-	@Override
-	public ArrayList<StrategyPO> queryValidStrategy(String fliters) {
-		// TODO Auto-generated method stub
-		return sb.queryValidStrategy(fliters);
-	}
+
 	@Override
 	public SaleReceiptPO setTreatment(StrategyPO spo, SaleReceiptPO po)
 			throws Exception {
 		// TODO Auto-generated method stub
 		return sb.setTreatment(spo, po);
+	}
+	@Override
+	public ArrayList<StrategyPO> queryValidStrategy(SaleReceiptPO po)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return sb.queryValidStrategy(po);
 	}
 }

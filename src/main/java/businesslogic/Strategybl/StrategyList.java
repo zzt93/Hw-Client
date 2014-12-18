@@ -40,35 +40,28 @@ public class StrategyList implements Strategy_List_BLservice {
 		return this.list;
 	}
 
-	public void addStrategy(StrategyPO s) {
-		// s.setCondition(new Condition());
-		// s.setTimePeriod(new TimePeriod());
-		// s.setTreatment(new Treatment());
+	public void addStrategy(StrategyPO s) throws RemoteException {
 		list.add(s);
 		show();
 	}
 
-	public ArrayList<StrategyPO> queryValidStrategy(String strategyFliter) {
-		return null;
-	}
+//	public ArrayList<StrategyPO> queryValidStrategy(String strategyFliter) {
+//		return null;
+//	}
 
-	public ArrayList<StrategyPO> show() {
+	public ArrayList<StrategyPO> show() throws RemoteException {
 		refresh();
 		return this.list;
 	}
 
 	@SuppressWarnings("unchecked")
-	public void refresh() {
-		try {
-			if (sds.show().getErrMessage() == null) {
-				list = (ArrayList<StrategyPO>) sds.show().getObj();
-			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void refresh() throws RemoteException {
 
+		if (sds.show().getErrMessage() == null) {
+			list = (ArrayList<StrategyPO>) sds.show().getObj();
 		}
 	}
+
 
 	public ArrayList<StrategyPO> queryValidStrategy(SaleReceiptPO po) throws Exception {
 		ClientUtilityImpl cu = new ClientUtilityImpl();
@@ -125,12 +118,10 @@ public class StrategyList implements Strategy_List_BLservice {
 					.valueOf(spo.getTreatment().getCoupon()));
 		}
 		if (spo.getTreatment().type == CatOfTreatment.GIVE) {
-			
-			
+						
 			po.setComment("有礼品赠送哦亲~^0^");
-			GL_manager_BLservice gmb = new  GL_manager_repo_Impl();
 			RepoReceiptBLImpl ri = new RepoReceiptBLImpl();
-			
+			//FIXME 赠品还没有实现
 			
 			
 		}
