@@ -224,25 +224,28 @@ public class ApproveUI {
 				ReceiptPO po = listOfReceipts.get(table.getSelectedRow());
 				switch(po.type){
 				case STOCK_ACCEPT:
-		    		
 		    	case STOCK_REJECTION:
-		    		
+		    		new StockReceiptPane(approveBL,(StockReceiptPO)po);
+		    		break;
 		    	case SALE_ACCEPT:
-		    		
 		    	case SALE_REJECTION:
-		    		
+		    		new SaleReceiptPane(approveBL,(SaleReceiptPO)po);
+		    		break;
 		    	case RECEIVE:
-		    		
 		    	case PAYMENT:
-		    		
+		    		new PayReceiptPane(approveBL,(RecPO)po);
+		    		break;
 		    	case CASH:
-		    		new CashReceiptPane(null,(CashPO)po).approve();
+		    		new CashReceiptPane(approveBL,(CashPO)po);
+		    		break;
 		    	case REPORECEIPT:
-		    		
+		    		new RepoReceiptPane(approveBL,(RepoReceiptPO)po);
+		    		break;
 		    	case GOODSRECEIPT:
-		    		
+		    		new GoodsReceiptPane(approveBL,(GoodsReceiptPO)po);
+		    		break;
 		    	case SIGNAL:
-		    		
+		    		//不可审批
 				}
 			}
 		});

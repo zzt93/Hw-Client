@@ -1,13 +1,20 @@
 package presentation.RunningTableui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import businesslogicservice.Approveblservice.Approve_List_BLservice;
+import po.CashPO;
+import po.ReceiptPO;
 import po.ReceiptState;
 import po.ReceiptType;
 import po.RepoReceiptPO;
@@ -24,17 +31,26 @@ public class RepoReceiptPane {
 	private JTextField textReport;
 	private JTextField textStatisticNum;
 	private JButton btnCancel;
-
+	private JPanel panel;
+	
+	private Approve_List_BLservice approveBL;
 	private RepoReceiptPO receipt;
 	public RepoReceiptPane(){
 		initialize();
+	}
+	public RepoReceiptPane(Approve_List_BLservice approveBL,RepoReceiptPO receipt){
+		this.approveBL=approveBL;
+		this.receipt=receipt;
+		set(receipt);
+		approve();
+		visit(true);
 	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
@@ -150,6 +166,27 @@ public class RepoReceiptPane {
 		textState.setText(ReceiptState.getName(receipt.statement));
 		textReport.setText(String.valueOf(actualNum-statisticNum));
 		textStatisticNum.setText(String.valueOf(statisticNum));
+	}
+	public void approve(){
+		JButton button = new JButton("审批");
+		button.setBounds(234, 201, 60, 23);
+		panel.add(button);
+		
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<ReceiptPO> temp=new ArrayList<ReceiptPO>();
+				temp.add(receipt);
+				try {
+					approveBL.passList(temp);
+					approveBL.upload();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+	
 	}
 	public void visit(boolean temp){
 		frame.setVisible(temp);

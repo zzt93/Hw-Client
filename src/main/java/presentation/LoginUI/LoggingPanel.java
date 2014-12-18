@@ -55,38 +55,29 @@ public class LoggingPanel extends JPanel {
 		userList=null;
 		try {
 			userList=adminController.show();
-//			final HashMap<String, char[]> databaseMap = new HashMap<String, char[]>();
-////			databaseMap.put("accountant", new char[] { '1' });
-////			databaseMap.put("salesman", new char[] { '2' });
-////			databaseMap.put("keeper", new char[] { '3' });
-//			UserPO temp;
-//			for(int i=0;i<userList.size();i++){
-//				temp=userList.get(i);
-//				databaseMap.put(temp.getName(), temp.getPassword().toCharArray());
-//			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		UserPO admin=null;
+		if(userList.size()==0){
+			admin=new UserPO(0,"admin","123456","总经理");
+			userList.add(admin);
+			try {
+				adminController.confirm(admin);
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "自动创建管理员账户失败");
+				e1.printStackTrace();
+			}
+			
+		}
+		
 		final HashMap<String, char[]> databaseMap = new HashMap<String, char[]>();
-//		databaseMap.put("accountant", new char[] { '1' });
-//		databaseMap.put("salesman", new char[] { '2' });
-//		databaseMap.put("keeper", new char[] { '3' });
 		UserPO temp;
 		for(int i=0;i<userList.size();i++){
 			temp=userList.get(i);
 			databaseMap.put(temp.getName(), temp.getPassword().toCharArray());
-		}
-//		final HashMap<String, char[]> databaseMap = new HashMap<String, char[]>();
-//		databaseMap.put("accountant", new char[] { '1' });
-//		databaseMap.put("salesman", new char[] { '2' });
-//		databaseMap.put("keeper", new char[] { '3' });
-//		UserPO temp;
-//		for(int i=0;i<userList.size();i++){
-//			temp=userList.get(i);
-//			databaseMap.put(temp.getName(), temp.getPassword().toCharArray());
-//		}
-//					
+		}			
 		passwordField.addActionListener(new ActionListener() {
 		
 		public void actionPerformed(ActionEvent e) {

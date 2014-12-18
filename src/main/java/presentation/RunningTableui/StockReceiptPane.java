@@ -2,6 +2,7 @@ package presentation.RunningTableui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -14,7 +15,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import businesslogic.RunningTablebl.RunTableController;
+import businesslogicservice.Approveblservice.Approve_List_BLservice;
+import po.CashPO;
 import po.ProductsReceipt;
+import po.ReceiptPO;
 import po.ReceiptState;
 import po.ReceiptType;
 import po.SaleReceiptPO;
@@ -40,7 +44,7 @@ public class StockReceiptPane {
 	private PublicTableModel tableModel;
 	private StockReceiptPO receipt;
 	private RunTableController controller;
-	
+	private Approve_List_BLservice approveBL;
 	public StockReceiptPane(){
 		initialize();
 	}
@@ -49,6 +53,13 @@ public class StockReceiptPane {
 		this.controller=controller;
 		this.receipt=receipt;
 		credit();
+		visit(true);
+	}
+	public StockReceiptPane(Approve_List_BLservice approveBL,StockReceiptPO receipt){
+		this.approveBL=approveBL;
+		this.receipt=receipt;
+		set(receipt);
+		approve();
 		visit(true);
 	}
 	private void initialize(){
@@ -220,5 +231,26 @@ public class StockReceiptPane {
 			}
 			
 		});
+	}
+	public void approve(){
+		JButton button = new JButton("审批");
+		button.setBounds(439, 491, 60, 23);
+		panel.add(button);
+		
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<ReceiptPO> temp=new ArrayList<ReceiptPO>();
+				temp.add(receipt);
+				try {
+					approveBL.passList(temp);
+					approveBL.upload();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+	
 	}
 }

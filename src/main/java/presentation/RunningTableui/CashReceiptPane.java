@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -18,9 +19,11 @@ import javax.swing.JTextField;
 
 import businesslogic.FinancialReceiptbl.FinReceiptController;
 import businesslogic.RunningTablebl.RunTableController;
+import businesslogicservice.Approveblservice.Approve_List_BLservice;
 import po.CashPO;
 import po.DealState;
 import po.ItemPO;
+import po.ReceiptPO;
 import po.ReceiptState;
 import po.ReceiptType;
 import presentation.mainui.ModelType;
@@ -46,7 +49,7 @@ public class CashReceiptPane {
 	private PublicTableModel receiptModel;
 	private int currentRow;
 	private FinReceiptController finController;
-	
+	private Approve_List_BLservice approveBL;
 	public CashReceiptPane(){
 		initialize();
 	}
@@ -66,6 +69,13 @@ public class CashReceiptPane {
 		this.receipt=receipt;
 		this.controller=controller;
 		credit();
+		visit(true);
+	}
+	public CashReceiptPane(Approve_List_BLservice approveBL,CashPO receipt){
+		this.approveBL=approveBL;
+		this.receipt=receipt;
+		set(receipt);
+		approve();
 		visit(true);
 	}
 	
@@ -254,16 +264,24 @@ public class CashReceiptPane {
 		});
 	}
 	public void approve(){
-		set(receipt);
-		JButton button = new JButton("修改");
+		JButton button = new JButton("审批");
 		button.setBounds(219, 493, 60, 23);
 		panel.add(button);
 		
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
+				ArrayList<ReceiptPO> temp=new ArrayList<ReceiptPO>();
+				temp.add(receipt);
+				try {
+					approveBL.passList(temp);
+					approveBL.upload();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
 			}
 			
 		});
+	
 	}
 }
