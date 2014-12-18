@@ -69,10 +69,12 @@ public class Approve_Mock implements Approve_Detail_BLservice, Approve_List_BLse
     }
 
 	@Override
-	public void upload() throws Exception {
+	public void upload(ArrayList<ReceiptPO> po) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 
 
