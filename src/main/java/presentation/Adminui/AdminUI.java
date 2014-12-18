@@ -25,6 +25,9 @@ public class AdminUI {
 	private AdminBLService am;
 	static ArrayList<UserPO> users = null;
 	private String[][] data;
+	TableModel tm;
+	JScrollPane scrollPane;
+	String head[];
 
 	/**
 	 * Launch the application.
@@ -77,14 +80,14 @@ public class AdminUI {
 			e.printStackTrace();
 		}
 
-		String head[] = new String[] { "id", "name", "role" };
+		head = new String[] { "id", "name", "role" };
 		refreshTable();
-		TableModel tm = new MyTableModel(data, head);
+		tm = new MyTableModel(data, head);
 
 		table = new JTable(tm);
 		table.setBounds(25, 79, 426, 266);
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(35, 95, 499, 354);
 		panel.add(scrollPane);
 
@@ -184,6 +187,9 @@ public class AdminUI {
 			insert(data[i], po);
 			i++;
 		}
+		tm = new DefaultTableModel(data,head);
+		table.setModel(tm);
+		scrollPane.setViewportView(table);
 	}
 	private void insert(String[] strings, UserPO po) {
 		strings[0] = String.valueOf(po.getId());

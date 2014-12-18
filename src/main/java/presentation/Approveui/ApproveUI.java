@@ -11,6 +11,7 @@ import businesslogic.Approvebl.Approve_List;
 import businesslogicservice.Adminblservice.AdminBLService;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
 import presentation.RunningTableui.*;
+import presentation.Strategyui.StrategyListUI.MyTableModel;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,7 +32,9 @@ public class ApproveUI {
 	private ArrayList<ReceiptPO> listOfReceipts;
 	private String[][] cellData;
 	private AdminBLService ad;
-
+	String[] name = { "编号", "种类", "时间", "审批状态" };
+	TableModel tm;
+	JScrollPane scrollPane;
 	/**
 	 * Launch the application.
 	 */
@@ -79,13 +82,13 @@ public class ApproveUI {
 		labelHint.setBounds(39, 473, 211, 15);
 		totalPanel.add(labelHint);
 
-		final String[] name = { "编号", "种类", "时间", "审批状态" };
+		
 
 		// TODO 就是想搞你一下的存根;
 		// refreshTableDebug();
-		refreshTable();
+		refreshTable(name);
 
-		TableModel tm = new DefaultTableModel(cellData, name);
+		tm = new DefaultTableModel(cellData, name);
 
 		table = new JTable(tm);
 		
@@ -98,7 +101,7 @@ public class ApproveUI {
 				approveBL.order(name[pick]);
 			}
 		});
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 
 		scrollPane.setBounds(10, 10, 507, 249);
 		scrollPane.setViewportView(table);
@@ -111,7 +114,7 @@ public class ApproveUI {
 				for (int i : approves) {
 					if(listOfReceipts.get(i).statement == ReceiptState.wait){
 						listOfReceipts.get(i).statement = ReceiptState.approve;
-						refreshTable();
+						refreshTable(name);
 						listOfReceipts.get(i).statement = ReceiptState.wait;
 						approveIndex.add(listOfReceipts.get(i));
 
@@ -127,7 +130,7 @@ public class ApproveUI {
 		buttonScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listOfReceipts = approveBL.screen(null);
-				refreshTable();
+				refreshTable(name);
 			}
 		});
 		buttonScreen.setBounds(572, 211, 93, 23);
@@ -207,13 +210,16 @@ public class ApproveUI {
 
 	}
 
-	void refreshTable() {
+	void refreshTable(String[] name) {
 		cellData = new String[listOfReceipts.size()][4];
 		int i = 0;
 		for (ReceiptPO po : listOfReceipts) {
 			insert(cellData[i], po);
 			i++;
 		}
+		tm = new MyTableModel(cellData, name);
+		table.setModel(tm);
+		scrollPane.setViewportView(table);
 	}
 
 	void refreshTableDebug() {
