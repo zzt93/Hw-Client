@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,13 +34,13 @@ public class RepoReceiptPane {
 	private JButton btnCancel;
 	private JPanel panel;
 	
-	private Approve_List_BLservice approveBL;
+	private List<ReceiptPO> approveList;
 	private RepoReceiptPO receipt;
 	public RepoReceiptPane(){
 		initialize();
 	}
-	public RepoReceiptPane(Approve_List_BLservice approveBL,RepoReceiptPO receipt){
-		this.approveBL=approveBL;
+	public RepoReceiptPane(List<ReceiptPO> approveList,RepoReceiptPO receipt){
+		this.approveList=approveList;
 		this.receipt=receipt;
 		initialize();
 		set(receipt);
@@ -175,10 +176,10 @@ public class RepoReceiptPane {
 		
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<ReceiptPO> temp=new ArrayList<ReceiptPO>();
-				temp.add(receipt);
 				try {
-					approveBL.passList(temp);
+					receipt.statement=ReceiptState.approve;
+					approveList.add(receipt);
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();

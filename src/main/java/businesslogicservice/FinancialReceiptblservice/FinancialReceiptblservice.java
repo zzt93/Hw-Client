@@ -18,9 +18,7 @@ public interface FinancialReceiptblservice {
 	public void clearItem();
 	public double addBank(BkTransPO po);
 	public double addItem(ItemPO po);
-	public double deleteBank(BkTransPO po);
 	public double deleteBank(int i);
-	public double deleteItem(ItemPO po);
 	public double deleteItem(int i);
 	public String[] getBank() throws Exception;
 	public String[] getClient() throws Exception;
