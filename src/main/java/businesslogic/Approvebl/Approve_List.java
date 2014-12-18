@@ -100,7 +100,7 @@ public class Approve_List implements Approve_List_BLservice{
 	}
 
 	
-	public ArrayList<ReceiptPO> upload() throws Exception {
+	public ArrayList<ReceiptPO> uploadAbandoned() throws Exception {
 		// TODO Auto-generated method stub 这个借口不用了。。
 		ArrayList<GoodsReceiptPO> goods = new ArrayList<GoodsReceiptPO>();
 		ArrayList<RepoReceiptPO> repo = new ArrayList<RepoReceiptPO>();
@@ -156,8 +156,8 @@ public class Approve_List implements Approve_List_BLservice{
 	 * @param po
 	 */
 	@Override
-	public void upload(ArrayList<ReceiptPO> po){
-		ads.uploadReceipt(po);
+	public void upload(){
+		ads.uploadReceipt(receipts);
 	}
 	@Override
 	public String message(String userName) throws Exception {

@@ -45,11 +45,6 @@ public class Approve_Mock implements Approve_Detail_BLservice, Approve_List_BLse
 
     }
 
-    public ArrayList<ReceiptPO> upload() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     public String message(String userName) {
         // TODO Auto-generated method stub
         return null;
@@ -72,5 +67,13 @@ public class Approve_Mock implements Approve_Detail_BLservice, Approve_List_BLse
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public void upload() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

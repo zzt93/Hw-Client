@@ -81,20 +81,6 @@ public class ApproveUI {
 
 		final String[] name = { "编号", "种类", "时间", "审批状态" };
 
-		/**
-		 * Details
-		 */
-		final JScrollPane detailScrollPane = new JScrollPane();
-		detailScrollPane.setBounds(108, 322, 557, 81);
-		totalPanel.add(detailScrollPane);
-
-		TableModel detailTableModel = new DefaultTableModel(new String[1][2],
-				new String[] { "项目", "值" });
-		final JTable detailTable = new JTable(detailTableModel);
-		detailTable.setRowHeight(100);
-		detailTable.setBounds(107, 322, 325, 93);
-		detailScrollPane.setViewportView(detailTable);
-
 		// TODO 就是想搞你一下的存根;
 		// refreshTableDebug();
 		refreshTable();
@@ -102,15 +88,6 @@ public class ApproveUI {
 		TableModel tm = new DefaultTableModel(cellData, name);
 
 		table = new JTable(tm);
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int selectedRow = table.getSelectedRow();
-				analysis(detailTable, listOfReceipts.get(selectedRow),
-						detailScrollPane);
-
-			}
-		});
 		
 		
 		table.setBounds(10, 10, 507, 249);
@@ -126,19 +103,6 @@ public class ApproveUI {
 		scrollPane.setBounds(10, 10, 507, 249);
 		scrollPane.setViewportView(table);
 		totalPanel.add(scrollPane);
-
-		JLabel label = new JLabel("单据详细信息");
-		label.setBounds(20, 327, 92, 15);
-		totalPanel.add(label);
-
-		JButton buttonConfirm = new JButton("确认修改");
-		buttonConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
-		buttonConfirm.setBounds(290, 425, 93, 23);
-		totalPanel.add(buttonConfirm);
 
 		JButton buttonApproveAll = new JButton("批量通过");
 		buttonApproveAll.addActionListener(new ActionListener() {
@@ -177,25 +141,6 @@ public class ApproveUI {
 		});
 		buttonReturn.setBounds(572, 256, 93, 23);
 		totalPanel.add(buttonReturn);
-
-		JButton buttonApproveSingle = new JButton("通过");
-		buttonApproveSingle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int selectedRow = table.getSelectedRow();
-				if (listOfReceipts.get(selectedRow).statement == ReceiptState.approve) {
-					labelHint.setText("这是已经通过了的单据");
-				} else {
-					listOfReceipts.get(selectedRow).statement = ReceiptState.approve;
-					refreshTable();
-					listOfReceipts.get(selectedRow).statement = ReceiptState.wait;
-					approveIndex.add(listOfReceipts.get(selectedRow));
-					labelHint.setText("已审批为通过");
-				}
-
-			}
-		});
-		buttonApproveSingle.setBounds(136, 425, 93, 23);
-		totalPanel.add(buttonApproveSingle);
 
 		JButton buttonUpload = new JButton("上传");
 		buttonUpload.addActionListener(new ActionListener() {
@@ -259,101 +204,6 @@ public class ApproveUI {
 		item[1] = po.type.toString();
 		item[2] = po.time;
 		item[3] = po.statement.toString();
-
-	}
-
-	void analysis(JTable detailTable, ReceiptPO po, JScrollPane detailsp) {
-		DefaultTableModel tm;
-		switch (po.type) {
-		case CASH:
-			CashPO cPO = (CashPO) po;
-			String[] headers1 = new String[] { "type", "number", "time",
-					"operator", "total", "ItemList", "State" };
-			tm = new DefaultTableModel(headers1, 1);
-			detailTable.setModel(tm);
-			tm.addRow(new String[] { cPO.type.toString(), cPO.number, cPO.time,
-					cPO.operator, Double.toString(cPO.total),
-					cPO.itemList.toString(), cPO.statement.toString() });
-			break;
-		case GOODSRECEIPT:
-			GoodsReceiptPO gpo = (GoodsReceiptPO) po;
-			String[] headers2 = new String[] { "type", "number", "time",
-					"goodsPOs", "sumOfGifts", "State" };
-			tm = new DefaultTableModel(headers2, 1);
-			detailTable.setModel(tm);
-			tm.addRow(new String[] { gpo.type.toString(), gpo.number, gpo.time,
-					gpo.getGoods().toString(),
-					Double.toString(gpo.getSumOfGifts()),
-					gpo.statement.toString() });
-			break;
-		case PAYMENT:
-			PayPO ppo = (PayPO) po;
-			String[] header3 = new String[] { "type", "number", "time",
-					"client", "operator", "bankList", "total", "State" };
-			tm = new DefaultTableModel(header3, 1);
-			detailTable.setModel(tm);
-			tm.addRow(new String[] { ppo.time.toString(), ppo.number, ppo.time,
-					ppo.getClient(), ppo.getOperator(),
-					ppo.getBankList().toString(),
-					Double.toString(ppo.getTotal()), ppo.statement.toString() });
-			break;
-		case RECEIVE:
-			RecPO rpo = (RecPO) po;
-			String[] header4 = new String[] { "type", "number", "time",
-					"client", "operator", "bankList", "total", "State" };
-			tm = new DefaultTableModel(header4, 1);
-			detailTable.setModel(tm);
-			tm.addRow(new String[] { rpo.time.toString(), rpo.number, rpo.time,
-					rpo.getClient(), rpo.getOperator(),
-					rpo.getBankList().toString(),
-					Double.toString(rpo.getTotal()), rpo.statement.toString() });
-			break;
-		case REPORECEIPT:
-			RepoReceiptPO rrpo = (RepoReceiptPO) po;
-			String[] header5 = new String[] { "type", "number", "time",
-					"actualNum", "statisticNum", "date", "id", "State" };
-			tm = new DefaultTableModel(header5, 1);
-			tm.addRow(new String[] { rrpo.time.toString(), rrpo.number,
-					rrpo.time, Integer.toString(rrpo.getaNum()),
-					Integer.toString(rrpo.getcNum()), null, rrpo.getReceipt_id(),
-					rrpo.statement.toString() });
-			break;
-		case SALE_ACCEPT:
-		case SALE_REJECTION:
-			SaleReceiptPO srpo = (SaleReceiptPO) po;
-			String[] header6 = new String[] { "type", "number", "time",
-					"cliendID", "salesman", "operator", "respository",
-					"productList", "totalValue", "allowance", "coupon",
-					"actualValue", "comment" };
-			tm = new DefaultTableModel(header6, 1);
-			tm.addRow(new String[] { srpo.time.toString(), srpo.number,
-					srpo.time, Integer.toString(srpo.getClientId()),
-					srpo.getSalesman(), srpo.getOperator().toString(),
-					srpo.getRepository(), srpo.getProductList().toString(),
-					srpo.getTotalValue().toString(),
-					srpo.getActualValue().toString(),
-					srpo.getAllowance().toString(),
-					srpo.getCoupon().toString(),
-					srpo.getActualValue().toString(), srpo.getComment() });
-			break;
-		case STOCK_ACCEPT:
-		case STOCK_REJECTION:
-			StockReceiptPO stock = (StockReceiptPO) po;
-			String header7[] = new String[] { "type", "number", "time",
-					"cliendID", "operator", "respository", "productList",
-					"comment", "totalValue" };
-			tm = new DefaultTableModel(header7, 1);
-			tm.addRow(new String[] { stock.time.toString(), stock.number,
-					stock.time, Integer.toString(stock.getSupplier()),
-					stock.getOperator().toString(), stock.getRepository(),
-					stock.getProductList().toString(), stock.getComment(),
-					stock.getTotalValue().toString() });
-
-			break;
-		default:
-			break;
-
-		}
 
 	}
 
