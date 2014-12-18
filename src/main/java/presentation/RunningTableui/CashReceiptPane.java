@@ -3,6 +3,8 @@ package presentation.RunningTableui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import businesslogic.FinancialReceiptbl.FinReceiptController;
 import businesslogic.RunningTablebl.RunTableController;
 import po.CashPO;
 import po.DealState;
@@ -33,16 +36,31 @@ public class CashReceiptPane {
 	private JTextField textOperator;
 	private JTextField textBank;
 	private JTextField textState;
+	private JTextField textDeal;
 	private JButton btnCancel;
 	private JLabel labelTotal;
 	
 	private PublicTableModel tableModel;
 	private CashPO receipt;
 	private RunTableController controller;
+	private PublicTableModel receiptModel;
+	private int currentRow;
+	private FinReceiptController finController;
 	
 	public CashReceiptPane(){
 		initialize();
 	}
+	public CashReceiptPane(int row,PublicTableModel model){
+		this();
+		currentRow=row;
+		receiptModel=model;
+		try {
+			finController=new FinReceiptController();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出现了问题");
+			e.printStackTrace();
+		}
+	} 
 	public CashReceiptPane(RunTableController controller,CashPO receipt){
 		this();
 		this.receipt=receipt;
@@ -83,6 +101,10 @@ public class CashReceiptPane {
 		JLabel label_5 = new JLabel("审批状态:");
 		label_5.setBounds(90, 190, 54, 15);
 		panel.add(label_5);
+		
+		JLabel label_6 = new JLabel("处理状态:");
+		label_6.setBounds(90, 220, 54, 15);
+		panel.add(label_6);
 		
 		JLabel label_7 = new JLabel("条目清单");
 		label_7.setBounds(180, 250, 54, 15);
@@ -134,6 +156,11 @@ public class CashReceiptPane {
 		textState.setBounds(145, 187, 200, 21);
 		panel.add(textState);
 		
+		textDeal = new JTextField();
+		textDeal.setColumns(10);
+		textDeal.setBounds(145, 217, 200, 21);
+		panel.add(textDeal);
+		
 		btnCancel = new JButton("取消");
 		btnCancel.setBounds(319, 493, 60, 23);
 		panel.add(btnCancel);
@@ -150,6 +177,7 @@ public class CashReceiptPane {
 		textOperator.setEditable(false);
 		textBank.setEditable(false);
 		textState.setEditable(false);
+		textDeal.setEditable(false);
 	}
 	public void visit(boolean temp){
 		frame.setVisible(temp);
@@ -167,9 +195,36 @@ public class CashReceiptPane {
 		textState.setText(ReceiptState.getName(receipt.statement));
 		tableModel.update(receipt.itemList);
 		labelTotal.setText(String.valueOf(receipt.total));
+		textDeal.setText(DealState.getName(receipt.dealState));
 	}	
 	public void query(){
 		btnCancel.setText("关闭");
+	}
+	public void deal(){
+		JButton button = new JButton("处理");
+		button.setBounds(219, 493, 60, 23);
+		panel.add(button);
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				receipt.dealState=DealState.DEAL;
+				//FIXME
+//				try {
+//					finController.update(receipt);
+//					
+//				} catch (Exception e1) {
+//					JOptionPane.showMessageDialog(null, e1.getMessage());
+//					e1.printStackTrace();
+//				}
+				try {
+					finController.update(receipt);
+					receiptModel.insteadRow(currentRow, receipt);
+					frame.dispose();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 	public void credit(){
 		//TODO

@@ -3,6 +3,8 @@ package presentation.RunningTableui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.NotBoundException;
@@ -130,6 +132,7 @@ public class CheckReceiptFrame {
 				,"付款单","现金费用单","报溢报损单","库存赠送单"};
 		boxType = new JComboBox(temp);
 		boxType.setBounds(115, 57, 100, 21);
+		boxType.addItemListener(new TypeChange());
 		panel.add(boxType);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -204,6 +207,41 @@ public class CheckReceiptFrame {
 	public JPanel getPanel(){
 		return panel;
 	}
+	public class TypeChange implements ItemListener{
+		public void itemStateChanged(ItemEvent e) {
+			switch(boxType.getSelectedIndex()){
+			case 4:{
+				//收款单
+			}
+			case 5:{
+				//付款单
+				textRepository.setText("");
+				textRepository.setEditable(false);
+				boxClient.setEnabled(true);
+				break;
+			}
+			case 6:{
+				//现金费用单
+			}
+			case 7:{
+				//报溢报损单
+			}
+			case 8:{
+				//库存赠送单
+				textRepository.setText("");
+				textRepository.setEditable(false);
+				boxClient.setSelectedIndex(0);
+				boxClient.setEnabled(false);
+				break;
+			}
+			default:{
+				boxClient.setEnabled(true);
+				textRepository.setEditable(true);
+			}
+			}
+		}
+		
+	} 
 	public class Query implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			ReceiptType type;
@@ -219,6 +257,9 @@ public class CheckReceiptFrame {
 			//FIXME，进行查询操作，更新列表
 			try {
 				receiptList=controller.getReceipt(condition);
+				if(receiptList.size()==0){
+					JOptionPane.showMessageDialog(null, "无符合条件的数据");
+				}
 				tableModel.update(receiptList);
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage());

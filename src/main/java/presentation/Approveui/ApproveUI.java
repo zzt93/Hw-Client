@@ -208,6 +208,7 @@ public class ApproveUI {
 					approveBL.passList(approveIndex);
 					approveBL.upload();
 					listOfReceipts = approveBL.showList();
+					labelHint.setText("上传成功！");
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "上传失败！！！");
 				}

@@ -3,11 +3,8 @@ package presentation.Strategyui;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
-import po.ReceiptPO;
 import po.StrategyPO;
 import businesslogic.Strategybl.StrategyController;
-import businesslogic.Strategybl.StrategyList;
 import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
 
 import java.awt.*;
@@ -121,7 +118,13 @@ public class StrategyListUI {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {
+					arrStrategy = strategyList.show();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "未能获取到单据");
+					e1.printStackTrace();
+				}
 			}
 		});
 		button.setBounds(607, 237, 93, 23);

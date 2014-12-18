@@ -126,7 +126,7 @@ public class PublicTableModel extends DefaultTableModel {
 			data=new Object[list.size()][5];
 			ReceiptPO temp;
 			for(int i=0;i<list.size();i++){
-				temp=(ReceiptPO)list.get(0);
+				temp=(ReceiptPO)list.get(i);
 				data[i][1]=temp.time;
 				data[i][4]=ReceiptState.getName(temp.statement);
 				switch(temp.type){
@@ -168,7 +168,7 @@ public class PublicTableModel extends DefaultTableModel {
 				case PAYMENT:
 				case RECEIVE:{
 					RecPO temp1=(RecPO)temp;
-					data[i][0]="收款单";
+					data[i][0]=ReceiptType.getName(temp.type);
 					data[i][2]=temp1.operator;
 					data[i][3]=temp1.total;
 					break;
@@ -198,18 +198,14 @@ public class PublicTableModel extends DefaultTableModel {
 			ReceiptPO temp;
 			for(int i=0;i<list.size();i++){
 				temp=(ReceiptPO)list.get(i);
-				if(temp!=null){
-					System.out.println("YES");
-				}else{
-					System.out.println("NO");
-				}
 				data[i][0]=temp.time;
 				data[i][1]=ReceiptType.getName(temp.type);
 				data[i][3]=ReceiptState.getName(temp.statement);
 				switch(temp.type){
 				case CASH:{
 					CashPO temp1=(CashPO)temp;
-					data[i][2]=temp1.total;
+					data[i][2]=temp1.total;		
+					data[i][4]=DealState.getName(temp1.dealState);
 					break;
 				}
 				case RECEIVE:
@@ -221,7 +217,6 @@ public class PublicTableModel extends DefaultTableModel {
 				}
 				}
 			}
-			System.out.println("lala");
 			update(data);
 			break;
 		}
@@ -303,6 +298,22 @@ public class PublicTableModel extends DefaultTableModel {
 				data[i][0]=temp.getName();
 				data[i][1]=temp.getAmount();
 				data[i][2]=temp.getRemark();
+			}
+			update(data);
+			break;
+		}
+		case PRODUCTS:{
+			data=new Object[list.size()][7];
+			ProductsReceipt temp;
+			for(int i=0;i<list.size();i++){
+				temp=(ProductsReceipt)list.get(i);
+				data[i][0]=temp.getCommodity_id();
+				data[i][1]=temp.getName();
+				data[i][2]=temp.getType();
+				data[i][3]=temp.getNumber();
+				data[i][4]=temp.getPrice();
+				data[i][5]=temp.getTotal();
+				data[i][6]=temp.getComment();
 			}
 			update(data);
 			break;
@@ -418,6 +429,16 @@ public class PublicTableModel extends DefaultTableModel {
 		addRow(data);
 	}
 	public void insteadRow(int row,RecPO po){
+		removeRow(row);
+		Object[] data=new Object[5];
+		data[0]=po.time;
+		data[1]=ReceiptType.getName(po.type);
+		data[2]=po.total;
+		data[3]=ReceiptState.getName(po.statement);
+		data[4]=DealState.getName(po.dealState);
+		insertRow(row,data);
+	}
+	public void insteadRow(int row,CashPO po){
 		removeRow(row);
 		Object[] data=new Object[5];
 		data[0]=po.time;

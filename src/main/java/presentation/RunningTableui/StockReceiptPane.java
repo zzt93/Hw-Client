@@ -19,6 +19,7 @@ import po.ReceiptState;
 import po.ReceiptType;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
+import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
 
 public class StockReceiptPane {
@@ -90,8 +91,8 @@ public class StockReceiptPane {
 		scrollPane.setBounds(40, 210, 600, 220);
 		panel.add(scrollPane);
 		
-		
-		JTable table = new JTable();
+		tableModel=new PublicTableModel(ModelType.PRODUCTS);
+		JTable table = new JTable(tableModel);
 		table.setFillsViewportHeight(true);
 		scrollPane.setViewportView(table);
 		
