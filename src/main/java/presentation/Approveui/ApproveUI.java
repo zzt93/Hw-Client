@@ -27,7 +27,7 @@ public class ApproveUI {
 	private JTable table;
 	public JPanel totalPanel;
 	private Approve_List_BLservice approveBL;
-	//private Approve_Detail_BLservice approveDetail;
+	// private Approve_Detail_BLservice approveDetail;
 	private ArrayList<ReceiptPO> approveIndex;
 	private ArrayList<ReceiptPO> listOfReceipts;
 	private String[][] cellData;
@@ -35,6 +35,7 @@ public class ApproveUI {
 	String[] name = { "编号", "种类", "时间", "审批状态" };
 	TableModel tm;
 	JScrollPane scrollPane;
+
 	/**
 	 * Launch the application.
 	 */
@@ -58,6 +59,21 @@ public class ApproveUI {
 	 */
 	public ApproveUI() throws Exception {
 		initialize();
+		new Thread() {
+			public void run() {
+
+				try {
+					while (true) {
+						
+						Thread.sleep(20000);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		}.start();
+
 	}
 
 	/**
@@ -70,33 +86,37 @@ public class ApproveUI {
 		frame.getContentPane().setLayout(null);
 
 		totalPanel = new JPanel();
+		totalPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					listOfReceipts = approveBL.refresh();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTable(name);
+			}
+		});
 		totalPanel.setBounds(0, 0, 750, 498);
 		totalPanel.setLayout(null);
 		frame.getContentPane().add(totalPanel);
-		//TODO 用于Mock的切换
+		// TODO 用于Mock的切换
 		// /Read Receipts
 		approveBL = new Approve_List();
 		listOfReceipts = approveBL.showList();
-		//listOfReceipts = new Approve_Mock().showList();
+		// listOfReceipts = new Approve_Mock().showList();
 		final JLabel labelHint = new JLabel("状态栏");
 		labelHint.setBounds(39, 473, 211, 15);
 		totalPanel.add(labelHint);
 
-		
-
 		// TODO 就是想搞你一下的存根;
 		// refreshTableDebug();
-		refreshTable(name);
-
-		tm = new DefaultTableModel(cellData, name);
-
-		table = new JTable(tm);
-		
-		
+		table = new JTable();
 		table.setBounds(10, 10, 507, 249);
-		//FIXME 排序
-		table.getTableHeader().addMouseListener(new MouseAdapter(){
-			public void mouseReleased(MouseEvent e){
+		// FIXME 排序
+		table.getTableHeader().addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e) {
 				int pick = table.getTableHeader().columnAtPoint(e.getPoint());
 				approveBL.order(name[pick]);
 			}
@@ -104,22 +124,23 @@ public class ApproveUI {
 		scrollPane = new JScrollPane();
 
 		scrollPane.setBounds(10, 10, 507, 249);
-		scrollPane.setViewportView(table);
-		totalPanel.add(scrollPane);
 
+		totalPanel.add(scrollPane);
+		refreshTable(name);
+
+		approveIndex = new ArrayList<ReceiptPO>();
 		JButton buttonApproveAll = new JButton("批量通过");
 		buttonApproveAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int approves[] = table.getSelectedRows();
 				for (int i : approves) {
-					if(listOfReceipts.get(i).statement == ReceiptState.wait){
+					if (listOfReceipts.get(i).statement != ReceiptState.approve) {
 						listOfReceipts.get(i).statement = ReceiptState.approve;
 						refreshTable(name);
-						listOfReceipts.get(i).statement = ReceiptState.wait;
 						approveIndex.add(listOfReceipts.get(i));
 
 					}
-					
+
 				}
 			}
 		});
@@ -151,7 +172,7 @@ public class ApproveUI {
 				/**
 				 * 
 				 */
-				//FIXME 接口关键部分
+				// FIXME 接口关键部分
 				try {
 					approveBL.passList(approveIndex);
 					approveBL.upload(approveIndex);
@@ -165,35 +186,42 @@ public class ApproveUI {
 		});
 		buttonUpload.setBounds(572, 60, 93, 23);
 		totalPanel.add(buttonUpload);
-		
+
 		JButton buttonDetail = new JButton("详细信息");
 		buttonDetail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReceiptPO po = listOfReceipts.get(table.getSelectedRow());
-				switch(po.type){
+				ReceiptPO po = null;
+				try{
+					po = listOfReceipts.get(table.getSelectedRow());
+				}catch(ArrayIndexOutOfBoundsException e1){
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "未选择单据");
+				}
+				
+				switch (po.type) {
 				case STOCK_ACCEPT:
-		    	case STOCK_REJECTION:
-		    		new StockReceiptPane(approveBL,(StockReceiptPO)po);
-		    		break;
-		    	case SALE_ACCEPT:
-		    	case SALE_REJECTION:
-		    		new SaleReceiptPane(approveBL,(SaleReceiptPO)po);
-		    		break;
-		    	case RECEIVE:
-		    	case PAYMENT:
-		    		new PayReceiptPane(approveBL,(RecPO)po);
-		    		break;
-		    	case CASH:
-		    		new CashReceiptPane(approveBL,(CashPO)po);
-		    		break;
-		    	case REPORECEIPT:
-		    		new RepoReceiptPane(approveBL,(RepoReceiptPO)po);
-		    		break;
-		    	case GOODSRECEIPT:
-		    		new GoodsReceiptPane(approveBL,(GoodsReceiptPO)po);
-		    		break;
-		    	case SIGNAL:
-		    		//不可审批
+				case STOCK_REJECTION:
+					new StockReceiptPane(approveBL, (StockReceiptPO) po);
+					break;
+				case SALE_ACCEPT:
+				case SALE_REJECTION:
+					new SaleReceiptPane(approveBL, (SaleReceiptPO) po);
+					break;
+				case RECEIVE:
+				case PAYMENT:
+					new PayReceiptPane(approveBL, (RecPO) po);
+					break;
+				case CASH:
+					new CashReceiptPane(approveBL, (CashPO) po);
+					break;
+				case REPORECEIPT:
+					new RepoReceiptPane(approveBL, (RepoReceiptPO) po);
+					break;
+				case GOODSRECEIPT:
+					new GoodsReceiptPane(approveBL, (GoodsReceiptPO) po);
+					break;
+				case SIGNAL:
+					// 不可审批
 				}
 				approveIndex.add(po);
 			}
@@ -229,13 +257,14 @@ public class ApproveUI {
 		listOfReceipts = new ArrayList<ReceiptPO>();
 		try {
 			ad = new Adminbl();
-			listOfReceipts.add(new RepoReceiptPO("hehe", 12, 12,ad.getUser()));
+			listOfReceipts.add(new RepoReceiptPO("hehe", 12, 12, ad.getUser()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		listOfReceipts.add(new CashPO());
-		listOfReceipts.add(new SaleReceiptPO(10,"2","3","4",new BigDecimal(0)));
+		listOfReceipts.add(new SaleReceiptPO(10, "2", "3", "4", new BigDecimal(
+				0)));
 		for (ReceiptPO po : listOfReceipts) {
 			insert(cellData[i], po);
 			i++;

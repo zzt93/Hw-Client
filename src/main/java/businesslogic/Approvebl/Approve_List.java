@@ -49,6 +49,7 @@ public class Approve_List implements Approve_List_BLservice{
 	@Override
 	public ArrayList<ReceiptPO> showList() throws Exception {
 		//<yus>
+		receipts.clear();
 		SaleUtility saleUtility = new SaleUtilityImpl();
 		List<SaleReceiptPO> verSale = saleUtility.queryReceipt(new ReceiptConditionVO());
 		addOneByOne(verSale);
@@ -83,7 +84,7 @@ public class Approve_List implements Approve_List_BLservice{
 		/*
 		 * Request new info from 
 		 */
-		return showList();
+		return this.receipts;
 
 	}
 
@@ -91,11 +92,15 @@ public class Approve_List implements Approve_List_BLservice{
 	public boolean passList(ArrayList<ReceiptPO> array) throws Exception {
 		// TODO Auto-generated method stub
 		for(ReceiptPO rpo : array){
-			if(receipts.contains(rpo)){
-				receipts.get(receipts.indexOf(rpo)).statement=ReceiptState.approve;
+			if(receipts.contains(rpo)){				
+				if(receipts.get(receipts.indexOf(rpo)).statement!=ReceiptState.approve){
+					receipts.get(receipts.indexOf(rpo)).statement=ReceiptState.approve;
+				}
+				else{
+					return false;
+				}
 			}			
 		}
-
 		return true;
 	}
 
@@ -171,6 +176,7 @@ public class Approve_List implements Approve_List_BLservice{
 	}
 
 	public ArrayList<ReceiptPO> screen(String item){//ReceiptFilter[] filter
+		screenReceipts.clear();
 		for(ReceiptPO rpo:receipts){
 			if(rpo.statement == ReceiptState.wait||rpo.statement == ReceiptState.disapprove){
 				screenReceipts.add(rpo);
