@@ -27,13 +27,10 @@ public class ApproveUI {
 	private JTable table;
 	public JPanel totalPanel;
 	private Approve_List_BLservice approveBL;
-<<<<<<< HEAD
 	// private Approve_Detail_BLservice approveDetail;
 	private ArrayList<ReceiptPO> approveIndex;
-=======
 	//private Approve_Detail_BLservice approveDetail;
-	private ArrayList<ReceiptPO> approveIndex=new ArrayList<ReceiptPO>();
->>>>>>> origin/master
+
 	private ArrayList<ReceiptPO> listOfReceipts;
 	private String[][] cellData;
 	private AdminBLService ad;
@@ -114,19 +111,15 @@ public class ApproveUI {
 		final JLabel labelHint = new JLabel("状态栏");
 		labelHint.setBounds(39, 473, 211, 15);
 		totalPanel.add(labelHint);
-<<<<<<< HEAD
 
 		// TODO 就是想搞你一下的存根;
 		// refreshTableDebug();
 		table = new JTable();
-=======
 	
 		tm = new DefaultTableModel(cellData, name);
 
 		table = new JTable(tm);
 		
-		
->>>>>>> origin/master
 		table.setBounds(10, 10, 507, 249);
 		// FIXME 排序
 		table.getTableHeader().addMouseListener(new MouseAdapter() {
@@ -140,11 +133,9 @@ public class ApproveUI {
 		scrollPane.setBounds(10, 10, 507, 249);
 
 		totalPanel.add(scrollPane);
-<<<<<<< HEAD
 		refreshTable(name);
 
 		approveIndex = new ArrayList<ReceiptPO>();
-=======
 		
 		
 		// TODO 就是想搞你一下的存根;
@@ -152,7 +143,6 @@ public class ApproveUI {
 		refreshTable(name);
 		
 		
->>>>>>> origin/master
 		JButton buttonApproveAll = new JButton("批量通过");
 		buttonApproveAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -224,30 +214,6 @@ public class ApproveUI {
 				
 				switch (po.type) {
 				case STOCK_ACCEPT:
-<<<<<<< HEAD
-				case STOCK_REJECTION:
-					new StockReceiptPane(approveBL, (StockReceiptPO) po);
-					break;
-				case SALE_ACCEPT:
-				case SALE_REJECTION:
-					new SaleReceiptPane(approveBL, (SaleReceiptPO) po);
-					break;
-				case RECEIVE:
-				case PAYMENT:
-					new PayReceiptPane(approveBL, (RecPO) po);
-					break;
-				case CASH:
-					new CashReceiptPane(approveBL, (CashPO) po);
-					break;
-				case REPORECEIPT:
-					new RepoReceiptPane(approveBL, (RepoReceiptPO) po);
-					break;
-				case GOODSRECEIPT:
-					new GoodsReceiptPane(approveBL, (GoodsReceiptPO) po);
-					break;
-				case SIGNAL:
-					// 不可审批
-=======
 		    	case STOCK_REJECTION:
 		    		new StockReceiptPane(approveIndex,(StockReceiptPO)po);
 		    		break;
@@ -270,7 +236,8 @@ public class ApproveUI {
 		    		break;
 		    	case SIGNAL:
 		    		//不可审批
->>>>>>> origin/master
+				default:
+					break;
 				}
 			}
 		});
