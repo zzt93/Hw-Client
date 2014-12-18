@@ -195,6 +195,7 @@ public class ApproveUI {
 		    	case SIGNAL:
 		    		//不可审批
 				}
+				approveIndex.add(po);
 			}
 		});
 		buttonDetail.setBounds(572, 162, 93, 23);
