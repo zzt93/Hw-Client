@@ -48,7 +48,7 @@ public class SaleReceiptPane {
 	private PublicTableModel tableModel;
 	private SaleReceiptPO receipt;
 	private RunTableController controller;
-	private Approve_List_BLservice approveBL;
+	private List<ReceiptPO> approveList;
 	
 	public SaleReceiptPane(){
 		initialize();
@@ -60,8 +60,8 @@ public class SaleReceiptPane {
 		credit();
 		visit(true);
 	}
-	public SaleReceiptPane(Approve_List_BLservice approveBL,SaleReceiptPO receipt){
-		this.approveBL=approveBL;
+	public SaleReceiptPane(List<ReceiptPO> approveList,SaleReceiptPO receipt){
+		this.approveList=approveList;
 		this.receipt=receipt;
 		initialize();
 		set(receipt);
@@ -279,6 +279,7 @@ public class SaleReceiptPane {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					controller.CreditNote(receipt);
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();
@@ -294,10 +295,10 @@ public class SaleReceiptPane {
 		
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<ReceiptPO> temp=new ArrayList<ReceiptPO>();
-				temp.add(receipt);
 				try {
-					approveBL.passList(temp);
+					receipt.statement=ReceiptState.approve;
+					approveList.add(receipt);
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();

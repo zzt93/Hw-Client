@@ -81,7 +81,7 @@ public class AdminUI {
 		}
 
 		head = new String[] { "id", "name", "role" };
-		refreshTable();
+		
 		tm = new MyTableModel(data, head);
 
 		table = new JTable(tm);

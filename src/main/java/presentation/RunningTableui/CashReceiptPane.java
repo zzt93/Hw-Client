@@ -49,7 +49,7 @@ public class CashReceiptPane {
 	private PublicTableModel receiptModel;
 	private int currentRow;
 	private FinReceiptController finController;
-	private Approve_List_BLservice approveBL;
+	private List<ReceiptPO> approveList;
 	public CashReceiptPane(){
 		initialize();
 	}
@@ -71,8 +71,8 @@ public class CashReceiptPane {
 		credit();
 		visit(true);
 	}
-	public CashReceiptPane(Approve_List_BLservice approveBL,CashPO receipt){
-		this.approveBL=approveBL;
+	public CashReceiptPane(List<ReceiptPO> approveList,CashPO receipt){
+		this.approveList=approveList;
 		this.receipt=receipt;
 		initialize();
 		set(receipt);
@@ -256,6 +256,7 @@ public class CashReceiptPane {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					controller.CreditNote(receipt);
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();
@@ -271,10 +272,10 @@ public class CashReceiptPane {
 		
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<ReceiptPO> temp=new ArrayList<ReceiptPO>();
-				temp.add(receipt);
 				try {
-					approveBL.passList(temp);
+					receipt.statement=ReceiptState.approve;
+					approveList.add(receipt);
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();

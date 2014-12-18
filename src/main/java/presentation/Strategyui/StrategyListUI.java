@@ -100,19 +100,20 @@ public class StrategyListUI {
 		subpanel.setBounds(34, 10, 553, 438);
 		panel.add(subpanel);
 		subpanel.setLayout(null);
-
-		final String[] name = { "满足条件", "优惠方式", "起止时间" };
-
-		cellData = new String[arrStrategy.size()][3];
-		refreshTable(name);
-
+		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 20, 532, 408);
 
 		subpanel.add(scrollPane);
+		table=new JTable();
 		table.setBounds(10, 20, 558, 415);
 
 		scrollPane.setViewportView(table);
+		
+		final String[] name = { "满足条件", "优惠方式", "起止时间" };
+
+		cellData = new String[arrStrategy.size()][3];
+		refreshTable(name);
 
 		JButton button = new JButton("刷新");
 		button.addMouseListener(new MouseAdapter() {
