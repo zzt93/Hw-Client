@@ -28,6 +28,7 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		finReceipt=new FinReceipt();
 		clientController=new ClientUtilityImpl();
 		adminController=new AdminController();
+		bankController=new BankController();
 	}
 	public void clearBank(){
 		bankList.clear();
@@ -43,18 +44,18 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		itemList.add(po);
 		return itemList.getTotal();
 	}
-	public double deleteBank(BkTransPO po){
-		bankList.delete(po);
-		return bankList.getTotal();
-	}
+//	public double deleteBank(BkTransPO po){
+//		bankList.delete(po);
+//		return bankList.getTotal();
+//	}
 	public double deleteBank(int i){
 		bankList.delete(i);
 		return bankList.getTotal();
 	}
-	public double deleteItem(ItemPO po){
-		itemList.delete(po);
-		return itemList.getTotal();
-	}
+//	public double deleteItem(ItemPO po){
+//		itemList.delete(po);
+//		return itemList.getTotal();
+//	}
 	public double deleteItem(int i){
 		itemList.delete(i);
 		return itemList.getTotal();
@@ -78,8 +79,6 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		itemList.clear();
 	}		
 	public String[] getBank() throws Exception{
-		BankController bankController;
-		bankController=new BankController();
 		BankVO[] vo=bankController.search(null);
 		String result[];
 		result=new String[vo.length];

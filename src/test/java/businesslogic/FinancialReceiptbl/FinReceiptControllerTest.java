@@ -56,7 +56,7 @@ public class FinReceiptControllerTest {
 		for(int i=0;i<3;i++){
 			controller.addBank(list[i]);
 		}
-		double total=controller.deleteBank(list[1]);
+		double total=controller.deleteBank(1);
 		if(181==total){
 			assertTrue(true);
 		}else
@@ -72,7 +72,7 @@ public class FinReceiptControllerTest {
 		for(int i=0;i<3;i++){
 			controller.addItem(list[i]);
 		}
-		double total=controller.deleteItem(list[1]);
+		double total=controller.deleteItem(1);
 		if(181==total){
 			assertTrue(true);
 		}else
