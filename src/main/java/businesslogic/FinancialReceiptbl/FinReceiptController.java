@@ -100,13 +100,20 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		return adminController.getUser();
 	
 	}
-	public ReceiptPO[] getReceipt()throws Exception{
-		ArrayList<ReceiptPO> list=getReceipt(new ReceiptConditionVO());
-		ReceiptPO[] result=new ReceiptPO[list.size()];
-		for(int i=0;i<result.length;i++){
-			result[i]=list.get(i);
-		}
-		return result;
+	public ArrayList<ReceiptPO> getReceipt()throws Exception{
+		ReceiptConditionVO condition=new ReceiptConditionVO(ReceiptType.CASH);
+		condition.state=ReceiptState.wait;
+		ArrayList<ReceiptPO> list=new ArrayList<ReceiptPO>();
+		ArrayList<ReceiptPO> temp=getReceipt(condition);
+		list.addAll(temp);
+		condition.type=ReceiptType.PAYMENT;
+		temp=getReceipt(condition);
+		list.addAll(temp);
+		condition.type=ReceiptType.RECEIVE;
+		temp=getReceipt(condition);
+		list.addAll(temp);
+		
+		return list;
 	}
 	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception{
 		ResultMessage result;

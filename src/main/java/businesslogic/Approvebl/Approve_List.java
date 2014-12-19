@@ -68,7 +68,7 @@ public class Approve_List implements Approve_List_BLservice{
 		
 		//<gda>
 		FinReceiptController finreceipt = new FinReceiptController();
-		ArrayList<ReceiptPO> arrfin = finreceipt.getReceipt(new ReceiptConditionVO());
+		ArrayList<ReceiptPO> arrfin = finreceipt.getReceipt();
 		for(ReceiptPO po :arrfin){
 			receipts.add(po);
 		}

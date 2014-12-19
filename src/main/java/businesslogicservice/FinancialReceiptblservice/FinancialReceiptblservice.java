@@ -23,7 +23,7 @@ public interface FinancialReceiptblservice {
 	public String[] getBank() throws Exception;
 	public String[] getClient() throws Exception;
 	public String getOperator() throws Exception;
-	public ReceiptPO[] getReceipt()throws Exception;
+	public ArrayList<ReceiptPO> getReceipt()throws Exception;
 	public ArrayList<ReceiptPO> getReceipt(ReceiptConditionVO vo)throws Exception;
 	public void creditCash(CashVO vo)throws Exception;
 	public void creditPay(PayVO vo)throws Exception;
