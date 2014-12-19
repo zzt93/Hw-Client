@@ -14,9 +14,15 @@ public class ReceiptConditionVO extends TimeConditionVO implements Serializable 
     private static final long serialVersionUID = 1L;
     public ReceiptConditionVO(String startTime, String endTime, ReceiptType type, String client
             , String operator, String storage) {
-    	if(startTime.equals(""))startTime=null;
-    	if(endTime.equals(""))endTime=null;
-    	if(storage.equals(""))storage=null;
+    	if(startTime!=null){
+    		if(startTime.equals(""))startTime=null;
+    	}
+    	if(endTime!=null){
+    		if(endTime.equals(""))endTime=null;
+    	}
+    	if(storage!=null){
+    		if(storage.equals(""))storage=null;
+    	}
         this.startTime = startTime;
         this.endTime = endTime;
         this.type = type;

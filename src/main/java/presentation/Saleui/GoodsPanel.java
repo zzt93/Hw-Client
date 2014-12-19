@@ -191,7 +191,7 @@ public class GoodsPanel {
 				try {
 					goods=controller.eSearch_total(temp2[0]);
 				} catch (RemoteException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();
 				}
 //				GoodsVO goods=new GoodsVO("0001",20);
@@ -207,6 +207,7 @@ public class GoodsPanel {
 				}else{
 					textPrice.setText(String.valueOf(goods.getDefault_out()));
 				}
+//				listFrame.setVisible(false);
 				listFrame.dispose();		
 			}
 		}

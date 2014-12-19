@@ -26,12 +26,16 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
 		this.strategyId = strategyId;
 	}
 	public SaleReceiptPO(int clientId,String salesman,
-    		String repository,String comment,BigDecimal totalValue){
+    		String repository,String comment,BigDecimal totalValue,String operator){
     	this.clientId=clientId;
     	this.salesman=salesman;
     	this.repository=repository;
     	this.comment=comment;
     	this.totalValue=totalValue;
+    	this.operator=operator;
+    	allowance=new BigDecimal(0);
+    	coupon=new BigDecimal(0);
+    	actualValue=totalValue;
     }
     public String getNumber() {
         return number;
