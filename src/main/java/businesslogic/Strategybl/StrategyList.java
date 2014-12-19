@@ -1,9 +1,7 @@
 package businesslogic.Strategybl;
 
 import businesslogic.Clientbl.ClientUtilityImpl;
-import businesslogic.GoodsListbl.GL_manager_repo_Impl;
 import businesslogic.RepoReceiptbl.RepoReceiptBLImpl;
-import businesslogicservice.GoodsListblservice.GL_manager_BLservice;
 import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
 import dataservice.Strategydataservice.StrategyDataService;
 import po.*;
@@ -119,12 +117,12 @@ public class StrategyList implements Strategy_List_BLservice {
 		}
 		if (spo.getTreatment().type == CatOfTreatment.GIVE) {
 						
-			po.setComment("有礼品赠送哦亲~^0^");
-			RepoReceiptBLImpl ri = new RepoReceiptBLImpl();
+			po.setComment("有礼品赠送哦亲~^0^"+spo.getTreatment().toString());
 			//FIXME 赠品还没有实现
 			
 			
 		}
+		po.setStrategyId(spo.getStrategyId());
 		return po;
 		
 

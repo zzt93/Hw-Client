@@ -21,7 +21,11 @@ public class StrategyPO implements Serializable {
 	Condition condition;
 	Treatment treatment;
 	TimePeriod timePeriod;
+	int strategyId;
 	
+	public int getStrategyId() {
+		return strategyId;
+	}
 	public Condition getCondition() {
 		return condition;
 	}

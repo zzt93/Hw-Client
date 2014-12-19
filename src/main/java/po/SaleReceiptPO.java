@@ -21,7 +21,11 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     private BigDecimal coupon;          //代金券金额
     private BigDecimal actualValue;     //折让后总额
     private String comment;
-    public SaleReceiptPO(int clientId,String salesman,
+    private int strategyId;
+    public void setStrategyId(int strategyId) {
+		this.strategyId = strategyId;
+	}
+	public SaleReceiptPO(int clientId,String salesman,
     		String repository,String comment,BigDecimal totalValue){
     	this.clientId=clientId;
     	this.salesman=salesman;
