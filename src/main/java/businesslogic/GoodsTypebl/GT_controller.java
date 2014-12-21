@@ -3,7 +3,6 @@ package businesslogic.GoodsTypebl;
 import businesslogic.GoodsListbl.GL_controller;
 import businesslogicservice.GoodsTypeblservice.GTBLservice;
 import businesslogicservice.GoodsTypeblservice.GT_GL_BLservice;
-import businesslogicservice.GoodsTypeblservice.GT_account_service;
 import dataservice.GoodsTypedataservice.GoodsTypeDateService;
 import po.GoodsListPO;
 import po.TreeNodePO;
@@ -15,8 +14,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class GT_controller implements GT_GL_BLservice, GTBLservice,
-		GT_account_service {
+public class GT_controller implements GT_GL_BLservice, GTBLservice
+		{
 
 	ArrayList<TreeNodePO> treeNodePOs = new ArrayList<TreeNodePO>();
 
@@ -109,14 +108,6 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice,
 		return gtbLservice.show();
 	}
 
-	public void initialize(String account) throws Exception {
-		ArrayList<TreeNodePO> res = new ArrayList<TreeNodePO>();
-		goodsTypeDateService.initialize(res).getObj();
-	}
-
-	public String getDatabase(String account) throws Exception {
-		return goodsTypeDateService.getDatabse(account).getObj();
-	}
 
 	public ArrayList<String> addable_type() throws RemoteException {
 		return gt_gl_BLservice.addable_type();

@@ -37,7 +37,7 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		SaleUtility sale = new SaleUtilityImpl();
 
 		ReceiptConditionVO in_conditionVO = new ReceiptConditionVO(start, end, ReceiptType.STOCK_ACCEPT, null, null, "");
-		SaleConditionVO saleConditionVO = new SaleConditionVO(start, end, "", null, "", null);
+		SaleConditionVO saleConditionVO = new SaleConditionVO(start, end, null, null, "", null);
 
 
 		//get the all in
@@ -56,16 +56,16 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		
 
 		for (StockReceiptPO stockReceiptPO : stock_in) {
-			in.add(stockReceiptPO.getTotalValue());
+			in = in.add(stockReceiptPO.getTotalValue());
 		}
 		for (SaleReceiptPO saleReceiptPO : sale_in) {
-			in.add(saleReceiptPO.getTotalValue());
+			in = in.add(saleReceiptPO.getTotalValue());
 		}
 		for (StockReceiptPO saleReceiptPO : stock_out) {
-			out.add(saleReceiptPO.getTotalValue());
+			out = out.add(saleReceiptPO.getTotalValue());
 		}
 		for (SaleReceiptPO saleReceiptPO : sale_out) {
-			out.add(saleReceiptPO.getTotalValue());
+			out = out.add(saleReceiptPO.getTotalValue());
 		}
 		//count the amount
 		List<GoodsRecordVO> goodsRecordVOs = sale

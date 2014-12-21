@@ -6,6 +6,7 @@ import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -778,7 +779,7 @@ public class MainFrame extends javax.swing.JFrame {
 		}
 		int which = -1;
 		if (size > 0) {
-			which = Integer.parseInt((String) JOptionPane.showInputDialog(
+			which = Arrays.asList(dates).indexOf((String) JOptionPane.showInputDialog(
 					MainFrame.frame, "Choose which to export", "Choose: ",
 					JOptionPane.QUESTION_MESSAGE, null, dates, dates[0]));
 		} else {
@@ -841,6 +842,7 @@ public class MainFrame extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(frame,
 					"Repo Check fail to get data to CheckAndSum");
 		}
+		JOptionPane.showMessageDialog(null, "You successfully check the repository");
 	}// GEN-LAST:event_repo_checkActionPerformed
 
 	private void log_outActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_log_outActionPerformed

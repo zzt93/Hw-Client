@@ -230,7 +230,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
                     }
                 });
 
-        GL_navigator.setBackground(java.awt.Color.red);
+        //GL_navigator.setBackground(java.awt.Color.red);
         GL_navigator.setRollover(true);
         GL_navigator.add(filler1);
 
