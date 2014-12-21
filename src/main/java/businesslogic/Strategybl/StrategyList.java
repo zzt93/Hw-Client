@@ -54,9 +54,10 @@ public class StrategyList implements Strategy_List_BLservice {
 
 	@SuppressWarnings("unchecked")
 	public void refresh() throws RemoteException {
-
 		if (sds.show().getErrMessage() == null) {
 			list = (ArrayList<StrategyPO>) sds.show().getObj();
+		}else{
+			System.out.println(sds.show().getErrMessage());
 		}
 	}
 

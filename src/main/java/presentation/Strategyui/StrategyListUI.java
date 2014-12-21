@@ -79,9 +79,9 @@ public class StrategyListUI {
 		buttonNew.setBounds(607, 106, 93, 23);
 		panel.add(buttonNew);
 
-		JButton buttonScreen = new JButton("筛选");
-		buttonScreen.setBounds(607, 171, 93, 23);
-		panel.add(buttonScreen);
+//		JButton buttonScreen = new JButton("筛选");
+//		buttonScreen.setBounds(607, 171, 93, 23);
+//		panel.add(buttonScreen);
 
 		JButton buttonReturn = new JButton("返回");
 		buttonReturn.addActionListener(new ActionListener() {
@@ -126,6 +126,7 @@ public class StrategyListUI {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					arrStrategy = strategyList.show();
+					refreshTable(name);
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "未能获取到单据");
 					e1.printStackTrace();
