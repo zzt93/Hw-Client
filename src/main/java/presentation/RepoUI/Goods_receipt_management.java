@@ -672,7 +672,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 		DefaultTableModel giftTableModel = (DefaultTableModel) gift_table.getModel();
 		Vector<Vector<?>> dataVector = (Vector<Vector<?>>)giftTableModel.getDataVector().clone();
 		for (Vector<?> info : dataVector ) {
-			goodsVOs.add(new GoodsVO(info.get(0), info.get(1), info.get(2) ));
+			goodsVOs.add(new GoodsVO(info.get(1), info.get(0), info.get(2) ));
 		}
 		AdminController adminController = null;
 		try {

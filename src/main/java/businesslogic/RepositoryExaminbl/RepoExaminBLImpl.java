@@ -23,11 +23,8 @@ import java.util.List;
 public class RepoExaminBLImpl implements RepoExaminBLservice {
 
 	public RepoExaminBLImpl() throws RemoteException, NotBoundException {
-		this.repoExaminDataService = (RepoExaminDataService) RMIUtility.getImpl(examin);
 	}
 
-	RepoExaminDataService repoExaminDataService;
-	static String examin = "repo examin service";
 
 
 	public InOutRepoVO countInOut(String start, String end) throws Exception {
@@ -39,8 +36,8 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		StockUtility stock = new StockUtilityImpl();
 		SaleUtility sale = new SaleUtilityImpl();
 
-		ReceiptConditionVO in_conditionVO = new ReceiptConditionVO(start, end, ReceiptType.STOCK_ACCEPT, null, null, null);
-		SaleConditionVO saleConditionVO = new SaleConditionVO(start, end, "", null, null, null);
+		ReceiptConditionVO in_conditionVO = new ReceiptConditionVO(start, end, ReceiptType.STOCK_ACCEPT, null, null, "");
+		SaleConditionVO saleConditionVO = new SaleConditionVO(start, end, "", null, "", null);
 
 
 		//get the all in
@@ -51,7 +48,7 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		
 		
 		//get all out
-		ReceiptConditionVO out_condition = new ReceiptConditionVO(start, end, ReceiptType.STOCK_REJECTION, null, null, null);
+		ReceiptConditionVO out_condition = new ReceiptConditionVO(start, end, ReceiptType.STOCK_REJECTION, null, null, "");
 		List<StockReceiptPO> stock_out = stock.queryReceipt(out_condition);
 		out_condition.type = ReceiptType.SALE_ACCEPT;
 		List<SaleReceiptPO> sale_out = sale.queryReceipt(out_condition);
@@ -92,7 +89,6 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 			}
 		}
 		result = new InOutRepoVO(in, out, in_num, out_num, start, end);
-		repoExaminDataService.insert(result);
 		return result;
 	}
 

@@ -23,10 +23,10 @@ public class GoodsVO implements Serializable {
 		this.amount = amount;
 	}
 	
-	public GoodsVO(Object name, Object id, Object amount) {
+	public GoodsVO(Object id, Object name, Object amount) {
 		this.name = (String)name;
 		this.id = (String)id;
-		this.amount = Integer.parseInt((String)amount);
+		this.amount = (Integer)amount;
 	}
 
 	public int amount;

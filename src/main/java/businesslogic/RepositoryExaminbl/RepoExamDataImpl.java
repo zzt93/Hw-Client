@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class RepoExamDataImpl implements RepoExaminDataService {
 
-	public ResultMessage<ArrayList<InOutRepoVO>> getRepoReceipt()
+	public ResultMessage<ArrayList<InOutRepoVO>> getInOutRepo()
 			throws RemoteException {
-		System.out.println("in getRepoReceipt of repo examin data stub");
+		System.out.println("in getInOutRepo of repo examin data stub");
 		return new ResultMessage<ArrayList<InOutRepoVO>>(null, new ArrayList<InOutRepoVO>());
 	}
 

@@ -16,7 +16,8 @@ import java.util.HashMap;
 public class RepoReceiptBLImpl implements RepoReceBLservice {
 
 	RepoReceiptDataService repoReceiptDataService ;
-	public ArrayList<RepoReceiptPO> repoReceiptPOs() throws RemoteException {
+	public ArrayList<RepoReceiptPO> repoReceiptPOs() throws Exception {
+		repoReceiptDataService.getRepoReceipts(new ReceiptConditionVO()).throwIfFailed();
 		return repoReceiptDataService.getRepoReceipts(new ReceiptConditionVO()).getObj();
 	}
 	public ArrayList<GoodsReceiptPO> goodsReceiptPOs() throws RemoteException {
@@ -66,7 +67,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	 */
 	
 
-	public String[] receipt_ids() throws RemoteException {
+	public String[] receipt_ids() throws Exception {
 		String[] res = new String[repoReceiptPOs().size()];
 		int i = 0;
 		for (RepoReceiptPO receiptPO : repoReceiptPOs()) {
@@ -79,7 +80,7 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 		GoodsReceiptVO res = new GoodsReceiptVO(goodsReceiptPOs().get(i));
 		return res;
 	}
-	public RepoReceiptVO show_a_RepoReceiptVO(int i) throws RemoteException {
+	public RepoReceiptVO show_a_RepoReceiptVO(int i) throws Exception {
 		RepoReceiptVO res = new RepoReceiptVO(repoReceiptPOs().get(i));
 		return res;
 	}

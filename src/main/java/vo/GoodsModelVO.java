@@ -13,6 +13,15 @@ public class GoodsModelVO implements Serializable {
 	String name;
 	String model;
 
+	public GoodsModelVO(String add_type, String s, String name, String mo, double de_in, double de_out) {
+		this.type = add_type;
+		this.id = s;
+		this.name = name;
+		model = mo;
+		default_in = de_in;
+		default_out = de_out;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -36,7 +45,7 @@ public class GoodsModelVO implements Serializable {
 		this.default_out = default_out;
 	}
 	public double getDefault_out(){
-		return default_in;
+		return default_out;
 	}
 	double default_in;
 	double default_out;

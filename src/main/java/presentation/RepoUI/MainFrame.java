@@ -833,7 +833,10 @@ public class MainFrame extends javax.swing.JFrame {
 
 	private void repo_checkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_repo_checkActionPerformed
 		try {
-			repoCheckBLservice.checkAndSum();
+			RepoPO repoPO = repoCheckBLservice.checkAndSum();
+			if (repoPO == null){
+				JOptionPane.showMessageDialog(null, "Fail to check for no goods in the repository now");
+			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frame,
 					"Repo Check fail to get data to CheckAndSum");

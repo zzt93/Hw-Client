@@ -123,7 +123,8 @@ public class LoggingPanel extends JPanel {
 								e1.printStackTrace();
 							}
 						}else if(role.startsWith("库存")){
-							new MainFrame().setVisible(true);
+							MainFrame.frame = new MainFrame();
+							MainFrame.frame.setVisible(true);
 						}else if(role.startsWith("财务")){
 							FinancialUI financial=new FinancialUI();
 						}else{

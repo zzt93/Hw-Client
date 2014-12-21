@@ -421,6 +421,8 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
                         repoReceiptBLImpl.receipt_ids()));
             } catch (RemoteException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         rece_name.addActionListener(new ActionListener() {
@@ -441,6 +443,8 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
                     try {
                         template = repoReceiptBLImpl.show_a_RepoReceiptVO(index);
                     } catch (RemoteException e1) {
+                        e1.printStackTrace();
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -613,6 +617,8 @@ public class Repo_Receipt_management extends javax.swing.JPanel {
                 rece_name.setModel(new DefaultComboBoxModel<String>(
                         repoReceiptBLImpl.receipt_ids()));
             } catch (RemoteException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

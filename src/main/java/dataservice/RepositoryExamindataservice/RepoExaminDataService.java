@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface RepoExaminDataService extends Remote {
-	ResultMessage<ArrayList<InOutRepoVO>> getRepoReceipt() throws RemoteException;
+	ResultMessage<ArrayList<InOutRepoVO>> getInOutRepo() throws RemoteException;
 	
 	ResultMessage<Boolean> insert(InOutRepoVO receipt) throws RemoteException;
 	ResultMessage<Boolean> update(InOutRepoVO receipt) throws RemoteException;

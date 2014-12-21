@@ -25,6 +25,8 @@ public class GoodsModelPO implements Serializable {
 		this.lastInPrice = goodsVO.getLastInPrice();
 		this.lastOutPrice = goodsVO.getLastOutPrice();
 
+		this.default_in = goodsVO.getDefault_in();
+		this.default_out = goodsVO.getDefault_out();
 		this.type = goodsVO.getType();
 	}
 
@@ -55,7 +57,7 @@ public class GoodsModelPO implements Serializable {
 		this.default_out = default_out;
 	}
 	public double getDefault_out(){
-		return default_in;
+		return default_out;
 	}
 	double default_in;
 

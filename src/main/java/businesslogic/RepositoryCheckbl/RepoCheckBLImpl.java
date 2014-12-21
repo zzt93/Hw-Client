@@ -35,8 +35,11 @@ public class RepoCheckBLImpl implements RepoCheckBLservice {
 		GL_repo_BLservice gl_repo_BLservice = new GL_manager_repo_Impl();
 		GoodsListPO temp = gl_repo_BLservice.getGoodsList();
 		RepoPO repoPO = new RepoPO(temp);
-		repoCheckDataService.insert(repoPO);
-		return repoPO;
+		if (!repoPO.getRepoGoods().isEmpty()){
+			repoCheckDataService.insert(repoPO);
+			return repoPO;
+		}
+		return null;
 
 	}
 

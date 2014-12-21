@@ -18,7 +18,7 @@ public class RepoReceiptDataImpl implements RepoReceiptDataService {
 	@Override
 	public ResultMessage<ArrayList<RepoReceiptPO>> getRepoReceipts(ReceiptConditionVO receiptConditionVO)
 			throws RemoteException {
-		System.out.println("in getRepoReceipt of repo receipt data stub");
+		System.out.println("in getInOutRepo of repo receipt data stub");
 		return new ResultMessage<ArrayList<RepoReceiptPO>>(null, new ArrayList<RepoReceiptPO>());
 	}
 
