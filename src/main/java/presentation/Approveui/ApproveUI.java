@@ -171,10 +171,10 @@ public class ApproveUI {
 //		buttonScreen.setBounds(572, 211, 93, 23);
 //		totalPanel.add(buttonScreen);
 
-		JButton buttonReturn = new JButton("返回");
+		JButton buttonReturn = new JButton("刷新");
 		buttonReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				refreshTable(name);
 			}
 		});
 		buttonReturn.setBounds(572, 256, 93, 23);
@@ -191,6 +191,7 @@ public class ApproveUI {
 					approveBL.passList(approveIndex);
 					approveBL.upload(approveIndex);
 					listOfReceipts = approveBL.showList();
+					JOptionPane.showMessageDialog(null,"上传成功");
 					labelHint.setText("上传成功！");
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "上传失败！！！");
@@ -248,9 +249,9 @@ public class ApproveUI {
 
 	void insert(String[] item, ReceiptPO po) {
 		item[0] = po.number;
-		item[1] = po.type.toString();
+		item[1] = ReceiptType.getName(po.type);
 		item[2] = po.time;
-		item[3] = po.statement.toString();
+		item[3] = ReceiptState.getName(po.statement);
 
 	}
 

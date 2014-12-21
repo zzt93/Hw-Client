@@ -102,7 +102,6 @@ public class FinReceiptController implements FinancialReceiptblservice{
 	}
 	public ArrayList<ReceiptPO> getReceipt()throws Exception{
 		ReceiptConditionVO condition=new ReceiptConditionVO(ReceiptType.CASH);
-		condition.state=ReceiptState.wait;
 		ArrayList<ReceiptPO> list=new ArrayList<ReceiptPO>();
 		ArrayList<ReceiptPO> temp=getReceipt(condition);
 		list.addAll(temp);

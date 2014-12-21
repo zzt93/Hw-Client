@@ -50,7 +50,6 @@ public class RepoReceiptPane {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -140,6 +139,11 @@ public class RepoReceiptPane {
 		btnCancel = new JButton("取消");
 		btnCancel.setBounds(321, 201, 60, 23);
 		panel.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
 		
 		textNum.setEditable(false);
 		textType.setEditable(false);
@@ -149,6 +153,7 @@ public class RepoReceiptPane {
 		textState.setEditable(false);
 		textReport.setEditable(false);
 		textStatisticNum.setEditable(false);
+		textOperator.setEditable(false);
 //		JButton btnRight = new JButton("确定");
 //		btnRight.setBounds(234, 201, 60, 23);
 //		panel.add(btnRight);

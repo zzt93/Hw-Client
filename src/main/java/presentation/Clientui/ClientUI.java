@@ -267,7 +267,11 @@ public class ClientUI extends JPanel {
 			public void keyPressed(KeyEvent e){
 				if(e.getKeyCode()==10){
 					HashMap<String,Object> map=new HashMap<String,Object>();
-					map.put("name", textField.getText());
+					String value=textField.getText();
+					if(value.equals("")){
+						value=null;
+					}
+					map.put("name", value);
 //FIXME,测试注销掉					
 					try {
 						list=clientController.queryClient(map);
@@ -290,11 +294,10 @@ public class ClientUI extends JPanel {
 			if(row==-1){
 				JOptionPane.showMessageDialog(null, "未选中客户");
 			}else{
-				if(e.getClickCount()>=2){
+				if(e.getClickCount()==2){
 					ClientPanel pane=new ClientPanel(list.get(row));
+					pane.show();
 				}
-				ClientPanel pane=new ClientPanel(list.get(row));
-				pane.show();
 			}
 		}
 	}
