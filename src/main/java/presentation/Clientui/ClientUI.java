@@ -245,6 +245,7 @@ public class ClientUI extends JPanel {
 					client=list.get(row);
 					try {
 						clientController.deleteClient(client.getId());
+						JOptionPane.showMessageDialog(null, "删除成功");
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
@@ -269,9 +270,11 @@ public class ClientUI extends JPanel {
 					HashMap<String,Object> map=new HashMap<String,Object>();
 					String value=textField.getText();
 					if(value.equals("")){
-						value=null;
+						map=null;
+					}else{
+						map.put("name", value);
 					}
-					map.put("name", value);
+					
 //FIXME,测试注销掉					
 					try {
 						list=clientController.queryClient(map);

@@ -34,7 +34,7 @@ public class ApproveUI {
 	private ArrayList<ReceiptPO> listOfReceipts;
 	private String[][] cellData;
 	private AdminBLService ad;
-	String[] name = { "编号", "种类", "时间", "审批状态" };
+	public String[] name = { "编号", "种类", "时间", "审批状态" };
 	TableModel tm;
 	JScrollPane scrollPane;
 
@@ -152,7 +152,7 @@ public class ApproveUI {
 						listOfReceipts.get(i).statement = ReceiptState.approve;
 						refreshTable(name);
 						approveIndex.add(listOfReceipts.get(i));
-
+						
 					}
 
 				}
@@ -174,7 +174,14 @@ public class ApproveUI {
 		JButton buttonReturn = new JButton("刷新");
 		buttonReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				refreshTable(name);
+				try {
+					listOfReceipts=approveBL.showList();
+					refreshTable(name);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		buttonReturn.setBounds(572, 256, 93, 23);
@@ -188,7 +195,8 @@ public class ApproveUI {
 				 */
 				// FIXME 接口关键部分
 				try {
-					approveBL.passList(approveIndex);
+//					passList干啥用的
+//					approveBL.passList(approveIndex);
 					approveBL.upload(approveIndex);
 					listOfReceipts = approveBL.showList();
 					JOptionPane.showMessageDialog(null,"上传成功");
@@ -216,24 +224,24 @@ public class ApproveUI {
 				switch (po.type) {
 				case STOCK_ACCEPT:
 		    	case STOCK_REJECTION:
-		    		new StockReceiptPane(approveIndex,(StockReceiptPO)po);
+		    		new StockReceiptPane(table,approveIndex,(StockReceiptPO)po);
 		    		break;
 		    	case SALE_ACCEPT:
 		    	case SALE_REJECTION:
-		    		new SaleReceiptPane(approveIndex,(SaleReceiptPO)po);
+		    		new SaleReceiptPane(table,approveIndex,(SaleReceiptPO)po);
 		    		break;
 		    	case RECEIVE:
 		    	case PAYMENT:
-		    		new PayReceiptPane(approveIndex,(RecPO)po);
+		    		new PayReceiptPane(table,approveIndex,(RecPO)po);
 		    		break;
 		    	case CASH:
-		    		new CashReceiptPane(approveIndex,(CashPO)po);
+		    		new CashReceiptPane(table,approveIndex,(CashPO)po);
 		    		break;
 		    	case REPORECEIPT:
-		    		new RepoReceiptPane(approveIndex,(RepoReceiptPO)po);
+		    		new RepoReceiptPane(table,approveIndex,(RepoReceiptPO)po);
 		    		break;
 		    	case GOODSRECEIPT:
-		    		new GoodsReceiptPane(approveIndex,(GoodsReceiptPO)po);
+		    		new GoodsReceiptPane(table,approveIndex,(GoodsReceiptPO)po);
 		    		break;
 		    	case SIGNAL:
 		    		//不可审批
@@ -255,7 +263,7 @@ public class ApproveUI {
 
 	}
 
-	void refreshTable(String[] name) {
+	public void refreshTable(String[] name) {
 		cellData = new String[listOfReceipts.size()][4];
 		int i = 0;
 		for (ReceiptPO po : listOfReceipts) {

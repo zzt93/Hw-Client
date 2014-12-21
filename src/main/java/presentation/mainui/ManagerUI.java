@@ -2,6 +2,9 @@ package presentation.mainui;
 
 import presentation.Adminui.AdminUI;
 import presentation.Approveui.ApproveUI;
+import presentation.RunningTableui.CheckProfitFrame;
+import presentation.RunningTableui.CheckReceiptFrame;
+import presentation.RunningTableui.SaleRecordFrame;
 import presentation.Strategyui.StrategyListUI;
 
 import javax.swing.*;
@@ -14,6 +17,9 @@ public class ManagerUI {
 	private StrategyListUI strategyList;
 	private ApproveUI approveList;
 	private AdminUI adminList;
+	private CheckReceiptFrame CRF=new CheckReceiptFrame();
+	private SaleRecordFrame SRF=new SaleRecordFrame();
+	private CheckProfitFrame CPF=new CheckProfitFrame();
 	//private RunningTable
 
 	/**
@@ -69,8 +75,10 @@ public class ManagerUI {
 		
 		tabbedPane.addTab("制定促销策略",strategyList.panel);
 		tabbedPane.addTab("审批单据",approveList.totalPanel);
-		tabbedPane.addTab("查看经营表格",adminList.panel);
-		
+		tabbedPane.addTab("用户管理",adminList.panel);
+		tabbedPane.addTab("经营历程",CRF.getPanel());
+		tabbedPane.addTab("销售记录",SRF.getPanel());
+		tabbedPane.addTab("经营情况",CPF.getPanel());
 
 	}
 }

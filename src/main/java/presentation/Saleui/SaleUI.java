@@ -282,14 +282,7 @@ public class SaleUI extends JPanel {
         jButton0.setText("清空");
         jButton0.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent evt){
-        		 textSalesman.setText("请输入业务员");
-        	     textRepository.setText("请输入仓库");
-        	     textComment.setText("");
-        	     labelTotal.setText("");
-        	     labelAllowance.setText("");
-        	     labelCoupon.setText("");
-        	     labelActualValue.setText("");
-        	     tableModel.clear();
+        		clear();
         	}
         });
         jButton1.setText("添加商品");
@@ -454,6 +447,7 @@ public class SaleUI extends JPanel {
     		setSaleReceipt();
 			saleController.makeReceipt(saleReceipt);
 			JOptionPane.showMessageDialog(null, "制定单据成功");
+			clear();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
@@ -492,6 +486,17 @@ public class SaleUI extends JPanel {
     		saleReceipt.type=ReceiptType.SALE_REJECTION;
     	}
     	
+    }
+    private void clear(){
+    	 total=0;
+    	 textSalesman.setText("请输入业务员");
+	     textRepository.setText("请输入仓库");
+	     textComment.setText("");
+	     labelTotal.setText("");
+	     labelAllowance.setText("");
+	     labelCoupon.setText("");
+	     labelActualValue.setText("");
+	     tableModel.clear();
     }
     public class StrategyPane{
     	private JFrame frame;

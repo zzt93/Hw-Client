@@ -103,8 +103,8 @@ public class PublicTableModel extends DefaultTableModel {
 				data[i][1]=temp.getId();
 				data[i][2]=temp.getType();
 				data[i][3]=temp.getLevel();
-				data[i][4]=temp.getToPay();
-				data[i][5]=temp.getToReceive();
+				data[i][4]=temp.getToReceive();
+				data[i][5]=temp.getToPay();
 				data[i][6]=temp.getDefaultSalesMan();
 			}
 			update(data);
@@ -268,8 +268,8 @@ public class PublicTableModel extends DefaultTableModel {
 				data[i][0]=temp.getName();
 				data[i][1]=ClientType.getName(temp.getType());
 				data[i][2]=temp.getPhone();
-				data[i][3]=temp.getToPay();
-				data[i][4]=temp.getToReceive();
+				data[i][3]=temp.getToReceive();
+				data[i][4]=temp.getToPay();
 			}
 			update(data);
 			break;

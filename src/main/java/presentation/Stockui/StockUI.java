@@ -231,10 +231,7 @@ public class StockUI extends JPanel {
         jButton1.setText("清空");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	textRepository.setText("请输入仓库");
-            	textComment.setText("");
-            	labelTotal.setText("");
-            	tableModel.clear();
+            	clear();
             }
         });
 
@@ -374,13 +371,20 @@ public class StockUI extends JPanel {
     		setStockReceipt();
 			stockController.makeReceipt(stockReceipt);
 			JOptionPane.showMessageDialog(null, "制定单据成功");
+			clear();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
 		}
     	
     }//GEN-LAST:event_jButton1ActionPerformed
-   
+    private void clear(){
+    	total=0;
+    	textRepository.setText("请输入仓库");
+    	textComment.setText("");
+    	labelTotal.setText("");
+    	tableModel.clear();
+    }
     private void setStockReceipt(){
     	ClientPO client=clientList.get(boxClient.getSelectedIndex());
     	//FIXME,操作员get
