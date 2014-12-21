@@ -124,7 +124,7 @@ public class StrategyNewUI {
 		lblHint.setBounds(10, 366, 386, 15);
 		newFrame.getContentPane().add(lblHint);
 
-		// FIXME日期的大小不好调整
+		// FIXME 日期的大小不好调整
 		startTimeText = new JTextField("单击选择日期");
 		startTimeText.setBounds(184, 191, 109, 11);
 		// newFrame.getContentPane().add(startTimeText);
@@ -167,6 +167,7 @@ public class StrategyNewUI {
 					case 1:
 						c = new Condition(CatOfCondition.TOTALPRICE, Double
 								.parseDouble(textFieldCondition.getText()));
+						break;
 					case 2:
 						c = new Condition(CatOfCondition.COMPOSITION, goodsPO);
 					}
@@ -174,12 +175,15 @@ public class StrategyNewUI {
 					switch (comboBoxTreatment.getSelectedIndex()) {
 					case 0:
 						t = new Treatment(CatOfTreatment.GIVE, goodsPOGive);
+						break;
 					case 1:
 						t = new Treatment(CatOfTreatment.DISCOUNT, Double
 								.parseDouble(textFieldTreatment.getText()));
+						break;
 					case 2:
 						t = new Treatment(CatOfTreatment.COUPON, Double
 								.parseDouble(textFieldTreatment.getText()));
+						break;
 					}
 
 					snb.newStrategy(c, t, tp);
@@ -267,7 +271,7 @@ public class StrategyNewUI {
 		}
 
 		public void itemStateChanged(ItemEvent arg0) {
-			if (comboBox.getSelectedItem().equals(txt)) {
+			if (comboBox.getSelectedItem().equals(txt)&&arg0.getStateChange() == ItemEvent.SELECTED) {
 				final JFrame listFrame;
 				listFrame = new JFrame();
 				listFrame.setBounds(0, 0, 200, 400);
@@ -280,7 +284,6 @@ public class StrategyNewUI {
 					tempGoodsPO = new ArrayList<GoodsModelPO>(goodsManager
 							.getGoodsList().getGoodsModels().values());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -295,17 +298,20 @@ public class StrategyNewUI {
 				TableModel tm = new MyTableModel(data, str);
 				final JTable listTable = new JTable(tm);
 				JScrollPane scrollpane = new JScrollPane();
-				scrollpane.setBounds(0, 0, 190, 380);
+				scrollpane.setBounds(0, 0, 190, 300);
 				scrollpane.setViewportView(listTable);
 				listFrame.getContentPane().add(scrollpane);
-				listFrame.setVisible(true);
+				listFrame.setLayout(null);
+				
 
 				JButton subConfirm = new JButton("确定");
+				subConfirm.setBounds(0,310,60,30);
 				subConfirm.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						int a[] = listTable.getSelectedRows();
+						myGoodsPO = new ArrayList<GoodsModelPO>();
 						for (int i : a) {
-							myGoodsPO.add(tempGoodsPO.get(a[i]));
+							myGoodsPO.add(tempGoodsPO.get(i));
 							lblHint.setText("已经保存了商品啦");
 							String names = "";
 							for (GoodsModelPO model : myGoodsPO) {
@@ -317,7 +323,8 @@ public class StrategyNewUI {
 						listFrame.dispose();
 					}
 				});
-
+				listFrame.add(subConfirm);
+				listFrame.setVisible(true);
 			}
 		}
 

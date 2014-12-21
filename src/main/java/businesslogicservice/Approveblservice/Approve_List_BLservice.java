@@ -10,6 +10,6 @@ public interface Approve_List_BLservice {
 	boolean passList(ArrayList<ReceiptPO> array) throws Exception;
 	public void upload(ArrayList<ReceiptPO> po) throws Exception;
 	public String message(String userName) throws Exception;
-	ArrayList<ReceiptPO> screen(String item);
+//	ArrayList<ReceiptPO> screen(String item);
 	ArrayList<ReceiptPO> order(String item);
 }

@@ -15,7 +15,6 @@ public class Approve_Mock implements Approve_Detail_BLservice, Approve_List_BLse
 
     public ArrayList<ReceiptPO> showList() {
 		ArrayList<ReceiptPO> arr = new ArrayList<ReceiptPO>();
-		arr.add(new SaleReceiptPO(10001,"bendan","shazi","cangku1",new BigDecimal(0)));
 		arr.add(new StockReceiptPO(10001,"bendan","shazi","cangku1",new BigDecimal(0)));
 		arr.add(new GoodsReceiptVO(null,"user"));
 		arr.add(new RepoReceiptPO("id",100,1200,"user"));
@@ -56,11 +55,11 @@ public class Approve_Mock implements Approve_Detail_BLservice, Approve_List_BLse
         return false;
     }
 
-    @Override
-    public ArrayList<ReceiptPO> screen(String item) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+//    @Override
+//    public ArrayList<ReceiptPO> screen(String item) {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
 
     @Override
     public ArrayList<ReceiptPO> order(String item) {

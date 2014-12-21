@@ -108,7 +108,7 @@ public class ApproveUI {
 		approveBL = new Approve_List();
 		listOfReceipts = approveBL.showList();
 		// listOfReceipts = new Approve_Mock().showList();
-		final JLabel labelHint = new JLabel("状态栏");
+		final JLabel labelHint = new JLabel("按住Ctrl键选择多项单据");
 		labelHint.setBounds(39, 473, 211, 15);
 		totalPanel.add(labelHint);
 
@@ -161,15 +161,15 @@ public class ApproveUI {
 		buttonApproveAll.setBounds(572, 111, 93, 23);
 		totalPanel.add(buttonApproveAll);
 
-		JButton buttonScreen = new JButton("筛选");
-		buttonScreen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				listOfReceipts = approveBL.screen(null);
-				refreshTable(name);
-			}
-		});
-		buttonScreen.setBounds(572, 211, 93, 23);
-		totalPanel.add(buttonScreen);
+//		JButton buttonScreen = new JButton("筛选");
+//		buttonScreen.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				listOfReceipts = approveBL.screen(null);
+//				refreshTable(name);
+//			}
+//		});
+//		buttonScreen.setBounds(572, 211, 93, 23);
+//		totalPanel.add(buttonScreen);
 
 		JButton buttonReturn = new JButton("返回");
 		buttonReturn.addActionListener(new ActionListener() {
@@ -278,8 +278,6 @@ public class ApproveUI {
 			e.printStackTrace();
 		}
 		listOfReceipts.add(new CashPO());
-		listOfReceipts.add(new SaleReceiptPO(10, "2", "3", "4", new BigDecimal(
-				0)));
 		for (ReceiptPO po : listOfReceipts) {
 			insert(cellData[i], po);
 			i++;
