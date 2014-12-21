@@ -25,7 +25,7 @@ public class StockReceiptPO extends ReceiptPO implements Serializable {
         this.operator = operator;
         this.comment = comment;
         this.totalValue=totalValue;
-        
+        this.client=client;
     }
 
     public String getNumber() {

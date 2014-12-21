@@ -36,6 +36,8 @@ public class SaleReceiptPO extends ReceiptPO implements Serializable {
     	allowance=new BigDecimal(0);
     	coupon=new BigDecimal(0);
     	actualValue=totalValue;
+    	strategyId=0;
+    	this.client=client;
     }
     public String getNumber() {
         return number;
