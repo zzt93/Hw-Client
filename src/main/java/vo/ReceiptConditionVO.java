@@ -36,6 +36,7 @@ public class ReceiptConditionVO extends TimeConditionVO implements Serializable 
     }
 
     public ReceiptConditionVO() {
+    	this(null);
     }
    
 }

@@ -278,11 +278,8 @@ public class ApproveUI {
 			e.printStackTrace();
 		}
 		listOfReceipts.add(new CashPO());
-<<<<<<< HEAD
 		listOfReceipts.add(new SaleReceiptPO(10, "2", "3", "4", new BigDecimal(
 				0),"操作员"));
-=======
->>>>>>> origin/master
 		for (ReceiptPO po : listOfReceipts) {
 			insert(cellData[i], po);
 			i++;
