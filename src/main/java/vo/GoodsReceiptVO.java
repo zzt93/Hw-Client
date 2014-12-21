@@ -2,6 +2,7 @@ package vo;
 
 import po.GoodsReceiptPO;
 import po.ReceiptPO;
+import po.ReceiptType;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 
 	public GoodsReceiptVO(GoodsReceiptPO goodsReceiptPO) {
 		user = goodsReceiptPO.getUser();
+		type = ReceiptType.GOODSRECEIPT;
 		for (GoodsVO goodsVO : goodsReceiptPO.getGoods()) {
 			goodsVOs.add(goodsVO);
 		}
@@ -27,6 +29,7 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	}
 	public GoodsReceiptVO(Vector<GoodsVO> goodsVOs, String user) {
 		this.goodsVOs = goodsVOs;
+		type = ReceiptType.GOODSRECEIPT;
 		this.user = user; 
 	}
 	

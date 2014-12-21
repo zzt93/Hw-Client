@@ -714,7 +714,12 @@ public class MainFrame extends javax.swing.JFrame {
 				+ s_mon.getSelectedItem() + "-" + s_day.getSelectedItem();
 		data[1] = (String) s_year1.getSelectedItem() + "-"
 				+ s_mon1.getSelectedItem() + "-" + s_day1.getSelectedItem();
-
+		//check whether the input date is vaild
+		if (s_year.getSelectedIndex()*360 +s_mon.getSelectedIndex()*30+s_day.getSelectedIndex() >
+				s_year1.getSelectedIndex()*360 +s_mon1.getSelectedIndex()*30+s_day1.getSelectedIndex()){
+			JOptionPane.showMessageDialog(null, "wrong date to check");
+			return;
+		}
 		InOutRepoVO inout = null;
 
 		if (DEBUG) {

@@ -28,6 +28,8 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 
 
 	public InOutRepoVO countInOut(String start, String end) throws Exception {
+
+
 		BigDecimal in = new BigDecimal(0);
 		BigDecimal out = new BigDecimal(0);
 		int in_num = 0;
