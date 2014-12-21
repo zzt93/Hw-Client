@@ -23,6 +23,7 @@ public class ProductsReceipt implements Serializable {
         this.price = price;
         this.comment = comment;
         this.type=type;
+        this.name=name;
         total_value=new BigDecimal(0);
         price=price.multiply(new BigDecimal(number));
         total_value=total_value.add(price);

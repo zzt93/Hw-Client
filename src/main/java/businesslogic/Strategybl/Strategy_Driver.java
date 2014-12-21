@@ -9,7 +9,12 @@ public class Strategy_Driver{
 	public void drive(StrategyList sl,StrategyPO spo){
 		spo.setCondition(new Condition(CatOfCondition.CUSTOMERLEVEL,1));
 		spo.setTreatment(new Treatment(CatOfTreatment.COUPON,100));
-		sl.addStrategy(spo);
+		try {
+			sl.addStrategy(spo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	public static void main(String[] args) {

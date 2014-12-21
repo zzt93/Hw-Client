@@ -1,6 +1,7 @@
 package businesslogic.RunningTablebl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import businesslogic.RepoReceiptbl.RepoReceiptBLImpl;
 import businesslogic.RepositoryCheckbl.RepoCheckBLImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
+import po.GoodsModelPO;
 import po.GoodsReceiptPO;
 import po.ProductsReceipt;
 import po.ReceiptPO;
@@ -38,11 +40,9 @@ public class CheckProfit {
 		//获得商品均价
 		if(repoData==null){//没有库存盘点就取进价
 			GL_controller controller=new GL_controller();
-			List<GoodsVO> goodsList=controller.eSearch_batch(null);
-			GoodsVO temp;
-			for(int i=0;i<goodsList.size();i++){
-				temp=goodsList.get(i);
-				goodsPrice.put(temp.id,temp.inPrice);
+			Collection<GoodsModelPO> goodsList=controller.getGoodsModelPOs().values();
+			for(GoodsModelPO temp:goodsList){
+				goodsPrice.put(temp.getId(),temp.getDefault_in());
 			}
 		}else{//有盘点则取最近盘点的数据
 			ArrayList<RepoGoods> repoGoods=repoData.getRepoGoods();
@@ -91,7 +91,7 @@ public class CheckProfit {
 		List<ReceiptPO> list;
 		RepoReceiptBLImpl repo=new RepoReceiptBLImpl();
 		condition.type=ReceiptType.REPORECEIPT;
-		list=repo.sendReceipt(condition);
+		list=repo.sendReceipt(condition);	
 		double overFlow=0,damage=0;
 		double temp;
 		RepoReceiptPO receipt;
@@ -145,13 +145,9 @@ public class CheckProfit {
 		//TODO,成本调价
 		GL_controller controller=new GL_controller();
 		String str=null;
-		List<GoodsModelVO> goodsModelList=controller.iSearch(str);
-	
-		GoodsModelVO temp;
-		for(int i=0;i<goodsModelList.size();i++){
-			temp=goodsModelList.get(i);
+		Collection<GoodsModelPO> goodsModelList=controller.getGoodsModelPOs().values();
+		for(GoodsModelPO temp:goodsModelList){
 			profit.costAdjust+=temp.getAmount()*(temp.getLastInPrice()-goodsPrice.get(temp.getId()));
-		
 		}
 	}
 

@@ -7,6 +7,7 @@ import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
 import businesslogicservice.FinancialReceiptblservice.FinancialReceiptblservice;
+import businesslogicservice.RepoReceiptblservice.RepoReceBLservice;
 import businesslogicservice.Saleblservice.SaleUtility;
 import businesslogicservice.Stockblservice.StockUtility;
 import dataservice.ApproveDataService.ApproveDataService;
@@ -48,6 +49,7 @@ public class Approve_List implements Approve_List_BLservice{
 	@Override
 	public ArrayList<ReceiptPO> showList() throws Exception {
 		//<yus>
+		receipts.clear();
 		SaleUtility saleUtility = new SaleUtilityImpl();
 		List<SaleReceiptPO> verSale = saleUtility.queryReceipt(new ReceiptConditionVO());
 		addOneByOne(verSale);
@@ -57,17 +59,16 @@ public class Approve_List implements Approve_List_BLservice{
 		addOneByOne(verStock);
 		//</yus>
 		//<zzt>
-//		RepoReceiptDataService repository = new RepoReceiptDataImpl();
-//		//FIXME
-//		ArrayList<RepoReceiptPO> arrRepo =repository.getRepoReceipts(new ReceiptConditionVO()).getObj();
-//		receipts.addAll(arrRepo);
-//		ArrayList<GoodsReceiptPO> arrGoods = repository.getGoodsReceipts(new ReceiptConditionVO()).getObj();
-//		receipts.addAll(arrGoods);
+		RepoReceiptBLImpl respository = new RepoReceiptBLImpl();
+		List<RepoReceiptPO> verRepo = respository.repoReceiptPOs();
+		List<GoodsReceiptPO> verGoods = respository.goodsReceiptPOs();
+		addOneByOne(verRepo);
+		addOneByOne(verGoods);
 		//</zzt>
 		
 		//<gda>
 		FinReceiptController finreceipt = new FinReceiptController();
-		ArrayList<ReceiptPO> arrfin = finreceipt.getReceipt(new ReceiptConditionVO());
+		ArrayList<ReceiptPO> arrfin = finreceipt.getReceipt();
 		for(ReceiptPO po :arrfin){
 			receipts.add(po);
 		}
@@ -83,7 +84,7 @@ public class Approve_List implements Approve_List_BLservice{
 		/*
 		 * Request new info from 
 		 */
-		return showList();
+		return this.receipts;
 
 	}
 
@@ -91,23 +92,27 @@ public class Approve_List implements Approve_List_BLservice{
 	public boolean passList(ArrayList<ReceiptPO> array) throws Exception {
 		// TODO Auto-generated method stub
 		for(ReceiptPO rpo : array){
-			if(receipts.contains(rpo)){
-				receipts.get(receipts.indexOf(rpo)).statement=ReceiptState.approve;
+			if(receipts.contains(rpo)){				
+				if(receipts.get(receipts.indexOf(rpo)).statement!=ReceiptState.approve){
+					receipts.get(receipts.indexOf(rpo)).statement=ReceiptState.approve;
+				}
+				else{
+					return false;
+				}
 			}			
 		}
-
 		return true;
 	}
 
-	@Override
-	public ArrayList<ReceiptPO> upload() throws Exception {
+	
+	public ArrayList<ReceiptPO> uploadAbandoned() throws Exception {
 		// TODO Auto-generated method stub 这个借口不用了。。
 		ArrayList<GoodsReceiptPO> goods = new ArrayList<GoodsReceiptPO>();
 		ArrayList<RepoReceiptPO> repo = new ArrayList<RepoReceiptPO>();
 		ArrayList<SaleReceiptPO> sale = new ArrayList<SaleReceiptPO>();
 		ArrayList<StockReceiptPO> stock = new ArrayList<StockReceiptPO>();
 		ArrayList<CashPO> cash = new ArrayList<CashPO>();
-		ArrayList<PayPO> pay = new ArrayList<PayPO>();
+//		ArrayList<PayPO> pay = new ArrayList<PayPO>();
 		ArrayList<RecPO> rec = new ArrayList<RecPO>();//Receive);
 		
 		
@@ -122,10 +127,9 @@ public class Approve_List implements Approve_List_BLservice{
 				sale.add((SaleReceiptPO)po);
 				break;
 			case RECEIVE: 
-				rec.add((RecPO)po);
-				break;
+				//收款单和付款单统一都是RecPO类型，只有type属性不一样
 			case PAYMENT: 
-				pay.add((PayPO)po);
+				rec.add((RecPO)po);
 				break;
 			case CASH:
 				cash.add((CashPO)po);
@@ -156,8 +160,15 @@ public class Approve_List implements Approve_List_BLservice{
 	 * Interface Changed
 	 * @param po
 	 */
+	@Override
 	public void upload(ArrayList<ReceiptPO> po){
 		ads.uploadReceipt(po);
+		try {
+			showList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public String message(String userName) throws Exception {
@@ -165,6 +176,7 @@ public class Approve_List implements Approve_List_BLservice{
 	}
 
 	public ArrayList<ReceiptPO> screen(String item){//ReceiptFilter[] filter
+		screenReceipts.clear();
 		for(ReceiptPO rpo:receipts){
 			if(rpo.statement == ReceiptState.wait||rpo.statement == ReceiptState.disapprove){
 				screenReceipts.add(rpo);

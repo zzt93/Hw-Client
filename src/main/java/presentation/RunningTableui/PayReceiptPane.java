@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,9 +21,12 @@ import javax.swing.JTextField;
 
 import businesslogic.FinancialReceiptbl.FinReceiptController;
 import businesslogic.RunningTablebl.RunTableController;
+import businesslogicservice.Approveblservice.Approve_List_BLservice;
 import po.BkTransPO;
+import po.CashPO;
 import po.DealState;
 import po.RecPO;
+import po.ReceiptPO;
 import po.ReceiptState;
 import po.ReceiptType;
 import presentation.mainui.ModelType;
@@ -48,7 +52,7 @@ public class PayReceiptPane {
 	private PublicTableModel tableModel;
 	private RecPO receipt;
 	private RunTableController controller;
-	
+	private List<ReceiptPO> approveList;
 	public PayReceiptPane(){
 		initialize();
 	}
@@ -69,6 +73,14 @@ public class PayReceiptPane {
 		this.controller=controller;
 		credit();
 		frame.setVisible(true);
+	}
+	public PayReceiptPane(List<ReceiptPO> approveList,RecPO receipt){
+		this.approveList=approveList;
+		this.receipt=receipt;
+		initialize();
+		set(receipt);
+		approve();
+		visit(true);
 	}
 	private void initialize() {
 		frame = new JFrame();
@@ -235,6 +247,7 @@ public class PayReceiptPane {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					controller.CreditNote(receipt);
+					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 					e1.printStackTrace();
@@ -244,11 +257,33 @@ public class PayReceiptPane {
 		});
 
 	}
+	public void approve(){
+		JButton button = new JButton("审批");
+		button.setBounds(219, 493, 60, 23);
+		panel.add(button);
+		
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<ReceiptPO> temp=new ArrayList<ReceiptPO>();
+				temp.add(receipt);
+				try {
+					receipt.statement=ReceiptState.approve;
+					approveList.add(receipt);
+					frame.dispose();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+	
+	}
 	public static void main(String[] args){
 		RecPO temp=new RecPO();
 	
 		
-		PayReceiptPane temp1=new PayReceiptPane(null,temp);
+//		PayReceiptPane temp1=new PayReceiptPane(null,temp);
 //		temp1.set(temp);
 //		temp1.query();
 //		temp1.visit(true);

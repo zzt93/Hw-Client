@@ -14,6 +14,7 @@ public class ManagerUI {
 	private StrategyListUI strategyList;
 	private ApproveUI approveList;
 	private AdminUI adminList;
+	//private RunningTable
 
 	/**
 	 * Launch the application.
@@ -68,7 +69,7 @@ public class ManagerUI {
 		
 		tabbedPane.addTab("制定促销策略",strategyList.panel);
 		tabbedPane.addTab("审批单据",approveList.totalPanel);
-		tabbedPane.addTab("用户管理",adminList.panel);
+		tabbedPane.addTab("查看经营表格",adminList.panel);
 		
 
 	}

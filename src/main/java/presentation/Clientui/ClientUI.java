@@ -39,6 +39,7 @@ import po.ClientPO;
 import po.ClientType;
 import presentation.mainui.ModelType;
 import presentation.mainui.PublicTableModel;
+import businesslogic.Adminbl.AdminController;
 import businesslogic.Clientbl.ClientUtilityImpl;
 
 public class ClientUI extends JPanel {
@@ -54,6 +55,7 @@ public class ClientUI extends JPanel {
 	private JTextField textFieldEmail;
 	private JTextField textFieldUpperBound;
 	private ClientUtilityImpl clientController;
+	private AdminController adminController;
 	private ClientPO client;
 	private List<ClientPO> list=new ArrayList<ClientPO>();
 	PublicTableModel tableModel;
@@ -197,6 +199,7 @@ public class ClientUI extends JPanel {
 
 		try {
 			clientController = new ClientUtilityImpl();
+			adminController=new AdminController();
 		} catch (RemoteException | NotBoundException e) {
 			e.printStackTrace();
 		}
@@ -207,17 +210,25 @@ public class ClientUI extends JPanel {
 			int temp=typeBox.getSelectedIndex();
 			ClientType type=null;
 			if(temp==0){
-				type=ClientType.SELLER;
+				type=ClientType.STOCKER;
 			}
 			else if(temp==1){
-				type=ClientType.STOCKER;
+				type=ClientType.SELLER;
 			}
 			else{
 				JOptionPane.showMessageDialog(null, "请选择用户类型");
 			}
-			client=new ClientPO(type,ClientLevel.LEVEL1,textFieldName.getText(),textFieldPhone.getText()
-					,textFieldAddress.getText(),textFieldZip.getText(),textFieldEmail.getText(),"操作员");
 			try {
+				client=new ClientPO(
+						type,
+						ClientLevel.LEVEL1,
+						textFieldName.getText(),
+						textFieldPhone.getText(),
+						textFieldAddress.getText(),
+						textFieldZip.getText(),
+						textFieldEmail.getText(),
+						adminController.getUser());
+				
 				clientController.addClient(client);
 				JOptionPane.showMessageDialog(null,"添加成功");
 			} catch (Exception e1) {

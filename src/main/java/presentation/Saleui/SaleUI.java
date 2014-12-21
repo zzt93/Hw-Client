@@ -479,10 +479,11 @@ public class SaleUI extends JPanel {
     	
     	saleReceipt=new SaleReceiptPO(
     			client.getId(),
+    			textSalesman.getText(),
     			textRepository.getText(),
-    			operator,
     			textComment.getText(),
-    			new BigDecimal(total));
+    			new BigDecimal(total),
+    			operator);
     	saleReceipt.setProductList(prList);
     	saleReceipt.setClient(client.getName());
     	if(boxType.getSelectedIndex()==0){

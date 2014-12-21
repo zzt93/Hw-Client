@@ -11,6 +11,6 @@ public interface Strategy_List_BLservice {
 	public ArrayList<StrategyPO> show() throws Exception;
 	public ArrayList<StrategyPO> returnStrategy
 		(int cusLevel,ArrayList<GoodsPO> goods) throws Exception;
-	public ArrayList<StrategyPO> queryValidStrategy(String fliters);
+	public ArrayList<StrategyPO> queryValidStrategy(SaleReceiptPO po) throws Exception;
 	public SaleReceiptPO setTreatment(StrategyPO spo, SaleReceiptPO po) throws Exception;
 }

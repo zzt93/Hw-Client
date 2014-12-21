@@ -2,6 +2,7 @@ package po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Treatment implements Serializable {
@@ -64,12 +65,21 @@ public class Treatment implements Serializable {
 	public String toString(){
 		switch(type){
 		case GIVE:
-			return "赠品:"+give.toString();
+			return "赠品:"+giveToString();
 		case COUPON:
 			return "代金券:"+coupon;
 		case DISCOUNT:
 			return "折扣:"+discount;
 		}
 		return "空优惠";
+	}
+	public String giveToString(){
+		String str = "";
+		Iterator<GoodsModelPO> it = give.iterator();
+		while(it.hasNext()){
+			str+=it.next().name;
+			str+=",";
+		}
+		return str;
 	}
 }

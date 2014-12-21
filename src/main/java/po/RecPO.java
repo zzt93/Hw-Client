@@ -29,12 +29,7 @@ public class RecPO extends ReceiptPO implements Serializable {
 		type=ReceiptType.RECEIVE;
 	}
 	public RecPO(){
-		client="张三";
-		operator="小李";
-		total=2180;
 		type=ReceiptType.RECEIVE;
-		number="SKD-20140507-99653";
-		time="2014-05-07";
 	}
 	public String getClient() {
 		return client;

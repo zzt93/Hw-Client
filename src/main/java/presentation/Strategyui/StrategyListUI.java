@@ -21,6 +21,9 @@ public class StrategyListUI {
 	Strategy_List_BLservice strategyList;
 	String[][] cellData;
 	ArrayList<StrategyPO> arrStrategy;
+	JTable table;
+	TableModel tm;
+	JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -54,9 +57,9 @@ public class StrategyListUI {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		frame.getContentPane().setLayout(null);
-		
+
 		try {
 			strategyList = new StrategyController();
 			arrStrategy = strategyList.show();
@@ -65,71 +68,74 @@ public class StrategyListUI {
 			JOptionPane.showMessageDialog(null, "未能获取到单据");
 			e1.printStackTrace();
 		}
-		
+
 		panel = new JPanel();
-		panel.setBounds(20, 40,750, 500);
+		panel.setBounds(20, 40, 750, 500);
 		panel.setLayout(null);
 		frame.getContentPane().add(panel);
 		panel.setName("制定促销策略");
-		
+
 		JButton buttonNew = new JButton("新策略");
 		buttonNew.setBounds(607, 106, 93, 23);
 		panel.add(buttonNew);
-		
-		JButton buttonScreen = new JButton("筛选");
-		buttonScreen.setBounds(607, 171, 93, 23);
-		panel.add(buttonScreen);
-		
+
+//		JButton buttonScreen = new JButton("筛选");
+//		buttonScreen.setBounds(607, 171, 93, 23);
+//		panel.add(buttonScreen);
+
 		JButton buttonReturn = new JButton("返回");
 		buttonReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		buttonReturn.setBounds(607, 300, 93, 23);
 		panel.add(buttonReturn);
-		
+
 		JLabel lblListHint = new JLabel("我是卖萌的状态栏");
 		lblListHint.setBounds(34, 467, 310, 23);
 		panel.add(lblListHint);
-		
+
 		JPanel subpanel = new JPanel();
 		subpanel.setBounds(34, 10, 553, 438);
 		panel.add(subpanel);
 		subpanel.setLayout(null);
-		
-		
-		String[] name = {"满足条件","优惠方式","起止时间"};
-		
+
+		final String[] name = { "满足条件", "优惠方式", "起止时间" };
+
 		cellData = new String[arrStrategy.size()][3];
-		refreshTable();
-		TableModel tm = new MyTableModel(cellData,name); 	
-		JTable table = new JTable(tm);
 		
-		JScrollPane scrollPane = new JScrollPane();
+
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 20, 532, 408);
 
 		subpanel.add(scrollPane);
+
+		table=new JTable();
+
 		table.setBounds(10, 20, 558, 415);
-		
+
 		scrollPane.setViewportView(table);
 		
+		cellData = new String[arrStrategy.size()][3];
+		refreshTable(name);
+
 		JButton button = new JButton("刷新");
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
 					arrStrategy = strategyList.show();
+					refreshTable(name);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, "未能获取到单据");
 					e1.printStackTrace();
 				}
 			}
 		});
 		button.setBounds(607, 237, 93, 23);
-		panel.add(button);		
-		
+		panel.add(button);
+
 		buttonNew.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -145,33 +151,36 @@ public class StrategyListUI {
 				});
 			}
 		});
-		
+
 	}
-	
-	void refreshTable() {
+
+	void refreshTable(String name[]) {
 		cellData = new String[arrStrategy.size()][3];
 		int i = 0;
 		for (StrategyPO po : arrStrategy) {
 			insert(cellData[i], po);
 			i++;
 		}
+		tm = new MyTableModel(cellData, name);
+		table.setModel(tm);
+		scrollPane.setViewportView(table);
 	}
-	void insert(String[] item,StrategyPO po){
-		item[0]=po.getCondition().toString();
-		item[1]=po.getTreatment().toString();
-		item[2]=po.getTimePeriod().toString();
-	}
-	public static class MyTableModel extends DefaultTableModel{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		
-		public MyTableModel(Object[][] data, Object[] columnNames) {
-		        super(data, columnNames);
-		    }
 
-		public boolean isCellEditable(int row, int column){
+	void insert(String[] item, StrategyPO po) {
+		item[0] = po.getCondition().toString();
+		item[1] = po.getTreatment().toString();
+		item[2] = po.getTimePeriod().toString();
+	}
+
+	public static class MyTableModel extends DefaultTableModel {
+
+		private static final long serialVersionUID = 1L;
+
+		public MyTableModel(Object[][] data, Object[] columnNames) {
+			super(data, columnNames);
+		}
+
+		public boolean isCellEditable(int row, int column) {
 			return false;
 		}
 	}
