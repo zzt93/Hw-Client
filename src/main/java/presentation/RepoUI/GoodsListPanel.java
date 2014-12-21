@@ -21,6 +21,7 @@ import businesslogic.RepositoryCheckbl.RepoCheckBLImpl;
 import businesslogic.RepositoryCheckbl.RepoCheckDataImpl;
 import dataservice.RepositoryCheckdataservice.RepoCheckDataService;
 import po.GoodsModelPO;
+import presentation.LoginUI.Gui;
 import util.RMIUtility;
 import vo.GoodsModelVO;
 import vo.GoodsVO;
@@ -1204,10 +1205,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
     }// GEN-LAST:event_rece_naviActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_log_outActionPerformed
-
-        CardLayout card = (CardLayout) MainFrame.frame.getContentPane()
-                .getLayout();
-        card.show(MainFrame.frame.getContentPane(), "log_card");
+        MainFrame.frame.dispose();
+        new Gui();
     }// GEN-LAST:event_log_outActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deleteActionPerformed

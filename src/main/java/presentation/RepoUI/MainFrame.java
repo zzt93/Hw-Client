@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import po.RepoPO;
+import presentation.LoginUI.Gui;
 import vo.InOutRepoVO;
 import businesslogic.RepositoryCheckbl.RepoCheckBLImpl;
 import businesslogic.RepositoryExaminbl.RepoExaminBLImpl;
@@ -851,8 +852,8 @@ public class MainFrame extends javax.swing.JFrame {
 	}// GEN-LAST:event_repo_checkActionPerformed
 
 	private void log_outActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_log_outActionPerformed
-		CardLayout card = (CardLayout) this.getContentPane().getLayout();
-		card.show(this.getContentPane(), "log_card");
+		this.dispose();
+		new Gui();
 	}// GEN-LAST:event_log_outActionPerformed
 
 	private void refreshActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refreshActionPerformed

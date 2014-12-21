@@ -24,6 +24,7 @@ import javax.swing.JScrollBar;
 
 import po.TreeNodePO;
 import businesslogic.GoodsTypebl.GT_controller;
+import presentation.LoginUI.Gui;
 
 import javax.swing.JButton;
 
@@ -249,16 +250,14 @@ public class GoodsTypePanel extends javax.swing.JPanel {
     }// GEN-LAST:event_rece_naviActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_log_outActionPerformed
-
-        CardLayout card = (CardLayout) MainFrame.frame.getContentPane()
-                .getLayout();
-        card.show(MainFrame.frame.getContentPane(), "main_card");
-        MainFrame.tab_pane.setSelectedIndex(3);
+        MainFrame.frame.dispose();
+        new Gui();
     }// GEN-LAST:event_log_outActionPerformed
 
-    public void set_GT_navigator_not_visible(){
+    public void set_GT_navigator_not_visible() {
         GT_navigator.setVisible(false);
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar GT_navigator;
     private javax.swing.Box.Filler filler1;
@@ -293,6 +292,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 
         int pre_w = 400;
         int pre_h = 0;
+
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g); // Do the original draw
@@ -581,7 +581,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             String type = JOptionPane.showInputDialog("New type name:");
             boolean add_result = false;
             TreeNodePO to_add;
-            if (type == null){
+            if (type == null) {
                 return;
             }
             if (type == "") {
@@ -658,15 +658,15 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         }// GEN-LAST:event_checkActionPerformed
 
         private void updateActionPerformed(java.awt.event.ActionEvent evt) {
-        	if (!treeNodePO_in_nodepanel.type_editable()){
-        		JOptionPane.showMessageDialog(null, "This type is not editable");
-        		return;
-        	}
+            if (!treeNodePO_in_nodepanel.type_editable()) {
+                JOptionPane.showMessageDialog(null, "This type is not editable");
+                return;
+            }
             String new_type = JOptionPane
                     .showInputDialog("Input new type for this node");
-            if (new_type == null){
-            	JOptionPane.showMessageDialog(null, "Invaild input");
-            	return;
+            if (new_type == null) {
+                JOptionPane.showMessageDialog(null, "Invaild input");
+                return;
             }
             type_info = new_type;
             TreeNodePO temp = new TreeNodePO(treeNodePO_in_nodepanel.getFa(),

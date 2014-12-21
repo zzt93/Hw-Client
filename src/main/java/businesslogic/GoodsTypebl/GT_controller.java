@@ -14,132 +14,132 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class GT_controller implements GT_GL_BLservice, GTBLservice
-		{
+public class GT_controller implements GT_GL_BLservice, GTBLservice {
 
-	ArrayList<TreeNodePO> treeNodePOs = new ArrayList<TreeNodePO>();
+    GoodsTypeDateService goodsTypeDateService;
 
-	public ArrayList<TreeNodePO> getTreeNodePOs() {
-		return treeNodePOs;
-	}
+    GTBLservice gtbLservice;
+    GT_GL_BLservice gt_gl_BLservice;
 
-	GoodsTypeDateService goodsTypeDateService;
-	static String gt_service = "goods type data service";
-
-	public GT_controller() throws RemoteException, NullPointerException, NotBoundException {
-		goodsTypeDateService = (GoodsTypeDateService) RMIUtility.getImpl(gt_service);
-
-		if (MainFrame.DEBUG) {
-			treeNodePOs = new ArrayList<TreeNodePO>();
-		} else {
-			treeNodePOs = goodsTypeDateService.getGoodsTypde().getObj();
-		}
-
-		if (treeNodePOs.size()==0) {
-			TreeNodePO root = new TreeNodePO("Light/灯");
-			treeNodePOs.add(root);
-			goodsTypeDateService.insert(root);
-		}
-		initial_list();
-		gtbLservice = new GTBLImpl(treeNodePOs);
-		gt_gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
-
-		gl_controller = new GL_controller();
-	}
-
-	private void initial_list() {
-		for (int i = 0; i < treeNodePOs.size(); i++) {
-			TreeNodePO temp = treeNodePOs.get(i);
-			for (int j = 1; j < treeNodePOs.size(); j++) {//skip the first root node
-				TreeNodePO son = treeNodePOs.get(j);
-				if (son.getFa().equals(temp)){
-					temp.getSons().add(son);
-				}
-			}
-		}
-	}
-
-	GTBLservice gtbLservice;
-	GT_GL_BLservice gt_gl_BLservice;
-
-	/*
-	 * for cross modules
-	 */
-	GL_controller gl_controller;
-
-	public boolean add(TreeNodePO node) throws Exception {
-
-		boolean res = goodsTypeDateService.insert(node).getObj();
-		if (res) {
-			gtbLservice.add(node);
-		}
-		return res;
-	}
-
-	public boolean check_ever_has(String type){
-		for (TreeNodePO treeNodePO : treeNodePOs) {
-			if (type.equals(treeNodePO.getType_so_far())){
-				return treeNodePO.getGoodsModels().size() > 0;
-			}
-		}
-		return false;
-	}
-	public boolean update(TreeNodePO tNode) throws Exception {
-		boolean res = gtbLservice.update(tNode);
-		if (res) {
-			goodsTypeDateService.update(tNode);
-		}
-		return res;
-	}
-
-	public boolean delete(TreeNodePO tNode) throws Exception {
-		boolean res = gtbLservice.delete(tNode);
-		if (res) {
-			goodsTypeDateService.delete(tNode);
-		}
-		return res;
-	}
-
-	public TreeNodePO eSearch(String id) throws Exception {
-		return gtbLservice.eSearch(id);
-	}
-
-	public ArrayList<TreeNodePO> show() throws Exception {
-		return gtbLservice.show();
-	}
+    /*
+     * for cross modules invoke
+     */
 
 
-	public ArrayList<String> addable_type() throws RemoteException {
-		return gt_gl_BLservice.addable_type();
-	}
+    ArrayList<TreeNodePO> treeNodePOs = new ArrayList<TreeNodePO>();
+    static String gt_service = "goods type data service";
 
-	public void update_nodelist(ArrayList<TreeNodeVO> treeNodes,
-			GoodsListPO goodsListPO) throws Exception {
-		gt_gl_BLservice.update_nodelist(treeNodes, goodsListPO);
-		goodsTypeDateService.update(null);
-	}
+    public ArrayList<TreeNodePO> getTreeNodePOs() {
+        return treeNodePOs;
+    }
 
-	public int height() {
-		int height = 0;
-		TreeNodePO fa = treeNodePOs.get(0);
-		return travel(fa, 0);
-	}
+    public GT_controller() throws RemoteException, NullPointerException, NotBoundException {
+        goodsTypeDateService = (GoodsTypeDateService) RMIUtility.getImpl(gt_service);
 
-	private int travel(TreeNodePO po, int i) {
-		if (po == null ) {
-			return i;
-		} else {
-			if (po.getSons().size() == 0){
-				return i+1;
-			}
-			int max = 0;
-			for (TreeNodePO treeNodePO : po.getSons()) {
-				int temp = travel(treeNodePO, i+1);
-				if (max < temp){
-					max = temp;
-				}
-			}
-			return max;
-		}
-	}
+        if (MainFrame.DEBUG) {
+            treeNodePOs = new ArrayList<TreeNodePO>();
+        } else {
+            treeNodePOs = goodsTypeDateService.getGoodsTypde().getObj();
+        }
+
+        if (treeNodePOs.size() == 0) {
+            TreeNodePO root = new TreeNodePO("Light/灯");
+            treeNodePOs.add(root);
+            goodsTypeDateService.insert(root);
+        }
+        initial_list();
+        gtbLservice = new GTBLImpl(treeNodePOs);
+        gt_gl_BLservice = new GT_GL_BLImpl(treeNodePOs);
+
+
+    }
+
+    private void initial_list() {
+        for (int i = 0; i < treeNodePOs.size(); i++) {
+            TreeNodePO temp = treeNodePOs.get(i);
+            for (int j = 1; j < treeNodePOs.size(); j++) {//skip the first root node
+                TreeNodePO son = treeNodePOs.get(j);
+                if (son.getFa().equals(temp)) {
+                    temp.getSons().add(son);
+                }
+            }
+        }
+    }
+
+    public boolean add(TreeNodePO node) throws Exception {
+
+        boolean res = goodsTypeDateService.insert(node).getObj();
+        if (res) {
+            gtbLservice.add(node);
+        }
+        return res;
+    }
+
+    public boolean check_ever_has(String type) {
+        for (TreeNodePO treeNodePO : treeNodePOs) {
+            if (type.equals(treeNodePO.getType_so_far())) {
+                return treeNodePO.getGoodsModels().size() > 0;
+            }
+        }
+        return false;
+    }
+
+    public boolean update(TreeNodePO tNode) throws Exception {
+        boolean res = gtbLservice.update(tNode);
+        if (res) {
+            goodsTypeDateService.update(tNode);
+        }
+        return res;
+    }
+
+    public boolean delete(TreeNodePO tNode) throws Exception {
+        boolean res = gtbLservice.delete(tNode);
+        if (res) {
+            goodsTypeDateService.delete(tNode);
+        }
+        return res;
+    }
+
+    public TreeNodePO eSearch(String id) throws Exception {
+        return gtbLservice.eSearch(id);
+    }
+
+    public ArrayList<TreeNodePO> show() throws Exception {
+        return gtbLservice.show();
+    }
+
+
+    public ArrayList<String> addable_type() throws RemoteException {
+        return gt_gl_BLservice.addable_type();
+    }
+
+    public void update_nodelist(ArrayList<TreeNodeVO> treeNodes,
+                                GoodsListPO goodsListPO) throws Exception {
+        gt_gl_BLservice.update_nodelist(treeNodes, goodsListPO);
+        goodsTypeDateService.update(null);
+    }
+
+    public int height() {
+        int height = 0;
+        TreeNodePO fa = treeNodePOs.get(0);
+        return travel(fa, 0);
+    }
+
+    private int travel(TreeNodePO po, int i) {
+        if (po == null) {
+            return i;
+        } else {
+            if (po.getSons().size() == 0) {
+                return i + 1;
+            }
+            int max = 0;
+            for (TreeNodePO treeNodePO : po.getSons()) {
+                int temp = travel(treeNodePO, i + 1);
+                if (max < temp) {
+                    max = temp;
+                }
+            }
+            return max;
+        }
+    }
 }
