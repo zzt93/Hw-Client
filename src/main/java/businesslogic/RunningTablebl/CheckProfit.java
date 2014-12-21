@@ -123,21 +123,27 @@ public class CheckProfit {
 	}
 	private void checkStockReceipt() throws Exception{
 		//TODO,进货退货差价，
-		List<StockReceiptPO> stockInList;
+//		List<StockReceiptPO> stockInList;
 		List<StockReceiptPO> stockOutList;
 		StockUtilityImpl stock=new StockUtilityImpl();
-		condition.type=ReceiptType.STOCK_ACCEPT;
-		stockInList=stock.queryReceipt(condition);
+//		condition.type=ReceiptType.STOCK_ACCEPT;
+//		stockInList=stock.queryReceipt(condition);
 		condition.type=ReceiptType.STOCK_REJECTION;
 		stockOutList=stock.queryReceipt(condition);
-		StockReceiptPO temp;
-		for(int i=0;i<stockInList.size();i++){
-			temp=stockInList.get(i);
-			profit.stockDiffer+=temp.getTotalValue().doubleValue();
-		}
-		for(int i=0;i<stockOutList.size();i++){
-			temp=stockOutList.get(i);
-			profit.stockDiffer-=temp.getTotalValue().doubleValue();
+//		StockReceiptPO temp;
+//		for(int i=0;i<stockInList.size();i++){
+//			temp=stockInList.get(i);
+//			profit.stockDiffer+=temp.getTotalValue().doubleValue();
+//		}
+//		for(int i=0;i<stockOutList.size();i++){
+//			temp=stockOutList.get(i);
+//			profit.stockDiffer-=temp.getTotalValue().doubleValue();
+//		}
+		for(StockReceiptPO receipt:stockOutList){
+			for(ProductsReceipt pr:receipt.getProductList()){
+				double inPrice=goodsPrice.get(pr.getCommodity_id());
+				profit.stockDiffer+=(pr.getPrice().doubleValue()-inPrice)*pr.getNumber();
+			}
 		}
 		
 	}

@@ -489,6 +489,7 @@ public class SaleUI extends JPanel {
     }
     private void clear(){
     	 total=0;
+    	 prList.removeAllElements();
     	 textSalesman.setText("请输入业务员");
 	     textRepository.setText("请输入仓库");
 	     textComment.setText("");

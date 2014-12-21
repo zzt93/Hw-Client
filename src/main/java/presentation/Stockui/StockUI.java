@@ -379,6 +379,7 @@ public class StockUI extends JPanel {
     	
     }//GEN-LAST:event_jButton1ActionPerformed
     private void clear(){
+    	list.removeAllElements();
     	total=0;
     	textRepository.setText("请输入仓库");
     	textComment.setText("");

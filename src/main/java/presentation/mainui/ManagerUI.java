@@ -73,6 +73,8 @@ public class ManagerUI {
 		approveList = new ApproveUI();
 		adminList=new AdminUI();
 		
+		CRF.uncredit();
+		
 		tabbedPane.addTab("制定促销策略",strategyList.panel);
 		tabbedPane.addTab("审批单据",approveList.totalPanel);
 		tabbedPane.addTab("用户管理",adminList.panel);
