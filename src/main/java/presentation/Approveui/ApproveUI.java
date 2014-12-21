@@ -279,7 +279,7 @@ public class ApproveUI {
 		}
 		listOfReceipts.add(new CashPO());
 		listOfReceipts.add(new SaleReceiptPO(10, "2", "3", "4", new BigDecimal(
-				0)));
+				0),"操作员"));
 		for (ReceiptPO po : listOfReceipts) {
 			insert(cellData[i], po);
 			i++;
