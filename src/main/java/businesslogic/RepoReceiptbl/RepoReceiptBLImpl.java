@@ -129,11 +129,15 @@ public class RepoReceiptBLImpl implements RepoReceBLservice {
 	@Override
 	public boolean produceGoodsReceipt(GoodsReceiptVO goodsVOs)
 			throws Exception {
-		repoReceiptDataService.insert(new GoodsReceiptPO(goodsVOs));
+		repoReceiptDataService.insert(new GoodsReceiptPO(goodsVOs)).throwIfFailed();
 		return true;
 	}
 
-	
+	public boolean produceGoodsReceipt_forAccount(GoodsReceiptPO goodsVOs)
+			throws Exception {
+		repoReceiptDataService.insert(goodsVOs).throwIfFailed();
+		return true;
+	}
 
 	
 	
