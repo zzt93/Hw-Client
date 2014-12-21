@@ -186,6 +186,7 @@ public class CheckReceiptFrame {
 		
 		JButton btnCreditCopy = new JButton("红冲复制");
 		btnCreditCopy.setBounds(60, 400, 80, 23);
+		btnCreditCopy.setEnabled(false);
 		panel.add(btnCreditCopy);
 		
 		progressBar = new JProgressBar();

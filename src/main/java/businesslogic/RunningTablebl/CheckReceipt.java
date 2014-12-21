@@ -4,6 +4,10 @@ import businesslogic.FinancialReceiptbl.FinReceiptController;
 import businesslogic.RepoReceiptbl.RepoReceiptBLImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
+import po.CashPO;
+import po.GoodsReceiptPO;
+import po.PayPO;
+import po.RecPO;
 import po.ReceiptPO;
 import po.SaleReceiptPO;
 import po.StockReceiptPO;
@@ -51,11 +55,13 @@ public class CheckReceipt {
 		
 		return list;
 	}
-	public void CreditNote(ReceiptPO vo)throws Exception{
-		switch(vo.type){
+	public void CreditNote(ReceiptPO po)throws Exception{
+		switch(po.type){
 		case GOODSRECEIPT:{
+			//FIXME,改成直接传递po
 			RepoReceiptBLImpl temp=new RepoReceiptBLImpl();
-			temp.produceGoodsReceipt((GoodsReceiptVO)vo);
+			GoodsReceiptVO vo=new GoodsReceiptVO((GoodsReceiptPO)po);
+			temp.produceGoodsReceipt(vo);
 			break;
 		}
 		//FIXME,该红冲是否生成有待商榷
@@ -67,28 +73,28 @@ public class CheckReceipt {
 		case SALE_ACCEPT:
 		case SALE_REJECTION:{
 			SaleUtilityImpl temp=new SaleUtilityImpl();
-			temp.makeReceipt((SaleReceiptPO)vo);
+			temp.makeReceipt((SaleReceiptPO)po);
 			break;
 		}
 		case STOCK_ACCEPT:
 		case STOCK_REJECTION:{
 			StockUtilityImpl temp=new StockUtilityImpl();
-			temp.makeReceipt((StockReceiptPO)vo);
+			temp.makeReceipt((StockReceiptPO)po);
 			break;
 		}
 		case CASH:{
 			FinReceiptController temp=new FinReceiptController();
-			temp.creditCash((CashVO)vo);
+			temp.creditCash((CashPO)po);
 			break;
 		}
 		case RECEIVE:{
 			FinReceiptController temp=new FinReceiptController();
-			temp.creditRec((RecVO)vo);
+			temp.creditRec((RecPO)po);
 			break;
 		}
 		case PAYMENT:{
 			FinReceiptController temp=new FinReceiptController();
-			temp.creditPay((PayVO)vo);
+			temp.creditPay((PayPO)po);
 			break;
 		}
 	}

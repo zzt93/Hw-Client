@@ -149,8 +149,13 @@ public class BankManageFrame {
 				int i=JOptionPane.showConfirmDialog(null,"","是否删除？",JOptionPane.YES_NO_OPTION);
 				if(i==0){
 					try {
-						controller.delete(list[currentRow]);
-						JOptionPane.showMessageDialog(null, "删除成功");
+						BankVO temp=list[currentRow];
+						if(temp.balance!=0){
+							JOptionPane.showMessageDialog(null, "不可删除！");
+						}else{
+							controller.delete(temp);
+							JOptionPane.showMessageDialog(null, "删除成功");
+						}
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
@@ -166,7 +171,7 @@ public class BankManageFrame {
 						,JOptionPane.ERROR_MESSAGE);
 			}
 			else{
-				bankPane=new BankPanel(list[currentRow]);
+				bankPane=new BankPanel(list[currentRow],controller);
 				bankPane.modify();
 				bankPane.visit();
 			}
@@ -174,7 +179,7 @@ public class BankManageFrame {
 	}
 	public class Add implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			bankPane=new BankPanel();
+			bankPane=new BankPanel(controller);
 			bankPane.add();
 			bankPane.visit();
 		}

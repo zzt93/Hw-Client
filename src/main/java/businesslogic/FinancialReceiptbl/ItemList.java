@@ -23,6 +23,7 @@ public class ItemList {
 		}
 	}
 	public void delete(int i){
+		total-=list.get(i).getAmount();
 		list.remove(i);
 	}
 	public double getTotal(){

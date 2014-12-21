@@ -2,11 +2,12 @@ package businesslogic.FinancialReceiptbl;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import po.BkTransPO;
+import po.CashPO;
 import po.ItemPO;
 import vo.CashVO;
 import vo.PayVO;
-
 import static org.junit.Assert.assertTrue;
 
 public class FinReceiptControllerTest {
@@ -104,7 +105,7 @@ public class FinReceiptControllerTest {
 	@Test
 	public void testCreditCash() {
 		try{
-			controller.creditCash(new CashVO());
+			controller.creditCash(new CashPO());
 			assertTrue(false);
 		}catch(Exception e){
 			System.out.println(e.getMessage());

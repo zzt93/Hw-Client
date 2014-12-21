@@ -164,20 +164,20 @@ public class FinancialReceiptFrame {
 	}
 	public class Payment implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			FinReceiptPane receiptPane=new FinReceiptPane();
+			FinReceiptPane receiptPane=new FinReceiptPane(controller);
 			receiptPane.creatPay();
 		}
 		
 	}
 	public class Receive implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			FinReceiptPane receiptPane=new FinReceiptPane();
+			FinReceiptPane receiptPane=new FinReceiptPane(controller);
 			receiptPane.creatRec();
 		}
 	}
 	public class Cash implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			FinReceiptPane receiptPane=new FinReceiptPane();
+			FinReceiptPane receiptPane=new FinReceiptPane(controller);
 			receiptPane.creatCash();
 		}
 	}
