@@ -54,25 +54,18 @@ public class FinReceiptPane {
 	JLabel label4;
 	JLabel label3;
 	JScrollPane scrollPane;
-	//FIXME
+
 	FinReceiptController controller;
 	SubPanel listPane;
 	
-	public FinReceiptPane(){
-		//FIXME
-		try {
-			controller=new FinReceiptController();
-		} catch (RemoteException | NotBoundException e) {
-			JOptionPane.showMessageDialog(null, "服务器出现了问题");
-			e.printStackTrace();
-		}
+	public FinReceiptPane(FinReceiptController controller){
+		this.controller=controller;
 		initialize();
 	}
 	public void ini(){//每次发起一次添加单据操作前执行,
 		//comboBox有时是客户列表，有时是银行账户,
 		if(comboBox!=null)
 		panel.remove(comboBox);
-		//FIXME
 		controller.clearBank();
 		controller.clearItem();
 	}
@@ -98,17 +91,14 @@ public class FinReceiptPane {
 //		panel.add(textNum);
 //		textNum.setColumns(10);
 //		textNum.setEditable(false);
-		//FIXME,操作员获得
 		
 		JLabel labelOperator;
 		labelOperator = new JLabel("操作员:");
 		labelOperator.setFont(font);
 		labelOperator.setBounds(90, 93, 80, 20);
 		panel.add(labelOperator);
-//		labelOperator.setFont(font);
-//		labelOperator.setBounds(90, 93, 54, 20);
-//		panel.add(labelOperator);
 
+		//操作员获得
 		try {
 			textOperator = new JTextField(controller.getOperator());
 			textOperator.setFont(font2);
@@ -179,7 +169,7 @@ public class FinReceiptPane {
 	private void bankIni(){
 		label3.setText("客户");
 		
-		//FIXEME,客户获得
+		//客户获得
 		String[] temp=null;
 		try {
 			temp = controller.getClient();
@@ -230,12 +220,21 @@ public class FinReceiptPane {
 		bankIni();
 		btnRight.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				
+				if(comboBox.getSelectedItem()==null){
+					JOptionPane.showMessageDialog(null, "客户不能为空");
+					return ;
+				}
+				if(tableModel.getRowCount()==0){
+					JOptionPane.showMessageDialog(null, "转账列表不能为空");
+					return;
+				}
+				
 				PayVO pay=new PayVO(
 						(String)comboBox.getSelectedItem(),
 						textOperator.getText(),
 						total);
-//				JOptionPane.showMessageDialog(null, "添加成功");
-				//FIXME,
+
 				try {
 					controller.makePayment(pay);
 					JOptionPane.showMessageDialog(null, "添加成功");
@@ -251,18 +250,22 @@ public class FinReceiptPane {
 		frame.setVisible(true);
 	}
 	public void creatCash(){
-		//TODO
 		ini();
 		cashIni();
 		btnRight.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				if(comboBox.getSelectedItem()==null){
+					JOptionPane.showMessageDialog(null, "银行账户不能为空");
+					return ;
+				}
+				if(tableModel.getRowCount()==0){
+					JOptionPane.showMessageDialog(null, "条目清单不能为空");
+					return;
+				}
 				CashVO cash=new CashVO(
 						(String)comboBox.getSelectedItem(),
 						textOperator.getText(),
 						total);
-				
-//				JOptionPane.showMessageDialog(null, "添加成功");
-				//FIXME
 				try {
 					controller.makeCash(cash);
 					JOptionPane.showMessageDialog(null, "添加成功");
@@ -274,6 +277,7 @@ public class FinReceiptPane {
 			}
 			
 		});
+		
 		frame.setTitle("现金费用单");
 		frame.setVisible(true);
 	}
@@ -282,13 +286,21 @@ public class FinReceiptPane {
 		bankIni();
 		btnRight.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				
+				if(comboBox.getSelectedItem()==null){
+					JOptionPane.showMessageDialog(null, "客户不能为空");
+					return ;
+				}
+				if(tableModel.getRowCount()==0){
+					JOptionPane.showMessageDialog(null, "转账列表不能为空");
+					return;
+				}
+				
 				RecVO receive=new RecVO(
 						(String)comboBox.getSelectedItem(),
 						textOperator.getText(),
 						total);
 				
-//				JOptionPane.showMessageDialog(null, "添加成功");
-				//FIXME
 				try {
 					controller.makeReceive(receive);
 					JOptionPane.showMessageDialog(null, "添加成功");
@@ -308,8 +320,7 @@ public class FinReceiptPane {
 			if(table.getSelectedRow()<0){
 				JOptionPane.showMessageDialog(null, "未选中账户");
 			}else{
-				//FIXME,
-//				tableModel,ArrayList是否一样动态调整？
+
 				switch(tableModel.type){
 				case ITEM:
 					total=controller.deleteItem(table.getSelectedRow());
@@ -333,10 +344,7 @@ public class FinReceiptPane {
 		}
 		
 	}
-	public static void main(String[] args){
-		FinReceiptPane a=new FinReceiptPane();
-		a.creatPay();
-	}
+
 	public class SubPanel {
 		BkTransPO bankTrans;
 		JFrame frame;
@@ -404,15 +412,14 @@ public class FinReceiptPane {
 		}
 		public void transfer(){
 			String[] temp=null;
-			
+			//获得银行列表
 			try {
 				temp = controller.getBank();
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage());
 				e1.printStackTrace();
 			}
-//			temp=new String[]{"银行账户1","银行账户2","银行账户3"};
-			//FIXME,获得银行列表
+
 			
 			comboBox=new JComboBox(temp);
 			comboBox.setBounds(90,13,100,25);
@@ -420,10 +427,25 @@ public class FinReceiptPane {
 			
 			button.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
-					bankTrans=new BkTransPO(
-							(String)comboBox.getSelectedItem(),
-							Double.valueOf(textAmount.getText()),
-							textRemark.getText());
+					if(comboBox.getSelectedItem()==null){
+						JOptionPane.showMessageDialog(null, "银行账户不能为空");
+						return;
+					}
+					if(textAmount.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "转账金额不能为空");
+						return;
+					}
+					
+					try{
+						bankTrans=new BkTransPO(
+								(String)comboBox.getSelectedItem(),
+								Double.valueOf(textAmount.getText()),
+								textRemark.getText());
+					}catch(NumberFormatException e2){
+						JOptionPane.showMessageDialog(null, "账户金额应为数字");
+						e2.printStackTrace();
+						return;
+					}
 					tableModel.addRow(bankTrans);
 					//FIXME
 					total=controller.addBank(bankTrans);
@@ -442,11 +464,24 @@ public class FinReceiptPane {
 			
 			button.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
-					item=new ItemPO(
-							textItem.getText(),
-							Double.valueOf(textAmount.getText()),
-							textRemark.getText());
-					//FIXME
+					if(textItem.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "条目不能为空");
+						return;
+					}
+					if(textAmount.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "金额不能为空");
+						return;
+					}
+					try{
+						item=new ItemPO(
+								textItem.getText(),
+								Double.valueOf(textAmount.getText()),
+								textRemark.getText());
+					}catch(NumberFormatException e2){
+						JOptionPane.showMessageDialog(null, "账户金额应为数字");
+						e2.printStackTrace();
+						return;
+					}
 					total=controller.addItem(item);
 					labelTotal.setText(String.valueOf(total));
 					tableModel.addRow(item);

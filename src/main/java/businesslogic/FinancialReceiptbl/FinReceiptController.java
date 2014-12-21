@@ -123,18 +123,18 @@ public class FinReceiptController implements FinancialReceiptblservice{
 		
 		return list;
 	}
-	public void creditCash(CashVO vo)throws Exception{
-		CashPO po=new CashPO(vo);
+	public void creditCash(CashPO po)throws Exception{
+		
 		ResultMessage result=finReceipt.makeCash(po);
 		result.throwIfFailed();
 	}
-	public void creditPay(PayVO vo)throws Exception{
-		PayPO po=new PayPO(vo);
+	public void creditPay(PayPO po)throws Exception{
+		
 		ResultMessage result=finReceipt.makePayMent(po);
 		result.throwIfFailed();
 	}
-	public void creditRec(RecVO vo)throws Exception{
-		RecPO po=new RecPO(vo);
+	public void creditRec(RecPO po)throws Exception{
+		
 		ResultMessage result=finReceipt.makeReceive(po);
 		result.throwIfFailed();
 	}

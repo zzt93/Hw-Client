@@ -35,19 +35,17 @@ public class BankPanel {
 	BankController controller;
 	private Font font=new Font("宋体",Font.PLAIN,18);
 //	private Font font2=new Font("宋体",Font.PLAIN,14);
-	public BankPanel(BankVO vo){
+	public BankPanel(BankVO vo,BankController controller){
+		this.controller=controller;
 		bank=vo;
 		initialize();
 	}
-	public BankPanel(){
+	public BankPanel(BankController controller){
+		this.controller=controller;
 		initialize();
 	}
 	public void initialize(){
-		try {
-			controller = new BankController();
-		} catch (RemoteException | NotBoundException e) {
-			JOptionPane.showMessageDialog(null, "服务器出问题了");
-		}
+		
 
 		frame=new JFrame();
 		frame.setBounds(100,100,350,250);
@@ -105,15 +103,31 @@ public class BankPanel {
 	public void add(){
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				BankVO bank=new BankVO(name.getText(),
-						Double.valueOf(balance.getText()),remark.getText());
-//FXIEME,底层
+				
+//FXIEME,底层	
+				if(name.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "账户名称不能为空");
+					return;
+				}
+				if(balance.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "账户金额不能为空");
+					return;
+				}
+				try{
+					bank=new BankVO(name.getText(),
+							Double.valueOf(balance.getText()),remark.getText());
+				}catch(NumberFormatException e2){
+					JOptionPane.showMessageDialog(null, "账户金额应为数字");
+					e2.printStackTrace();
+					return;
+				}
 				try {
 					controller.add(bank);
 					JOptionPane.showMessageDialog(null,"添加成功");
 					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null,e1.getMessage());
+					e1.printStackTrace();
 				}
 
 				
@@ -125,7 +139,12 @@ public class BankPanel {
 		remark.setText(bank.remark);
 		name.setText(bank.name);
 		name.setEditable(false);
-		balance.setText(String.valueOf(bank.balance));
+		try{
+			balance.setText(String.valueOf(bank.balance));
+		}catch(NumberFormatException e){
+			JOptionPane.showMessageDialog(null, "账户金额应为数字");
+			e.printStackTrace();
+		}
 		balance.setEditable(false);
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -139,6 +158,7 @@ public class BankPanel {
 					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null,e1.getMessage());
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -149,6 +169,6 @@ public class BankPanel {
 	}
 
 	public static void main(String[] args){
-		BankPanel pane=new BankPanel();
+//		BankPanel pane=new BankPanel();
 	}
 }
