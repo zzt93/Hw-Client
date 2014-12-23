@@ -56,18 +56,18 @@ public class RepoExaminBLImpl implements RepoExaminBLservice {
 		List<SaleReceiptPO> sale_out = sale.queryReceipt(out_condition);
 		
 		
-
+		//count the money
 		for (StockReceiptPO stockReceiptPO : stock_in) {
-			in = in.add(stockReceiptPO.getTotalValue());
+			out = out.add(stockReceiptPO.getTotalValue());
 		}
 		for (SaleReceiptPO saleReceiptPO : sale_in) {
-			in = in.add(saleReceiptPO.getTotalValue());
+			out = out.add(saleReceiptPO.getTotalValue());
 		}
 		for (StockReceiptPO saleReceiptPO : stock_out) {
-			out = out.add(saleReceiptPO.getTotalValue());
+			in = in.add(saleReceiptPO.getTotalValue());
 		}
 		for (SaleReceiptPO saleReceiptPO : sale_out) {
-			out = out.add(saleReceiptPO.getTotalValue());
+			in = in.add(saleReceiptPO.getTotalValue());
 		}
 		//count the amount
 		List<GoodsRecordVO> goodsRecordVOs = sale
