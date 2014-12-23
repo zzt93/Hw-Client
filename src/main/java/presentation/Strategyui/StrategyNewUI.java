@@ -216,6 +216,8 @@ public class StrategyNewUI {
 		});
 		buttonCancel.setBounds(323, 297, 93, 23);
 		newFrame.getContentPane().add(buttonCancel);
+		goodsPO = new ArrayList<GoodsModelPO>();
+		goodsPOGive = new ArrayList<GoodsModelPO>();
 
 		comboBoxCondition.addItemListener(new MyItemListener(comboBoxCondition,
 				txtComposition, lblHint, textFieldCondition, goodsPO));
@@ -308,8 +310,7 @@ public class StrategyNewUI {
 				subConfirm.setBounds(0,310,60,30);
 				subConfirm.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						int a[] = listTable.getSelectedRows();
-						myGoodsPO = new ArrayList<GoodsModelPO>();
+						int a[] = listTable.getSelectedRows();	
 						for (int i : a) {
 							myGoodsPO.add(tempGoodsPO.get(i));
 							lblHint.setText("已经保存了商品啦");

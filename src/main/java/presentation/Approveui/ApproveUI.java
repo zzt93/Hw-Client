@@ -126,6 +126,7 @@ public class ApproveUI {
 			public void mouseReleased(MouseEvent e) {
 				int pick = table.getTableHeader().columnAtPoint(e.getPoint());
 				approveBL.order(name[pick]);
+				refreshTable(name);
 			}
 		});
 		scrollPane = new JScrollPane();

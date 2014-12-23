@@ -2,6 +2,7 @@ package presentation.mainui;
 
 import presentation.Adminui.AdminUI;
 import presentation.Approveui.ApproveUI;
+import presentation.LoginUI.Beginer;
 import presentation.RunningTableui.CheckProfitFrame;
 import presentation.RunningTableui.CheckReceiptFrame;
 import presentation.RunningTableui.SaleRecordFrame;
@@ -10,6 +11,8 @@ import presentation.Strategyui.StrategyListUI;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ManagerUI {
 
@@ -62,6 +65,12 @@ public class ManagerUI {
 		frame.getContentPane().add(label);
 		
 		JButton buttonLogOut = new JButton("登出");
+		buttonLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Beginer.main(null);
+			}
+		});
 		buttonLogOut.setBounds(511, 16, 93, 23);
 		frame.getContentPane().add(buttonLogOut);
 		
