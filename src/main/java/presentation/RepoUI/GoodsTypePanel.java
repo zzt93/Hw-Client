@@ -578,6 +578,10 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         }// GEN-LAST:event_formMouseExited
 
         private void addActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addActionPerformed
+            if (gt_controller.check_ever_has(treeNodePO_in_nodepanel.getType_so_far())) {
+                JOptionPane.showMessageDialog(null, "Invaild type to add: already has goods under it");
+                return;
+            }
             String type = JOptionPane.showInputDialog("New type name:");
             boolean add_result = false;
             TreeNodePO to_add;
@@ -589,29 +593,26 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             } else {
                 to_add = new TreeNodePO(treeNodePO_in_nodepanel, type);
             }
-            if (gt_controller.check_ever_has(treeNodePO_in_nodepanel.getType_so_far())) {
-                JOptionPane.showMessageDialog(null, "Invaild type to add: already has goods under it");
-            } else {
-                try {
-                    add_result = gt_controller.add(to_add);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (MainFrame.DEBUG) {
-                    add_result = true;
-                }
-                if (add_result) {
-                    JOptionPane.showMessageDialog(MainFrame.frame,
-                            "Successfully added");
-                    // update node
-                    nodes.put(to_add, new NodePanel(to_add));
-                    tree_panel.repaint();
-                    tree_panel.revalidate();
-                    set_tree_scrol_view(nodes.get(to_add).getLocation());
-                } else {
-                    JOptionPane.showMessageDialog(MainFrame.frame, "Fail to add ");
-                }
+            try {
+                add_result = gt_controller.add(to_add);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (MainFrame.DEBUG) {
+                add_result = true;
+            }
+            if (add_result) {
+                JOptionPane.showMessageDialog(MainFrame.frame,
+                        "Successfully added");
+                // update node
+                nodes.put(to_add, new NodePanel(to_add));
+                tree_panel.repaint();
+                tree_panel.revalidate();
+                set_tree_scrol_view(nodes.get(to_add).getLocation());
+            } else {
+                JOptionPane.showMessageDialog(MainFrame.frame, "Fail to add ");
             }
 
 

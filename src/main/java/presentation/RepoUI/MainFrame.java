@@ -710,15 +710,16 @@ public class MainFrame extends javax.swing.JFrame {
 	private void repo_examinActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_repo_examinActionPerformed
 
 		String[] data = new String[6];
-
+		// get the date from ui
 		data[0] = (String) s_year.getSelectedItem() + "-"
 				+ s_mon.getSelectedItem() + "-" + s_day.getSelectedItem();
 		data[1] = (String) s_year1.getSelectedItem() + "-"
 				+ s_mon1.getSelectedItem() + "-" + s_day1.getSelectedItem();
-		//check whether the input date is vaild
+
+		/* check whether the input date is valid */
 		if (s_year.getSelectedIndex()*360 +s_mon.getSelectedIndex()*30+s_day.getSelectedIndex() >
 				s_year1.getSelectedIndex()*360 +s_mon1.getSelectedIndex()*30+s_day1.getSelectedIndex()){
-			JOptionPane.showMessageDialog(null, "wrong date to check");
+			JOptionPane.showMessageDialog(null, "Wrong date to check");
 			return;
 		}
 		InOutRepoVO inout = null;
@@ -745,7 +746,7 @@ public class MainFrame extends javax.swing.JFrame {
 			data[4] = "" + inout.getSumOfIn_num();
 			data[5] = "" + inout.getSumOfOut_num();
 		}
-		// show a dialog
+		// show a result by a dialog
 		final Repo_examin_dialog dialog = new Repo_examin_dialog(frame, true,
 				data);
 		dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -843,6 +844,7 @@ public class MainFrame extends javax.swing.JFrame {
 			RepoPO repoPO = repoCheckBLservice.checkAndSum();
 			if (repoPO == null){
 				JOptionPane.showMessageDialog(null, "Fail to check for no goods in the repository now");
+				return;
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frame,
