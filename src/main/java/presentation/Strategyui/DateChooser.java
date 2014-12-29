@@ -9,9 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
  
-/** 
- * 日期选择器，可以指定日期的显示格式 
- */
 public class DateChooser extends JPanel {
  
 	private static final long serialVersionUID = 4529266044762990227L;
@@ -19,16 +16,16 @@ public class DateChooser extends JPanel {
 	private Date initDate;
 	private Calendar now = Calendar.getInstance();
 	private Calendar select;
-	private JPanel monthPanel;//月历  
-	private JP1 jp1;//四块面板,组成  
-	private JP2 jp2;
-	private JP3 jp3;
-	private JP4 jp4;
-	private Font font = new Font("宋体", Font.PLAIN, 12);
-	private final LabelManager lm = new LabelManager();
-	private SimpleDateFormat sdf;
-	private boolean isShow = false;
-	private Popup pop;
+	private JPanel monthPanel;
+	JP1 jp1;
+	JP2 jp2;
+	JP3 jp3;
+	JP4 jp4;
+	Font font = new Font("宋体", Font.PLAIN, 12);
+	final LabelManager lm = new LabelManager();
+	SimpleDateFormat sdf;
+	boolean isShow = false;
+	Popup pop;
  
 	private JComponent showDate;
  
@@ -71,17 +68,12 @@ public class DateChooser extends JPanel {
 		initPanel();
 	}
  
-	/** 
-	 * 是否允许用户选择 
-	 */
+
 	public void setEnabled(boolean b) {
 		super.setEnabled(b);
 		showDate.setEnabled(b);
 	}
  
-	/** 
-	 *得到当前选择框的日期 
-	 */
 	public Date getDate() {
 		return select.getTime();
 	}
@@ -94,8 +86,6 @@ public class DateChooser extends JPanel {
 		sdf = new SimpleDateFormat(format);
 		return sdf.format(select.getTime());
 	}
- 
-	//根据初始化的日期,初始化面板  
 	private void initPanel() {
 		monthPanel = new JPanel(new BorderLayout());
 		monthPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
@@ -114,7 +104,6 @@ public class DateChooser extends JPanel {
  
 			}
  
-			//只要祖先组件一移动,马上就让popup消失  
 			public void ancestorMoved(AncestorEvent event) {
 				hidePanel();
 			}
@@ -180,7 +169,7 @@ public class DateChooser extends JPanel {
 		});
 	}
  
-	//根据新的日期刷新  
+
 	private void refresh() {
 		jp1.updateDate();
 		jp2.updateDate();
@@ -188,9 +177,7 @@ public class DateChooser extends JPanel {
 		jp4.updateDate();
 		SwingUtilities.updateComponentTreeUI(this);
 	}
- 
-	//提交日期  
-	private void commit() {
+	void commit() {
 		//TODO add other components here
 		if (showDate instanceof JTextField) {
 			((JTextField) showDate).setText(sdf.format(select.getTime()));
@@ -200,8 +187,7 @@ public class DateChooser extends JPanel {
  
 		hidePanel();
 	}
- 
-	//隐藏日期选择面板  
+
 	private void hidePanel() {
 		if (pop != null) {
 			isShow = false;
@@ -210,7 +196,6 @@ public class DateChooser extends JPanel {
 		}
 	}
  
-	//显示日期选择面板  
 	private void showPanel(Component owner) {
 		if (pop != null) {
 			pop.hide();
@@ -234,10 +219,7 @@ public class DateChooser extends JPanel {
 		pop.show();
 		isShow = true;
 	}
- 
-	/** 
-	 * 最上面的面板用来显示月份的增减 
-	 */
+
 	private class JP1 extends JPanel {
 		private static final long serialVersionUID = -5638853772805561174L;
 		JLabel yearleft, yearright, monthleft, monthright, center, centercontainer;
@@ -378,7 +360,7 @@ public class DateChooser extends JPanel {
  
 		protected void paintComponent(Graphics g) {
 			g.setFont(font);
-			g.drawString("星期日 星期一 星期二 星期三 星期四 星期五 星期六", 5, 10);
+			g.drawString("周日 周一 周二 周三 周四 周五 周六", 5, 10);
 			g.drawLine(0, 15, getWidth(), 15);
 		}
  
@@ -466,12 +448,11 @@ public class DateChooser extends JPanel {
  
 		protected void paintComponent(Graphics g) {
 			if (day == select.get(Calendar.DAY_OF_MONTH) && month == select.get(Calendar.MONTH)) {
-				//如果当前日期是选择日期,则高亮显示  
 				g.setColor(new Color(160, 185, 215));
 				g.fillRect(0, 0, getWidth(), getHeight());
 			}
 			if (year == now.get(Calendar.YEAR) && month == now.get(Calendar.MONTH) && day == now.get(Calendar.DAY_OF_MONTH)) {
-				//如果日期和当前日期一样,则用红框  
+
 				Graphics2D gd = (Graphics2D) g;
 				gd.setColor(Color.RED);
 				Polygon p = new Polygon();
@@ -481,7 +462,7 @@ public class DateChooser extends JPanel {
 				p.addPoint(0, getHeight() - 1);
 				gd.drawPolygon(p);
 			}
-			if (isSelected) {//如果被选中了就画出一个虚线框出来  
+			if (isSelected) {
 				Stroke s = new BasicStroke(1.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_BEVEL, 1.0f, new float[] { 2.0f, 2.0f }, 1.0f);
 				Graphics2D gd = (Graphics2D) g;
 				gd.setStroke(s);
@@ -559,23 +540,12 @@ public class DateChooser extends JPanel {
 		public void clear() {
 			list.clear();
 		}
- 
-		@SuppressWarnings("unused")
-		public void setSelect(MyLabel my, boolean b) {
-			for (MyLabel m : list) {
-				if (m.equals(my)) {
-					m.setSelected(true, b);
-				} else {
-					m.setSelected(false, b);
-				}
-			}
-		}
+
+
  
 		public void setSelect(Point p, boolean b) {
-			//如果是拖动,则要优化一下,以提高效率  
 			if (b) {
-				//表示是否能返回,不用比较完所有的标签,能返回的标志就是把上一个标签和  
-				//将要显示的标签找到了就可以了  
+ 
 				boolean findPrevious = false, findNext = false;
 				for (MyLabel m : list) {
 					if (m.contains(p)) {
@@ -618,29 +588,29 @@ public class DateChooser extends JPanel {
 			this.setPreferredSize(new Dimension(295, 20));
 			this.setBackground(new Color(160, 185, 215));
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-			final JLabel jl = new JLabel("今天: " + sdf.format(new Date()));
-			jl.setToolTipText("点击选择今天日期");
-			this.add(jl, BorderLayout.CENTER);
-			jl.addMouseListener(new MouseAdapter() {
+			final JLabel jlabel = new JLabel("今天: " + sdf.format(new Date()));
+			jlabel.setToolTipText("点击选择今天日期");
+			this.add(jlabel, BorderLayout.CENTER);
+			jlabel.addMouseListener(new MouseAdapter() {
 				public void mouseEntered(MouseEvent me) {
-					jl.setCursor(new Cursor(Cursor.HAND_CURSOR));
-					jl.setForeground(Color.RED);
+					jlabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+					jlabel.setForeground(Color.RED);
 				}
  
 				public void mouseExited(MouseEvent me) {
-					jl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-					jl.setForeground(Color.BLACK);
+					jlabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+					jlabel.setForeground(Color.BLACK);
 				}
  
 				public void mousePressed(MouseEvent me) {
-					jl.setForeground(Color.WHITE);
+					jlabel.setForeground(Color.WHITE);
 					select.setTime(new Date());
 					refresh();
 					commit();
 				}
  
 				public void mouseReleased(MouseEvent me) {
-					jl.setForeground(Color.BLACK);
+					jlabel.setForeground(Color.BLACK);
 				}
 			});
 		}
@@ -650,21 +620,4 @@ public class DateChooser extends JPanel {
 		}
 	}
  
-	public static void main(String[] args) {
-		DateChooser dateChooser1 = DateChooser.getInstance("yyyy-MM-dd");
-		DateChooser dateChooser2 = DateChooser.getInstance("yyyy-MM-dd");
-		JTextField showDate1 = new JTextField("单击选择日期");
-		JLabel showDate2 = new JLabel("单击选择日期");
- 
-		dateChooser1.register(showDate1);
-		dateChooser2.register(showDate2);
- 
-		JFrame jf = new JFrame("测试日期选择器");
-		jf.add(showDate1, BorderLayout.NORTH);
-		jf.add(showDate2, BorderLayout.SOUTH);
-		jf.pack();
-		jf.setLocationRelativeTo(null);
-		jf.setVisible(true);
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
 }

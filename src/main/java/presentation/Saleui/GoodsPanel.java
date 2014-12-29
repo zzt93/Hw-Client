@@ -202,7 +202,7 @@ public class GoodsPanel {
 				textName.setText(goods.getName());
 				textModel.setText(goods.getModel());
 				textId.setText(goods.getId());
-				if(type==GoodsPaneType.SALE){
+				if(type==GoodsPaneType.STOCK){
 					textPrice.setText(String.valueOf(goods.getDefault_in()));
 				}else{
 					textPrice.setText(String.valueOf(goods.getDefault_out()));

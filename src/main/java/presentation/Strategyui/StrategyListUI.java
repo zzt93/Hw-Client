@@ -83,6 +83,8 @@ public class StrategyListUI {
 //		buttonScreen.setBounds(607, 171, 93, 23);
 //		panel.add(buttonScreen);
 
+		
+		
 		JButton buttonReturn = new JButton("返回");
 		buttonReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

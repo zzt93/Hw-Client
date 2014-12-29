@@ -39,7 +39,7 @@ public class SaleRecordFrame {
 	private JTextField textStartTime;
 	private JTextField textEndTime;
 	private JTextField textGoods;
-	private JComboBox boxOperator;
+	private JTextField boxOperator;
 	private JComboBox boxClient;
 	private JPanel panel; 
 	
@@ -91,16 +91,10 @@ public class SaleRecordFrame {
 		panel.add(textRepository);
 		textRepository.setColumns(10);
 
-		//TODO,获得操作员列表
-		try {
-			boxOperator=new JComboBox(controller.getOperator());
-		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-			e1.printStackTrace();
-		}
+		
 		
 //		boxOperator = new JComboBox(new String[]{null,"操作员1","操作员2"});
-		
+		boxOperator = new JTextField();
 		boxOperator.setBounds(115, 177, 100, 21);
 		panel.add(boxOperator);
 		
@@ -193,7 +187,7 @@ public class SaleRecordFrame {
 					textGoods.getText(),
 					(String)boxClient.getSelectedItem(),
 					textRepository.getText(),
-					(String)boxOperator.getSelectedItem());
+					(String)boxOperator.getText());
 //			condition.client=(String)boxClient.getSelectedItem();
 //			condition.endTime=textEndTime.getText();
 //			condition.startTime=textStartTime.getText();
@@ -245,7 +239,9 @@ public class SaleRecordFrame {
 		public class MouseClick extends MouseAdapter{
 			public void mouseClicked(MouseEvent e){
 				if(e.getClickCount()>=2){
-					textGoods.setText(goodsList.getSelectedValue());
+					String[] temp=goodsList.getSelectedValue().split("\\(");
+					String[] goodsName=temp[1].split("\\)");
+					textGoods.setText(goodsName[0]);
 					listFrame.setVisible(false);
 				}
 			}

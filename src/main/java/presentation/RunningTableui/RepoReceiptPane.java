@@ -11,7 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import businesslogicservice.Approveblservice.Approve_List_BLservice;
 import po.CashPO;
@@ -36,10 +38,12 @@ public class RepoReceiptPane {
 	
 	private List<ReceiptPO> approveList;
 	private RepoReceiptPO receipt;
+	private JTable approveTable;
 	public RepoReceiptPane(){
 		initialize();
 	}
-	public RepoReceiptPane(List<ReceiptPO> approveList,RepoReceiptPO receipt){
+	public RepoReceiptPane(JTable approveTable,List<ReceiptPO> approveList,RepoReceiptPO receipt){
+		this.approveTable=approveTable;
 		this.approveList=approveList;
 		this.receipt=receipt;
 		initialize();
@@ -184,6 +188,7 @@ public class RepoReceiptPane {
 				try {
 					receipt.statement=ReceiptState.approve;
 					approveList.add(receipt);
+					instead();
 					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -192,7 +197,37 @@ public class RepoReceiptPane {
 			}
 			
 		});
-	
+		
+		JButton button1=new JButton("不通过");
+		button1.setBounds(134,201,80,23);
+		panel.add(button1);
+		button1.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				try {
+					receipt.statement=ReceiptState.disapprove;
+					approveList.add(receipt);
+					instead();
+					frame.dispose();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		});
+	}
+	public void instead(){//对审批单据的table进行即时更新
+		int row=approveTable.getSelectedRow();
+		DefaultTableModel model=(DefaultTableModel) approveTable.getModel();
+		Object data[]=new Object[4];
+		data[0]=receipt.number;
+		data[1]=ReceiptType.getName(receipt.type);
+		data[2]=receipt.time;
+		data[3]=ReceiptState.getName(receipt.statement);
+		model.removeRow(row);
+		model.insertRow(row,data);
 	}
 	public void visit(boolean temp){
 		frame.setVisible(temp);

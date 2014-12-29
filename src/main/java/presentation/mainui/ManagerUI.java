@@ -2,11 +2,17 @@ package presentation.mainui;
 
 import presentation.Adminui.AdminUI;
 import presentation.Approveui.ApproveUI;
+import presentation.LoginUI.Beginer;
+import presentation.RunningTableui.CheckProfitFrame;
+import presentation.RunningTableui.CheckReceiptFrame;
+import presentation.RunningTableui.SaleRecordFrame;
 import presentation.Strategyui.StrategyListUI;
 
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ManagerUI {
 
@@ -14,6 +20,9 @@ public class ManagerUI {
 	private StrategyListUI strategyList;
 	private ApproveUI approveList;
 	private AdminUI adminList;
+	private CheckReceiptFrame CRF=new CheckReceiptFrame();
+	private SaleRecordFrame SRF=new SaleRecordFrame();
+	private CheckProfitFrame CPF=new CheckProfitFrame();
 	//private RunningTable
 
 	/**
@@ -56,6 +65,12 @@ public class ManagerUI {
 		frame.getContentPane().add(label);
 		
 		JButton buttonLogOut = new JButton("登出");
+		buttonLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Beginer.main(null);
+			}
+		});
 		buttonLogOut.setBounds(511, 16, 93, 23);
 		frame.getContentPane().add(buttonLogOut);
 		
@@ -67,10 +82,14 @@ public class ManagerUI {
 		approveList = new ApproveUI();
 		adminList=new AdminUI();
 		
+		CRF.uncredit();
+		
 		tabbedPane.addTab("制定促销策略",strategyList.panel);
 		tabbedPane.addTab("审批单据",approveList.totalPanel);
-		tabbedPane.addTab("查看经营表格",adminList.panel);
-		
+		tabbedPane.addTab("用户管理",adminList.panel);
+		tabbedPane.addTab("经营历程",CRF.getPanel());
+		tabbedPane.addTab("销售记录",SRF.getPanel());
+		tabbedPane.addTab("经营情况",CPF.getPanel());
 
 	}
 }

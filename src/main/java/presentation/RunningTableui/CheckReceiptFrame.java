@@ -31,6 +31,7 @@ import po.CashPO;
 import po.GoodsReceiptPO;
 import po.RecPO;
 import po.ReceiptPO;
+import po.ReceiptState;
 import po.ReceiptType;
 import po.RepoReceiptPO;
 import po.SaleReceiptPO;
@@ -50,6 +51,7 @@ public class CheckReceiptFrame {
 	JComboBox boxOperator;
 	JComboBox boxType;
 	JComboBox boxClient;
+	JButton btnCredit;
 	private JPanel panel;
 	private PublicTableModel tableModel;
 	private RunTableController controller;
@@ -179,7 +181,7 @@ public class CheckReceiptFrame {
 		panel.add(btnQuery);
 		btnQuery.addActionListener(new Query());
 		
-		JButton btnCredit = new JButton("红冲");
+		btnCredit = new JButton("红冲");
 		btnCredit.setBounds(60, 350, 60, 23);
 		panel.add(btnCredit);
 		btnCredit.addActionListener(new Credit());
@@ -288,6 +290,10 @@ public class CheckReceiptFrame {
 				return ;
 			}else{
 				ReceiptPO temp=receiptList.get(table.getSelectedRow());
+				if(temp.statement==ReceiptState.wait){
+					JOptionPane.showMessageDialog(null,"待审的单据不可红冲");
+					return;
+				}
 				switch(temp.type){
 				case CASH:{
 					CashReceiptPane creditPane=new CashReceiptPane(controller,(CashPO)temp);
@@ -368,6 +374,9 @@ public class CheckReceiptFrame {
 				}
 			}
 		}
+	}
+	public void uncredit(){
+		btnCredit.setEnabled(false);
 	}
 	public static void main(String[] args){
 		CheckReceiptFrame a=new CheckReceiptFrame();

@@ -52,7 +52,7 @@ public class ClientPanel {
 		JLabel label1=new JLabel("编号: "+client.getId());
 		label1.setBounds(40,40,180,20);
 		
-		JLabel label2=new JLabel("类型: "+client.getToPay());
+		JLabel label2=new JLabel("类型: "+client.getType());
 		label2.setBounds(240,40,180,20);
 		
 		JLabel label3=new JLabel("级别: "+client.getLevel().toString());
@@ -223,6 +223,7 @@ public class ClientPanel {
 			try {
 				clientController.modifyClient(client);
 				JOptionPane.showMessageDialog(null, "修改成功");
+				frame.dispose();
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null,e1.getMessage());
 			}

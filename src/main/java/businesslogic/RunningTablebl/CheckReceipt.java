@@ -56,12 +56,13 @@ public class CheckReceipt {
 		return list;
 	}
 	public void CreditNote(ReceiptPO po)throws Exception{
+		po.number=null;
+		po.time=null;
 		switch(po.type){
 		case GOODSRECEIPT:{
 			//FIXME,改成直接传递po
 			RepoReceiptBLImpl temp=new RepoReceiptBLImpl();
-			GoodsReceiptVO vo=new GoodsReceiptVO((GoodsReceiptPO)po);
-			temp.produceGoodsReceipt(vo);
+			temp.produceGoodsReceipt_forAccount((GoodsReceiptPO)po);
 			break;
 		}
 		//FIXME,该红冲是否生成有待商榷
@@ -87,16 +88,13 @@ public class CheckReceipt {
 			temp.creditCash((CashPO)po);
 			break;
 		}
-		case RECEIVE:{
+		case RECEIVE:
+		case PAYMENT:{
 			FinReceiptController temp=new FinReceiptController();
 			temp.creditRec((RecPO)po);
 			break;
 		}
-		case PAYMENT:{
-			FinReceiptController temp=new FinReceiptController();
-			temp.creditPay((PayPO)po);
-			break;
-		}
+		
 	}
 	}
 	
