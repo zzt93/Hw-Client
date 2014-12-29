@@ -102,6 +102,12 @@ public class SaleUI extends JPanel {
      */
     public SaleUI() {
         initComponents();
+        try {
+			strategyController=new StrategyList();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出了问题");
+			e.printStackTrace();
+		}
     }
 
     /**

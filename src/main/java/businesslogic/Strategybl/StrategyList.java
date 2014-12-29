@@ -23,6 +23,7 @@ public class StrategyList implements Strategy_List_BLservice {
 		if (sds == null) {
 			sds = (StrategyDataService) RMIUtility.getImpl("Strategy");
 		}
+		refresh();
 	}
 
 	public ArrayList<StrategyPO> getList() {
@@ -64,7 +65,7 @@ public class StrategyList implements Strategy_List_BLservice {
 
 	public ArrayList<StrategyPO> queryValidStrategy(SaleReceiptPO po) throws Exception {
 		ClientUtilityImpl cu = new ClientUtilityImpl();
-
+		
 		ClientPO cl = cu.queryClientById(po.getClientId());
 		ArrayList<StrategyPO> pos = new ArrayList<StrategyPO>();
 		for (StrategyPO spo : list) {
