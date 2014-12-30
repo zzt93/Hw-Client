@@ -31,6 +31,7 @@ public class Treatment implements Serializable {
 		default:
 			break;
 		}
+		
 
 	}
 	public CatOfTreatment getType() {
