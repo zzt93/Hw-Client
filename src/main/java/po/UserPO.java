@@ -16,6 +16,12 @@ public class UserPO implements Serializable {
 		password = p;
 		role = r;
 	}
+	public UserPO(UserPO po){
+		id = po.getId();
+		name = po.getName();
+		password = po.password;
+		role = po.role;
+	}
 
 	
 	public UserPO(int i){

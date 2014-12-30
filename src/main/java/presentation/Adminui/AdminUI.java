@@ -119,15 +119,16 @@ public class AdminUI {
 		JButton buttonModify = new JButton("修改用户");
 		buttonModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AdminNewUI admin = new AdminNewUI(users.get(table
+						.getSelectedRow()));
 				try {
 					am.delete(users.get(table.getSelectedRow()));
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				users.remove(table.getSelectedRow());
-				AdminNewUI admin = new AdminNewUI(users.get(table
-						.getSelectedRow()));
+				//users.remove(table.getSelectedRow());
+				
 				try {
 					users = am.show();
 				} catch (Exception e1) {
