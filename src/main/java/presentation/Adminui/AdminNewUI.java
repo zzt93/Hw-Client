@@ -17,8 +17,12 @@ import po.UserPO;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AdminNewUI extends JDialog {
 
@@ -34,7 +38,7 @@ public class AdminNewUI extends JDialog {
 	JComboBox<String> comboBox;
 	private AdminController adminController;
 	private AdminUI listUI;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -42,8 +46,9 @@ public class AdminNewUI extends JDialog {
 	public static void main(String[] args) {
 		try {
 			AdminNewUI dialog = new AdminNewUI(null);
-			
+
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,11 +57,13 @@ public class AdminNewUI extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * 
+	 * @wbp.parser.constructor
 	 */
 	public AdminNewUI(AdminUI ui) {
 		listUI = ui;
 		try {
-			adminController=new AdminController();
+			adminController = new AdminController();
 			textFieldName = new JTextField();
 			textFieldPassword = new JTextField();
 		} catch (RemoteException | NotBoundException e) {
@@ -66,10 +73,10 @@ public class AdminNewUI extends JDialog {
 		initialize();
 	}
 
-	public AdminNewUI(UserPO po,AdminUI ui) {
+	public AdminNewUI(UserPO po, AdminUI ui) {
 		listUI = ui;
 		try {
-			adminController=new AdminController();
+			adminController = new AdminController();
 		} catch (RemoteException | NotBoundException e) {
 			JOptionPane.showMessageDialog(null, "服务器出现了问题");
 			e.printStackTrace();
@@ -84,6 +91,20 @@ public class AdminNewUI extends JDialog {
 	}
 
 	public void initialize() {
+		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				if (tempUserPO != null) {
+					userpo = new UserPO(tempUserPO);
+					try {
+						adminController.confirm(userpo);
+					} catch (Exception e1) {
+					}
+				}
+				listUI.refreshTable();
+				dispose();
+			}
+		});
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -94,7 +115,6 @@ public class AdminNewUI extends JDialog {
 		labelName.setBounds(52, 34, 66, 15);
 		contentPanel.add(labelName);
 
-		
 		textFieldName.setBounds(233, 31, 143, 21);
 		contentPanel.add(textFieldName);
 		textFieldName.setColumns(10);
@@ -103,7 +123,6 @@ public class AdminNewUI extends JDialog {
 		labelPassWord.setBounds(52, 95, 54, 15);
 		contentPanel.add(labelPassWord);
 
-		
 		textFieldPassword.setBounds(233, 92, 143, 21);
 		contentPanel.add(textFieldPassword);
 		textFieldPassword.setColumns(10);
@@ -136,19 +155,19 @@ public class AdminNewUI extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						int id=0;
-						switch((String) comboBox.getSelectedItem()){
+						int id = 0;
+						switch ((String) comboBox.getSelectedItem()) {
 						case "库存管理人员":
-							id+=10000;
+							id += 10000;
 						case "进货销售人员":
-							id+=10000;
+							id += 10000;
 						case "财务人员":
-							id+=10000;
+							id += 10000;
 						case "总经理":
-							id+=10000;
+							id += 10000;
 							break;
 						}
-						id+=(int)Math.random()*10000;
+						id += (int) Math.random() * 10000;
 						userpo = new UserPO(0, textFieldName.getText(),
 								textFieldPassword.getText(), (String) comboBox
 										.getSelectedItem());
@@ -160,12 +179,18 @@ public class AdminNewUI extends JDialog {
 							JOptionPane.showMessageDialog(null, "连接失败");
 							e1.printStackTrace();
 						}
-						if(judge){
+						if (judge) {
 							JOptionPane.showMessageDialog(null, "成功");
+							try {
+								listUI.users = listUI.am.show();
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							listUI.refreshTable();
 							AdminNewUI.this.dispose();
 						}
-						
+
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -182,6 +207,12 @@ public class AdminNewUI extends JDialog {
 								adminController.confirm(userpo);
 							} catch (Exception e1) {
 							}
+						}
+						try {
+							listUI.users = listUI.am.show();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
 						listUI.refreshTable();
 						dispose();
