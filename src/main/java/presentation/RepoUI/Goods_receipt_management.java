@@ -187,7 +187,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
         Repo_navigator.add(repo_navi);
         Repo_navigator.add(filler2);
 
-        log_out.setText("退出登录");
+        log_out.setText("返回");
         log_out.setFocusable(false);
         log_out.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         log_out.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
