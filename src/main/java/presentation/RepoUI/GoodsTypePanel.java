@@ -12,6 +12,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -400,11 +402,30 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         TreeNodePO treeNodePO_in_nodepanel;
         private JButton update;
 
+        private ArrayList<TreeNodePO> fake_sons = new ArrayList<>();
+        private ArrayList<TreeNodePO> real_sons ;
+        private int count = 0;
+
         public NodePanel(TreeNodePO po) {
             type_info = po.getType();
             type_so_far = po.getType_so_far();
             treeNodePO_in_nodepanel = po;
+            real_sons = po.getSons();
+
             initComponents();
+
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    count ++;
+                    if (count%2 == 0){
+                        treeNodePO_in_nodepanel.setSons(fake_sons);
+                    } else {
+                        treeNodePO_in_nodepanel.setSons(real_sons);
+                    }
+                }
+            });
         }
 
         /**

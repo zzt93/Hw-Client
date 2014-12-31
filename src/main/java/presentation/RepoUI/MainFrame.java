@@ -1,7 +1,6 @@
 package presentation.RepoUI;
 
-import java.awt.CardLayout;
-import java.awt.Cursor;
+import java.awt.*;
 import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -55,6 +54,15 @@ public class MainFrame extends javax.swing.JFrame {
 		}
 
 		initComponents();
+
+		// set the location of frame
+		int windowWidth = frame.getWidth();
+		int windowHeight = frame.getHeight();
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Dimension screenSize = kit.getScreenSize();
+		int screenWidth = screenSize.width;
+		int screenHeight = screenSize.height;
+		setLocation(screenWidth / 2 - windowWidth / 2, screenHeight / 2 - windowHeight / 2);
 	}
 
 	String[] year = new String[] { "2013", "2014", "2015", "2016" };

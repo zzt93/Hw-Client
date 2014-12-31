@@ -25,7 +25,8 @@ public class RepoReceiptPO extends ReceiptPO implements Serializable {
 		operator = user;
 		super.type = ReceiptType.REPORECEIPT;
 		super.time=new DateGetter().toString();
-		
+		number = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
+
 	}	
 	
 	public String getOperator(){

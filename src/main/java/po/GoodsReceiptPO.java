@@ -4,7 +4,10 @@ import vo.GoodsReceiptVO;
 import vo.GoodsVO;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Edited by dzh,add extension,11.12
  *
@@ -20,6 +23,8 @@ public class GoodsReceiptPO extends ReceiptPO implements Serializable {
 			goodsVOs.add(goodsVO);
 		}
 		sumOfGifts = goodsReceiptVO.getSumOfGifts();
+
+		number = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
 	}
 	
 	public ArrayList<GoodsVO> getGoods() {
