@@ -96,7 +96,7 @@ public class AdminUI {
 		JButton buttonNew = new JButton("新建用户");
 		buttonNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminNewUI.main(null);
+				AdminNewUI admin = new AdminNewUI(AdminUI.this);
 				try {
 					users = am.show();
 				} catch (Exception e1) {
@@ -120,7 +120,7 @@ public class AdminUI {
 		buttonModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminNewUI admin = new AdminNewUI(users.get(table
-						.getSelectedRow()));
+						.getSelectedRow()),AdminUI.this);
 				try {
 					am.delete(users.get(table.getSelectedRow()));
 				} catch (Exception e1) {

@@ -3,6 +3,7 @@ package presentation.Strategyui;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
 import po.StrategyPO;
 import businesslogic.Strategybl.StrategyController;
 import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
@@ -15,7 +16,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class StrategyListUI {
-
 	private JFrame frame;
 	public JPanel panel;
 	Strategy_List_BLservice strategyList;
@@ -143,9 +143,10 @@ public class StrategyListUI {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				EventQueue.invokeLater(new Runnable() {
+					@SuppressWarnings("unused")
 					public void run() {
 						try {
-							StrategyNewUI.main(null);
+							StrategyNewUI strategy = new StrategyNewUI(StrategyListUI.this);
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null, "服务器出错了ToT");
 							e.printStackTrace();

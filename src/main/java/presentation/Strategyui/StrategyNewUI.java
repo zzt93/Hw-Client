@@ -31,6 +31,7 @@ public class StrategyNewUI {
 	private ArrayList<GoodsModelPO> goodsPO;
 	private ArrayList<GoodsModelPO> tempGoodsPO;
 	private ArrayList<GoodsModelPO> goodsPOGive;
+	private StrategyListUI listUI;
 
 	Strategy_New_BLservice snb = new StrategyController();
 
@@ -41,7 +42,7 @@ public class StrategyNewUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StrategyNewUI window = new StrategyNewUI();
+					StrategyNewUI window = new StrategyNewUI(null);
 					window.frame.setVisible(false);
 					window.newFrame.setVisible(true);
 				} catch (Exception e) {
@@ -54,11 +55,12 @@ public class StrategyNewUI {
 	/**
 	 * Create the application.
 	 */
-	public StrategyNewUI() {
-
+	public StrategyNewUI(StrategyListUI ui) {
+		listUI = ui;
 		initialize();
-
+		this.newFrame.setVisible(true);
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -192,6 +194,7 @@ public class StrategyNewUI {
 					} else {
 						if (snb.confirm()) {
 							JOptionPane.showMessageDialog(null, "成功");
+							listUI.refreshTable();
 							newFrame.dispose();
 						} else {
 							JOptionPane.showMessageDialog(null, "失败了>o<");

@@ -33,6 +33,7 @@ public class AdminNewUI extends JDialog {
 	private UserPO tempUserPO;
 	JComboBox<String> comboBox;
 	private AdminController adminController;
+	private AdminUI listUI;
 	
 	/**
 	 * Launch the application.
@@ -40,7 +41,7 @@ public class AdminNewUI extends JDialog {
 
 	public static void main(String[] args) {
 		try {
-			AdminNewUI dialog = new AdminNewUI();
+			AdminNewUI dialog = new AdminNewUI(null);
 			
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -52,7 +53,8 @@ public class AdminNewUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AdminNewUI() {
+	public AdminNewUI(AdminUI ui) {
+		listUI = ui;
 		try {
 			adminController=new AdminController();
 			textFieldName = new JTextField();
@@ -64,7 +66,8 @@ public class AdminNewUI extends JDialog {
 		initialize();
 	}
 
-	public AdminNewUI(UserPO po) {
+	public AdminNewUI(UserPO po,AdminUI ui) {
+		listUI = ui;
 		try {
 			adminController=new AdminController();
 		} catch (RemoteException | NotBoundException e) {
@@ -143,6 +146,7 @@ public class AdminNewUI extends JDialog {
 							id+=10000;
 						case "总经理":
 							id+=10000;
+							break;
 						}
 						id+=(int)Math.random()*10000;
 						userpo = new UserPO(0, textFieldName.getText(),
@@ -158,6 +162,7 @@ public class AdminNewUI extends JDialog {
 						}
 						if(judge){
 							JOptionPane.showMessageDialog(null, "成功");
+							listUI.refreshTable();
 							AdminNewUI.this.dispose();
 						}
 						
@@ -178,6 +183,7 @@ public class AdminNewUI extends JDialog {
 							} catch (Exception e1) {
 							}
 						}
+						listUI.refreshTable();
 						dispose();
 					}
 				});
