@@ -22,7 +22,7 @@ public class AdminUI {
 	private JFrame frame;
 	private JTable table;
 	public JPanel panel;
-	private AdminBLService am;
+	AdminBLService am;
 	static ArrayList<UserPO> users = null;
 	private String[][] data;
 	TableModel tm;
@@ -97,6 +97,7 @@ public class AdminUI {
 		buttonNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminNewUI admin = new AdminNewUI(AdminUI.this);
+				admin.setVisible(true);
 				try {
 					users = am.show();
 				} catch (Exception e1) {
@@ -119,12 +120,15 @@ public class AdminUI {
 		JButton buttonModify = new JButton("修改用户");
 		buttonModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 				AdminNewUI admin = new AdminNewUI(users.get(table
 						.getSelectedRow()),AdminUI.this);
-				try {
+
+				
 					am.delete(users.get(table.getSelectedRow()));
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
+					lblHint.setText("你还没选择你要改哪个用户呢！！");
 					e1.printStackTrace();
 				}
 				//users.remove(table.getSelectedRow());
@@ -135,7 +139,7 @@ public class AdminUI {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				refreshTable();
+
 			}
 		});
 		buttonModify.setBounds(560, 141, 93, 23);
@@ -153,9 +157,12 @@ public class AdminUI {
 					
 					refreshTable();
 					table.repaint();
+				} catch (ArrayIndexOutOfBoundsException e2){
+					lblHint.setText("你没选你要删哪个吧..");
+					e2.printStackTrace();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					lblHint.setText("删除失败");
+					lblHint.setText("删除失败..");
 					e1.printStackTrace();
 				}
 			}
