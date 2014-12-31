@@ -1,7 +1,7 @@
 package businesslogic.Logbl;
 
 public class Logbl_driver {
-	public void driver(Logbl_stub log){
+	public void driver(Logbl log){
 		try {
 			String[] record=log.check();
 		} catch (Exception e) {
