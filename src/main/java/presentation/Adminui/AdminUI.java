@@ -97,6 +97,7 @@ public class AdminUI {
 		buttonNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminNewUI admin = new AdminNewUI(AdminUI.this);
+				admin.setVisible(true);
 				try {
 					users = am.show();
 				} catch (Exception e1) {

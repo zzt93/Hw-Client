@@ -941,10 +941,23 @@ public class MainFrame extends javax.swing.JFrame {
 		 * http://download.oracle.com/javase
 		 * /tutorial/uiswing/lookandfeel/plaf.html
 		 */
+		look_and_feel();
+		// </editor-fold>
+
+		/* Create and display the form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				frame = new MainFrame();
+				frame.setVisible(true);
+			}
+		});
+	}
+
+	public static void look_and_feel(){
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
 					.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
+				if ("GTK".equals(info.getName())) {
 					javax.swing.UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
@@ -962,17 +975,7 @@ public class MainFrame extends javax.swing.JFrame {
 			java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		}
-		// </editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				frame = new MainFrame();
-				frame.setVisible(true);
-			}
-		});
 	}
-
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton export;
 	private javax.swing.Box.Filler filler2;
