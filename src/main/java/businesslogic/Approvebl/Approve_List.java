@@ -162,13 +162,17 @@ public class Approve_List implements Approve_List_BLservice{
 	 */
 	@Override
 	public void upload(ArrayList<ReceiptPO> po){
-		ads.uploadReceipt(po);
-		try {
-			showList();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(ads.uploadReceipt(po).getErrMessage()==null){
+			try {
+				showList();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println(ads.uploadReceipt(po).getErrMessage());
 		}
+		
 	}
 	@Override
 	public String message(String userName) throws Exception {
