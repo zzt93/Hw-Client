@@ -449,8 +449,6 @@ public class PublicTableModel extends DefaultTableModel {
 		insertRow(row,data);
 	}
 	public void clear(){
-		for(int i=0;i<this.getRowCount();i++){
-			this.removeRow(0);
-		}
+		this.setRowCount(0);
 	}
 }

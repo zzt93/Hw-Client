@@ -583,7 +583,7 @@ public class MainFrame extends javax.swing.JFrame {
 		tool.setRollover(true);
 		tool.add(filler4);
 
-		log_out.setText("退出");
+		log_out.setText("退出登录");
 		log_out.setFocusable(false);
 		log_out.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		log_out.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -595,7 +595,7 @@ public class MainFrame extends javax.swing.JFrame {
 		tool.add(log_out);
 		tool.add(filler2);
 
-		refresh.setText("刷新");
+		refresh.setText("刷新数据");
 		refresh.setFocusable(false);
 		refresh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		refresh.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -858,7 +858,7 @@ public class MainFrame extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(frame,
 					"Repo Check fail to get data to CheckAndSum");
 		}
-		JOptionPane.showMessageDialog(null, "You successfully check the repository");
+		JOptionPane.showMessageDialog(null, "盘点成功，点击导出可查看详情");
 	}// GEN-LAST:event_repo_checkActionPerformed
 
 	private void log_outActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_log_outActionPerformed

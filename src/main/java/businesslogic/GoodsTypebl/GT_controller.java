@@ -5,6 +5,7 @@ import businesslogicservice.GoodsTypeblservice.GTBLservice;
 import businesslogicservice.GoodsTypeblservice.GT_GL_BLservice;
 import dataservice.GoodsTypedataservice.GoodsTypeDateService;
 import po.GoodsListPO;
+import po.ResultMessage;
 import po.TreeNodePO;
 import presentation.RepoUI.MainFrame;
 import util.RMIUtility;
@@ -33,13 +34,15 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice {
         return treeNodePOs;
     }
 
-    public GT_controller() throws RemoteException, NullPointerException, NotBoundException {
+    public GT_controller() throws Exception {
         goodsTypeDateService = (GoodsTypeDateService) RMIUtility.getImpl(gt_service);
 
         if (MainFrame.DEBUG) {
             treeNodePOs = new ArrayList<TreeNodePO>();
         } else {
-            treeNodePOs = goodsTypeDateService.getGoodsTypde().getObj();
+            ResultMessage<ArrayList<TreeNodePO>> message = goodsTypeDateService.getGoodsTypde();
+            message.throwIfFailed();
+            treeNodePOs = message.getObj();
         }
 
         if (treeNodePOs.size() == 0) {

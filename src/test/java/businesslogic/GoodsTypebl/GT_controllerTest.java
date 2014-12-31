@@ -30,7 +30,7 @@ public class GT_controllerTest {
 				try to delete it
 			*  result should be false
 			*  */
-			assertTrue(gt.delete(son));
+			assertTrue(!gt.delete(son));
 
 			// try update one node's type
 			TreeNodePO son11_update = new TreeNodePO(son11.getFa(), son11.getType());

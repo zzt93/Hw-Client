@@ -70,6 +70,8 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             }
         } catch (NotBoundException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         if (MainFrame.DEBUG) {
             treeNodePOs = new ArrayList<TreeNodePO>();

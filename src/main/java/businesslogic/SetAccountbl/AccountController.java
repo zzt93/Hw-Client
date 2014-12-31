@@ -32,7 +32,7 @@ public class AccountController implements SetAccountblservice {
 	private GL_controller goodsController;
 	private BankController bankController;
 	private static SetAccountdataservice dataService;
-	public AccountController() throws RemoteException, NullPointerException, NotBoundException{
+	public AccountController() throws Exception {
 		  if (dataService == null)
 	            dataService = (SetAccountdataservice) RMIUtility.getImpl("SetAccount");
 		GTcontroller=new GT_controller();

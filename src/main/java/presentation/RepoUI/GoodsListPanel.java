@@ -472,6 +472,8 @@ public class GoodsListPanel extends javax.swing.JPanel {
                     + ": Fail to get type info at ");
         } catch (NotBoundException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         try {
             addable_type.setModel(new javax.swing.DefaultComboBoxModel(gt_GL_BLservice

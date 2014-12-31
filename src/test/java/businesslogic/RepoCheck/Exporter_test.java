@@ -39,7 +39,7 @@ public class Exporter_test {
 		
 		HashMap<String, ArrayList<GoodsPO>> goods = new HashMap<String, ArrayList<GoodsPO>>();
 		ArrayList<GoodsPO> a1_list = new ArrayList<GoodsPO>();
-		a1_list.add(new GoodsPO(new GoodsVO("a1", "light", 10)));
+		a1_list.add(new GoodsPO(new GoodsVO("Light", "light", 10)));
 		a1_list.add(new GoodsPO(new GoodsVO("a1", "light", 10)));
 		ArrayList<GoodsPO> a2_list = new ArrayList<GoodsPO>();
 		a2_list.add(new GoodsPO(new GoodsVO("a1", "light", 10)));
