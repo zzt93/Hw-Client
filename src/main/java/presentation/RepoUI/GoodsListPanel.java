@@ -259,7 +259,7 @@ public class GoodsListPanel extends javax.swing.JPanel {
         GL_navigator.add(rece_navi);
         GL_navigator.add(filler2);
 
-        log_out.setText("退出登录");
+        log_out.setText("返回");
         log_out.setFocusable(false);
         log_out.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         log_out.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1205,8 +1205,10 @@ public class GoodsListPanel extends javax.swing.JPanel {
     }// GEN-LAST:event_rece_naviActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_log_outActionPerformed
-        MainFrame.frame.dispose();
-        new Gui();
+        CardLayout card = (CardLayout) MainFrame.frame.getContentPane()
+                .getLayout();
+        card.show(MainFrame.frame.getContentPane(), "main_card");
+        MainFrame.tab_pane.setSelectedIndex(0);
     }// GEN-LAST:event_log_outActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deleteActionPerformed

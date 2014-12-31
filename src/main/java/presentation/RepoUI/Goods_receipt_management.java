@@ -640,9 +640,10 @@ public class Goods_receipt_management extends javax.swing.JPanel {
     }// GEN-LAST:event_repo_naviActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_log_outActionPerformed
-
-        MainFrame.frame.dispose();
-        new Gui();
+        CardLayout card = (CardLayout) MainFrame.frame.getContentPane()
+                .getLayout();
+        card.show(MainFrame.frame.getContentPane(), "main_card");
+        MainFrame.tab_pane.setSelectedIndex(1);
     }// GEN-LAST:event_log_outActionPerformed
 
     private void delActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_delActionPerformed

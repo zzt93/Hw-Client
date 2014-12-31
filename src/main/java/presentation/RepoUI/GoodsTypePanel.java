@@ -184,7 +184,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         GT_navigator.add(rece_navi);
         GT_navigator.add(filler2);
 
-        log_out.setText("退出登录");
+        log_out.setText("返回");
         log_out.setFocusable(false);
         log_out.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         log_out.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -252,8 +252,10 @@ public class GoodsTypePanel extends javax.swing.JPanel {
     }// GEN-LAST:event_rece_naviActionPerformed
 
     private void log_outActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_log_outActionPerformed
-        MainFrame.frame.dispose();
-        new Gui();
+        CardLayout card = (CardLayout) MainFrame.frame.getContentPane()
+                .getLayout();
+        card.show(MainFrame.frame.getContentPane(), "main_card");
+        MainFrame.tab_pane.setSelectedIndex(0);
     }// GEN-LAST:event_log_outActionPerformed
 
     public void set_GT_navigator_not_visible() {
@@ -292,7 +294,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
 
         }
 
-        int pre_w = 400;
+        int pre_w = 0;
         int pre_h = 0;
 
         @Override
@@ -303,7 +305,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
                 this.setPreferredSize(new Dimension(2000, 1000));
             } else {
                 this.setPreferredSize(new java.awt.Dimension(pre_w + NODE_W
-                        * gt_controller.getTreeNodePOs().size() / 2, pre_h
+                        * gt_controller.getTreeNodePOs().size() , pre_h
                         + NODE_H * gt_controller.height()));
             }
 
@@ -329,7 +331,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
                 gridBagConstraints.gridy = height;
                 this.add(nodes.get(fa), gridBagConstraints);
 
-                int i = 1;
+                int i = 0;
                 if (fa.getSons().size() == 0) {
                     return;
                 }
@@ -340,7 +342,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
                     } else {
 
                     }
-                    draw_node(treeNodePO, height + 1, row - i);
+                    draw_node(treeNodePO, height + 1, (i%2==0)?row - 2*i-1:row + 2*i-1);
                     ++i;
                 }
             }
@@ -405,7 +407,6 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         private ArrayList<TreeNodePO> fake_sons = new ArrayList<>();
         private ArrayList<TreeNodePO> real_sons ;
         private int count = 0;
-        private boolean in = true;
 
         public NodePanel(TreeNodePO po) {
             type_info = po.getType();
@@ -420,7 +421,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     count ++;
-                    if (count%2 == 0){
+                    if (count%2 == 1){
                         treeNodePO_in_nodepanel.setSons(fake_sons);
                     } else {
                         treeNodePO_in_nodepanel.setSons(real_sons);
