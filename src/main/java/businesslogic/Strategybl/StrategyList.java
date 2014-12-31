@@ -23,6 +23,7 @@ public class StrategyList implements Strategy_List_BLservice {
 		if (sds == null) {
 			sds = (StrategyDataService) RMIUtility.getImpl("Strategy");
 		}
+		refresh();
 	}
 
 	public ArrayList<StrategyPO> getList() {
@@ -64,7 +65,7 @@ public class StrategyList implements Strategy_List_BLservice {
 
 	public ArrayList<StrategyPO> queryValidStrategy(SaleReceiptPO po) throws Exception {
 		ClientUtilityImpl cu = new ClientUtilityImpl();
-
+		
 		ClientPO cl = cu.queryClientById(po.getClientId());
 		ArrayList<StrategyPO> pos = new ArrayList<StrategyPO>();
 		for (StrategyPO spo : list) {
@@ -77,7 +78,7 @@ public class StrategyList implements Strategy_List_BLservice {
 
 			} else if (spo.getCondition().type == CatOfCondition.TOTALPRICE
 					&& BigDecimal.valueOf(spo.getCondition().getTotalPrice())
-							.compareTo(po.getActualValue()) > 0) {
+							.compareTo(po.getTotalValue()) < 0) {
 
 				pos.add(spo);
 
@@ -108,16 +109,22 @@ public class StrategyList implements Strategy_List_BLservice {
 		if (spo.getTreatment().type == CatOfTreatment.DISCOUNT) {
 			po.setAllowance(BigDecimal
 					.valueOf(spo.getTreatment().getDiscount()));
+			po.setActualValue(po.getTotalValue().subtract(po.getAllowance()));
+			po.setCoupon(new BigDecimal(0));
 			bd.add(BigDecimal
 					.valueOf(spo.getTreatment().getDiscount()));
 		}
 		if (spo.getTreatment().type == CatOfTreatment.COUPON) {
 			po.setCoupon(BigDecimal.valueOf(spo.getTreatment().getCoupon()));
+			po.setActualValue(po.getTotalValue());
+			po.setAllowance(new BigDecimal(0));
 			bd.add(BigDecimal
 					.valueOf(spo.getTreatment().getCoupon()));
 		}
 		if (spo.getTreatment().type == CatOfTreatment.GIVE) {
-						
+			po.setAllowance(new BigDecimal(0));
+			po.setCoupon(new BigDecimal(0));
+			po.setActualValue(po.getTotalValue());
 			po.setComment("有礼品赠送哦亲~^0^"+spo.getTreatment().toString());
 			//FIXME 赠品还没有实现
 			

@@ -79,6 +79,7 @@ public class StrategyNew implements Strategy_New_BLservice {
 		if(rm.getErrMessage()==null){
 			return true;
 		}else{
+			System.out.println(rm.getErrMessage());
 			return false;
 		}
 	}

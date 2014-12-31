@@ -32,6 +32,7 @@ import businesslogic.Clientbl.ClientUtilityImpl;
 import businesslogic.Salebl.SaleUtilityImpl;
 import businesslogic.Stockbl.StockUtilityImpl;
 import businesslogic.Strategybl.StrategyList;
+import po.CatOfCondition;
 import po.ClientPO;
 import po.ClientType;
 import po.ProductsReceipt;
@@ -102,6 +103,13 @@ public class SaleUI extends JPanel {
      */
     public SaleUI() {
         initComponents();
+        total=0;
+        try {
+			strategyController=new StrategyList();
+		} catch (RemoteException | NotBoundException e) {
+			JOptionPane.showMessageDialog(null, "服务器出了问题");
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -571,6 +579,7 @@ public class SaleUI extends JPanel {
     		btnRight.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					calculate();
+					frame.dispose();
 				}
     			
     		});
@@ -601,9 +610,13 @@ public class SaleUI extends JPanel {
 				}
     	    }
     	 public void refresh(StrategyPO po){
+    		 
     		 textDiscount.setText(String.valueOf(po.getTreatment().getDiscount()));
     		 textCoupon.setText(String.valueOf(po.getTreatment().getCoupon()));
-    		 giftModel.update(po.getTreatment().getGive());
+    		 if(po.getTreatment().getGive()!=null){
+    			 giftModel.update(po.getTreatment().getGive());
+    		 }
+    		 
     	 }
     }
  

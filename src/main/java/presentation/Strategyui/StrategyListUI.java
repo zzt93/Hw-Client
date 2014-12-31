@@ -3,6 +3,7 @@ package presentation.Strategyui;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
 import po.StrategyPO;
 import businesslogic.Strategybl.StrategyController;
 import businesslogicservice.Strategyblservice.Strategy_List_BLservice;
@@ -15,7 +16,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class StrategyListUI {
-
 	private JFrame frame;
 	public JPanel panel;
 	Strategy_List_BLservice strategyList;
@@ -24,6 +24,7 @@ public class StrategyListUI {
 	JTable table;
 	TableModel tm;
 	JScrollPane scrollPane;
+	final String[] name = { "满足条件", "优惠方式", "起止时间" };
 
 	/**
 	 * Launch the application.
@@ -103,7 +104,7 @@ public class StrategyListUI {
 		panel.add(subpanel);
 		subpanel.setLayout(null);
 
-		final String[] name = { "满足条件", "优惠方式", "起止时间" };
+		
 
 		cellData = new String[arrStrategy.size()][3];
 		
@@ -120,7 +121,7 @@ public class StrategyListUI {
 		scrollPane.setViewportView(table);
 		
 		cellData = new String[arrStrategy.size()][3];
-		refreshTable(name);
+		refreshTable();
 
 		JButton button = new JButton("刷新");
 		button.addMouseListener(new MouseAdapter() {
@@ -128,7 +129,7 @@ public class StrategyListUI {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					arrStrategy = strategyList.show();
-					refreshTable(name);
+					refreshTable();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "未能获取到单据");
 					e1.printStackTrace();
@@ -142,9 +143,10 @@ public class StrategyListUI {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				EventQueue.invokeLater(new Runnable() {
+					@SuppressWarnings("unused")
 					public void run() {
 						try {
-							StrategyNewUI.main(null);
+							StrategyNewUI strategy = new StrategyNewUI(StrategyListUI.this);
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null, "服务器出错了ToT");
 							e.printStackTrace();
@@ -156,7 +158,7 @@ public class StrategyListUI {
 
 	}
 
-	void refreshTable(String name[]) {
+	public void refreshTable() {
 		cellData = new String[arrStrategy.size()][3];
 		int i = 0;
 		for (StrategyPO po : arrStrategy) {

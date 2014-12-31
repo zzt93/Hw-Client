@@ -81,6 +81,7 @@ public class StockUI extends JPanel {
      */
     public StockUI() {
         initComponents();
+        total=0;
     }
 
     /**

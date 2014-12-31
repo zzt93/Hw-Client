@@ -97,7 +97,7 @@ public class ApproveUI {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				refreshTable(name);
+				refreshTable();
 			}
 		});
 		totalPanel.setBounds(0, 0, 750, 498);
@@ -126,7 +126,7 @@ public class ApproveUI {
 			public void mouseReleased(MouseEvent e) {
 				int pick = table.getTableHeader().columnAtPoint(e.getPoint());
 				approveBL.order(name[pick]);
-				refreshTable(name);
+				refreshTable();
 			}
 		});
 		scrollPane = new JScrollPane();
@@ -134,14 +134,14 @@ public class ApproveUI {
 		scrollPane.setBounds(10, 10, 507, 249);
 
 		totalPanel.add(scrollPane);
-		refreshTable(name);
+		refreshTable();
 
 		approveIndex = new ArrayList<ReceiptPO>();
 		
 		
 		// TODO 就是想搞你一下的存根;
 		// refreshTableDebug();
-		refreshTable(name);
+		refreshTable();
 		
 		
 		JButton buttonApproveAll = new JButton("批量通过");
@@ -151,7 +151,7 @@ public class ApproveUI {
 				for (int i : approves) {
 					if (listOfReceipts.get(i).statement != ReceiptState.approve) {
 						listOfReceipts.get(i).statement = ReceiptState.approve;
-						refreshTable(name);
+						refreshTable();
 						approveIndex.add(listOfReceipts.get(i));
 						
 					}
@@ -166,7 +166,7 @@ public class ApproveUI {
 //		buttonScreen.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				listOfReceipts = approveBL.screen(null);
-//				refreshTable(name);
+//				refreshTable();
 //			}
 //		});
 //		buttonScreen.setBounds(572, 211, 93, 23);
@@ -177,7 +177,7 @@ public class ApproveUI {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					listOfReceipts=approveBL.showList();
-					refreshTable(name);
+					refreshTable();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -202,6 +202,7 @@ public class ApproveUI {
 					listOfReceipts = approveBL.showList();
 					JOptionPane.showMessageDialog(null,"上传成功");
 					labelHint.setText("上传成功！");
+					refreshTable();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "上传失败！！！");
 				}
@@ -264,7 +265,7 @@ public class ApproveUI {
 
 	}
 
-	public void refreshTable(String[] name) {
+	public void refreshTable() {
 		cellData = new String[listOfReceipts.size()][4];
 		int i = 0;
 		for (ReceiptPO po : listOfReceipts) {

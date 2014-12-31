@@ -33,6 +33,7 @@ public class AdminNewUI extends JDialog {
 	private UserPO tempUserPO;
 	JComboBox<String> comboBox;
 	private AdminController adminController;
+	private AdminUI listUI;
 	
 	/**
 	 * Launch the application.
@@ -40,7 +41,8 @@ public class AdminNewUI extends JDialog {
 
 	public static void main(String[] args) {
 		try {
-			AdminNewUI dialog = new AdminNewUI();
+			AdminNewUI dialog = new AdminNewUI(null);
+			
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -51,9 +53,12 @@ public class AdminNewUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AdminNewUI() {
+	public AdminNewUI(AdminUI ui) {
+		listUI = ui;
 		try {
 			adminController=new AdminController();
+			textFieldName = new JTextField();
+			textFieldPassword = new JTextField();
 		} catch (RemoteException | NotBoundException e) {
 			JOptionPane.showMessageDialog(null, "服务器出现了问题");
 			e.printStackTrace();
@@ -61,13 +66,16 @@ public class AdminNewUI extends JDialog {
 		initialize();
 	}
 
-	public AdminNewUI(UserPO po) {
+	public AdminNewUI(UserPO po,AdminUI ui) {
+		listUI = ui;
 		try {
 			adminController=new AdminController();
 		} catch (RemoteException | NotBoundException e) {
 			JOptionPane.showMessageDialog(null, "服务器出现了问题");
 			e.printStackTrace();
 		}
+		textFieldName = new JTextField();
+		textFieldPassword = new JTextField();
 		textFieldName.setText(po.getName());
 		textFieldPassword.setText(po.getPassword());
 		tempUserPO = po;
@@ -86,7 +94,7 @@ public class AdminNewUI extends JDialog {
 		labelName.setBounds(52, 34, 66, 15);
 		contentPanel.add(labelName);
 
-		textFieldName = new JTextField();
+		
 		textFieldName.setBounds(233, 31, 143, 21);
 		contentPanel.add(textFieldName);
 		textFieldName.setColumns(10);
@@ -95,7 +103,7 @@ public class AdminNewUI extends JDialog {
 		labelPassWord.setBounds(52, 95, 54, 15);
 		contentPanel.add(labelPassWord);
 
-		textFieldPassword = new JTextField();
+		
 		textFieldPassword.setBounds(233, 92, 143, 21);
 		contentPanel.add(textFieldPassword);
 		textFieldPassword.setColumns(10);
@@ -128,6 +136,19 @@ public class AdminNewUI extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int id=0;
+						switch((String) comboBox.getSelectedItem()){
+						case "库存管理人员":
+							id+=10000;
+						case "进货销售人员":
+							id+=10000;
+						case "财务人员":
+							id+=10000;
+						case "总经理":
+							id+=10000;
+							break;
+						}
+						id+=(int)Math.random()*10000;
 						userpo = new UserPO(0, textFieldName.getText(),
 								textFieldPassword.getText(), (String) comboBox
 										.getSelectedItem());
@@ -141,6 +162,7 @@ public class AdminNewUI extends JDialog {
 						}
 						if(judge){
 							JOptionPane.showMessageDialog(null, "成功");
+							listUI.refreshTable();
 							AdminNewUI.this.dispose();
 						}
 						
@@ -155,8 +177,13 @@ public class AdminNewUI extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (tempUserPO != null) {
-							
+							userpo = new UserPO(tempUserPO);
+							try {
+								adminController.confirm(userpo);
+							} catch (Exception e1) {
+							}
 						}
+						listUI.refreshTable();
 						dispose();
 					}
 				});

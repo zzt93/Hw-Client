@@ -3,6 +3,7 @@ package presentation.mainui;
 import presentation.Adminui.AdminUI;
 import presentation.Approveui.ApproveUI;
 import presentation.LoginUI.Beginer;
+import presentation.Logui.LogUI;
 import presentation.RunningTableui.CheckProfitFrame;
 import presentation.RunningTableui.CheckReceiptFrame;
 import presentation.RunningTableui.SaleRecordFrame;
@@ -23,6 +24,7 @@ public class ManagerUI {
 	private CheckReceiptFrame CRF=new CheckReceiptFrame();
 	private SaleRecordFrame SRF=new SaleRecordFrame();
 	private CheckProfitFrame CPF=new CheckProfitFrame();
+	private LogUI logui = new LogUI();
 	//private RunningTable
 
 	/**
@@ -90,6 +92,7 @@ public class ManagerUI {
 		tabbedPane.addTab("经营历程",CRF.getPanel());
 		tabbedPane.addTab("销售记录",SRF.getPanel());
 		tabbedPane.addTab("经营情况",CPF.getPanel());
+		tabbedPane.addTab("日志",logui.getContentPane());
 
 	}
 }
