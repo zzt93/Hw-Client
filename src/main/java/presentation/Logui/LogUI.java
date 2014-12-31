@@ -63,7 +63,7 @@ public class LogUI extends JDialog {
 		scrollPane.setBounds(10, 10, 577, 281);
 		String[][] cellData = new String[str.size()][1];
 		for(int i = 0;i<str.size();i++){
-			cellData[i][1] = str.get(i);
+			cellData[i][0] = str.get(i);
 		}
 		TableModel tm = new DefaultTableModel(cellData,null);
 		
