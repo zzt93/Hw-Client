@@ -56,8 +56,8 @@ public class MainFrame extends javax.swing.JFrame {
 		initComponents();
 
 		// set the location of frame
-		int windowWidth = frame.getWidth();
-		int windowHeight = frame.getHeight();
+		int windowWidth = this.getWidth();
+		int windowHeight = this.getHeight();
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenWidth = screenSize.width;

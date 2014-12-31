@@ -405,6 +405,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
         private ArrayList<TreeNodePO> fake_sons = new ArrayList<>();
         private ArrayList<TreeNodePO> real_sons ;
         private int count = 0;
+        private boolean in = true;
 
         public NodePanel(TreeNodePO po) {
             type_info = po.getType();
@@ -424,7 +425,10 @@ public class GoodsTypePanel extends javax.swing.JPanel {
                     } else {
                         treeNodePO_in_nodepanel.setSons(real_sons);
                     }
+                    tree_panel.repaint();
+                    tree_panel.revalidate();
                 }
+
             });
         }
 
@@ -500,6 +504,13 @@ public class GoodsTypePanel extends javax.swing.JPanel {
             });
 
             type.setText(type_info);
+            type.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+
+                }
+            });
 
             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
                     jPanel1);
