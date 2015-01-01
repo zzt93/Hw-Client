@@ -65,7 +65,8 @@ public class LogUI extends JDialog {
 		for(int i = 0;i<str.size();i++){
 			cellData[i][0] = str.get(i);
 		}
-		TableModel tm = new DefaultTableModel(cellData,null);
+		String[] head = {"项目"};
+		TableModel tm = new DefaultTableModel(cellData,head);
 		
 		JTable table = new JTable(tm);
 		table.setBounds(10, 10, 577, 281);
@@ -75,17 +76,17 @@ public class LogUI extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+//			{
+//				JButton okButton = new JButton("OK");
+//				okButton.setActionCommand("OK");
+//				buttonPane.add(okButton);
+//				getRootPane().setDefaultButton(okButton);
+//			}
+//			{
+//				JButton cancelButton = new JButton("Cancel");
+//				cancelButton.setActionCommand("Cancel");
+//				buttonPane.add(cancelButton);
+//			}
 		}
 	}
 }
