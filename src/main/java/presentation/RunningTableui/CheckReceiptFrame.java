@@ -77,15 +77,15 @@ public class CheckReceiptFrame {
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("单据类型:");
-		label.setBounds(60, 60, 54, 15);
+		label.setBounds(60, 60, 60, 15);
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("起始时间:");
-		label_1.setBounds(60, 100, 54, 15);
+		label_1.setBounds(60, 100, 60, 15);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("终止时间:");
-		label_2.setBounds(60, 140, 54, 15);
+		label_2.setBounds(60, 140, 60, 15);
 		panel.add(label_2);
 		
 		JLabel label_3 = new JLabel("操作员:");
@@ -153,7 +153,7 @@ public class CheckReceiptFrame {
 //		tableModel.update(list);
 		
 		JLabel label_6 = new JLabel("单据列表");
-		label_6.setBounds(431, 57, 54, 15);
+		label_6.setBounds(431, 57, 60, 15);
 		panel.add(label_6);
 		
 		JButton btnClear = new JButton("清空");

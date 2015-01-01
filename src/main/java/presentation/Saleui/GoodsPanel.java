@@ -215,14 +215,19 @@ public class GoodsPanel {
 	public class Right implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
-			pr=new ProductsReceipt(
-					textId.getText(),
-					Integer.valueOf(textNum.getText()),
-					new BigDecimal(textPrice.getText()),
-					textComment.getText(),
-					textModel.getText(),
-					textName.getText());
 			
+			try{
+				pr=new ProductsReceipt(
+						textId.getText(),
+						Integer.valueOf(textNum.getText()),
+						new BigDecimal(textPrice.getText()),
+						textComment.getText(),
+						textModel.getText(),
+						textName.getText());
+			}catch(NumberFormatException e1){
+				JOptionPane.showMessageDialog(null, "商品数量格式有误");
+				e1.printStackTrace();
+			}
 			//添加到表格，添加到list,刷新界面总额
 			tableModel.addRow(pr);
 			list.add(pr);

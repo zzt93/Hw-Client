@@ -55,11 +55,11 @@ public class CheckProfitFrame {
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("起始时间:");
-		label.setBounds(60, 104, 54, 15);
+		label.setBounds(60, 104, 60, 15);
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("终止时间:");
-		label_1.setBounds(60, 146, 54, 15);
+		label_1.setBounds(60, 146, 60, 15);
 		panel.add(label_1);
 		
 		textStartTime = new JTextField();
@@ -81,7 +81,7 @@ public class CheckProfitFrame {
 		scrollPane.setViewportView(table);
 		
 		JLabel label_2 = new JLabel("经营情况");
-		label_2.setBounds(460, 60, 54, 15);
+		label_2.setBounds(460, 60, 60, 15);
 		panel.add(label_2);
 		
 		JButton btnQuery = new JButton("查询");
