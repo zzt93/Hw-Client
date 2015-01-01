@@ -119,7 +119,7 @@ public class ClientUI extends JPanel {
 		labelZip.setBounds(87, 187, 54, 15);
 		panel_1.add(labelZip);
 		
-		JLabel labelEmail = new JLabel("伊妹儿");
+		JLabel labelEmail = new JLabel("email");
 		labelEmail.setBounds(87, 236, 54, 15);
 		panel_1.add(labelEmail);
 		

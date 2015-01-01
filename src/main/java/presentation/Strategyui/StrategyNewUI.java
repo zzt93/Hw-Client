@@ -102,12 +102,14 @@ public class StrategyNewUI {
 		final JComboBox<String> comboBoxTreatment = new JComboBox<String>();
 		comboBoxTreatment.setBounds(184, 125, 109, 21);
 		newFrame.getContentPane().add(comboBoxTreatment);
-		String txtGive = new String("赠品");
+
 		String txtDiscount = new String("折扣");
 		String txtCoupon = new String("代金券");
-		comboBoxTreatment.addItem(txtGive);
+		String txtGive = new String("赠品");
+
 		comboBoxTreatment.addItem(txtDiscount);
 		comboBoxTreatment.addItem(txtCoupon);
+		comboBoxTreatment.addItem(txtGive);
 
 		JLabel lblTimePeriod = new JLabel("起止时间 ");
 		lblTimePeriod.setBounds(56, 194, 54, 15);
@@ -176,16 +178,17 @@ public class StrategyNewUI {
 
 					switch (comboBoxTreatment.getSelectedIndex()) {
 					case 0:
-						t = new Treatment(CatOfTreatment.GIVE, goodsPOGive);
-						break;
-					case 1:
 						t = new Treatment(CatOfTreatment.DISCOUNT, Double
 								.parseDouble(textFieldTreatment.getText()));
 						break;
-					case 2:
+					case 1:
 						t = new Treatment(CatOfTreatment.COUPON, Double
 								.parseDouble(textFieldTreatment.getText()));
 						break;
+					case 2:
+						t = new Treatment(CatOfTreatment.GIVE, goodsPOGive);
+						break;
+
 					}
 
 					snb.newStrategy(c, t, tp);
