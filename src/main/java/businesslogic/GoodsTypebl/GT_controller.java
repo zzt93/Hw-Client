@@ -60,8 +60,11 @@ public class GT_controller implements GT_GL_BLservice, GTBLservice {
     private void initial_list() {
         for (int i = 0; i < treeNodePOs.size(); i++) {
             TreeNodePO temp = treeNodePOs.get(i);
-            for (int j = 1; j < treeNodePOs.size(); j++) {//skip the first root node
+            for (int j = 0; j < treeNodePOs.size(); j++) {//skip the first root node
                 TreeNodePO son = treeNodePOs.get(j);
+                if (son.getFa() == null){
+                    continue;
+                }
                 if (son.getFa().equals(temp)) {
                     temp.getSons().add(son);
                 }

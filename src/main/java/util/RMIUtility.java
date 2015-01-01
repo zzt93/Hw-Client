@@ -15,7 +15,7 @@ public class RMIUtility {
 
     static {
         try {
-            registry = LocateRegistry.getRegistry("172.26.91.197");
+            registry = LocateRegistry.getRegistry("172.26.56.35");
         } catch (RemoteException e) {
             e.printStackTrace();
         }

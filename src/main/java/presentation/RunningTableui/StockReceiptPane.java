@@ -228,6 +228,7 @@ public class StockReceiptPane {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					controller.CreditNote(receipt);
+					JOptionPane.showMessageDialog(null,"添加成功");
 					frame.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());

@@ -151,7 +151,17 @@ public class Goods_receipt_management extends javax.swing.JPanel {
                     return;
                 }
                 back.removeAll();
-                back.add(new Goods_rece(temp, show_table_model));
+                DefaultTableModel model = new DefaultTableModel();
+                Vector< Vector<Object> > data = new Vector<Vector<Object> >();
+                for (GoodsVO goodsVO : temp.getGoodsVOs()) {
+                    Vector t = new Vector();
+                    t.add(goodsVO.name);
+                    t.add(goodsVO.id);
+                    t.add(goodsVO.amount);
+                    data.add(t);
+                }
+                model.setDataVector(data, new Vector(Arrays.asList(gift_table_col)));
+                back.add(new Goods_rece(temp, model));
                 back.repaint();
                 back.revalidate();
             }
@@ -271,164 +281,77 @@ public class Goods_receipt_management extends javax.swing.JPanel {
         javax.swing.GroupLayout buttonsLayout = new javax.swing.GroupLayout(
                 buttons);
         buttons.setLayout(buttonsLayout);
-        buttonsLayout
-                .setHorizontalGroup(buttonsLayout
-                        .createParallelGroup(
-                                javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(
-                                buttonsLayout
-                                        .createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(
-                                                buttonsLayout
-                                                        .createParallelGroup(
-                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(
-                                                                buttonsLayout
-                                                                        .createSequentialGroup()
-                                                                        .addGap(0,
-                                                                                127,
-                                                                                Short.MAX_VALUE)
-                                                                        .addComponent(
-                                                                                add)
-                                                                        .addGap(16,
-                                                                                16,
-                                                                                16))
-                                                        .addGroup(
-                                                                buttonsLayout
-                                                                        .createSequentialGroup()
-                                                                        .addGroup(
-                                                                                buttonsLayout
-                                                                                        .createParallelGroup(
-                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                        .addComponent(
-                                                                                                jLabel2)
-                                                                                        .addGroup(
-                                                                                                buttonsLayout
-                                                                                                        .createParallelGroup(
-                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                        .addComponent(
-                                                                                                                del)
-                                                                                                        .addComponent(
-                                                                                                                jLabel1)))
-                                                                        .addGap(18,
-                                                                                18,
-                                                                                18)
-                                                                        .addGroup(
-                                                                                buttonsLayout
-                                                                                        .createParallelGroup(
-                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                        .addComponent(
-                                                                                                amount,
-                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                        .addComponent(
-                                                                                                goods_id,
-                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                        .addContainerGap())))
-                        .addGroup(
-                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                buttonsLayout
-                                        .createSequentialGroup()
-                                        .addContainerGap(
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                Short.MAX_VALUE)
-                                        .addComponent(produce)
-                                        .addGap(61, 61, 61)));
-        buttonsLayout
-                .setVerticalGroup(buttonsLayout
-                        .createParallelGroup(
-                                javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(
-                                buttonsLayout
-                                        .createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(
-                                                buttonsLayout
-                                                        .createParallelGroup(
-                                                                javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(
-                                                                goods_id,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel2))
-                                        .addGap(35, 35, 35)
-                                        .addGroup(
-                                                buttonsLayout
-                                                        .createParallelGroup(
-                                                                javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel1)
-                                                        .addComponent(
-                                                                amount,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(33, 33, 33)
-                                        .addGroup(
-                                                buttonsLayout
-                                                        .createParallelGroup(
-                                                                javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(add)
-                                                        .addComponent(del))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(produce)
-                                        .addContainerGap(48, Short.MAX_VALUE)));
+        buttonsLayout.setHorizontalGroup(
+                buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(buttonsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel1)
+                                        .addComponent(del))
+                                .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(buttonsLayout.createSequentialGroup()
+                                                .addGap(7, 7, 7)
+                                                .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(buttonsLayout.createSequentialGroup()
+                                                .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(buttonsLayout.createSequentialGroup()
+                                                                .addGap(19, 19, 19)
+                                                                .addComponent(add))
+                                                        .addGroup(buttonsLayout.createSequentialGroup()
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(goods_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(buttonsLayout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(produce)
+                                .addContainerGap(67, Short.MAX_VALUE))
+        );
+        buttonsLayout.setVerticalGroup(
+                buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(buttonsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(goods_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                .addGap(35, 35, 35)
+                                .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addGroup(buttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(del)
+                                        .addComponent(add))
+                                .addGap(27, 27, 27)
+                                .addComponent(produce)
+                                .addContainerGap(27, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout makeLayout = new javax.swing.GroupLayout(make);
         make.setLayout(makeLayout);
-        makeLayout.setHorizontalGroup(makeLayout.createParallelGroup(
-                javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                makeLayout
-                        .createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1,
-                                javax.swing.GroupLayout.PREFERRED_SIZE, 428,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(buttons,
-                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap()));
-        makeLayout
-                .setVerticalGroup(makeLayout
-                        .createParallelGroup(
-                                javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(
-                                makeLayout
-                                        .createSequentialGroup()
-                                        .addGroup(
-                                                makeLayout
-                                                        .createParallelGroup(
-                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(
-                                                                makeLayout
-                                                                        .createSequentialGroup()
-                                                                        .addGap(110,
-                                                                                110,
-                                                                                110)
-                                                                        .addComponent(
-                                                                                buttons,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(
-                                                                makeLayout
-                                                                        .createSequentialGroup()
-                                                                        .addContainerGap()
-                                                                        .addComponent(
-                                                                                jScrollPane1,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                445,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addContainerGap()));
-
+        makeLayout.setHorizontalGroup(
+            makeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(makeLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(32, 32, 32)
+                    .addComponent(buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(77, Short.MAX_VALUE))
+        );
+        makeLayout.setVerticalGroup(
+                makeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(makeLayout.createSequentialGroup()
+                                .addGroup(makeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(makeLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(makeLayout.createSequentialGroup()
+                                                .addGap(113, 113, 113)
+                                                .addComponent(buttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
+        );
+        
         change.add(make, "make");
 
         javax.swing.GroupLayout show_buttonsLayout = new javax.swing.GroupLayout(
@@ -599,6 +522,10 @@ public class Goods_receipt_management extends javax.swing.JPanel {
                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                 Short.MAX_VALUE).addGap(23, 23, 23)));
+
+
+
+       
     }// </editor-fold>//GEN-END:initComponents
 
     private void show_receActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_show_receActionPerformed
@@ -659,12 +586,19 @@ public class Goods_receipt_management extends javax.swing.JPanel {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addActionPerformed
         Object[] goods_info = ((String) goods_id.getSelectedItem()).split(" ");
+        int a = 0;
+        try {
+            a = Integer.parseInt(amount.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "wrong format of number");
+            return ;
+        }
         if (MainFrame.DEBUG) {
 
             goods_info[0] = "" + goods_info[0] + count++;
         }
-        Object[] row = new Object[]{goods_info[0], goods_info[1],
-                goods_info[2]};
+        Object[] row = new Object[]{goods_info[2], goods_info[0]+" "+goods_info[1],
+                a};
         ((DefaultTableModel) gift_table.getModel()).addRow(row);
     }// GEN-LAST:event_addActionPerformed
 
@@ -695,6 +629,7 @@ public class Goods_receipt_management extends javax.swing.JPanel {
         }
         try {
             receiptBLImpl.produceGoodsReceipt(goodsReceiptVO);
+            JOptionPane.showMessageDialog(null, "成功生成赠送单");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(MainFrame.frame, e
                     + ": Fail to set data in server");

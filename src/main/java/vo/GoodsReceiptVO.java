@@ -15,7 +15,7 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 	
 	public String user;
 	
-	Vector<GoodsVO> goodsVOs;
+	Vector<GoodsVO> goodsVOs = new Vector<>();
 	double sumOfGifts;
 	private static final long serialVersionUID = 1L;
 

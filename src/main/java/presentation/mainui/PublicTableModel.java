@@ -112,12 +112,12 @@ public class PublicTableModel extends DefaultTableModel {
 		}
 		case GIFT:{
 			data=new Object[list.size()][4];
-			GoodsPO temp;
+			GoodsModelPO temp;
 			for(int i=0;i<list.size();i++){
-				temp=(GoodsPO)list.get(i);
+				temp=(GoodsModelPO)list.get(i);
 				data[i][0]=temp.getName();
 				data[i][1]=temp.getModel();
-				data[i][2]=temp.getOutPrice();
+				data[i][2]=temp.getDefault_out();
 			}
 			update(data);
 			break;

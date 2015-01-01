@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class GoodsReceiptPO extends ReceiptPO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	ArrayList<GoodsVO> goodsVOs;
+	ArrayList<GoodsVO> goodsVOs = new ArrayList<>();
 	double sumOfGifts;
 	String user;
 	public GoodsReceiptPO(GoodsReceiptVO goodsReceiptVO) {
@@ -23,7 +23,7 @@ public class GoodsReceiptPO extends ReceiptPO implements Serializable {
 			goodsVOs.add(goodsVO);
 		}
 		sumOfGifts = goodsReceiptVO.getSumOfGifts();
-
+		type = goodsReceiptVO.type;
 		number = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
 	}
 	
