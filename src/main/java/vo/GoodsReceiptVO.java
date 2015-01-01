@@ -26,6 +26,7 @@ public class GoodsReceiptVO extends ReceiptPO implements Serializable {
 			goodsVOs.add(goodsVO);
 		}
 		sumOfGifts = goodsReceiptPO.getSumOfGifts();
+		time = goodsReceiptPO.time;
 	}
 	public GoodsReceiptVO(Vector<GoodsVO> goodsVOs, String user) {
 		this.goodsVOs = goodsVOs;
