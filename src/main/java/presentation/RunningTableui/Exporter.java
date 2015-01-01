@@ -91,7 +91,12 @@ public class Exporter {
 				}
 				for(int i=1;i<rowNum+1;i++){
 					for(int j=0;j<columnNum;j++){
-						Label label=new Label(j,i,String.valueOf(table.getValueAt(i-1, j)));
+						String temp=String.valueOf(table.getValueAt(i-1, j));
+						if(temp==null){
+							temp="";
+						}
+						Label label=new Label(j,i,temp);
+						
 						sheet.addCell(label);
 					}
 					progressBar.setValue(i);
