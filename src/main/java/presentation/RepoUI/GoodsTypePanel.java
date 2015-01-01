@@ -311,7 +311,7 @@ public class GoodsTypePanel extends javax.swing.JPanel {
                         + NODE_H * gt_controller.height()));
             }
 
-            TreeNodePO fa = treeNodePOs.get(0);
+            TreeNodePO fa = treeNodePOs.get(1);
 
             int initial = (treeNodePOs.size() / 2 >= 4) ? treeNodePOs.size() - 1
                     : 3;

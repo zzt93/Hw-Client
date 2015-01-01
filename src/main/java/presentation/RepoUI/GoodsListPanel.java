@@ -208,7 +208,10 @@ public class GoodsListPanel extends javax.swing.JPanel {
                                 .println("-----------------------------------------------");
                         if (column == 0 && data != null && !data.equals("")) {// name is vaild
                             try {
-                                gl_controller.set_signal_name(temp);
+                                GoodsModelPO goodsModelPO = gl_controller.set_signal_name(temp);
+                                if (goodsModelPO == null){
+                                    JOptionPane.showMessageDialog(null, "此属性不可修改");
+                                }
                             } catch (Exception e1) {
                                 JOptionPane.showMessageDialog(MainFrame.frame,
                                         e1 + " : Fail to update information");

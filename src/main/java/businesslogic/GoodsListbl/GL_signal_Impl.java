@@ -32,11 +32,11 @@ public class GL_signal_Impl implements GL_signal_BLservice {
 		HashMap<String, GoodsModelPO> goodsModels = goodsListPO().getGoodsModels();
 		GoodsModelPO temp = goodsModels.get(goods.id);
 		temp.setName(goods.name);
-		if (goods.amount > 0) {//TODO may be more logic here
-			temp.setSignal(goods.amount);
-			return temp;
+		if (goods.amount < 0) {//TODO may be more logic here
+			return null;
 		}
-		return null;
+		temp.setSignal(goods.amount);
+		return temp;
 	}
 
 	public int getSignal(GoodsVO goods) throws Exception {
