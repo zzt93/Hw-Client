@@ -197,6 +197,12 @@ public class StrategyNewUI {
 					} else {
 						if (snb.confirm()) {
 							JOptionPane.showMessageDialog(null, "成功");
+							try {
+								listUI.arrStrategy = listUI.strategyList.show();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							listUI.refreshTable();
 							newFrame.dispose();
 						} else {
