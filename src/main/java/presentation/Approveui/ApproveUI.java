@@ -205,6 +205,7 @@ public class ApproveUI {
 					refreshTable();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "上传失败！！！");
+					e1.printStackTrace();
 				}
 
 			}

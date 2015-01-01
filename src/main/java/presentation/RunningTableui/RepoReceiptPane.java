@@ -173,6 +173,7 @@ public class RepoReceiptPane {
 		textType.setText(ReceiptType.getName(receipt.type));
 		textDate.setText(receipt.time);
 		textGoodsID.setText(receipt.getGoods_id());
+		textOperator.setText(receipt.getOperator());
 		textActualNum.setText(String.valueOf(actualNum));
 		textState.setText(ReceiptState.getName(receipt.statement));
 		textReport.setText(String.valueOf(actualNum-statisticNum));

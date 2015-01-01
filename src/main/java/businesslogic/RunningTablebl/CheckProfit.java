@@ -84,7 +84,21 @@ public class CheckProfit {
 				profit.saleCost+=pr.getNumber()*goodsPrice.get(pr.getCommodity_id());
 			}
 		}
-		//TODO，销售退货是否计算待定
+		//TODO，销售退货计算，销售收入减去退货总价，销售成本减去退货成本
+		condition.type=ReceiptType.SALE_REJECTION;
+		receipt_list=sale.queryReceipt(condition);
+		for(int i=0;i<receipt_list.size();i++){
+			temp=receipt_list.get(i);
+			profit.saleIncome-=temp.getActualValue().doubleValue();//销售收入-退货总价
+			
+			//销售成本-退货成本
+			List<ProductsReceipt> prList=temp.getProductList();
+			ProductsReceipt pr;
+			for(int j=0;j<prList.size();j++){
+				pr=prList.get(i);
+				profit.saleCost-=pr.getNumber()*goodsPrice.get(pr.getCommodity_id());
+			}
+		}
 	}
 	private void checkRepoReceipt()throws Exception{
 		//商品报溢，商品报损收入支出的计算
